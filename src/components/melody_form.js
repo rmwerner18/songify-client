@@ -1,0 +1,127 @@
+import { render } from '@testing-library/react'
+import React from 'react'
+
+const MelodyForm = (props) => {
+
+    const array = () => {
+        let array = []
+        for (let i=0; i<32; i++) {
+            array.push(i)
+        }
+        return array
+    }
+
+    const keyRoots = [
+        'C5',
+        'C#5',
+        'D5',
+        'D#5',
+        'E5',
+        'F5',
+        'F#5',
+        'G5',
+        'G#5',
+        'A5',
+        'A#5',
+        'B5'
+    ]
+
+    const modes = [
+        "ionian",
+        "dorian",
+        "phrygian",
+        "lydian",
+        "mixolydian",
+        "aeolian",
+        "locrain"
+    ]
+
+
+    const changeHandler = (e, beats) => {
+        console.log(e.target.id)
+        let newArray = beats 
+        if (beats.includes(parseInt(e.target.id))) {
+            let index = newArray.findIndex(n => n === parseInt(e.target.id))
+            newArray.splice(index, 1)
+        } else {
+            newArray.push(parseInt(e.target.id))
+            console.log(newArray)
+        }
+
+        props.changeHandler(e.target.name, newArray)
+    }
+
+    const IRows = () => {
+        return array().map(n => <input type="checkbox" checked={props.IBeats.includes(n)} name="IBeats" id={n} onChange={(e) => changeHandler(e, props.IBeats)}/>)
+    }
+    const viiRows = () => {
+        return array().map(n => <input type="checkbox" checked={props.viiBeats.includes(n)} name="viiBeats" id={n} onChange={(e) => changeHandler(e, props.viiBeats)}/>)
+    }
+    const viRows = () => {
+        return array().map(n => <input type="checkbox" checked={props.viBeats.includes(n)} name="viBeats" id={n} onChange={(e) => changeHandler(e, props.viBeats)}/>)
+    }
+    const vRows = () => {
+        return array().map(n => <input type="checkbox" checked={props.vBeats.includes(n)} name="vBeats" id={n} onChange={(e) => changeHandler(e, props.vBeats)}/>)
+    }
+    const ivRows = () => {
+        return array().map(n => <input type="checkbox" checked={props.ivBeats.includes(n)} name="ivBeats" id={n} onChange={(e) => changeHandler(e, props.ivBeats)}/>)
+    }
+    const iiiRows = () => {
+        return array().map(n => <input type="checkbox" checked={props.iiiBeats.includes(n)} name="iiiBeats" id={n} onChange={(e) => changeHandler(e, props.iiiBeats)}/>)
+    }
+    const iiRows = () => {
+        return array().map(n => <input type="checkbox" checked={props.iiBeats.includes(n)} name="iiBeats" id={n} onChange={(e) => changeHandler(e, props.iiBeats)}/>)
+    }
+    const iRows = () => {
+        return array().map(n => <input type="checkbox" checked={props.iBeats.includes(n)} name="iBeats" id={n} onChange={(e) => changeHandler(e, props.iBeats)}/>)
+    }
+    const removeNumber = (string) => {
+        let newString = string.split('')
+        newString.pop()
+        return newString.join('')
+    }
+    const rootOptions = () => {
+        return keyRoots.map(root => <option value={root}>{removeNumber(root)}</option>)
+    }
+    const modeOptions = () => {
+        return modes.map(mode => <option value={mode}>{mode}</option>)
+    }
+
+    return(
+        <>
+        <div>   
+            {IRows()}
+        </div>
+        <div>
+            {viiRows()}
+        </div>
+        <div>
+            {viRows()}
+        </div>
+        <div>   
+            {vRows()}
+        </div>
+        <div>
+            {ivRows()}
+        </div>
+        <div>
+            {iiiRows()}
+        </div>
+        <div>
+            {iiRows()}
+        </div>
+        <div>
+            {iRows()}
+        </div>
+        <select onChange={props.rootHandler}>
+            {rootOptions()}
+        </select>
+        <select onChange={props.modeHandler}>
+            {modeOptions()}
+        </select>
+        <button onClick={props.clearState}>Clear Melody</button>
+        </>
+    )
+}
+
+export default MelodyForm

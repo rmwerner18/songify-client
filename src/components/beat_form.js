@@ -1,14 +1,9 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 
-class BeatForm extends React.Component {
-    state = {
-        hhBeats: [],
-        snareBeats: [],
-        kickBeats: []
-    }
+const BeatForm = (props) => {
 
-    changeHandler = (e, beats) => {
+    const changeHandler = (e, beats) => {
         console.log(e.target.id)
         let newArray = beats 
         if (beats.includes(parseInt(e.target.id))) {
@@ -18,49 +13,43 @@ class BeatForm extends React.Component {
             newArray.push(parseInt(e.target.id))
             console.log(newArray)
         }
-        this.setState({[e.target.name]: newArray})
-        this.props.changeHandler(e.target.name, newArray)
+        props.changeHandler(e.target.name, newArray)
     }
 
-    makeHHRows = () => {
+    const array = () => {
         let array = []
         for (let i=0; i<32; i++) {
             array.push(i)
         }
-        return array.map(n => <input type="checkbox" checked={this.state.hhBeats.includes(n)} name="hhBeats" id={n} onChange={(e) => this.changeHandler(e, this.state.hhBeats)}/>)
+        return array
     }
 
-    makeSnareRows = () => {
-        let array = []
-        for (let i=0; i<32; i++) {
-            array.push(i)
-        }
-        return array.map(n => <input type="checkbox" checked={this.state.snareBeats.includes(n)} name="snareBeats" id={n} onChange={(e) => this.changeHandler(e, this.state.snareBeats)}/>)
+    const makeHHRows = () => {
+        return array().map(n => <input type="checkbox" checked={props.hhBeats.includes(n)} name="hhBeats" id={n} onChange={(e) => changeHandler(e, props.hhBeats)}/>)
     }
 
-    makeKickRows = () => {
-        let array = []
-        for (let i=0; i<32; i++) {
-            array.push(i)
-        }
-        return array.map(n => <input type="checkbox" checked={this.state.kickBeats.includes(n)} name="kickBeats" id={n} onChange={(e) => this.changeHandler(e, this.state.kickBeats)}/>)
+    const makeSnareRows = () => {
+        return array().map(n => <input type="checkbox" checked={props.snareBeats.includes(n)} name="snareBeats" id={n} onChange={(e) => changeHandler(e, props.snareBeats)}/>)
     }
 
-    render() {
-        return(
-            <>
-            <div>   
-                {this.makeHHRows()}
-            </div>
-            <div>
-                {this.makeSnareRows()}
-            </div>
-            <div>
-                {this.makeKickRows()}
-            </div>
-            </>
-        )
+    const makeKickRows = () => {
+        return array().map(n => <input type="checkbox" checked={props.kickBeats.includes(n)} name="kickBeats" id={n} onChange={(e) => changeHandler(e, props.kickBeats)}/>)
     }
+
+    return(
+        <>
+        <div>   
+            {makeHHRows()}
+        </div>
+        <div>
+            {makeSnareRows()}
+        </div>
+        <div>
+            {makeKickRows()}
+        </div>
+        <button onClick={props.clearState}>Clear Drums</button>
+        </>
+    )
 }
 
 export default BeatForm
