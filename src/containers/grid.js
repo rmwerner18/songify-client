@@ -1,114 +1,144 @@
 import React from 'react';
 import * as Tone from 'tone'
 import Chord from '../components/chord'
-
-
-var Octavian = require('octavian')
+import TempoForm from '../components/tempo_form'
+import BeatForm from '../components/beat_form'
 
 class Grid extends React.Component {
     state = {
         measures: 12,
         chords: [
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {bass: "A", name: "A", quality: "major"}
+            {
+                bass: "",
+                name: "A4", 
+                quality: "majorSeventh", 
+                freqs: [440, 554.365, 659.255, 830.609, 220],
+                formattedBass: "",
+                formattedName: "A",
+                formattedQuality: "maj7"
+            }, 
+            {
+                bass: "",
+                name: "E4", 
+                quality: "dominantSeventh", 
+                freqs: [329.628, 415.305, 493.883, 587.33, 164.814],
+                formattedBass: "",
+                formattedName: "E",
+                formattedQuality: "7"
+            },
+            {
+                bass: "",
+                name: "F#4", 
+                quality: "minorSeventh", 
+                freqs: [369.994, 440, 554.365, 659.255, 184.997],
+                formattedBass: "",
+                formattedName: "F#",
+                formattedQuality: "m7"
+            },
+            {
+                bass: "",
+                name: "D4", 
+                quality: "majorSeventh", 
+                freqs: [293.665, 369.994, 440, 554.365, 146.832],
+                formattedBass: "",
+                formattedName: "D",
+                formattedQuality: "maj7"
+            }
         ],
-        quality: ""
+        bpm: 100,
+        snareBeats: [],
+        kickBeats: [],
+        hhBeats: []
       }
 
 
-    chordProgression = (index, time, synth) => {
-        console.log('hello')
-        let chords = [
-            [293.665, 369.994, 440, 220],
-            [493.883, 587.33, 739.989, 830.609, 246.942],
-            [369.994, 440, 554.365, 184.997],
-            [493.883, 622.254, 739.989, 220],
-            [329.628, 415.305, 493.883, 246.942],
-            [261.626, 311.127, 369.994, 261.626],
-            [329.628, 415.305, 493.883, 246.942],
-            [466.164, 554.365, 659.255, 233.082],
-            [440, 554.365, 659.255, 220],
-            [329.628, 415.305, 493.883, 207.652],
-            [369.994, 440, 554.365, 184.997],
-            [329.628, 415.305, 493.883, 164.814]
-        ]
-        if ([0, 1, 2, 3].includes(index)) {
-            synth.triggerAttackRelease(chords[0], '0.5', time)
-        } else if ([4, 5, 6, 7].includes(index)) {
-            synth.triggerAttackRelease(chords[1], '0.5', time)
-        } else if ([8, 9, 10, 11].includes(index)) {
-            synth.triggerAttackRelease(chords[2], '0.5', time)
-        } else if ([12, 13, 14, 15].includes(index)) {
-            synth.triggerAttackRelease(chords[3], '0.5', time)
-        } else if ([16, 17, 18, 19].includes(index)) {
-            synth.triggerAttackRelease(chords[4], '0.5', time)
-        } else if ([20, 21, 22, 23].includes(index)) {
-            synth.triggerAttackRelease(chords[5], '0.5', time)
-        } else if ([24, 25, 26, 27].includes(index)) {
-            synth.triggerAttackRelease(chords[6], '0.5', time)
-        } else if ([28, 29, 30, 31].includes(index)) {
-            synth.triggerAttackRelease(chords[7], '0.5', time)
-        } else if ([32, 33, 34, 35].includes(index)) {
-            synth.triggerAttackRelease(chords[8], '0.5', time)
-        } else if ([36, 37, 38, 39].includes(index)) {
-            synth.triggerAttackRelease(chords[9], '0.5', time)
-        } else if ([40, 41, 42, 43].includes(index)) {
-            synth.triggerAttackRelease(chords[10], '0.5', time)
-        } else if ([44, 45, 46, 47].includes(index)) {
-            synth.triggerAttackRelease(chords[11], '0.5', time)
+    chordProgression = (index, time, synth, snare, kick, hh) => {
+        let chords = this.state.chords.map(chord => chord.freqs)
+        Tone.Transport.bpm.value = parseInt(this.state.bpm)
+        if ([0,4 ].includes(index)) {
+            synth.triggerAttackRelease(chords[0], '2n', time)
+        } else if ([8, 12].includes(index)) {
+            synth.triggerAttackRelease(chords[1], '2n', time)
+        } else if ([16,20].includes(index)) {
+            synth.triggerAttackRelease(chords[2], '2n', time)
+        } else if ([24, 28].includes(index)) {
+            synth.triggerAttackRelease(chords[3], '2n', time)
         } 
+        if (this.state.kickBeats.includes(index)) {
+            kick.start(time)
+        }
+        if (this.state.snareBeats.includes(index)) {
+            snare.start(time)
+        }
+        if (this.state.hhBeats.includes(index)) {
+            hh.start(time);
+        }
+
+        // else if ([16, 17, 18, 19].includes(index)) {
+        //     synth.triggerAttackRelease(this.state.chords[4].freqs, '0.5', time)
+        // } else if ([20, 21, 22, 23].includes(index)) {
+        //     synth.triggerAttackRelease(this.state.chords[5].freqs, '0.5', time)
+        // } else if ([24, 25, 26, 27].includes(index)) {
+        //     synth.triggerAttackRelease(this.state.chords[6].freqs, '0.5', time)
+        // } else if ([28, 29, 30, 31].includes(index)) {
+        //     synth.triggerAttackRelease(this.state.chords[7].freqs, '0.5', time)
+        // } else if ([32, 33, 34, 35].includes(index)) {
+        //     synth.triggerAttackRelease(this.state.chords[8].freqs, '0.5', time)
+        // } else if ([36, 37, 38, 39].includes(index)) {
+        //     synth.triggerAttackRelease(this.state.chords[9].freqs, '0.5', time)
+        // } else if ([40, 41, 42, 43].includes(index)) {
+        //     synth.triggerAttackRelease(this.state.chords[10].freqs, '0.5', time)
+        // } else if ([44, 45, 46, 47].includes(index)) {
+        //     synth.triggerAttackRelease(this.state.chords[11].freqs, '0.5', time)
+        // } 
     }
 
-    playGong = (bass, name, qual) => {
-        let b = new Octavian.Note(bass)
-        let chord = new Octavian.Chord(name, qual)
-        let freqs = chord.frequencies
-        freqs.push(b.frequency)
+    setNumOfEigthNotes = (n, array) => {
+        for (let i=0; i<n; i++) {
+            array.push(i)
+        }
+    }
 
-        console.log(freqs)
+    startLoop = () => {
+        const gong = new Tone.Player("https://tonejs.github.io/audio/berklee/gong_1.mp3").toDestination();
+        const snare = new Tone.Player("https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/snare.wav").toDestination();
+        const kick = new Tone.Player("https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/kick.wav").toDestination();
+        const hh = new Tone.Player("https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/hihat-close.wav").toDestination();
+        const sampler = new Tone.Sampler({
+            urls: {
+                "C4": "C4.mp3",
+                "D#4": "Ds4.mp3",
+                "F#4": "Fs4.mp3",
+                "A4": "A4.mp3",
+            },
+            release: 1,
+            baseUrl: "https://tonejs.github.io/audio/salamander/",
+        }).toDestination();
+
+        let array = []
+        this.setNumOfEigthNotes(32, array)
+        const synth = new Tone.PolySynth().toDestination();
+        Tone.loaded().then(() => {
+            const seq = new Tone.Sequence((time, index) => {
+                this.chordProgression(index, time, sampler, snare, kick, hh)
+            }, array).start(0);
+            Tone.Transport.start();
+        })
+    }
+
+    stopLoop = () => {
+        Tone.Transport.stop()
+        Tone.Transport.cancel()
     }
     
     clickHandler = () => {
-
-        let button = document.querySelector("button")
-        button.addEventListener('click', e => {
-            let array = []
-            for (let i=0; i<48; i++) {
-                array.push(i)
-            }
-            const synth = new Tone.PolySynth().toDestination();
-            const seq = new Tone.Sequence((time, index) => {
-                // synth.triggerAttackRelease(note, 0.1, time);
-                this.chordProgression(index, time, synth)
-                // subdivisions are given as subarrays
-            }, array).start(0);
-            Tone.Transport.bpm.value = 60;
-            Tone.Transport.start();
-
-            const sampler = new Tone.Sampler({
-                urls: {
-                  "D#4": "Ds4.mp3",
-                  "F#4": "Fs4.mp3",
-                  "A4": "A4.mp3",
-                },
-                release: 1,
-                baseUrl: "https://tonejs.github.io/audio/salamander/"
-              }).toDestination();
-
-
-     
-        })
-      }
+        // HANDLES LOOP
+        if (Tone.Transport.state === "stopped") {
+            this.startLoop()
+        } else {
+            this.stopLoop()
+        }
+    }
 
     chordSubmitHandler = (e, id, state) => {
         e.preventDefault()
@@ -117,21 +147,37 @@ class Grid extends React.Component {
         this.setState({chords: newArray})
     }
 
+    tempoChangeHandler = (bpm) => {
+        this.setState({bpm: bpm})
+    }
+
     showChords = () => {
             return this.state.chords.map((chord, index) => {
-                console.log(chord)
-                return <Chord id={index} chord={chord} submitHandler={this.chordSubmitHandler}/>
+                return <Chord id={index} key={index} chord={chord} submitHandler={this.chordSubmitHandler}/>
             })
     }
 
+    beatChangeHandler = (type, array) => {
+        // if (type === 'hhBeats') {
+        //     this.setState({hhBeats: array})
+        // } else if (type === 'snareBeats') {
+        //     this.setState({snareBeats: array})
+        // } else if 
+        this.setState({[type]: array})
+    }
+
     render() {
-        console.log(this.state)
+        console.log("snare:", this.state.snareBeats)
+        // console.log(this.state.kickBeats)
+        console.log("hh:", this.state.hhBeats)
         return (
             <>
-                {this.clickHandler()}
                 <div className="chord-container">
                     {this.showChords()}
                 </div>
+                <button onClick={this.clickHandler}>start</button>
+                <TempoForm bpm={this.state.bpm} changeHandler={this.tempoChangeHandler} />
+                <BeatForm changeHandler={this.beatChangeHandler}/>
             </>
         )
     }
