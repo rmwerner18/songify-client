@@ -33,11 +33,12 @@ const MelodyForm = (props) => {
         "lydian",
         "mixolydian",
         "aeolian",
-        "locrain"
+        "locrian"
     ]
 
 
     const changeHandler = (e, beats) => {
+        
         console.log(e.target.id)
         let newArray = beats 
         if (beats.includes(parseInt(e.target.id))) {
@@ -52,7 +53,7 @@ const MelodyForm = (props) => {
     }
 
     const IRows = () => {
-        return array().map(n => <input type="checkbox" checked={props.IBeats.includes(n)} name="IBeats" id={n} onChange={(e) => changeHandler(e, props.IBeats)}/>)
+        return array().map(n => <input type="checkbox" checked={props.IBeats.includes(n)} name="IBeats" id={n} onChange={(e) => changeHandler(e, props.IBeats)} />)
     }
     const viiRows = () => {
         return array().map(n => <input type="checkbox" checked={props.viiBeats.includes(n)} name="viiBeats" id={n} onChange={(e) => changeHandler(e, props.viiBeats)}/>)
@@ -89,28 +90,28 @@ const MelodyForm = (props) => {
 
     return(
         <>
-        <div>   
+        <div className='checkbox-row'>   
             {IRows()}
         </div>
-        <div>
+        <div className='checkbox-row'>
             {viiRows()}
         </div>
-        <div>
+        <div className='checkbox-row'>
             {viRows()}
         </div>
-        <div>   
+        <div className='checkbox-row'>   
             {vRows()}
         </div>
-        <div>
+        <div className='checkbox-row'>
             {ivRows()}
         </div>
-        <div>
+        <div className='checkbox-row'>
             {iiiRows()}
         </div>
-        <div>
+        <div className='checkbox-row'>
             {iiRows()}
         </div>
-        <div>
+        <div className='checkbox-row'>
             {iRows()}
         </div>
         <select onChange={props.rootHandler}>

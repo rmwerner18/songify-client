@@ -11,8 +11,8 @@ class TempoForm extends React.Component {
     render() {
         return (
             <>
-            <input type="range" min="30" max='300' value={this.state.bpm} onChange={this.changeHandler}/>
-            <p>bpm: {this.state.bpm}</p>
+                <input type="range" min="30" max='300' value={this.state.bpm} onChange={this.changeHandler}/>
+                <p className="bpm-meter">bpm: {this.state.bpm}</p>
             </>
         )
     }

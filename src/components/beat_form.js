@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react'
 import React from 'react'
+import BeatSelect from './beat_select'
 
 const BeatForm = (props) => {
 
@@ -38,15 +39,16 @@ const BeatForm = (props) => {
 
     return(
         <>
-        <div>   
+        <div className='checkbox-row'>   
             {makeHHRows()}
         </div>
-        <div>
+        <div className='checkbox-row'>
             {makeSnareRows()}
         </div>
-        <div>
+        <div className='checkbox-row'>
             {makeKickRows()}
         </div>
+        <BeatSelect changeHandler={props.presetChangeHandler} />
         <button onClick={props.clearState}>Clear Drums</button>
         </>
     )

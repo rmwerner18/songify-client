@@ -7,6 +7,8 @@ import InstrumentForm from '../components/instrument_form'
 import MelodyForm from '../components/melody_form'
 import modes from '../modes'
 import defaultChords from '../default_chords'
+import drumPresets from '../drum_presets'
+import chordPresets from '../chord_presets'
 
 class Grid extends React.Component {
     state = {
@@ -121,8 +123,10 @@ class Grid extends React.Component {
         // HANDLES LOOP
         if (Tone.Transport.state === "stopped") {
             this.startLoop()
+            document.getElementById('start-button').innerText = 'Stop'
         } else {
             this.stopLoop()
+            document.getElementById('start-button').innerText = 'Start'
         }
     }
 
@@ -177,6 +181,12 @@ class Grid extends React.Component {
         })
     }
 
+    randomProgGenereator = () => {
+        let max = chordPresets.length
+        let int =  Math.floor(Math.random() * Math.floor(max));
+        this.setState({chords: chordPresets[int]})
+    }
+
     rootHandler = (e) => {
         this.setState({melodyKey: e.target.value})
     }
@@ -185,23 +195,53 @@ class Grid extends React.Component {
         this.setState({melodyMode: e.target.value})
     }
 
+    beatPresetChangeHandler = (e) => {
+        if (e.target.value != 'no preset') {
+            let beat = drumPresets[e.target.value]
+            this.setState({
+                kickBeats: beat.kickBeats,
+                snareBeats: beat.snareBeats,
+                hhBeats: beat.hhBeats
+            })
+        }
+    }
 
+    saveSongHandler = () => {
+        fetch('http://localhost:3000/songs', {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+                accepts: "application/json"
+            },
+            body: JSON.stringify(
+                this.state
+            )
+        })
+    }
+
+    loadSong = () => {
+        fetch('http://localhost:3000/songs/2')
+        .then(resp => resp.json())
+        .then(song => this.setState(song))
+    }
  
     render() {
-        console.log("Mode:", this.state.melodyMode)
+        console.log("state:", this.state)
         return (
-            <>
+            <div className="song-maker-container">
                 <div className="chord-container">
                     {this.showChords()}
                 </div>
-                <button onClick={this.clickHandler}>start</button>
+                <button id='start-button' onClick={this.clickHandler}>Start</button>
                 <TempoForm bpm={this.state.bpm} changeHandler={this.tempoChangeHandler} />
                 <InstrumentForm changeHandler={this.instrumentChangeHandler}/>
+                <button onClick={this.randomProgGenereator}>Generate Random Progression</button>
                 <BeatForm 
                     hhBeats={this.state.hhBeats} 
                     snareBeats={this.state.snareBeats} 
                     kickBeats={this.state.kickBeats}
-                    changeHandler={this.beatChangeHandler} 
+                    changeHandler={this.beatChangeHandler}
+                    presetChangeHandler={this.beatPresetChangeHandler} 
                     clearState={this.clearDrumState}
                 />
                 <br/>
@@ -220,7 +260,9 @@ class Grid extends React.Component {
                     modeHandler={this.modeHandler}
                     clearState={this.clearMelodyState}
                 />
-            </>
+                <button onClick={this.saveSongHandler}>Save</button>
+                <button onClick={this.loadSong}>Load Song</button>
+            </div>
         )
     }
 }

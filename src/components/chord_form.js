@@ -49,6 +49,11 @@ class ChordForm extends React.Component {
             chord = new Octavian.Chord(name)
             chord.addInterval('majorThird')
             chord.addInterval('minorSixth')
+        } else if (qual === "5") {
+            chord = new Octavian.Chord(name)
+            chord.addInterval('perfectFifth')
+            chord.addInterval('perfectOctave')
+            console.log(chord)
         } else {
             chord = new Octavian.Chord(name, qual)
         }
@@ -125,6 +130,8 @@ class ChordForm extends React.Component {
                     <input type="checkbox" checked={this.state.quality === 'halfDimished'} onChange={this.changeHandler} name="quality" value="halfDimished"/>  
                     <label id="formattedQuality">aug</label>              
                     <input type="checkbox" checked={this.state.quality === 'augmented'} onChange={this.changeHandler} name="quality" value="augmented"/>
+                    <label id="formattedQuality">5</label>  
+                    <input type="checkbox" checked={this.state.quality === '5'} onChange={this.changeHandler} name="quality" value="5"/>
                 </fieldset>
                 <fieldset>
                     <legend>Bass Note (optional):</legend>
