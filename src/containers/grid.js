@@ -28,105 +28,13 @@ class Grid extends React.Component {
         IBeats: [],
         melodyKey: "C5",
         melodyMode: "ionian"
-      }
-
-
-    chordProgression = (index, time, synth, snare, kick, hh) => {
-        let chords = this.state.chords.map(chord => chord.freqs)
-        Tone.Transport.bpm.value = parseInt(this.state.bpm)
-        if ([0, 4].includes(index)) {
-            synth.triggerAttackRelease(chords[0], '2n', time)
-        } else if ([8, 12].includes(index)) {
-            synth.triggerAttackRelease(chords[1], '2n', time)
-        } else if ([16, 20].includes(index)) {
-            synth.triggerAttackRelease(chords[2], '2n', time)
-        } else if ([24, 28].includes(index)) {
-            synth.triggerAttackRelease(chords[3], '2n', time)
-        } 
-        if (this.state.kickBeats.includes(index)) {
-            kick.start(time)
-        }
-        if (this.state.snareBeats.includes(index)) {
-            snare.start(time)
-        }
-        if (this.state.hhBeats.includes(index)) {
-            hh.start(time);
-        }
-        if (this.state.iBeats.includes(index)) {
-            synth.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[0], '8n', time)
-        }
-        if (this.state.iiBeats.includes(index)) {
-            synth.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[1], '8n', time)
-        }
-        if (this.state.iiiBeats.includes(index)) {
-            synth.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[2], '8n', time)
-        }
-        if (this.state.ivBeats.includes(index)) {
-            synth.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[3], '8n', time)
-        }
-        if (this.state.vBeats.includes(index)) {
-            synth.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[4], '8n', time)
-        }
-        if (this.state.viBeats.includes(index)) {
-            synth.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[5], '8n', time)
-        }
-        if (this.state.viiBeats.includes(index)) {
-            synth.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[6], '8n', time)
-        }
-        if (this.state.IBeats.includes(index)) {
-            synth.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[7], '8n', time)
-        }
-
     }
 
-    setNumOfEigthNotes = (n, array) => {
-        for (let i=0; i<n; i++) {
-            array.push(i)
-        }
-    }
-
-    startLoop = () => {
-        const snare = new Tone.Player("https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/snare.wav").toDestination();
-        const kick = new Tone.Player("https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/kick.wav").toDestination();
-        const hh = new Tone.Player("https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/hihat-close.wav").toDestination();
-        let instrument
-        if (this.state.instrument === "piano") {
-            instrument = new Tone.Sampler({
-                urls: {
-                    "C4": "C4.mp3",
-                    "D#4": "Ds4.mp3",
-                    "F#4": "Fs4.mp3",
-                    "A4": "A4.mp3",
-                },
-                release: 1,
-                baseUrl: "https://tonejs.github.io/audio/salamander/",
-            }).toDestination();
-        } else if (this.state.instrument === "synth") {
-            instrument = new Tone.PolySynth().toDestination();
-        }
-        let array = []
-        this.setNumOfEigthNotes(32, array)
-        Tone.loaded().then(() => {
-            const seq = new Tone.Sequence((time, index) => {
-                this.chordProgression(index, time, instrument, snare, kick, hh)
-            }, array).start(0);
-            Tone.Transport.start();
-        })
-    }
-
-    stopLoop = () => {
-        Tone.Transport.stop()
-        Tone.Transport.cancel()
-    }
-    
-    clickHandler = () => {
-        // HANDLES LOOP
-        if (Tone.Transport.state === "stopped") {
-            this.startLoop()
-            document.getElementById('start-button').innerText = 'Stop'
-        } else {
-            this.stopLoop()
-            document.getElementById('start-button').innerText = 'Start'
+    componentDidMount = () => {
+        if (this.props.song_id) {
+            fetch(`http://localhost:3000/songs/${this.props.song_id}`)
+            .then(resp => resp.json())
+            .then(song => this.setState(song))
         }
     }
 
@@ -207,6 +115,19 @@ class Grid extends React.Component {
     }
 
     saveSongHandler = () => {
+        this.props.song_id
+        ?
+        fetch(`http://localhost:3000/songs/${this.props.song_id}`, {
+            method: "PATCH",
+            headers: {
+                "content-type": "application/json",
+                accepts: "application/json"
+            },
+            body: JSON.stringify(
+                this.state
+            )
+        })
+        :
         fetch('http://localhost:3000/songs', {
             method: "POST",
             headers: {
@@ -218,12 +139,6 @@ class Grid extends React.Component {
             )
         })
     }
-
-    loadSong = () => {
-        fetch('http://localhost:3000/songs/2')
-        .then(resp => resp.json())
-        .then(song => this.setState(song))
-    }
  
     render() {
         console.log("state:", this.state)
@@ -232,7 +147,7 @@ class Grid extends React.Component {
                 <div className="chord-container">
                     {this.showChords()}
                 </div>
-                <button id='start-button' onClick={this.clickHandler}>Start</button>
+                <button id='start-button' onClick={(e) => this.props.playHandler(e, this.state)}>Start</button>
                 <TempoForm bpm={this.state.bpm} changeHandler={this.tempoChangeHandler} />
                 <InstrumentForm changeHandler={this.instrumentChangeHandler}/>
                 <button onClick={this.randomProgGenereator}>Generate Random Progression</button>
@@ -261,7 +176,6 @@ class Grid extends React.Component {
                     clearState={this.clearMelodyState}
                 />
                 <button onClick={this.saveSongHandler}>Save</button>
-                <button onClick={this.loadSong}>Load Song</button>
             </div>
         )
     }
