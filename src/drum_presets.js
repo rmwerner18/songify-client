@@ -1,4 +1,4 @@
-const { default: defaultChords } = require("./default_chords")
+// const { default: defaultChords } = require("./default_chords")
 
 const drumPresets = [
     {

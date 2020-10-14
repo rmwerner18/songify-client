@@ -30,6 +30,93 @@ class Grid extends React.Component {
         melodyMode: "ionian"
     }
 
+
+  player = (index, time) => {
+    let chords = this.state.chords.map(chord => chord.freqs)
+    Tone.Transport.bpm.value = parseInt(this.state.bpm)
+    let instrument
+    if (this.state.instrument === 'synth') {
+      instrument = this.props.state.synth
+    } else if (this.state.instrument === 'piano') {
+      instrument = this.props.state.piano
+    }
+    if ([0, 4].includes(index)) {
+        instrument.triggerAttackRelease(chords[0], '2n', time)
+    } else if ([8, 12].includes(index)) {
+        instrument.triggerAttackRelease(chords[1], '2n', time)
+    } else if ([16, 20].includes(index)) {
+        instrument.triggerAttackRelease(chords[2], '2n', time)
+    } else if ([24, 28].includes(index)) {
+        instrument.triggerAttackRelease(chords[3], '2n', time)
+    } 
+    if (this.state.kickBeats.includes(index)) {
+        this.props.state.kick.start(time)
+    }
+    if (this.state.snareBeats.includes(index)) {
+        this.props.state.snare.start(time)
+    }
+    if (this.state.hhBeats.includes(index)) {
+        this.props.state.hh.start(time);
+    }
+    if (this.state.iBeats.includes(index)) {
+        instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[0], '8n', time)
+    }
+    if (this.state.iiBeats.includes(index)) {
+        instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[1], '8n', time)
+    }
+    if (this.state.iiiBeats.includes(index)) {
+        instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[2], '8n', time)
+    }
+    if (this.state.ivBeats.includes(index)) {
+        instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[3], '8n', time)
+    }
+    if (this.state.vBeats.includes(index)) {
+        instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[4], '8n', time)
+    }
+    if (this.state.viBeats.includes(index)) {
+        instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[5], '8n', time)
+    }
+    if (this.state.viiBeats.includes(index)) {
+        instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[6], '8n', time)
+    }
+    if (this.state.IBeats.includes(index)) {
+        instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[7], '8n', time)
+    }
+  }
+
+  setNumOfEigthNotes = (n, array) => {
+    for (let i=0; i<n; i++) {
+        array.push(i)
+    }
+  }
+
+  startLoop = () => {
+    let array = []
+    this.setNumOfEigthNotes(32, array)
+    const seq = new Tone.Sequence((time, index) => {
+        this.player(index, time)
+    }, array).start(0)
+    Tone.Transport.start();
+  }
+
+  stopLoop = () => {
+    Tone.Transport.stop()
+    Tone.Transport.cancel()
+  }
+
+  playHandler = (e) => {
+    // HANDLES LOOP
+    if (Tone.Transport.state === "stopped") {
+      Tone.Destination.context.resume().then(() => {
+        this.startLoop()
+      })
+      e.target.innerText = 'Stop'
+    } else {
+        this.stopLoop()
+        e.target.innerText = 'Start'
+    }
+  }
+
     componentDidMount = () => {
         if (this.props.song_id) {
             fetch(`http://localhost:3000/songs/${this.props.song_id}`)
@@ -55,8 +142,16 @@ class Grid extends React.Component {
             })
     }
 
-    beatChangeHandler = (type, array) => {
-        this.setState({[type]: array})
+    beatChangeHandler = (type, obj) => {
+        if (type === 'all') {
+            this.setState({
+                kickBeats: obj.kickBeats,
+                snareBeats: obj.snareBeats,
+                hhBeats: obj.hhBeats
+            })
+        } else {
+            this.setState({[type]: obj})
+        }
     }
 
     instrumentChangeHandler = (e) => {
@@ -102,18 +197,6 @@ class Grid extends React.Component {
         this.setState({melodyMode: e.target.value})
     }
 
-    beatPresetChangeHandler = (e) => {
-        if (e.target.value != 'no preset') {
-            console.log(drumPresets[e.target.value])
-            let beat = drumPresets[e.target.value]
-            this.setState({
-                kickBeats: beat.kickBeats,
-                snareBeats: beat.snareBeats,
-                hhBeats: beat.hhBeats
-            })
-        }
-    }
-
     saveSongHandler = () => {
         this.props.song_id
         ?
@@ -141,13 +224,13 @@ class Grid extends React.Component {
     }
  
     render() {
-        console.log(this.state)
+        console.log(this.state.bpm)
         return (
             <div className="song-maker-container">
                 <div className="chord-container">
                     {this.showChords()}
                 </div>
-                <button id='start-button' onClick={(e) => this.props.playHandler(e, this.state)}>Start</button>
+                <button id='start-button' onClick={(e) => this.playHandler(e)}>Start</button>
                 <TempoForm bpm={this.state.bpm} changeHandler={this.tempoChangeHandler} />
                 <InstrumentForm changeHandler={this.instrumentChangeHandler}/>
                 <button onClick={this.randomProgGenereator}>Generate Random Progression</button>

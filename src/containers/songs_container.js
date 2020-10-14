@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import Song from '../components/song'
 
+
 class SongsContainer extends React.Component {
     state = {
         loaded: false,
@@ -10,8 +11,7 @@ class SongsContainer extends React.Component {
 
     renderSongs = () => {
         return this.state.songs.map(song => {
-            console.log("song!:", song)
-            return (<Song song={song} player={this.props.player} playHandler={this.props.playHandler} deleteHandler={this.deleteHandler} editHandler={this.editHandler}/>)
+            return (<Song song={song} state={this.props.state} player={this.props.player} playHandler={this.props.playHandler} deleteHandler={this.deleteHandler} editHandler={this.editHandler}/>)
         })
     }
 
