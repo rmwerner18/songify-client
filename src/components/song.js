@@ -1,27 +1,10 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import Grid from '../containers/grid'
 import * as Tone from 'tone'
-import Chord from '../components/chord'
-import TempoForm from '../components/tempo_form'
-import BeatForm from '../components/beat_form'
-import InstrumentForm from '../components/instrument_form'
-import MelodyForm from '../components/melody_form'
 import modes from '../modes'
-import defaultChords from '../default_chords'
-import drumPresets from '../drum_presets'
-import chordPresets from '../chord_presets'
+
 
 const Song = (props) => {
-
-    const showModal = () => {
-        document.getElementById(`chord-edit-modal-${props.song.id}`).style.display = 'block'
-    }
-
-    const closeHandler = () => {
-        document.getElementById(`chord-edit-modal-${props.song.id}`).style.display = 'none'
-    }
-
 
   const player = (index, time) => {
     let chords = props.song.chords.map(chord => chord.freqs)
@@ -111,24 +94,14 @@ const Song = (props) => {
 
 
     return (
-        <>
-            {/* <div id={`chord-edit-modal-${props.song.id}`} className="modal">
-                <div className="modal-content">
-                    <span className="close" onClick={closeHandler}>&times;</span>
-                    <div>
-                        {<Grid player={props.player} playHandler={props.playHandler} song={props.song}/>}
-                    </div>
-                </div>
-            </div> */}
-            <div className="song-box">
-                <p>{props.song.id}</p>
-                <button onClick={(e) => playHandler(e, props.song)}>Start</button>
-                <button onClick={() => props.deleteHandler(props.song)}>Delete</button>
-                <NavLink to={`/songs/${props.song.id}/edit`}>
-                    <button>Edit</button>
-                </NavLink>
-            </div>
-        </>
+        <div className="song-box">
+            <p>{props.song.id}</p>
+            <button onClick={(e) => playHandler(e, props.song)}>Start</button>
+            <button onClick={() => props.deleteHandler(props.song)}>Delete</button>
+            <NavLink to={`/songs/${props.song.id}/edit`}>
+                <button>Edit</button>
+            </NavLink>
+        </div>
     )
 
 }

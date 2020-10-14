@@ -1,5 +1,5 @@
-import { render } from '@testing-library/react'
 import React from 'react'
+import drumPresets from '../drum_presets'
 
 const MelodyForm = (props) => {
 
@@ -88,37 +88,39 @@ const MelodyForm = (props) => {
 
     return(
         <>
-        <div className='checkbox-row'>   
-            {IRows()}
-        </div>
-        <div className='checkbox-row'>
-            {viiRows()}
-        </div>
-        <div className='checkbox-row'>
-            {viRows()}
-        </div>
-        <div className='checkbox-row'>   
-            {vRows()}
-        </div>
-        <div className='checkbox-row'>
-            {ivRows()}
-        </div>
-        <div className='checkbox-row'>
-            {iiiRows()}
-        </div>
-        <div className='checkbox-row'>
-            {iiRows()}
-        </div>
-        <div className='checkbox-row'>
-            {iRows()}
-        </div>
-        <select onChange={props.rootHandler}>
-            {rootOptions()}
-        </select>
-        <select onChange={props.modeHandler}>
-            {modeOptions()}
-        </select>
-        <button onClick={props.clearState}>Clear Melody</button>
+            <div className="melody-container">
+                <div className='checkbox-row'>   
+                    {IRows()}
+                </div>
+                <div className='checkbox-row'>
+                    {viiRows()}
+                </div>
+                <div className='checkbox-row'>
+                    {viRows()}
+                </div>
+                <div className='checkbox-row'>   
+                    {vRows()}
+                </div>
+                <div className='checkbox-row'>
+                    {ivRows()}
+                </div>
+                <div className='checkbox-row'>
+                    {iiiRows()}
+                </div>
+                <div className='checkbox-row'>
+                    {iiRows()}
+                </div>
+                <div className='checkbox-row'>
+                    {iRows()}
+                </div>
+            </div>
+            <select onChange={props.rootHandler}>
+                {rootOptions()}
+            </select>
+            <select onChange={props.modeHandler}>
+                {modeOptions()}
+            </select>
+            <button onClick={props.clearState}>Clear Melody</button>
         </>
     )
 }

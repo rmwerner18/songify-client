@@ -1,4 +1,3 @@
-import { render } from '@testing-library/react'
 import React from 'react'
 import BeatSelect from './beat_select'
 import drumPresets from '../drum_presets'
@@ -7,8 +6,7 @@ const BeatForm = (props) => {
 
     const presetChangeHandler = (e) => {
         if (e.target.value != 'no preset') {
-            console.log(e.target.value)
-            let beat = e.target.value
+            let beat = drumPresets[e.target.value]
             props.changeHandler('all', beat)
         }
     }
@@ -49,17 +47,19 @@ const BeatForm = (props) => {
     }
     return(
         <>
-        <div className='checkbox-row'>   
-            {makeHHRows()}
-        </div>
-        <div className='checkbox-row'>
-            {makeSnareRows()}
-        </div>
-        <div className='checkbox-row'>
-            {makeKickRows()}
-        </div>
-        <BeatSelect changeHandler={e => changeHandler(e)} />
-        <button onClick={props.clearState}>Clear Drums</button>
+            <div className="beat-container">
+                <div className='checkbox-row'>   
+                    {makeHHRows()}
+                </div>
+                <div className='checkbox-row'>
+                    {makeSnareRows()}
+                </div>
+                <div className='checkbox-row'>
+                    {makeKickRows()}
+                </div>
+            </div>
+            <BeatSelect changeHandler={e => changeHandler(e)} />
+            <button onClick={props.clearState}>Clear Drums</button>
         </>
     )
 }

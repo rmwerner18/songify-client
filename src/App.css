@@ -39,6 +39,37 @@ h1 {
   color: white;
 }
 
+
+.checkbox-row {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  height: 15px;
+  
+}
+
+input[type='checkbox'] {
+  height: 15px;
+  width: 15px;
+  background-color: #eee;
+  margin: 0px;
+  padding: 0px;
+}
+
+.beat-container {
+  margin-left: 10px;
+  margin-right: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.melody-container {
+  margin-left: 10px;
+  margin-right: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
 .song-box {
   height: 15vh;
   width: 50vw;
@@ -56,7 +87,7 @@ h1 {
   display: flex;
   width: auto;
   height: auto;
-  margin: 1px;
+  margin: 10px;
   justify-content: center;
   align-items: center;
 }
@@ -122,9 +153,4 @@ h1 {
   color: black;
   text-decoration: none;
   cursor: pointer;
-}
-
-input {
-  margin: 0px;
-  padding: 0px;
 }

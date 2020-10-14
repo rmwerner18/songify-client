@@ -7,7 +7,6 @@ import InstrumentForm from '../components/instrument_form'
 import MelodyForm from '../components/melody_form'
 import modes from '../modes'
 import defaultChords from '../default_chords'
-import drumPresets from '../drum_presets'
 import chordPresets from '../chord_presets'
 
 class Grid extends React.Component {
@@ -144,6 +143,7 @@ class Grid extends React.Component {
 
     beatChangeHandler = (type, obj) => {
         if (type === 'all') {
+            console.log(obj)
             this.setState({
                 kickBeats: obj.kickBeats,
                 snareBeats: obj.snareBeats,
