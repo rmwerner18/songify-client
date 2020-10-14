@@ -53,7 +53,6 @@ class ChordForm extends React.Component {
             chord = new Octavian.Chord(name)
             chord.addInterval('perfectFifth')
             chord.addInterval('perfectOctave')
-            console.log(chord)
         } else {
             chord = new Octavian.Chord(name, qual)
         }

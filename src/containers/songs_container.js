@@ -20,7 +20,6 @@ class SongsContainer extends React.Component {
             method: "DELETE"
         }).then(resp => resp.json())
         .then((songs) => {
-            console.log("DEL RESP", songs)
             this.setState({songs: songs})
         })
     }
@@ -35,7 +34,6 @@ class SongsContainer extends React.Component {
     }
 
     render() {
-        console.log(this.state)
         return (
             this.state.loaded 
             ?

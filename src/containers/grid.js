@@ -46,7 +46,6 @@ class Grid extends React.Component {
     }
 
     tempoChangeHandler = (bpm) => {
-        console.log("GRID", bpm)
         this.setState({bpm: bpm})
     }
 
@@ -61,7 +60,6 @@ class Grid extends React.Component {
     }
 
     instrumentChangeHandler = (e) => {
-        console.log(e.target.value)
         this.setState({instrument: e.target.value})
     }
 
@@ -106,6 +104,7 @@ class Grid extends React.Component {
 
     beatPresetChangeHandler = (e) => {
         if (e.target.value != 'no preset') {
+            console.log(drumPresets[e.target.value])
             let beat = drumPresets[e.target.value]
             this.setState({
                 kickBeats: beat.kickBeats,
@@ -142,7 +141,7 @@ class Grid extends React.Component {
     }
  
     render() {
-
+        console.log(this.state)
         return (
             <div className="song-maker-container">
                 <div className="chord-container">

@@ -5,14 +5,12 @@ import BeatSelect from './beat_select'
 const BeatForm = (props) => {
 
     const changeHandler = (e, beats) => {
-        console.log(e.target.id)
         let newArray = beats 
         if (beats.includes(parseInt(e.target.id))) {
             let index = newArray.findIndex(n => n === parseInt(e.target.id))
             newArray.splice(index, 1)
         } else {
             newArray.push(parseInt(e.target.id))
-            console.log(newArray)
         }
         props.changeHandler(e.target.name, newArray)
     }

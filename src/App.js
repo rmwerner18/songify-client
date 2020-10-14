@@ -42,7 +42,6 @@ class App extends React.Component {
   }
 
   player = (index, time, state) => {
-    console.log("PLAYER", state)
     let chords = state.chords.map(chord => chord.freqs)
     Tone.Transport.bpm.value = parseInt(state.bpm)
     let instrument
@@ -102,25 +101,22 @@ class App extends React.Component {
   }
 
   startLoop = (state) => {
-    // console.log(Tone.Destination.context.state, Tone.Transport)
     let array = []
     this.setNumOfEigthNotes(32, array)
     const seq = new Tone.Sequence((time, index) => {
+        console.log(state)
         this.player(index, time, state)
-    }, array).start(0);
-    seq.start(0)
+    }, array).start(0)
     Tone.Transport.start();
   }
 
   stopLoop = () => {
     Tone.Transport.stop()
     Tone.Transport.cancel()
-    // console.log(Tone.Destination.context.state, Tone.Transport)
   }
 
   playHandler = (e, state) => {
     // HANDLES LOOP
-    // console.log(Tone.Destination.context.state, Tone.Transport)
     if (Tone.Transport.state === "stopped") {
       Tone.Destination.context.resume().then(() => {
         this.startLoop(state)
