@@ -46,6 +46,7 @@ class Grid extends React.Component {
     }
 
     tempoChangeHandler = (bpm) => {
+        console.log("GRID", bpm)
         this.setState({bpm: bpm})
     }
 
@@ -141,7 +142,7 @@ class Grid extends React.Component {
     }
  
     render() {
-        console.log("state:", this.state)
+
         return (
             <div className="song-maker-container">
                 <div className="chord-container">

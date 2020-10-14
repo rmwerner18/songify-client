@@ -5,6 +5,7 @@ class TempoForm extends React.Component {
         bpm: this.props.bpm
     }
     changeHandler = (e) => {
+        console.log("FORM", e.target.value)
         this.setState({bpm: e.target.value})
         this.props.changeHandler(e.target.value)
     }
