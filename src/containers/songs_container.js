@@ -11,7 +11,14 @@ class SongsContainer extends React.Component {
 
     renderSongs = () => {
         return this.state.songs.map(song => {
-            return (<Song song={song} state={this.props.state} player={this.props.player} playHandler={this.props.playHandler} deleteHandler={this.deleteHandler} editHandler={this.editHandler}/>)
+            return (<Song 
+                song={song} 
+                state={this.props.state}        
+                layer={this.props.player} 
+                playHandler={this.props.playHandler} 
+                deleteHandler={this.deleteHandler} 
+                editHandler={this.editHandler} 
+                likeHandler={this.likeHandler}/>)
         })
     }
 
@@ -24,13 +31,55 @@ class SongsContainer extends React.Component {
         })
     }
 
+    filterSongs = (songs) => {
+        let header = "ALL SONGS"
+        let filteredSongs = songs
+        if (this.props.usersSongs) {
+            filteredSongs = songs.filter(song => song.user.id === this.props.state.user.id)
+            header = "YOUR SONGS"
+        } else if (this.props.favoritedSongs) {
+            filteredSongs = songs.filter(song => song.likes.find(like => like.user_id === this.props.state.user.id))
+            console.log("filteredSongs")
+            header = "LIKED SONGS"
+        }
+        this.renderSongs(filteredSongs)
+        this.setState({loaded: true, songs: filteredSongs, header: header})
+    }
+
     componentDidMount = () => {
         fetch('http://localhost:3000/songs')
         .then(resp => resp.json())
-        .then(songs => {
-            this.renderSongs(songs)
-            this.setState({loaded: true, songs: songs})
-        })
+        .then(songs => this.filterSongs(songs))
+    }
+
+    likeHandler = (e) => {
+        console.log(e.target)
+        let songId = e.target.id.split('-')[2]
+        let song = this.state.songs.find(song => song.id === parseInt(songId))
+        if (song.likes.find(like => like.user_id === this.props.state.user.id)) {
+            let like = song.likes.find(like => like.user_id === this.props.state.user.id && like.song_id === song.id)
+            fetch(`http://localhost:3000/likes/${like.id}`, {
+                method: 'DELETE',
+                headers: {
+                    'content-type': 'application/json',
+                    accepts: 'application/json'
+                }
+            }).then(resp=>resp.json())
+            .then(songs => this.filterSongs(songs))
+        } else {
+            fetch('http://localhost:3000/likes/', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    accepts: 'application/json'
+                },
+                body: JSON.stringify({
+                    song_id: song.id,
+                    user_id: this.props.state.user.id
+                })
+            }).then(resp=>resp.json())
+            .then(songs => this.filterSongs(songs))
+        }
     }
 
     render() {
@@ -38,7 +87,7 @@ class SongsContainer extends React.Component {
             this.state.loaded 
             ?
             <div className="songs-container">
-                <h1>ALL SONGS</h1>
+                <h1>{this.state.header}</h1>
                 {this.renderSongs()}
             </div>
             :

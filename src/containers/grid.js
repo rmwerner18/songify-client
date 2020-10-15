@@ -11,6 +11,8 @@ import chordPresets from '../chord_presets'
 
 class Grid extends React.Component {
     state = {
+        user_id: this.props.state.user.id,
+        likes: 0,
         chords: defaultChords,
         bpm: 100,
         snareBeats: [],
@@ -220,11 +222,12 @@ class Grid extends React.Component {
             body: JSON.stringify(
                 this.state
             )
-        })
+        }).then(resp => resp.json())
+        .then(console.log)
     }
  
     render() {
-        console.log(this.state.bpm)
+        console.log('USER ID', this.props.state.user.id)
         return (
             <div className="song-maker-container">
                 <div className="chord-container">
