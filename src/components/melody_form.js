@@ -50,29 +50,35 @@ const MelodyForm = (props) => {
         props.changeHandler(e.target.name, newArray)
     }
 
+    const isOnMeasureLine = (i) => {
+        if ((i+1) % 8 === 0 && i != 31) {
+            return true 
+        }
+    }
+
     const IRows = () => {
-        return array().map(n => <input type="checkbox" checked={props.IBeats.includes(n)} name="IBeats" id={n} onChange={(e) => changeHandler(e, props.IBeats)} />)
+        return array().map((n, index) => <input type="checkbox" className={isOnMeasureLine(index) ? 'measure-line' : null} checked={props.IBeats.includes(n)} name="IBeats" id={n} onChange={(e) => changeHandler(e, props.IBeats)} />)
     }
     const viiRows = () => {
-        return array().map(n => <input type="checkbox" checked={props.viiBeats.includes(n)} name="viiBeats" id={n} onChange={(e) => changeHandler(e, props.viiBeats)}/>)
+        return array().map((n, index) => <input type="checkbox" checked={props.viiBeats.includes(n)} className={isOnMeasureLine(index) ? 'measure-line' : null} name="viiBeats" id={n} onChange={(e) => changeHandler(e, props.viiBeats)}/>)
     }
     const viRows = () => {
-        return array().map(n => <input type="checkbox" checked={props.viBeats.includes(n)} name="viBeats" id={n} onChange={(e) => changeHandler(e, props.viBeats)}/>)
+        return array().map((n, index) => <input type="checkbox" checked={props.viBeats.includes(n)} className={isOnMeasureLine(index) ? 'measure-line' : null} name="viBeats" id={n} onChange={(e) => changeHandler(e, props.viBeats)}/>)
     }
     const vRows = () => {
-        return array().map(n => <input type="checkbox" checked={props.vBeats.includes(n)} name="vBeats" id={n} onChange={(e) => changeHandler(e, props.vBeats)}/>)
+        return array().map((n, index) => <input type="checkbox" checked={props.vBeats.includes(n)} className={isOnMeasureLine(index) ? 'measure-line' : null}  name="vBeats" id={n} onChange={(e) => changeHandler(e, props.vBeats)}/>)
     }
     const ivRows = () => {
-        return array().map(n => <input type="checkbox" checked={props.ivBeats.includes(n)} name="ivBeats" id={n} onChange={(e) => changeHandler(e, props.ivBeats)}/>)
+        return array().map((n, index) => <input type="checkbox" checked={props.ivBeats.includes(n)} className={isOnMeasureLine(index) ? 'measure-line' : null}  name="ivBeats" id={n} onChange={(e) => changeHandler(e, props.ivBeats)}/>)
     }
     const iiiRows = () => {
-        return array().map(n => <input type="checkbox" checked={props.iiiBeats.includes(n)} name="iiiBeats" id={n} onChange={(e) => changeHandler(e, props.iiiBeats)}/>)
+        return array().map((n, index) => <input type="checkbox" checked={props.iiiBeats.includes(n)} className={isOnMeasureLine(index) ? 'measure-line' : null}  name="iiiBeats" id={n} onChange={(e) => changeHandler(e, props.iiiBeats)}/>)
     }
     const iiRows = () => {
-        return array().map(n => <input type="checkbox" checked={props.iiBeats.includes(n)} name="iiBeats" id={n} onChange={(e) => changeHandler(e, props.iiBeats)}/>)
+        return array().map((n, index) => <input type="checkbox" checked={props.iiBeats.includes(n)} className={isOnMeasureLine(index) ? 'measure-line' : null}  name="iiBeats" id={n} onChange={(e) => changeHandler(e, props.iiBeats)}/>)
     }
     const iRows = () => {
-        return array().map(n => <input type="checkbox" checked={props.iBeats.includes(n)} name="iBeats" id={n} onChange={(e) => changeHandler(e, props.iBeats)}/>)
+        return array().map((n, index) => <input type="checkbox" checked={props.iBeats.includes(n)} className={isOnMeasureLine(index) ? 'measure-line' : null}  name="iBeats" id={n} onChange={(e) => changeHandler(e, props.iBeats)}/>)
     }
     const removeNumber = (string) => {
         let newString = string.split('')
@@ -114,12 +120,14 @@ const MelodyForm = (props) => {
                     {iRows()}
                 </div>
             </div>
-            <select onChange={props.rootHandler}>
-                {rootOptions()}
-            </select>
-            <select onChange={props.modeHandler}>
-                {modeOptions()}
-            </select>
+            <div className='mode-select'>
+                <select onChange={props.rootHandler}>
+                    {rootOptions()}
+                </select>
+                <select onChange={props.modeHandler}>
+                    {modeOptions()}
+                </select>
+            </div>
             <button onClick={props.clearState}>Clear Melody</button>
         </>
     )

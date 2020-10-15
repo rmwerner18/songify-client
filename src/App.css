@@ -46,7 +46,6 @@ h1 {
   padding-top: 0px;
   padding-bottom: 0px;
   height: 15px;
-  
 }
 
 input[type='checkbox'] {
@@ -55,18 +54,40 @@ input[type='checkbox'] {
   background-color: #eee;
   margin: 0px;
   padding: 0px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+input[class='measure-line'] {
+  margin-right: 5px;
+}
+
+.chord-options {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.tempo-form {
+  display: flex;
+}
+
+.instrument-form {
+  height: auto;
 }
 
 .beat-container {
   margin-left: 10px;
   margin-right: 10px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 20px;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
 
 .melody-container {
   margin-left: 10px;
   margin-right: 10px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 20px;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
 
 
@@ -88,8 +109,17 @@ input[type='checkbox'] {
   width: auto;
   height: auto;
   margin: 10px;
+  margin-bottom: 20px;
   justify-content: center;
   align-items: center;
+}
+
+.mode-select {
+  display: flex;
+}
+
+button {
+  margin-bottom: 10px;
 }
 
 .chord-box {

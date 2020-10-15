@@ -230,10 +230,12 @@ class Grid extends React.Component {
                 <div className="chord-container">
                     {this.showChords()}
                 </div>
-                <button id='start-button' onClick={(e) => this.playHandler(e)}>Start</button>
-                <TempoForm bpm={this.state.bpm} changeHandler={this.tempoChangeHandler} />
-                <InstrumentForm changeHandler={this.instrumentChangeHandler}/>
                 <button onClick={this.randomProgGenereator}>Generate Random Progression</button>
+                <button id='start-button' onClick={(e) => this.playHandler(e)}>Start</button>
+                <div className='chord-options'>
+                    <TempoForm bpm={this.state.bpm} changeHandler={this.tempoChangeHandler} />
+                    <InstrumentForm changeHandler={this.instrumentChangeHandler}/>
+                </div>
                 <BeatForm 
                     hhBeats={this.state.hhBeats} 
                     snareBeats={this.state.snareBeats} 
