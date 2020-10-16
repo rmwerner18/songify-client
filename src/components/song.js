@@ -100,6 +100,7 @@ const Song = (props) => {
 
     return (
         <div className="song-box">
+            <p>{props.song.name}</p>
             <p>{props.song.user.username}</p>
             <button onClick={(e) => playHandler(e, props.song)}>Start</button>
             <button onClick={() => props.deleteHandler(props.song)}>Delete</button>

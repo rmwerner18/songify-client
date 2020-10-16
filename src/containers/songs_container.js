@@ -39,10 +39,8 @@ class SongsContainer extends React.Component {
             header = "YOUR SONGS"
         } else if (this.props.favoritedSongs) {
             filteredSongs = songs.filter(song => song.likes.find(like => like.user_id === this.props.state.user.id))
-            console.log("filteredSongs")
             header = "LIKED SONGS"
         }
-        this.renderSongs(filteredSongs)
         this.setState({loaded: true, songs: filteredSongs, header: header})
     }
 
@@ -53,7 +51,6 @@ class SongsContainer extends React.Component {
     }
 
     likeHandler = (e) => {
-        console.log(e.target)
         let songId = e.target.id.split('-')[2]
         let song = this.state.songs.find(song => song.id === parseInt(songId))
         if (song.likes.find(like => like.user_id === this.props.state.user.id)) {

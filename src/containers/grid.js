@@ -5,13 +5,14 @@ import TempoForm from '../components/tempo_form'
 import BeatForm from '../components/beat_form'
 import InstrumentForm from '../components/instrument_form'
 import MelodyForm from '../components/melody_form'
+import SongNameForm from '../components/song_name_form'
 import modes from '../modes'
 import defaultChords from '../default_chords'
 import chordPresets from '../chord_presets'
 
 class Grid extends React.Component {
     state = {
-        user_id: this.props.state.user.id,
+        user_id: null,
         likes: 0,
         chords: defaultChords,
         bpm: 100,
@@ -122,7 +123,9 @@ class Grid extends React.Component {
         if (this.props.song_id) {
             fetch(`http://localhost:3000/songs/${this.props.song_id}`)
             .then(resp => resp.json())
-            .then(song => this.setState(song))
+            .then(song => {
+                this.setState(song)
+            })
         }
     }
 
@@ -145,7 +148,6 @@ class Grid extends React.Component {
 
     beatChangeHandler = (type, obj) => {
         if (type === 'all') {
-            console.log(obj)
             this.setState({
                 kickBeats: obj.kickBeats,
                 snareBeats: obj.snareBeats,
@@ -199,7 +201,12 @@ class Grid extends React.Component {
         this.setState({melodyMode: e.target.value})
     }
 
-    saveSongHandler = () => {
+    saveSongHandler = (e, songname) => {  
+        e.preventDefault()
+        let newObj
+        newObj = this.state
+        newObj.user_id = this.props.state.user.id
+        newObj.name = songname
         this.props.song_id
         ?
         fetch(`http://localhost:3000/songs/${this.props.song_id}`, {
@@ -209,9 +216,10 @@ class Grid extends React.Component {
                 accepts: "application/json"
             },
             body: JSON.stringify(
-                this.state
+                newObj
             )
-        })
+        }).then(resp => resp.json())
+        .then(console.log)
         :
         fetch('http://localhost:3000/songs', {
             method: "POST",
@@ -220,51 +228,72 @@ class Grid extends React.Component {
                 accepts: "application/json"
             },
             body: JSON.stringify(
-                this.state
+                newObj
             )
         }).then(resp => resp.json())
         .then(console.log)
     }
+    
+
+    modalClickHandler = () => {
+        Tone.Transport.stop()
+        Tone.Transport.cancel()
+        document.getElementById(`song-name-form-modal`).style.display = "block"
+    }
+
+    modalCloseHandler = () => {
+        document.getElementById(`song-name-form-modal`).style.display = "none"
+    }
+
  
     render() {
-        console.log('USER ID', this.props.state.user.id)
         return (
-            <div className="song-maker-container">
-                <div className="chord-container">
-                    {this.showChords()}
+            <>
+                <div id={`song-name-form-modal`} className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={this.modalCloseHandler}>&times;</span>
+                        <div>
+                            {<SongNameForm submitHandler={this.saveSongHandler} onClick={() => console.log(this.state)}/>}
+                        </div>
+                    </div>
                 </div>
-                <button onClick={this.randomProgGenereator}>Generate Random Progression</button>
-                <button id='start-button' onClick={(e) => this.playHandler(e)}>Start</button>
-                <div className='chord-options'>
-                    <TempoForm bpm={this.state.bpm} changeHandler={this.tempoChangeHandler} />
-                    <InstrumentForm changeHandler={this.instrumentChangeHandler}/>
+                <div className="song-maker-container">
+                    <div className="chord-container">
+                        {this.showChords()}
+                    </div>
+                    <button onClick={this.randomProgGenereator}>Generate Random Progression</button>
+                    <button id='start-button' onClick={(e) => this.playHandler(e)}>Start</button>
+                    <div className='chord-options'>
+                        <TempoForm bpm={this.state.bpm} changeHandler={this.tempoChangeHandler} />
+                        <InstrumentForm changeHandler={this.instrumentChangeHandler}/>
+                    </div>
+                    <BeatForm 
+                        hhBeats={this.state.hhBeats} 
+                        snareBeats={this.state.snareBeats} 
+                        kickBeats={this.state.kickBeats}
+                        changeHandler={this.beatChangeHandler}
+                        presetChangeHandler={this.beatPresetChangeHandler} 
+                        clearState={this.clearDrumState}
+                    />
+                    <br/>
+                    <br/>
+                    <MelodyForm
+                        IBeats={this.state.IBeats}
+                        viiBeats={this.state.viiBeats}
+                        viBeats={this.state.viBeats}
+                        vBeats={this.state.vBeats}
+                        ivBeats={this.state.ivBeats}
+                        iiiBeats={this.state.iiiBeats}
+                        iiBeats={this.state.iiBeats}
+                        iBeats={this.state.iBeats}
+                        changeHandler={this.melodyChangeHandler} 
+                        rootHandler={this.rootHandler}
+                        modeHandler={this.modeHandler}
+                        clearState={this.clearMelodyState}
+                    />
+                    <button onClick={this.props.song_id ? this.saveSongHandler : this.modalClickHandler}>Save</button>
                 </div>
-                <BeatForm 
-                    hhBeats={this.state.hhBeats} 
-                    snareBeats={this.state.snareBeats} 
-                    kickBeats={this.state.kickBeats}
-                    changeHandler={this.beatChangeHandler}
-                    presetChangeHandler={this.beatPresetChangeHandler} 
-                    clearState={this.clearDrumState}
-                />
-                <br/>
-                <br/>
-                <MelodyForm
-                    IBeats={this.state.IBeats}
-                    viiBeats={this.state.viiBeats}
-                    viBeats={this.state.viBeats}
-                    vBeats={this.state.vBeats}
-                    ivBeats={this.state.ivBeats}
-                    iiiBeats={this.state.iiiBeats}
-                    iiBeats={this.state.iiBeats}
-                    iBeats={this.state.iBeats}
-                    changeHandler={this.melodyChangeHandler} 
-                    rootHandler={this.rootHandler}
-                    modeHandler={this.modeHandler}
-                    clearState={this.clearMelodyState}
-                />
-                <button onClick={this.saveSongHandler}>Save</button>
-            </div>
+            </>
         )
     }
 }
