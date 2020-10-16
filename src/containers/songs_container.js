@@ -1,5 +1,4 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 import Song from '../components/song'
 
 
@@ -12,6 +11,7 @@ class SongsContainer extends React.Component {
     renderSongs = () => {
         return this.state.songs.map(song => {
             return (<Song 
+                key={song.id}
                 song={song} 
                 state={this.props.state}        
                 layer={this.props.player} 

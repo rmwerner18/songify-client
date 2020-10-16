@@ -1,5 +1,3 @@
-// const { default: defaultChords } = require("./default_chords")
-
 const drumPresets = [
     {
         hhBeats: [2, 14, 18, 22, 26, 30, 6, 10],

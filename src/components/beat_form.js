@@ -5,7 +5,7 @@ import drumPresets from '../drum_presets'
 const BeatForm = (props) => {
 
     const presetChangeHandler = (e) => {
-        if (e.target.value != 'no preset') {
+        if (e.target.value !== 'no preset') {
             let beat = drumPresets[e.target.value]
             props.changeHandler('all', beat)
         }
@@ -36,21 +36,21 @@ const BeatForm = (props) => {
 
 
     const isOnMeasureLine = (i) => {
-        if ((i+1) % 8 === 0 && i != 31) {
+        if ((i+1) % 8 === 0 && i !== 31) {
             return true 
         }
     }
 
     const makeHHRows = () => {
-        return array().map((n, index) => <input type="checkbox" className={isOnMeasureLine(index) ? 'measure-line' : null} checked={props.hhBeats.includes(n)} name="hhBeats" id={n} onChange={(e) => changeHandler(e, props.hhBeats)}/>)
+        return array().map((n, index) => <input key={index} type="checkbox" className={isOnMeasureLine(index) ? 'measure-line' : null} checked={props.hhBeats.includes(n)} name="hhBeats" id={n} onChange={(e) => changeHandler(e, props.hhBeats)}/>)
     }
 
     const makeSnareRows = () => {
-        return array().map((n, index) => <input type="checkbox" className={isOnMeasureLine(index) ? 'measure-line' : null} checked={props.snareBeats.includes(n)} name="snareBeats" id={n} onChange={(e) => changeHandler(e, props.snareBeats)}/>)
+        return array().map((n, index) => <input key={index} type="checkbox" className={isOnMeasureLine(index) ? 'measure-line' : null} checked={props.snareBeats.includes(n)} name="snareBeats" id={n} onChange={(e) => changeHandler(e, props.snareBeats)}/>)
     }
 
     const makeKickRows = () => {
-        return array().map((n, index) => <input type="checkbox" className={isOnMeasureLine(index) ? 'measure-line' : null} checked={props.kickBeats.includes(n)} name="kickBeats" id={n} onChange={(e) => changeHandler(e, props.kickBeats)}/>)
+        return array().map((n, index) => <input key={index} type="checkbox" className={isOnMeasureLine(index) ? 'measure-line' : null} checked={props.kickBeats.includes(n)} name="kickBeats" id={n} onChange={(e) => changeHandler(e, props.kickBeats)}/>)
     }
     return(
         <>

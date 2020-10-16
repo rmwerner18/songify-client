@@ -5,7 +5,6 @@ import Grid from './containers/grid'
 import SongsContainer from './containers/songs_container'
 import UserPage from './containers/user_page'
 import { BrowserRouter, Route } from 'react-router-dom';
-import modes from './modes'
 
 class App extends React.Component {
   state = {
@@ -59,7 +58,7 @@ class App extends React.Component {
           </header> */}
           <BrowserRouter className='App-Content'>
             <Route exact path={`/users/${this.state.user.id}`} render={() => <UserPage  player={this.player} state={this.state} playHandler={this.playHandler}/>}/>
-            <Route exact path='/songs/:id/edit' render={(routerProps) => <Grid player={this.player} state={this.state} playHandler={this.playHandler} song_id={routerProps.match.params.id}  />}/>
+            <Route exact path='/songs/:id/edit' render={(routerProps) => <Grid player={this.player} state={this.state} playHandler={this.playHandler} song_id={routerProps.match.params.id} />}/>
             <Route exact path='/songs' render={() => <SongsContainer player={this.player} state={this.state} playHandler={this.playHandler} editHandler={this.editHandler} />}/>
             <Route exact path='/' render={() => <Grid player={this.player} state={this.state} playHandler={this.playHandler} />}/>
           </BrowserRouter>

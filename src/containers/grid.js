@@ -95,7 +95,7 @@ class Grid extends React.Component {
   startLoop = () => {
     let array = []
     this.setNumOfEigthNotes(32, array)
-    const seq = new Tone.Sequence((time, index) => {
+    new Tone.Sequence((time, index) => {
         this.player(index, time)
     }, array).start(0)
     Tone.Transport.start();
@@ -107,6 +107,7 @@ class Grid extends React.Component {
   }
 
   playHandler = (e) => {
+
     // HANDLES LOOP
     if (Tone.Transport.state === "stopped") {
       Tone.Destination.context.resume().then(() => {
@@ -231,13 +232,14 @@ class Grid extends React.Component {
                 newObj
             )
         }).then(resp => resp.json())
-        .then(console.log)
+        .then(song => alert("Your song has been saved!"))
     }
     
 
     modalClickHandler = () => {
         Tone.Transport.stop()
         Tone.Transport.cancel()
+        document.getElementById("grid-start-button").innerText = "Start"
         document.getElementById(`song-name-form-modal`).style.display = "block"
     }
 
@@ -262,7 +264,7 @@ class Grid extends React.Component {
                         {this.showChords()}
                     </div>
                     <button onClick={this.randomProgGenereator}>Generate Random Progression</button>
-                    <button id='start-button' onClick={(e) => this.playHandler(e)}>Start</button>
+                    <button id='grid-start-button' onClick={(e) => this.playHandler(e)}>Start</button>
                     <div className='chord-options'>
                         <TempoForm bpm={this.state.bpm} changeHandler={this.tempoChangeHandler} />
                         <InstrumentForm changeHandler={this.instrumentChangeHandler}/>
@@ -278,6 +280,7 @@ class Grid extends React.Component {
                     <br/>
                     <br/>
                     <MelodyForm
+                        song_id={this.props.song_id ? this.props.song_id : null}
                         IBeats={this.state.IBeats}
                         viiBeats={this.state.viiBeats}
                         viBeats={this.state.viBeats}

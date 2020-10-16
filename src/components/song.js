@@ -68,7 +68,7 @@ const Song = (props) => {
     const startLoop = () => {
         let array = []
         setNumOfEigthNotes(32, array)
-        const seq = new Tone.Sequence((time, index) => {
+        new Tone.Sequence((time, index) => {
             player(index, time)
         }, array).start(0)
         Tone.Transport.start();
@@ -81,12 +81,24 @@ const Song = (props) => {
 
     const playHandler = (e) => {
         // HANDLES LOOP
+        console.log(Tone.Transport.state)
         if (Tone.Transport.state === "stopped") {
         Tone.Destination.context.resume().then(() => {
             startLoop()
         })
         e.target.innerText = 'Stop'
-        } else {
+        } else if (Tone.Transport.state === "started" && e.target.innerText === "Start") {
+            let elements = document.getElementsByClassName('song-list-start-button')
+            let array = Array.from(elements)
+            let item = array.find(el => el.innerText === "Stop")
+            item.innerText = "Start"
+            e.target.innerText = "Stop"
+            stopLoop()
+            Tone.Destination.context.resume().then(() => {
+                startLoop()
+            })
+        }
+        else {
             stopLoop()
             e.target.innerText = 'Start'
         }
@@ -102,12 +114,12 @@ const Song = (props) => {
         <div className="song-box">
             <p>{props.song.name}</p>
             <p>{props.song.user.username}</p>
-            <button onClick={(e) => playHandler(e, props.song)}>Start</button>
+            <button className="song-list-start-button" onClick={(e) => playHandler(e, props.song)}>Start</button>
             <button onClick={() => props.deleteHandler(props.song)}>Delete</button>
             <NavLink to={`/songs/${props.song.id}/edit`}>
-                <button>Edit</button>
+                <button onClick={stopLoop}>Edit</button>
             </NavLink>
-            {props.song.user.id != props.state.user.id 
+            {props.song.user.id !== props.state.user.id 
             ?
             <button id={`like-button-${props.song.id}`} onClick={(e) => props.likeHandler(e)}>{userLikesSong() ? "Unlike" : "Like"}</button>       
             :

@@ -1,5 +1,3 @@
-const { default: defaultChords } = require("./default_chords")
-
 const chordPresets = [
     [
         {
