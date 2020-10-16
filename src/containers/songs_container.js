@@ -44,7 +44,9 @@ class SongsContainer extends React.Component {
         this.setState({loaded: true, songs: filteredSongs, header: header})
     }
 
+
     componentDidMount = () => {
+        document.querySelector('.navbar').style.display = 'none'
         fetch('http://localhost:3000/songs')
         .then(resp => resp.json())
         .then(songs => this.filterSongs(songs))
@@ -61,7 +63,7 @@ class SongsContainer extends React.Component {
                     'content-type': 'application/json',
                     accepts: 'application/json'
                 }
-            }).then(resp=>resp.json())
+            }).then(resp => resp.json())
             .then(songs => this.filterSongs(songs))
         } else {
             fetch('http://localhost:3000/likes/', {
@@ -74,7 +76,7 @@ class SongsContainer extends React.Component {
                     song_id: song.id,
                     user_id: this.props.state.user.id
                 })
-            }).then(resp=>resp.json())
+            }).then(resp => resp.json())
             .then(songs => this.filterSongs(songs))
         }
     }

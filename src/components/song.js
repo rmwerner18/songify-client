@@ -108,23 +108,27 @@ const Song = (props) => {
         return props.song.likes.find(like => like.user_id === props.state.user.id)
     }
 
-   
+    stopLoop()
 
     return (
         <div className="song-box">
-            <p>{props.song.name}</p>
-            <p>{props.song.user.username}</p>
-            <button className="song-list-start-button" onClick={(e) => playHandler(e, props.song)}>Start</button>
-            <button onClick={() => props.deleteHandler(props.song)}>Delete</button>
-            <NavLink to={`/songs/${props.song.id}/edit`}>
-                <button onClick={stopLoop}>Edit</button>
-            </NavLink>
-            {props.song.user.id !== props.state.user.id 
-            ?
-            <button id={`like-button-${props.song.id}`} onClick={(e) => props.likeHandler(e)}>{userLikesSong() ? "Unlike" : "Like"}</button>       
-            :
-            null}
-            <span>likes: <span id={`like-count-${props.song.id}`}>{props.song.likes.length}</span></span>
+            <h2 className="song-title">{props.song.name}</h2>
+            <p className="song-maker">Created By: {props.song.user.username}</p>
+            <div className='song-list-start-button-container'>
+                <button className="song-list-start-button" onClick={(e) => playHandler(e, props.song)}>Start</button>
+            </div>
+            <div className='song-options'>
+                <button onClick={() => props.deleteHandler(props.song)}>Delete</button>
+                <NavLink to={`/songs/${props.song.id}/edit`}>
+                    <button onClick={stopLoop}>Edit</button>
+                </NavLink>
+                {props.song.user.id !== props.state.user.id 
+                ?
+                <button id={`like-button-${props.song.id}`} onClick={(e) => props.likeHandler(e)}>{userLikesSong() ? "Unlike" : "Like"}</button>       
+                :
+                null}
+                <span>likes: <span id={`like-count-${props.song.id}`}>{props.song.likes.length}</span></span>
+            </div>
         </div>
     )
 

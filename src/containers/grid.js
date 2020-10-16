@@ -9,6 +9,7 @@ import SongNameForm from '../components/song_name_form'
 import modes from '../modes'
 import defaultChords from '../default_chords'
 import chordPresets from '../chord_presets'
+import PlayButton from '../components/play_button';
 
 class Grid extends React.Component {
     state = {
@@ -34,6 +35,7 @@ class Grid extends React.Component {
 
 
   player = (index, time) => {
+    
     let chords = this.state.chords.map(chord => chord.freqs)
     Tone.Transport.bpm.value = parseInt(this.state.bpm)
     let instrument
@@ -107,13 +109,13 @@ class Grid extends React.Component {
   }
 
   playHandler = (e) => {
-
+    console.log(e.target)
     // HANDLES LOOP
     if (Tone.Transport.state === "stopped") {
-      Tone.Destination.context.resume().then(() => {
-        this.startLoop()
-      })
-      e.target.innerText = 'Stop'
+        Tone.Destination.context.resume().then(() => {
+            this.startLoop()
+        })
+        e.target.innerText = 'Stop'
     } else {
         this.stopLoop()
         e.target.innerText = 'Start'
@@ -121,6 +123,8 @@ class Grid extends React.Component {
   }
 
     componentDidMount = () => {
+        this.stopLoop()
+        document.querySelector('.navbar').style.display = 'none'
         if (this.props.song_id) {
             fetch(`http://localhost:3000/songs/${this.props.song_id}`)
             .then(resp => resp.json())
@@ -263,13 +267,16 @@ class Grid extends React.Component {
                     <div className="chord-container">
                         {this.showChords()}
                     </div>
-                    <button onClick={this.randomProgGenereator}>Generate Random Progression</button>
-                    <button id='grid-start-button' onClick={(e) => this.playHandler(e)}>Start</button>
                     <div className='chord-options'>
-                        <TempoForm bpm={this.state.bpm} changeHandler={this.tempoChangeHandler} />
-                        <InstrumentForm changeHandler={this.instrumentChangeHandler}/>
+                        <button id='grid-start-button' onClick={(e) => this.playHandler(e)}>Start</button>
+                        {/* <PlayButton clickHandler={this.playHandler} /> */}
+                        <div className='playback-options'>
+                            <TempoForm bpm={this.state.bpm} changeHandler={this.tempoChangeHandler} />
+                            <InstrumentForm changeHandler={this.instrumentChangeHandler}/>
+                        </div>
+                        <button className='random-chords-button' onClick={this.randomProgGenereator}>Generate Random Progression</button>
                     </div>
-                    <BeatForm 
+                    <BeatForm
                         hhBeats={this.state.hhBeats} 
                         snareBeats={this.state.snareBeats} 
                         kickBeats={this.state.kickBeats}
@@ -294,7 +301,9 @@ class Grid extends React.Component {
                         modeHandler={this.modeHandler}
                         clearState={this.clearMelodyState}
                     />
-                    <button onClick={this.props.song_id ? this.saveSongHandler : this.modalClickHandler}>Save</button>
+                    <div className='save-container' >
+                        <button className='save-button' onClick={this.props.song_id ? this.saveSongHandler : this.modalClickHandler}>Save</button>
+                    </div>
                 </div>
             </>
         )

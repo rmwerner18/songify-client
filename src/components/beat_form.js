@@ -53,7 +53,7 @@ const BeatForm = (props) => {
         return array().map((n, index) => <input key={index} type="checkbox" className={isOnMeasureLine(index) ? 'measure-line' : null} checked={props.kickBeats.includes(n)} name="kickBeats" id={n} onChange={(e) => changeHandler(e, props.kickBeats)}/>)
     }
     return(
-        <>
+        <div className='beat-form'>
             <div className="beat-container">
                 <div className='checkbox-row'>   
                     {makeHHRows()}
@@ -65,9 +65,11 @@ const BeatForm = (props) => {
                     {makeKickRows()}
                 </div>
             </div>
-            <BeatSelect changeHandler={e => changeHandler(e)} />
-            <button onClick={props.clearState}>Clear Drums</button>
-        </>
+            <div className='beat-options'>
+                <BeatSelect changeHandler={e => changeHandler(e)} />
+                <button onClick={props.clearState}>Clear Drums</button>
+            </div>
+        </div>
     )
 }
 

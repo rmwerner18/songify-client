@@ -108,7 +108,7 @@ class MelodyForm extends React.Component {
         return(
             this.state.song.id || this.props.song_id === null
             ?
-            <>
+            <div className='melody-form'>
                 <div className="melody-container">
                     <div className='checkbox-row'>   
                         {this.IRows()}
@@ -142,9 +142,9 @@ class MelodyForm extends React.Component {
                     <select onChange={this.props.modeHandler}>
                         {this.modeOptions()}
                     </select>
+                    <button onClick={this.props.clearState}>Clear Melody</button>
                 </div>
-                <button onClick={this.props.clearState}>Clear Melody</button>
-            </>
+            </div>
             : 
             "loading melody"
         )

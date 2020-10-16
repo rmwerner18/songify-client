@@ -4,6 +4,8 @@ import * as Tone from 'tone'
 import Grid from './containers/grid'
 import SongsContainer from './containers/songs_container'
 import UserPage from './containers/user_page'
+import NavBar from './containers/nav_bar'
+import MenuIcon from './components/menu_icon'
 import { BrowserRouter, Route } from 'react-router-dom';
 
 class App extends React.Component {
@@ -49,6 +51,16 @@ class App extends React.Component {
     return <Grid player={this.player} playHandler={this.playHandler} song={song}/>
   }
 
+  displayNav = () => {
+    console.log('clicked')
+    let navbar = document.querySelector('.navbar')
+    if (navbar.style.display === 'none') {
+      return navbar.style.display ='flex'
+    } else {
+      return navbar.style.display = 'none'
+    }
+  }
+
   render() {
       return (
         this.state.synth 
@@ -57,6 +69,10 @@ class App extends React.Component {
           {/* <header className="App-header">
           </header> */}
           <BrowserRouter className='App-Content'>
+            <div className='navbar-with-image'>
+              <MenuIcon displayNav={this.displayNav}/>
+              <NavBar user={this.state.user} />
+            </div>
             <Route exact path={`/users/${this.state.user.id}`} render={() => <UserPage  player={this.player} state={this.state} playHandler={this.playHandler}/>}/>
             <Route exact path='/songs/:id/edit' render={(routerProps) => <Grid player={this.player} state={this.state} playHandler={this.playHandler} song_id={routerProps.match.params.id} />}/>
             <Route exact path='/songs' render={() => <SongsContainer player={this.player} state={this.state} playHandler={this.playHandler} editHandler={this.editHandler} />}/>
