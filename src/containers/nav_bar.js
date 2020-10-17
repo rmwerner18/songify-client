@@ -8,7 +8,7 @@ const link = {
     width: '100px',
     padding: '12px',
     margin: '3px 6px 3px',
-    background: 'black',
+    background: '#3E818F',
     textDecoration: 'none',
     borderRadius: '10px',
     color: 'white',
@@ -21,7 +21,7 @@ const NavBar = (props) =>
     exact
     style={link}
     activeStyle={{
-      background: 'darkgray'
+      background: '#7EBCC8'
     }}
   >Home</NavLink>
   <NavLink
@@ -29,7 +29,7 @@ const NavBar = (props) =>
     exact
     style={link}
     activeStyle={{
-      background: 'darkgray'
+      background: '#7EBCC8'
     }}
   >All Songs</NavLink>
   <NavLink
@@ -37,7 +37,7 @@ const NavBar = (props) =>
     exact
     style={link}
     activeStyle={{
-      background: 'darkgray'
+      background: '#7EBCC8'
     }}
   >Your Songs</NavLink>
 </div>

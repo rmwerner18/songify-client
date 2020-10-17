@@ -268,13 +268,20 @@ class Grid extends React.Component {
                         {this.showChords()}
                     </div>
                     <div className='chord-options'>
-                        <button id='grid-start-button' onClick={(e) => this.playHandler(e)}>Start</button>
-                        {/* <PlayButton clickHandler={this.playHandler} /> */}
-                        <div className='playback-options'>
-                            <TempoForm bpm={this.state.bpm} changeHandler={this.tempoChangeHandler} />
-                            <InstrumentForm changeHandler={this.instrumentChangeHandler}/>
+                        <div className='grid-start-button-container'>
+                            <button id='grid-start-button' onClick={(e) => this.playHandler(e)}>Start</button>
                         </div>
-                        <button className='random-chords-button' onClick={this.randomProgGenereator}>Generate Random Progression</button>
+                        {/* <PlayButton clickHandler={this.playHandler} /> */}
+                        <div className='save-container' >
+                            <button className='save-button' onClick={this.props.song_id ? this.saveSongHandler : this.modalClickHandler}>Save</button>
+                        </div>
+                        <div className='random-chords-button-container'>
+                            <button className='random-chords-button' onClick={this.randomProgGenereator}>Generate Random Progression</button>
+                        </div>
+                    </div>
+                    <div className='playback-options'>
+                        <TempoForm bpm={this.state.bpm} changeHandler={this.tempoChangeHandler} />
+                        <InstrumentForm changeHandler={this.instrumentChangeHandler}/>
                     </div>
                     <BeatForm
                         hhBeats={this.state.hhBeats} 
@@ -301,9 +308,6 @@ class Grid extends React.Component {
                         modeHandler={this.modeHandler}
                         clearState={this.clearMelodyState}
                     />
-                    <div className='save-container' >
-                        <button className='save-button' onClick={this.props.song_id ? this.saveSongHandler : this.modalClickHandler}>Save</button>
-                    </div>
                 </div>
             </>
         )
