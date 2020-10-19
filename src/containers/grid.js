@@ -208,35 +208,41 @@ class Grid extends React.Component {
 
     saveSongHandler = (e, songname) => {  
         e.preventDefault()
-        let newObj
-        newObj = this.state
-        newObj.user_id = this.props.state.user.id
-        newObj.name = songname
-        this.props.song_id
-        ?
-        fetch(`http://localhost:3000/songs/${this.props.song_id}`, {
-            method: "PATCH",
-            headers: {
-                "content-type": "application/json",
-                accepts: "application/json"
-            },
-            body: JSON.stringify(
-                newObj
-            )
-        }).then(resp => resp.json())
-        .then(console.log)
-        :
-        fetch('http://localhost:3000/songs', {
-            method: "POST",
-            headers: {
-                "content-type": "application/json",
-                accepts: "application/json"
-            },
-            body: JSON.stringify(
-                newObj
-            )
-        }).then(resp => resp.json())
-        .then(song => alert("Your song has been saved!"))
+        console.log("SAVE", this.props.state.user.id)
+            let newObj
+            newObj = this.state
+            newObj.user_id = this.props.state.user.id
+            newObj.name = songname
+            this.props.song_id
+            ?
+            fetch(`http://localhost:3000/songs/${this.props.song_id}`, {
+                method: "PATCH",
+                headers: {
+                    "content-type": "application/json",
+                    accepts: "application/json",
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                },
+                body: JSON.stringify(
+                    newObj
+                )
+            }).then(resp => resp.json())
+            .then(() => {
+                this.stopLoop()
+                alert("Your changes have been saved!")
+            })
+            :
+            fetch('http://localhost:3000/songs', {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                    accepts: "application/json",
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                },
+                body: JSON.stringify(
+                    newObj
+                )
+            }).then(resp => resp.json())
+            .then(song => alert("Your song has been saved!"))
     }
     
 
@@ -244,7 +250,11 @@ class Grid extends React.Component {
         Tone.Transport.stop()
         Tone.Transport.cancel()
         document.getElementById("grid-start-button").innerText = "Start"
-        document.getElementById(`song-name-form-modal`).style.display = "block"
+        if (this.props.state.user.id) {
+            document.getElementById(`song-name-form-modal`).style.display = "block"
+        } else {
+            alert('Please login to save a song')
+        }
     }
 
     modalCloseHandler = () => {
@@ -253,6 +263,7 @@ class Grid extends React.Component {
 
  
     render() {
+        console.log("GRID RENDER", this.props.state.user.id)
         return (
             <>
                 <div id={`song-name-form-modal`} className="modal">

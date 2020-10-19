@@ -32,14 +32,41 @@ const NavBar = (props) =>
       background: '#7EBCC8'
     }}
   >All Songs</NavLink>
-  <NavLink
+  {
+    props.user.id
+    ?
+    <NavLink
     to={`/users/${props.user.id}`}
     exact
     style={link}
     activeStyle={{
       background: '#7EBCC8'
     }}
-  >Your Songs</NavLink>
+    >Your Songs</NavLink>
+    :
+    null
+  }
+  {
+    props.user.id 
+    ?
+    <NavLink
+      to='/logout'
+      exact
+      style={link}
+      activeStyle={{
+        background: '#7EBCC8'
+      }}
+    >Logout</NavLink>
+    :
+    <NavLink
+      to='/login'
+      exact
+      style={link}
+      activeStyle={{
+        background: '#7EBCC8'
+      }}
+    >Login</NavLink>
+  }
 </div>
 
   export default NavBar

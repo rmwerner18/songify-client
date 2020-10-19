@@ -6,7 +6,8 @@ import SongsContainer from './containers/songs_container'
 import UserPage from './containers/user_page'
 import NavBar from './containers/nav_bar'
 import MenuIcon from './components/menu_icon'
-import { BrowserRouter, Route } from 'react-router-dom';
+import Login from './components/login'
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 
 class App extends React.Component {
   state = {
@@ -42,9 +43,20 @@ class App extends React.Component {
         hh: hh
       })
     })
-    fetch('http://localhost:3000/users/3')
-    .then(resp => resp.json())
-    .then(user => this.setState({user: user}))
+    // fetch('http://localhost:3000/users/3')
+    // .then(resp => resp.json())
+    // .then(user => this.setState({user: user}))
+    let token = localStorage.getItem('token')
+    console.log("token", token)
+    if (token) {
+      console.log('token:', token)
+      fetch('http://localhost:3000/profile', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`
+        }}).then(resp => resp.json())
+        .then(resp => this.setState({user: resp.user}))
+    }
   }
 
   editHandler = (song) => {
@@ -61,7 +73,55 @@ class App extends React.Component {
     }
   }
 
+  loginHandler = (e, state) => {
+    e.preventDefault()
+    let user = {
+      username: state.username,
+      password: state.password
+    }
+    fetch('http://localhost:3000/login', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': "application/json"
+      },
+      body: JSON.stringify({user: user})
+    }).then(resp => resp.json())
+    .then(result => {
+      console.log(result.user)
+      localStorage.setItem('token', result.jwt);
+      this.setState({user: result.user});
+    })
+  }
+
+  signUpHandler = (e, state) => {
+    e.preventDefault()
+    let user = {
+      username: state.username,
+      password: state.password
+    }
+    fetch('http://localhost:3000/users', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': "application/json"
+      },
+      body: JSON.stringify({user: user})
+    }).then(resp => resp.json())
+    .then(result => {
+      console.log(result)
+      localStorage.setItem('token', result.jwt);
+      this.setState({user: result.user});
+    })
+  }
+
+  logoutHandler = () => {
+    localStorage.removeItem('token')
+    this.setState({user: {}})
+  }
+
   render() {
+    console.log("USER", this.state.user)
       return (
         this.state.synth 
         ?
@@ -73,10 +133,18 @@ class App extends React.Component {
               <MenuIcon displayNav={this.displayNav}/>
               <NavBar user={this.state.user} />
             </div>
-            <Route exact path={`/users/${this.state.user.id}`} render={() => <UserPage  player={this.player} state={this.state} playHandler={this.playHandler}/>}/>
-            <Route exact path='/songs/:id/edit' render={(routerProps) => <Grid player={this.player} state={this.state} playHandler={this.playHandler} song_id={routerProps.match.params.id} />}/>
-            <Route exact path='/songs' render={() => <SongsContainer player={this.player} state={this.state} playHandler={this.playHandler} editHandler={this.editHandler} />}/>
-            <Route exact path='/' render={() => <Grid player={this.player} state={this.state} playHandler={this.playHandler} />}/>
+            <Route exact path={'/users/:id'} render={(routerProps) => <UserPage state={this.state} id={routerProps.match.params.id}/>}/>
+            <Route exact path='/songs/:id/edit' render={(routerProps) => <Grid state={this.state} song_id={routerProps.match.params.id} />}/>
+            <Route exact path='/songs' render={() => <SongsContainer state={this.state} editHandler={this.editHandler} />}/>
+            <Route exact path='/login' render={() => this.state.user.id ?
+              <Redirect to='/'/>
+              :
+              <Login loginHandler={this.loginHandler} signUpHandler={this.signUpHandler}/>}/>
+            <Route path="/logout" render={() => this.state.user.id ?
+              this.logoutHandler()
+              :
+              <Redirect to={'/login'}/>}/>
+            <Route exact path='/' render={() => <Grid state={this.state} />}/>
           </BrowserRouter>
         </div>
         :
