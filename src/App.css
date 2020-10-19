@@ -55,8 +55,12 @@ header {
   flex-direction: column;
 }
 
+
+/*orange one: https://images.unsplash.com/photo-1522249210728-7cd95094022a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80 */
+/* hazy sinlight: https://www.mypianoteacherrocks.com/closeup-piano-key-with-light-from-window_9693-119.jpg */
+
 body {
-  background-image: url("https://images.unsplash.com/photo-1522249210728-7cd95094022a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
+  background-image: url("https://cdn4.vectorstock.com/i/1000x1000/93/63/two-piano-keys-sketch-style-vector-3819363.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
