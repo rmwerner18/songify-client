@@ -1,5 +1,6 @@
 import React from 'react'
 import Song from '../components/song'
+import * as Tone from 'tone'
 
 
 class SongsContainer extends React.Component {
@@ -14,7 +15,7 @@ class SongsContainer extends React.Component {
                 key={song.id}
                 song={song} 
                 state={this.props.state}        
-                layer={this.props.player} 
+                player={this.props.player} 
                 playHandler={this.props.playHandler} 
                 deleteHandler={this.deleteHandler} 
                 editHandler={this.editHandler} 
@@ -24,7 +25,10 @@ class SongsContainer extends React.Component {
 
     deleteHandler = (song) => {
         fetch(`http://localhost:3000/songs/${song.id}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
         }).then(resp => resp.json())
         .then((songs) => {
             this.setState({songs: songs})
@@ -55,30 +59,45 @@ class SongsContainer extends React.Component {
     likeHandler = (e) => {
         let songId = e.target.id.split('-')[2]
         let song = this.state.songs.find(song => song.id === parseInt(songId))
-        if (song.likes.find(like => like.user_id === this.props.state.user.id)) {
-            let like = song.likes.find(like => like.user_id === this.props.state.user.id && like.song_id === song.id)
-            fetch(`http://localhost:3000/likes/${like.id}`, {
-                method: 'DELETE',
-                headers: {
-                    'content-type': 'application/json',
-                    accepts: 'application/json'
-                }
-            }).then(resp => resp.json())
-            .then(songs => this.filterSongs(songs))
-        } else {
-            fetch('http://localhost:3000/likes/', {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json',
-                    accepts: 'application/json'
-                },
-                body: JSON.stringify({
-                    song_id: song.id,
-                    user_id: this.props.state.user.id
-                })
-            }).then(resp => resp.json())
-            .then(songs => this.filterSongs(songs))
-        }
+        if (this.props.state.user.id) {
+            if (song.likes.find(like => like.user_id === this.props.state.user.id)) {
+                let like = song.likes.find(like => like.user_id === this.props.state.user.id && like.song_id === song.id)
+                fetch(`http://localhost:3000/likes/${like.id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'content-type': 'application/json',
+                        accepts: 'application/json',
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                }).then(resp => resp.json())
+                .then(songs => this.filterSongs(songs))
+            } else {
+                fetch('http://localhost:3000/likes/', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json',
+                        accepts: 'application/json',
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    },
+                    body: JSON.stringify({
+                        song_id: song.id,
+                        user_id: this.props.state.user.id
+                    })
+                }).then(resp => resp.json())
+                .then(songs => this.filterSongs(songs))
+            }
+        } 
+        // else {
+        //     console.log(Tone.Transport)
+        //     // if (Tone.Transport.)
+        //     let elements = document.getElementsByClassName('song-list-start-button')
+        //     let array = Array.from(elements)
+        //     let item = array.find(el => el.innerText === "Stop")
+        //     item.innerText = "Start"
+        //     Tone.Transport.stop()
+        //     Tone.Transport.cancel()
+        //     alert('Please login to save a song')
+        // }
     }
 
     render() {

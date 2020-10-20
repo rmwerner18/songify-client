@@ -118,11 +118,18 @@ const Song = (props) => {
                 <button className="song-list-start-button" onClick={(e) => playHandler(e, props.song)}>Start</button>
             </div>
             <div className='song-options'>
-                <button onClick={() => props.deleteHandler(props.song)}>Delete</button>
-                <NavLink to={`/songs/${props.song.id}/edit`}>
-                    <button onClick={stopLoop}>Edit</button>
-                </NavLink>
-                {props.song.user.id !== props.state.user.id 
+                {props.song.user.id === props.state.user.id 
+                ?
+                <>
+                    <button onClick={() => props.deleteHandler(props.song)}>Delete</button>
+                    <NavLink to={`/songs/${props.song.id}/edit`}>
+                        <button onClick={stopLoop}>Edit</button>
+                    </NavLink>
+                </>
+                :
+                null
+                }
+                {(props.song.user.id !== props.state.user.id && props.state.user.id)
                 ?
                 <button id={`like-button-${props.song.id}`} onClick={(e) => props.likeHandler(e)}>{userLikesSong() ? "Unlike" : "Like"}</button>       
                 :

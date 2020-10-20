@@ -208,35 +208,41 @@ class Grid extends React.Component {
 
     saveSongHandler = (e, songname) => {  
         e.preventDefault()
-        let newObj
-        newObj = this.state
-        newObj.user_id = this.props.state.user.id
-        newObj.name = songname
-        this.props.song_id
-        ?
-        fetch(`http://localhost:3000/songs/${this.props.song_id}`, {
-            method: "PATCH",
-            headers: {
-                "content-type": "application/json",
-                accepts: "application/json"
-            },
-            body: JSON.stringify(
-                newObj
-            )
-        }).then(resp => resp.json())
-        .then(console.log)
-        :
-        fetch('http://localhost:3000/songs', {
-            method: "POST",
-            headers: {
-                "content-type": "application/json",
-                accepts: "application/json"
-            },
-            body: JSON.stringify(
-                newObj
-            )
-        }).then(resp => resp.json())
-        .then(song => alert("Your song has been saved!"))
+        console.log("SAVE", this.props.state.user.id)
+            let newObj
+            newObj = this.state
+            newObj.user_id = this.props.state.user.id
+            newObj.name = songname
+            this.props.song_id
+            ?
+            fetch(`http://localhost:3000/songs/${this.props.song_id}`, {
+                method: "PATCH",
+                headers: {
+                    "content-type": "application/json",
+                    accepts: "application/json",
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                },
+                body: JSON.stringify(
+                    newObj
+                )
+            }).then(resp => resp.json())
+            .then(() => {
+                this.stopLoop()
+                alert("Your changes have been saved!")
+            })
+            :
+            fetch('http://localhost:3000/songs', {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                    accepts: "application/json",
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                },
+                body: JSON.stringify(
+                    newObj
+                )
+            }).then(resp => resp.json())
+            .then(song => alert("Your song has been saved!"))
     }
     
 
@@ -244,7 +250,11 @@ class Grid extends React.Component {
         Tone.Transport.stop()
         Tone.Transport.cancel()
         document.getElementById("grid-start-button").innerText = "Start"
-        document.getElementById(`song-name-form-modal`).style.display = "block"
+        if (this.props.state.user.id) {
+            document.getElementById(`song-name-form-modal`).style.display = "block"
+        } else {
+            alert('Please login to save a song')
+        }
     }
 
     modalCloseHandler = () => {
@@ -253,6 +263,7 @@ class Grid extends React.Component {
 
  
     render() {
+        console.log("GRID RENDER", this.props.state.user.id)
         return (
             <>
                 <div id={`song-name-form-modal`} className="modal">
@@ -263,18 +274,31 @@ class Grid extends React.Component {
                         </div>
                     </div>
                 </div>
+                {this.props.song_id
+                ?
+                <h1>Edit {this.state.name}</h1>
+                :
+                <h1>Create a Song</h1>
+                }
                 <div className="song-maker-container">
                     <div className="chord-container">
                         {this.showChords()}
                     </div>
                     <div className='chord-options'>
-                        <button id='grid-start-button' onClick={(e) => this.playHandler(e)}>Start</button>
-                        {/* <PlayButton clickHandler={this.playHandler} /> */}
-                        <div className='playback-options'>
-                            <TempoForm bpm={this.state.bpm} changeHandler={this.tempoChangeHandler} />
-                            <InstrumentForm changeHandler={this.instrumentChangeHandler}/>
+                        <div className='grid-start-button-container'>
+                            <button id='grid-start-button' onClick={(e) => this.playHandler(e)}><span>Start</span></button>
                         </div>
-                        <button className='random-chords-button' onClick={this.randomProgGenereator}>Generate Random Progression</button>
+                        {/* <PlayButton clickHandler={this.playHandler} /> */}
+                        <div className='save-container' >
+                            <button className='save-button' onClick={this.props.song_id ? this.saveSongHandler : this.modalClickHandler}><span>Save</span></button>
+                        </div>
+                        <div className='random-chords-button-container'>
+                            <button className='random-chords-button' onClick={this.randomProgGenereator}><span>Randomize Chords</span></button>
+                        </div>
+                    </div>
+                    <div className='playback-options'>
+                        <TempoForm bpm={this.state.bpm} changeHandler={this.tempoChangeHandler} />
+                        <InstrumentForm changeHandler={this.instrumentChangeHandler}/>
                     </div>
                     <BeatForm
                         hhBeats={this.state.hhBeats} 
@@ -301,9 +325,6 @@ class Grid extends React.Component {
                         modeHandler={this.modeHandler}
                         clearState={this.clearMelodyState}
                     />
-                    <div className='save-container' >
-                        <button className='save-button' onClick={this.props.song_id ? this.saveSongHandler : this.modalClickHandler}>Save</button>
-                    </div>
                 </div>
             </>
         )

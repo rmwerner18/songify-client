@@ -8,10 +8,12 @@ const link = {
     width: '100px',
     padding: '12px',
     margin: '3px 6px 3px',
-    background: 'black',
+    background: '#FFFDF0',
+    'font-family': "Courier New",
     textDecoration: 'none',
     borderRadius: '10px',
-    color: 'white',
+    color: 'black',
+    fontWeight: '900'
   }
   
 const NavBar = (props) =>
@@ -21,7 +23,7 @@ const NavBar = (props) =>
     exact
     style={link}
     activeStyle={{
-      background: 'darkgray'
+      background: '#B2854E'
     }}
   >Home</NavLink>
   <NavLink
@@ -29,17 +31,44 @@ const NavBar = (props) =>
     exact
     style={link}
     activeStyle={{
-      background: 'darkgray'
+      background: '#B2854E'
     }}
   >All Songs</NavLink>
-  <NavLink
+  {
+    props.user.id
+    ?
+    <NavLink
     to={`/users/${props.user.id}`}
     exact
     style={link}
     activeStyle={{
-      background: 'darkgray'
+      background: '#B2854E'
     }}
-  >Your Songs</NavLink>
+    >Your Songs</NavLink>
+    :
+    null
+  }
+  {
+    props.user.id 
+    ?
+    <NavLink
+      to='/logout'
+      exact
+      style={link}
+      activeStyle={{
+        background: '#B2854E'
+      }}
+    >Logout</NavLink>
+    :
+    <NavLink
+      to='/login'
+      exact
+      style={link}
+      activeStyle={{
+        background: '#B2854E'
+      }}
+    >Login</NavLink>
+  }
 </div>
 
   export default NavBar
