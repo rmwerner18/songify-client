@@ -115,10 +115,10 @@ class Grid extends React.Component {
         Tone.Destination.context.resume().then(() => {
             this.startLoop()
         })
-        e.target.innerText = 'Stop'
+        e.target.innerHTML = '<span>||</span>'
     } else {
         this.stopLoop()
-        e.target.innerText = 'Start'
+        e.target.innerHTML = '<span>▶</span>'
     }
   }
 
@@ -249,7 +249,7 @@ class Grid extends React.Component {
     modalClickHandler = () => {
         Tone.Transport.stop()
         Tone.Transport.cancel()
-        document.getElementById("grid-start-button").innerText = "Start"
+        document.getElementById("grid-start-button").innerHTML = "<span>▶</span>"
         if (this.props.state.user.id) {
             document.getElementById(`song-name-form-modal`).style.display = "block"
         } else {
@@ -285,10 +285,10 @@ class Grid extends React.Component {
                         {this.showChords()}
                     </div>
                     <div className='chord-options'>
-                        <div className='grid-start-button-container'>
-                            <button id='grid-start-button' onClick={(e) => this.playHandler(e)}><span>Start</span></button>
-                        </div>
                         {/* <PlayButton clickHandler={this.playHandler} /> */}
+                        <div className='grid-start-button-container'>
+                            <button id='grid-start-button' onClick={(e) => this.playHandler(e)}><span>▶</span></button>
+                        </div>
                         <div className='save-container' >
                             <button className='save-button' onClick={this.props.song_id ? this.saveSongHandler : this.modalClickHandler}><span>Save</span></button>
                         </div>

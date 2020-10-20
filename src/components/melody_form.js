@@ -69,28 +69,68 @@ class MelodyForm extends React.Component {
     }
 
     IRows = () => {
-        return this.array().map((n, index) => <input key={index} type="checkbox" checked={this.props.IBeats.includes(n)} className={this.isOnMeasureLine(index) ? 'measure-line' : null} name="IBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.IBeats)} />)
+        return this.array().map((n, index) => {return (
+        <label className={`checkbox-container ${this.isOnMeasureLine(index) ? 'measure-line' : null}`}>
+            <input key={index} type="checkbox" checked={this.props.IBeats.includes(n)}name="IBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.IBeats)}/>
+            <div className='checkmark'></div>
+        </label>
+        )})
     }
     viiRows = () => {
-        return this.array().map((n, index) => <input key={index} type="checkbox" checked={this.props.viiBeats.includes(n)} className={this.isOnMeasureLine(index) ? 'measure-line' : null} name="viiBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.viiBeats)}/>)
+        return this.array().map((n, index) => {return (
+        <label className={`checkbox-container ${this.isOnMeasureLine(index) ? 'measure-line' : null}`}>
+            <input key={index} type="checkbox" checked={this.props.viiBeats.includes(n)}name="viiBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.viiBeats)}/>
+            <div className='checkmark'></div>
+        </label>
+        )})
     }
     viRows = () => {
-        return this.array().map((n, index) => <input key={index} type="checkbox" checked={this.props.viBeats.includes(n)} className={this.isOnMeasureLine(index) ? 'measure-line' : null} name="viBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.viBeats)}/>)
+        return this.array().map((n, index) => {return (
+        <label className={`checkbox-container ${this.isOnMeasureLine(index) ? 'measure-line' : null}`}>
+            <input key={index} type="checkbox" checked={this.props.viBeats.includes(n)}name="viBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.viBeats)}/>
+            <div className='checkmark'></div>
+        </label>
+        )})
     }
     vRows = () => {
-        return this.array().map((n, index) => <input key={index} type="checkbox" checked={this.props.vBeats.includes(n)} className={this.isOnMeasureLine(index) ? 'measure-line' : null}  name="vBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.vBeats)}/>)
+        return this.array().map((n, index) => {return (
+        <label className={`checkbox-container ${this.isOnMeasureLine(index) ? 'measure-line' : null}`}>
+            <input key={index} type="checkbox" checked={this.props.vBeats.includes(n)} name="vBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.vBeats)}/>
+            <div className='checkmark'></div>
+        </label>
+        )})
     }
     ivRows = () => {
-        return this.array().map((n, index) => <input key={index} type="checkbox" checked={this.props.ivBeats.includes(n)} className={this.isOnMeasureLine(index) ? 'measure-line' : null}  name="ivBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.ivBeats)}/>)
+        return this.array().map((n, index) => {return (
+        <label className={`checkbox-container ${this.isOnMeasureLine(index) ? 'measure-line' : null}`}>
+            <input key={index} type="checkbox" checked={this.props.ivBeats.includes(n)} name="ivBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.ivBeats)}/>
+            <div className='checkmark'></div>
+        </label>
+        )})
     }
     iiiRows = () => {
-        return this.array().map((n, index) => <input key={index} type="checkbox" checked={this.props.iiiBeats.includes(n)} className={this.isOnMeasureLine(index) ? 'measure-line' : null}  name="iiiBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.iiiBeats)}/>)
+        return this.array().map((n, index) => {return (
+        <label className={`checkbox-container ${this.isOnMeasureLine(index) ? 'measure-line' : null}`}>
+            <input key={index} type="checkbox" checked={this.props.iiiBeats.includes(n)} name="iiiBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.iiiBeats)}/>
+            <div className='checkmark'></div>
+        </label>
+        )})
     }
     iiRows = () => {
-        return this.array().map((n, index) => <input key={index} type="checkbox" checked={this.props.iiBeats.includes(n)} className={this.isOnMeasureLine(index) ? 'measure-line' : null}  name="iiBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.iiBeats)}/>)
+        return this.array().map((n, index) => {return (
+        <label className={`checkbox-container ${this.isOnMeasureLine(index) ? 'measure-line' : null}`}>
+            <input key={index} type="checkbox" checked={this.props.iiBeats.includes(n)} name="iiBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.iiBeats)}/>
+            <div className='checkmark'></div>
+        </label>
+        )})
     }
     iRows = () => {
-        return this.array().map((n, index) => <input key={index} type="checkbox" checked={this.props.iBeats.includes(n)} className={this.isOnMeasureLine(index) ? 'measure-line' : null}  name="iBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.iBeats)}/>)
+        return this.array().map((n, index) => {return (
+        <label className={`checkbox-container ${this.isOnMeasureLine(index) ? 'measure-line' : null}`}>
+            <input key={index} type="checkbox" checked={this.props.iBeats.includes(n)} name="iBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.iBeats)}/>
+            <div className='checkmark'></div>
+        </label>
+        )})
     }
     removeNumber = (string) => {
         let newString = string.split('')

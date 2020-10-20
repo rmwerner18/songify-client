@@ -63,23 +63,23 @@ class Login extends React.Component {
         this.stopLoop()
 
         return (
-            <>
+            <div className='login-all'>
                 {this.state.hasAccount
                 ?
-                <form onSubmit={this.loginHandler}>
-                    <input type='text' name='username' onChange={this.changeHandler} value={this.state.username}/>
-                    <input type='password' name='password' onChange={this.changeHandler} value={this.state.password}/>
+                <form onSubmit={this.loginHandler} className='login-fields'>
+                    <input type='text' name='username' onChange={this.changeHandler} value={this.state.username} className='username'/>
+                    <input type='password' name='password' onChange={this.changeHandler} value={this.state.password} className='password'/>
                     <input type='submit'/>
                 </form>
                 :
-                <form onSubmit={this.signUpHandler}>
-                    <input type='text' name='username' onChange={this.changeHandler} value={this.state.username}/>
-                    <input type='password' name='password' onChange={this.changeHandler} value={this.state.password}/>
+                <form onSubmit={this.signUpHandler} className='login-fields'>
+                    <input type='text' name='username' onChange={this.changeHandler} value={this.state.username} className='username'/>
+                    <input type='password' name='password' onChange={this.changeHandler} value={this.state.password} className='password'/>
                     <input type='text' value='test'/>
                     <input type='submit'/>
                 </form>}
                 <button onClick={this.changeModeHandler}>Don't have an account? Sign Up</button> 
-            </>
+            </div>
         )
     }
 }

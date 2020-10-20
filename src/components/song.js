@@ -86,13 +86,13 @@ const Song = (props) => {
         Tone.Destination.context.resume().then(() => {
             startLoop()
         })
-        e.target.innerText = 'Stop'
-        } else if (Tone.Transport.state === "started" && e.target.innerText === "Start") {
+        e.target.innerHTML = '<span>||</span>'
+        } else if (Tone.Transport.state === "started" && e.target.innerHTML === "<span>▶</span>") {
             let elements = document.getElementsByClassName('song-list-start-button')
             let array = Array.from(elements)
-            let item = array.find(el => el.innerText === "Stop")
-            item.innerText = "Start"
-            e.target.innerText = "Stop"
+            let item = array.find(el => el.innerHTML === "<span>||</span>")
+            item.innerHTML = "<span>▶</span>"
+            e.target.innerHTML = "<span>||</span>"
             stopLoop()
             Tone.Destination.context.resume().then(() => {
                 startLoop()
@@ -100,7 +100,7 @@ const Song = (props) => {
         }
         else {
             stopLoop()
-            e.target.innerText = 'Start'
+            e.target.innerHTML = '<span>▶</span>'
         }
     }
 
@@ -115,7 +115,7 @@ const Song = (props) => {
             <h2 className="song-title">{props.song.name}</h2>
             <p className="song-maker">Created By: {props.song.user.username}</p>
             <div className='song-list-start-button-container'>
-                <button className="song-list-start-button" onClick={(e) => playHandler(e, props.song)}>Start</button>
+                <button className="song-list-start-button" onClick={(e) => playHandler(e, props.song)}><span>▶</span></button>
             </div>
             <div className='song-options'>
                 {props.song.user.id === props.state.user.id 

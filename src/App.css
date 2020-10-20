@@ -114,13 +114,15 @@ h2 {
 }
 
 .checkbox-row {
+  display: flex;
+  flex-direction: row;
   margin-top: 0px;
   margin-bottom: 0px;
   padding-top: 0px;
   padding-bottom: 0px;
   height: 15px;
 }
-
+/* 
 input[type='checkbox'] {
   height: 15px;
   width: 15px;
@@ -128,14 +130,48 @@ input[type='checkbox'] {
   margin: 0px;
   padding: 0px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+} */
+
+.checkbox-container {
+  height: 15px;
+  width: 15px;
+  display: flex;
+  /* padding-left: 35px; */
+  /* margin-bottom: 12px;  */
+  /* cursor: pointer; */
+  /* -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; */
 }
 
-input[class='measure-line'] {
+.checkbox-container input {
+  display: none;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  border-style: solid;
+  border-width: thin;
+  height: 15px;
+  width: 15px;
+  background-color: #DAC6AA;
+}
+
+.checkbox-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #36241A;
+}
+
+.measure-line {
   margin-right: 5px;
 }
-
-
-
 
 .tempo-form {
   display: flex;
@@ -203,6 +239,7 @@ input[class='measure-line'] {
   height: 85px;
   width: 85px;
   border-radius: 50%;
+  font-size: x-large;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15), 0 2px 10px 0 rgba(0, 0, 0, 0.1);
   background: linear-gradient(-20deg, #FFFDF0 0%, #B2854E 100%, #B2854E 100%)
 }
@@ -255,6 +292,7 @@ input[class='measure-line'] {
 }
 
 .grid-start-button-container {
+  grid-area: start;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -267,10 +305,10 @@ input[class='measure-line'] {
 }
 
 #grid-start-button {
-  grid-area: strt;
   height: 85px;
   width: 85px;
   border-radius: 50%;
+  font-size: x-large;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15), 0 2px 10px 0 rgba(0, 0, 0, 0.1);
   background: linear-gradient(-20deg,  #FFFDF0 0%, #B2854E 100%, #B2854E 100%)
 }
@@ -311,7 +349,23 @@ button:focus {
   display: grid;
   margin: 10px;
   grid-template-areas:
-  "strt rand save"
+  "rand start save"
+}
+
+.login-fields {
+  display: flex;
+  height: auto;
+  flex-direction: column;
+}
+
+.username, .password {
+  height: 20px;
+  width: 200px;
+}
+
+.chord-form {
+
+
 }
 
 .song-maker {

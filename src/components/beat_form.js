@@ -42,16 +42,28 @@ const BeatForm = (props) => {
     }
 
     const makeHHRows = () => {
-        return array().map((n, index) => <input key={index} type="checkbox" className={isOnMeasureLine(index) ? 'measure-line' : null} checked={props.hhBeats.includes(n)} name="hhBeats" id={n} onChange={(e) => changeHandler(e, props.hhBeats)}/>)
-    }
+        return array().map((n, index) => {return (
+        <label className={`checkbox-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
+            <input key={index} type="checkbox" checked={props.hhBeats.includes(n)} name="hhBeats" id={n} onChange={(e) => changeHandler(e, props.hhBeats)}/>
+            <div className='checkmark'></div>
+        </label>
+    )})}
 
     const makeSnareRows = () => {
-        return array().map((n, index) => <input key={index} type="checkbox" className={isOnMeasureLine(index) ? 'measure-line' : null} checked={props.snareBeats.includes(n)} name="snareBeats" id={n} onChange={(e) => changeHandler(e, props.snareBeats)}/>)
-    }
+        return array().map((n, index) => {return (
+        <label className={`checkbox-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
+            <input key={index} type="checkbox" checked={props.snareBeats.includes(n)} name="snareBeats" id={n} onChange={(e) => changeHandler(e, props.snareBeats)}/>
+            <div className='checkmark'></div>
+        </label>
+    )})}
 
     const makeKickRows = () => {
-        return array().map((n, index) => <input key={index} type="checkbox" className={isOnMeasureLine(index) ? 'measure-line' : null} checked={props.kickBeats.includes(n)} name="kickBeats" id={n} onChange={(e) => changeHandler(e, props.kickBeats)}/>)
-    }
+        return array().map((n, index) => {return (
+        <label className={`checkbox-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
+            <input key={index} type="checkbox" checked={props.kickBeats.includes(n)} name="kickBeats" id={n} onChange={(e) => changeHandler(e, props.kickBeats)}/>
+            <div className='checkmark'></div>
+        </label>
+    )})}
     return(
         <div className='beat-form'>
             <div className="beat-container">

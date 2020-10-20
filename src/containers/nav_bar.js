@@ -1,20 +1,17 @@
 import React from 'react'
-import Grid from './grid'
-import SongsContainer from './songs_container'
-import UserPage from './user_page'
 import { NavLink } from 'react-router-dom'
 
 const link = {
-    width: '100px',
-    padding: '12px',
-    margin: '3px 6px 3px',
-    background: '#FFFDF0',
-    'font-family': "Courier New",
-    textDecoration: 'none',
-    borderRadius: '10px',
-    color: 'black',
-    fontWeight: '900'
-  }
+  width: '100px',
+  padding: '12px',
+  margin: '3px 6px 3px',
+  background: '#FFFDF0',
+  'font-family': "Courier New",
+  textDecoration: 'none',
+  borderRadius: '10px',
+  color: 'black',
+  fontWeight: '900'
+}
   
 const NavBar = (props) =>
 <div className='navbar'> 
@@ -71,4 +68,4 @@ const NavBar = (props) =>
   }
 </div>
 
-  export default NavBar
+export default NavBar

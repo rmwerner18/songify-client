@@ -77,7 +77,7 @@ class ChordForm extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.submitHandler} >
+            <form onSubmit={this.submitHandler} className="chord-form">
                 <fieldset>
                     <legend>Chord Name:</legend>
                     <label id="formattedName">{this.notes[0]}</label>
