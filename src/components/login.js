@@ -27,6 +27,8 @@ class Login extends React.Component {
     }
 
     changeModeHandler = (e) => {
+        const message = document.querySelector('span')
+        message.style.display = 'none'
         let text = e.target.innerText
         this.setState(previousState => ({hasAccount: !previousState.hasAccount, username: '', password: ''}))
         if (text === "Don't have an account? Sign Up") {
@@ -45,13 +47,17 @@ class Login extends React.Component {
         e.preventDefault()
         if (this.usernameIsTaken() === false && this.state.hasAccount === false) {
             this.props.signUpHandler(e, this.state)
-        } else console.log('that username is unavailable')
+        } else {
+            let message = document.querySelector('span')
+            message.style.display = 'block'
+        }
     }
 
     loginHandler = (e) => {
         e.preventDefault()
         if (this.usernameIsTaken() === false && this.state.hasAccount === true) {
-            console.log('incorrect username or password')
+            const message = document.querySelector('span')
+            message.style.display = 'block'
         } else this.props.loginHandler(e, this.state)
     }
 
@@ -66,18 +72,25 @@ class Login extends React.Component {
             <div className='login-all'>
                 {this.state.hasAccount
                 ?
-                <form onSubmit={this.loginHandler} className='login-fields'>
-                    <input type='text' name='username' onChange={this.changeHandler} value={this.state.username} className='username'/>
-                    <input type='password' name='password' onChange={this.changeHandler} value={this.state.password} className='password'/>
-                    <input type='submit'/>
-                </form>
+                <>
+                    <h1>login</h1>
+                    <span>Invalid username or password</span>
+                    <form onSubmit={this.loginHandler} className='login-fields' id='login-fields'>
+                        <input type='text' name='username' onChange={this.changeHandler} value={this.state.username} placeholder='username' className='username'/>
+                        <input type='password' name='password' onChange={this.changeHandler} value={this.state.password} placeholder='password' className='password'/>
+                        <input type='submit'/>
+                    </form>
+                </>
                 :
-                <form onSubmit={this.signUpHandler} className='login-fields'>
-                    <input type='text' name='username' onChange={this.changeHandler} value={this.state.username} className='username'/>
-                    <input type='password' name='password' onChange={this.changeHandler} value={this.state.password} className='password'/>
-                    <input type='text' value='test'/>
-                    <input type='submit'/>
-                </form>}
+                <>
+                    <h1>sign-up</h1>
+                    <span>This username is unavailable</span>
+                    <form onSubmit={this.signUpHandler} className='login-fields'>
+                        <input type='text' name='username' onChange={this.changeHandler} value={this.state.username} placeholder='username' className='username'/>
+                        <input type='password' name='password' onChange={this.changeHandler} value={this.state.password} placeholder='password' className='password'/>
+                        <input type='submit'/>
+                    </form>
+                </>}
                 <button onClick={this.changeModeHandler}>Don't have an account? Sign Up</button> 
             </div>
         )

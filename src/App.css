@@ -18,6 +18,28 @@ header {
   position: absolute;
 }
 
+fieldset {
+  border-radius: 25px;
+  background-color: #FFFDF0;
+}
+
+fieldset span {
+  background-color: #FFFDF0;
+  border-radius: 5px;
+  margin-top: 3px;
+}
+.chord-name-selection {
+  width: 200px;
+}
+
+.chord-quality-selection {
+  width: 200px;
+}
+
+.chord-bass-selection {
+  width: 200px;
+}
+
 .menu-icon-background {
   display: flex;
   height: 50px;
@@ -352,20 +374,60 @@ button:focus {
   "rand start save"
 }
 
+.login-all {
+  height: 50%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-all button {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login-all span {
+  color: red;
+  display: none; 
+}
+
 .login-fields {
   display: flex;
   height: auto;
+  width: 100%;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-fields input[type='submit'] {
+  width: 100px;
+  margin-bottom: 100px;
+  margin-top: 5px;
 }
 
 .username, .password {
-  height: 20px;
-  width: 200px;
+  height: 30px;
+  width: 100%;
+  font-size: x-large;
+  font-family:  "Courier New";
+  margin-bottom: 15px;
 }
 
-.chord-form {
 
 
+.chord-form input[type='submit'] {
+  margin-left: 300px;
+  margin-top: 10px;
+}
+
+.chord-form-chord {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .song-maker {
@@ -447,11 +509,12 @@ button:focus {
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #fefefe;
+  background-color: #E0CEB8;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
+  border-radius: 25px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 650px; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button */

@@ -92,7 +92,11 @@ class App extends React.Component {
         console.log(result.user)
         localStorage.setItem('token', result.jwt)
         this.setState({user: result.user})
-      } else console.log(result.message)
+      } else {
+        const message = document.createElement('span')
+        message.innerText = result.message
+        document.getElementById('login-fields').append(message)
+      }
     })
   }
 

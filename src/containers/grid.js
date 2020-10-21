@@ -139,6 +139,7 @@ class Grid extends React.Component {
         let newArray = this.state.chords
         newArray.splice(id, 1, state)
         this.setState({chords: newArray})
+        
     }
 
     tempoChangeHandler = (bpm) => {
