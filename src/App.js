@@ -47,9 +47,7 @@ class App extends React.Component {
     // .then(resp => resp.json())
     // .then(user => this.setState({user: user}))
     let token = localStorage.getItem('token')
-    console.log("token", token)
     if (token) {
-      console.log('token:', token)
       fetch('http://localhost:3000/profile', {
         method: 'GET',
         headers: {
@@ -64,7 +62,6 @@ class App extends React.Component {
   }
 
   displayNav = () => {
-    console.log('clicked')
     let navbar = document.querySelector('.navbar')
     if (navbar.style.display === 'none') {
       return navbar.style.display ='flex'
@@ -89,13 +86,11 @@ class App extends React.Component {
     }).then(resp => resp.json())
     .then(result => {
       if (result.user) {
-        console.log(result.user)
         localStorage.setItem('token', result.jwt)
         this.setState({user: result.user})
       } else {
-        const message = document.createElement('span')
-        message.innerText = result.message
-        document.getElementById('login-fields').append(message)
+        const message = document.querySelector('span')
+        message.style.display = 'block'
       }
     })
   }
@@ -115,7 +110,6 @@ class App extends React.Component {
       body: JSON.stringify({user: user})
     }).then(resp => resp.json())
     .then(result => {
-      console.log(result)
       localStorage.setItem('token', result.jwt);
       this.setState({user: result.user});
     })
@@ -127,7 +121,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log("USER", this.state.user)
       return (
         this.state.synth 
         ?

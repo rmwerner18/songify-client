@@ -109,7 +109,6 @@ class Grid extends React.Component {
   }
 
   playHandler = (e) => {
-    console.log(e.target)
     // HANDLES LOOP
     if (Tone.Transport.state === "stopped") {
         Tone.Destination.context.resume().then(() => {
@@ -139,7 +138,7 @@ class Grid extends React.Component {
         let newArray = this.state.chords
         newArray.splice(id, 1, state)
         this.setState({chords: newArray})
-        
+
     }
 
     tempoChangeHandler = (bpm) => {
@@ -209,7 +208,6 @@ class Grid extends React.Component {
 
     saveSongHandler = (e, songname) => {  
         e.preventDefault()
-        console.log("SAVE", this.props.state.user.id)
             let newObj
             newObj = this.state
             newObj.user_id = this.props.state.user.id
@@ -264,14 +262,13 @@ class Grid extends React.Component {
 
  
     render() {
-        console.log("GRID RENDER", this.props.state.user.id)
         return (
             <>
                 <div id={`song-name-form-modal`} className="modal">
                     <div className="modal-content">
                         <span className="close" onClick={this.modalCloseHandler}>&times;</span>
                         <div>
-                            {<SongNameForm submitHandler={this.saveSongHandler} onClick={() => console.log(this.state)}/>}
+                            {<SongNameForm submitHandler={this.saveSongHandler}/>}
                         </div>
                     </div>
                 </div>

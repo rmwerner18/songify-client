@@ -88,7 +88,6 @@ class SongsContainer extends React.Component {
             }
         } 
         // else {
-        //     console.log(Tone.Transport)
         //     // if (Tone.Transport.)
         //     let elements = document.getElementsByClassName('song-list-start-button')
         //     let array = Array.from(elements)

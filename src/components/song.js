@@ -81,7 +81,6 @@ const Song = (props) => {
 
     const playHandler = (e) => {
         // HANDLES LOOP
-        console.log(Tone.Transport.state)
         if (Tone.Transport.state === "stopped") {
         Tone.Destination.context.resume().then(() => {
             startLoop()
