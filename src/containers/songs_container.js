@@ -19,20 +19,26 @@ class SongsContainer extends React.Component {
                 playHandler={this.props.playHandler} 
                 deleteHandler={this.deleteHandler} 
                 editHandler={this.editHandler} 
-                likeHandler={this.likeHandler}/>)
+                likeHandler={this.likeHandler}
+            />)
         })
     }
 
     deleteHandler = (song) => {
+        let newArray = this.state.songs
+        let i = newArray.findIndex(s => s.id === song.id)
+        newArray.splice(i, 1)
+        this.setState({songs: newArray})
         fetch(`http://localhost:3000/songs/${song.id}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
-        }).then(resp => resp.json())
-        .then((songs) => {
-            this.setState({songs: songs})
         })
+        // .then(resp => resp.json())
+        // .then((songs) => {
+        //     this.setState({songs: songs})
+        // })
     }
 
     filterSongs = (songs) => {

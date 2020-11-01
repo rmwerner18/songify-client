@@ -80,26 +80,45 @@ const Song = (props) => {
     }
 
     const playHandler = (e) => {
+        console.log(e.target.innerHTML)
+        console.log(e.target.innerText)
+
         // HANDLES LOOP
         if (Tone.Transport.state === "stopped") {
-        Tone.Destination.context.resume().then(() => {
-            startLoop()
-        })
-        e.target.innerHTML = '<span>||</span>'
-        } else if (Tone.Transport.state === "started" && e.target.innerHTML === "<span>▶</span>") {
+            Tone.Destination.context.resume().then(() => {
+                startLoop()
+            })
+            if (e.target.innerHTML === "<span>▶</span>") {
+                e.target.innerHTML = "<span>||</span>"
+            } else if (e.target.innerHTML === "▶") {
+                e.target.innerHTML = "||"
+            }
+        } else if (Tone.Transport.state === "started" && e.target.innerText === "▶") {
             let elements = document.getElementsByClassName('song-list-start-button')
+            // console.log(elements)
             let array = Array.from(elements)
+            // console.log(array)
             let item = array.find(el => el.innerHTML === "<span>||</span>")
+            console.log('item', item)
             item.innerHTML = "<span>▶</span>"
-            e.target.innerHTML = "<span>||</span>"
+            if (e.target.innerHTML === "<span>▶</span>") {
+                e.target.innerHTML = "<span>||</span>"
+            } else if (e.target.innerHTML === "▶") {
+                e.target.innerHTML = "||"
+            }
             stopLoop()
             Tone.Destination.context.resume().then(() => {
                 startLoop()
             })
         }
         else {
+            // console.log("HIIIII")
             stopLoop()
-            e.target.innerHTML = '<span>▶</span>'
+            if (e.target.innerHTML === "<span>||</span>") {
+                e.target.innerHTML = "<span>▶</span>"
+            } else if (e.target.innerHTML === "||") {
+                e.target.innerHTML = "▶"
+            }
         }
     }
 
@@ -117,7 +136,7 @@ const Song = (props) => {
                 <button className="song-list-start-button" onClick={(e) => playHandler(e, props.song)}><span>▶</span></button>
             </div>
             <div className='song-options'>
-                {props.song.user.id === props.state.user.id 
+                {props.song.user.id === props.state.user.id
                 ?
                 <>
                     <button onClick={() => props.deleteHandler(props.song)}>Delete</button>

@@ -266,6 +266,12 @@ input[type='checkbox'] {
   background: linear-gradient(-20deg, #FFFDF0 0%, #B2854E 100%, #B2854E 100%)
 }
 
+/* .song-list-start-button span {
+  height: 85px;
+  width: 85px;
+  border-radius: 50%;
+} */
+
 .song-list-start-button:focus {
   outline: 0;
 }
@@ -282,6 +288,8 @@ input[type='checkbox'] {
   margin-top: 5px;
   margin-bottom: 5px;
   text-align: left;
+  overflow-x: scroll;
+  height: 27px;
 }
 
 .song-options {
