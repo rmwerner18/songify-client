@@ -10,6 +10,7 @@ import modes from '../modes'
 import defaultChords from '../default_chords'
 import chordPresets from '../chord_presets'
 import PlayButton from '../components/play_button';
+import { setNumOfEigthNotes, startLoop, stopLoop } from '../loop_handling'
 
 class Grid extends React.Component {
     state = {
