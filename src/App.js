@@ -43,9 +43,6 @@ class App extends React.Component {
         hh: hh
       })
     })
-    // fetch('http://localhost:3000/users/3')
-    // .then(resp => resp.json())
-    // .then(user => this.setState({user: user}))
     let token = localStorage.getItem('token')
     if (token) {
       fetch('http://localhost:3000/profile', {
