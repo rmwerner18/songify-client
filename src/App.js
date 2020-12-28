@@ -8,6 +8,8 @@ import NavBar from './containers/nav_bar'
 import MenuIcon from './components/menu_icon'
 import Login from './components/login'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { fetchSounds } from './actions/fetch_sounds'
+import { connect } from 'react-redux'
 
 class App extends React.Component {
   state = {
@@ -20,29 +22,30 @@ class App extends React.Component {
   }
 
   componentDidMount = () => {
-    const snare = new Tone.Player("https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/snare.wav").toDestination();
-    const kick = new Tone.Player("https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/kick.wav").toDestination();
-    const hh = new Tone.Player("https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/hihat-close.wav").toDestination();
-    const piano = new Tone.Sampler({
-      urls: {
-          "C4": "C4.mp3",
-          "D#4": "Ds4.mp3",
-          "F#4": "Fs4.mp3",
-          "A4": "A4.mp3",
-      },
-      release: 1,
-      baseUrl: "https://tonejs.github.io/audio/salamander/",
-    }).toDestination();
-    const synth = new Tone.PolySynth().toDestination();
-    Tone.loaded().then(() => {
-      this.setState({
-        synth: synth,
-        piano: piano,
-        snare: snare,
-        kick: kick,
-        hh: hh
-      })
-    })
+    // const snare = new Tone.Player("https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/snare.wav").toDestination();
+    // const kick = new Tone.Player("https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/kick.wav").toDestination();
+    // const hh = new Tone.Player("https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/hihat-close.wav").toDestination();
+    // const piano = new Tone.Sampler({
+    //   urls: {
+    //       "C4": "C4.mp3",
+    //       "D#4": "Ds4.mp3",
+    //       "F#4": "Fs4.mp3",
+    //       "A4": "A4.mp3",
+    //   },
+    //   release: 1,
+    //   baseUrl: "https://tonejs.github.io/audio/salamander/",
+    // }).toDestination();
+    // const synth = new Tone.PolySynth().toDestination();
+    // Tone.loaded().then(() => {
+    //   this.setState({
+    //     synth: synth,
+    //     piano: piano,
+    //     snare: snare,
+    //     kick: kick,
+    //     hh: hh
+    //   })
+    // })
+    this.props.fetchSounds()
     let token = localStorage.getItem('token')
     if (token) {
       fetch('http://localhost:3000/profile', {
@@ -149,4 +152,4 @@ class App extends React.Component {
     }
   }
 
-export default App;
+export default connect(null, { fetchSounds })(App);

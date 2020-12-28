@@ -59,25 +59,25 @@ const Song = (props) => {
         }
     }
 
-    // const setNumOfEigthNotes = (n, array) => {
-    //     for (let i=0; i<n; i++) {
-    //         array.push(i)
-    //     }
-    // }
+    const setNumOfEigthNotes = (n, array) => {
+        for (let i=0; i<n; i++) {
+            array.push(i)
+        }
+    }
 
-    // const startLoop = () => {
-    //     let array = []
-    //     setNumOfEigthNotes(32, array)
-    //     new Tone.Sequence((time, index) => {
-    //         player(index, time)
-    //     }, array).start(0)
-    //     Tone.Transport.start();
-    // }
+    const startLoop = () => {
+        let array = []
+        setNumOfEigthNotes(32, array)
+        new Tone.Sequence((time, index) => {
+            player(index, time)
+        }, array).start(0)
+        Tone.Transport.start();
+    }
 
-    // const stopLoop = () => {
-    //     Tone.Transport.stop()
-    //     Tone.Transport.cancel()
-    // }
+    const stopLoop = () => {
+        Tone.Transport.stop()
+        Tone.Transport.cancel()
+    }
 
     const playHandler = (e) => {
         console.log(e.target.innerHTML)
