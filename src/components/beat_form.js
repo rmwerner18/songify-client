@@ -1,6 +1,10 @@
 import React from 'react'
 import BeatSelect from './beat_select'
 import drumPresets from '../drum_presets'
+import { changeHHBeats } from '../actions/change_hh_beats'
+import { changeSnareBeats } from '../actions/change_snare_beats'
+import { changeKickBeats } from '../actions/change_kick_beats'
+import { connect } from 'react-redux'
 
 const BeatForm = (props) => {
 
@@ -22,7 +26,8 @@ const BeatForm = (props) => {
             } else {
                 newArray.push(parseInt(e.target.id))
             }
-            props.changeHandler(e.target.name, newArray)
+            // props.changeHandler(e.target.name, newArray)
+            if 
         }
     }
 
@@ -85,4 +90,18 @@ const BeatForm = (props) => {
     )
 }
 
-export default BeatForm
+const mapDispatchToProps = {
+    changeHHBeats,
+    changeSnareBeats,
+    changeKickBeats
+}
+
+const mapStateToProps = (state) => {
+    return {
+        hhBeats: state.hhBeats,
+        snareBeats: state.snareBeats,
+        kickBeats: state.kickBeats
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BeatForm)
