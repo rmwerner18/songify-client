@@ -57,6 +57,10 @@ class App extends React.Component {
     }
   }
 
+  componentDidUpdate = () => {
+    return
+  }
+
   editHandler = (song) => {
     return <Grid player={this.player} playHandler={this.playHandler} song={song}/>
   }
@@ -120,10 +124,12 @@ class App extends React.Component {
     this.setState({user: {}})
   }
 
+  
+
   render() {
       return (
-        this.state.synth 
-        ?
+        // this.state.synth 
+        // ?
         <div className="App">
           {/* <header className="App-header">
           </header> */}
@@ -146,10 +152,14 @@ class App extends React.Component {
             <Route exact path='/' render={() => <Grid state={this.state} />}/>
           </BrowserRouter>
         </div>
-        :
-        "loading sounds"
+        // :
+        // "loading sounds"
       );
     }
   }
 
-export default connect(null, { fetchSounds })(App);
+  const mapStateToProps = (state) => {
+    return state
+  }
+
+export default connect(mapStateToProps, { fetchSounds })(App);

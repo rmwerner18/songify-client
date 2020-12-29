@@ -10,6 +10,7 @@ import modes from '../modes'
 import defaultChords from '../default_chords'
 import chordPresets from '../chord_presets'
 import { startLoop, stopLoop } from '../loop_handling'
+import { connect } from 'react-redux'
 
 class Grid extends React.Component {
     state = {
@@ -34,95 +35,95 @@ class Grid extends React.Component {
     }
 
 
-//   player = (index, time) => {
+  player = (index, time) => {
     
-//     let chords = this.state.chords.map(chord => chord.freqs)
-//     Tone.Transport.bpm.value = parseInt(this.state.bpm)
-//     let instrument
-//     if (this.state.instrument === 'synth') {
-//       instrument = this.props.state.synth
-//     } else if (this.state.instrument === 'piano') {
-//       instrument = this.props.state.piano
-//     }
-//     if ([0, 4].includes(index)) {
-//         instrument.triggerAttackRelease(chords[0], '2n', time)
-//     } else if ([8, 12].includes(index)) {
-//         instrument.triggerAttackRelease(chords[1], '2n', time)
-//     } else if ([16, 20].includes(index)) {
-//         instrument.triggerAttackRelease(chords[2], '2n', time)
-//     } else if ([24, 28].includes(index)) {
-//         instrument.triggerAttackRelease(chords[3], '2n', time)
-//     } 
-//     if (this.state.kickBeats.includes(index)) {
-//         this.props.state.kick.start(time)
-//     }
-//     if (this.state.snareBeats.includes(index)) {
-//         this.props.state.snare.start(time)
-//     }
-//     if (this.state.hhBeats.includes(index)) {
-//         this.props.state.hh.start(time);
-//     }
-//     if (this.state.iBeats.includes(index)) {
-//         instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[0], '8n', time)
-//     }
-//     if (this.state.iiBeats.includes(index)) {
-//         instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[1], '8n', time)
-//     }
-//     if (this.state.iiiBeats.includes(index)) {
-//         instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[2], '8n', time)
-//     }
-//     if (this.state.ivBeats.includes(index)) {
-//         instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[3], '8n', time)
-//     }
-//     if (this.state.vBeats.includes(index)) {
-//         instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[4], '8n', time)
-//     }
-//     if (this.state.viBeats.includes(index)) {
-//         instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[5], '8n', time)
-//     }
-//     if (this.state.viiBeats.includes(index)) {
-//         instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[6], '8n', time)
-//     }
-//     if (this.state.IBeats.includes(index)) {
-//         instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[7], '8n', time)
-//     }
-//   }
+    let chords = this.state.chords.map(chord => chord.freqs)
+    Tone.Transport.bpm.value = parseInt(this.state.bpm)
+    let instrument
+    if (this.state.instrument === 'synth') {
+      instrument = this.props.synth
+    } else if (this.state.instrument === 'piano') {
+      instrument = this.props.piano
+    }
+    if ([0, 4].includes(index)) {
+        instrument.triggerAttackRelease(chords[0], '2n', time)
+    } else if ([8, 12].includes(index)) {
+        instrument.triggerAttackRelease(chords[1], '2n', time)
+    } else if ([16, 20].includes(index)) {
+        instrument.triggerAttackRelease(chords[2], '2n', time)
+    } else if ([24, 28].includes(index)) {
+        instrument.triggerAttackRelease(chords[3], '2n', time)
+    } 
+    if (this.state.kickBeats.includes(index)) {
+        this.props.kick.start(time)
+    }
+    if (this.state.snareBeats.includes(index)) {
+        this.props.snare.start(time)
+    }
+    if (this.state.hhBeats.includes(index)) {
+        this.props.hh.start(time);
+    }
+    if (this.state.iBeats.includes(index)) {
+        instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[0], '8n', time)
+    }
+    if (this.state.iiBeats.includes(index)) {
+        instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[1], '8n', time)
+    }
+    if (this.state.iiiBeats.includes(index)) {
+        instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[2], '8n', time)
+    }
+    if (this.state.ivBeats.includes(index)) {
+        instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[3], '8n', time)
+    }
+    if (this.state.vBeats.includes(index)) {
+        instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[4], '8n', time)
+    }
+    if (this.state.viBeats.includes(index)) {
+        instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[5], '8n', time)
+    }
+    if (this.state.viiBeats.includes(index)) {
+        instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[6], '8n', time)
+    }
+    if (this.state.IBeats.includes(index)) {
+        instrument.triggerAttackRelease(modes[this.state.melodyMode](this.state.melodyKey)[7], '8n', time)
+    }
+  }
 
-//   setNumOfEigthNotes = (n, array) => {
-//     for (let i=0; i<n; i++) {
-//         array.push(i)
-//     }
-//   }
+  setNumOfEigthNotes = (n, array) => {
+    for (let i=0; i<n; i++) {
+        array.push(i)
+    }
+  }
 
-//   startLoop = () => {
-//     let array = []
-//     this.setNumOfEigthNotes(32, array)
-//     new Tone.Sequence((time, index) => {
-//         this.player(index, time)
-//     }, array).start(0)
-//     Tone.Transport.start();
-//   }
+  startLoop = () => {
+    let array = []
+    this.setNumOfEigthNotes(32, array)
+    new Tone.Sequence((time, index) => {
+        this.player(index, time)
+    }, array).start(0)
+    Tone.Transport.start();
+  }
 
-//   stopLoop = () => {
-//     Tone.Transport.stop()
-//     Tone.Transport.cancel()
-//   }
+  stopLoop = () => {
+    Tone.Transport.stop()
+    Tone.Transport.cancel()
+  }
 
   playHandler = (e) => {
     // HANDLES LOOP
     if (Tone.Transport.state === "stopped") {
         Tone.Destination.context.resume().then(() => {
-            startLoop(this.state, this.props)
+            this.startLoop()
         })
         e.target.innerHTML = '<span>||</span>'
     } else {
-        stopLoop()
+        this.stopLoop()
         e.target.innerHTML = '<span>▶</span>'
     }
   }
 
     componentDidMount = () => {
-        stopLoop()
+        this.stopLoop()
         document.querySelector('.navbar').style.display = 'none'
         if (this.props.song_id) {
             fetch(`http://localhost:3000/songs/${this.props.song_id}`)
@@ -133,15 +134,15 @@ class Grid extends React.Component {
         }
     }
 
-    componentDidUpdate = () => {
-        if (Tone.Transport.state != "stopped") {
-            stopLoop()
-            Tone.Destination.context.resume().then(() => {
-                startLoop(this.state, this.props)
-            })
-        }
+    // componentDidUpdate = () => {
+    //     if (Tone.Transport.state != "stopped") {
+    //         this.stopLoop()
+    //         Tone.Destination.context.resume().then(() => {
+    //             startLoop(this.state, this.props)
+    //         })
+    //     }
 
-    }
+    // }
 
     chordSubmitHandler = (e, id, state) => {
         e.preventDefault()
@@ -236,7 +237,7 @@ class Grid extends React.Component {
                 )
             }).then(resp => resp.json())
             .then(() => {
-                stopLoop()
+                this.stopLoop()
                 alert("Your changes have been saved!")
             })
             :
@@ -272,6 +273,8 @@ class Grid extends React.Component {
 
  
     render() {
+        console.log(this.props)
+        console.log(this.state)
         return (
             <>
                 <div id={`song-name-form-modal`} className="modal">
@@ -339,4 +342,8 @@ class Grid extends React.Component {
     }
 }
 
-export default Grid
+const mapStateToProps = state => {
+    return state
+}
+
+export default connect(mapStateToProps)(Grid)
