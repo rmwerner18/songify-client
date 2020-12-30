@@ -299,21 +299,21 @@ class Grid extends React.Component {
                     />
                     <br/>
                     <br/>
-                    {/* <MelodyForm
-                        song_id={this.props.song_id ? this.props.song_id : null}
-                        IBeats={this.state.IBeats}
-                        viiBeats={this.state.viiBeats}
-                        viBeats={this.state.viBeats}
-                        vBeats={this.state.vBeats}
-                        ivBeats={this.state.ivBeats}
-                        iiiBeats={this.state.iiiBeats}
-                        iiBeats={this.state.iiBeats}
-                        iBeats={this.state.iBeats}
-                        changeHandler={this.melodyChangeHandler} 
-                        rootHandler={this.rootHandler}
-                        modeHandler={this.modeHandler}
-                        clearState={this.clearMelodyState}
-                    /> */}
+                    <MelodyForm
+                        // song_id={this.props.song_id ? this.props.song_id : null}
+                        // IBeats={this.state.IBeats}
+                        // viiBeats={this.state.viiBeats}
+                        // viBeats={this.state.viBeats}
+                        // vBeats={this.state.vBeats}
+                        // ivBeats={this.state.ivBeats}
+                        // iiiBeats={this.state.iiiBeats}
+                        // iiBeats={this.state.iiBeats}
+                        // iBeats={this.state.iBeats}
+                        // changeHandler={this.melodyChangeHandler} 
+                        // rootHandler={this.rootHandler}
+                        // modeHandler={this.modeHandler}
+                        // clearState={this.clearMelodyState}
+                    />
                 </div>
             </>
         )

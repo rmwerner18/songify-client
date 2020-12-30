@@ -5,6 +5,8 @@ import { changeHHBeats, changeSnareBeats, changeKickBeats } from '../actions/cha
 import { clearDrums } from '../actions/clear_drums'
 import { connect } from 'react-redux'
 import { addOrRemoveBeat } from '../helper_functions.js/add_or_remove_beat'
+import { makeBeatArray } from '../helper_functions.js/make_beat_array'
+import { isOnMeasureLine } from '../helper_functions.js/is_on_measure_line'
 
 const BeatForm = (props) => {
 
@@ -39,23 +41,8 @@ const BeatForm = (props) => {
         }
     }
 
-    const array = () => {
-        let array = []
-        for (let i=0; i<32; i++) {
-            array.push(i)
-        }
-        return array
-    }
-
-
-    const isOnMeasureLine = (i) => {
-        if ((i+1) % 8 === 0 && i !== 31) {
-            return true 
-        }
-    }
-
     const makeHHRows = () => {
-        return array().map((n, index) => {return (
+        return makeBeatArray().map((n, index) => {return (
         <label className={`checkbox-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
             <input key={index} type="checkbox" checked={props.hhBeats.includes(n)} name="hhBeats" id={n} onChange={(e) => changeHandler(e, props.hhBeats)}/>
             <div className='checkmark'></div>
@@ -63,7 +50,7 @@ const BeatForm = (props) => {
     )})}
 
     const makeSnareRows = () => {
-        return array().map((n, index) => {return (
+        return makeBeatArray().map((n, index) => {return (
         <label className={`checkbox-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
             <input key={index} type="checkbox" checked={props.snareBeats.includes(n)} name="snareBeats" id={n} onChange={(e) => changeHandler(e, props.snareBeats)}/>
             <div className='checkmark'></div>
@@ -71,12 +58,13 @@ const BeatForm = (props) => {
     )})}
 
     const makeKickRows = () => {
-        return array().map((n, index) => {return (
+        return makeBeatArray().map((n, index) => {return (
         <label className={`checkbox-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
             <input key={index} type="checkbox" checked={props.kickBeats.includes(n)} name="kickBeats" id={n} onChange={(e) => changeHandler(e, props.kickBeats)}/>
             <div className='checkmark'></div>
         </label>
     )})}
+    
     return(
         <div className='beat-form'>
             <div className="beat-container">

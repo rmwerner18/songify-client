@@ -22,6 +22,7 @@ let initialState = {
 }
 
 export const currentSongReducer = (state = initialState, action) => {
+    let clearedBeats
     switch (action.type) {
         case 'CHANGE_HH_BEATS':
             return Object.assign({}, state, {hhBeats: [...action.beats]})
@@ -30,28 +31,44 @@ export const currentSongReducer = (state = initialState, action) => {
         case 'CHANGE_KICK_BEATS':
             return Object.assign({}, state, {kickBeats: [...action.beats]})
         case 'CLEAR_DRUMS':
-            let clearedBeats = {
+            clearedBeats = {
                 hhBeats: [...action.hhBeats], 
                 snareBeats: [...action.snareBeats], 
                 kickBeats: [...action.kickBeats]
             }
             return Object.assign({}, state, clearedBeats)
         case 'CHANGE_i_BEATS':
-            return
+            return Object.assign({}, state, {iBeats: [...action.beats]})
         case 'CHANGE_ii_BEATS':
-            return
+            return Object.assign({}, state, {iiBeats: [...action.beats]})
         case 'CHANGE_iii_BEATS':
-            return
+            return Object.assign({}, state, {iiiBeats: [...action.beats]})
         case 'CHANGE_iv_BEATS':
-            return
+            return Object.assign({}, state, {ivBeats: [...action.beats]})
         case 'CHANGE_v_BEATS':
-            return
+            return Object.assign({}, state, {vBeats: [...action.beats]})
         case 'CHANGE_vi_BEATS':
-            return
+            return Object.assign({}, state, {viBeats: [...action.beats]})
         case 'CHANGE_vii_BEATS':
-            return
+            return Object.assign({}, state, {viiBeats: [...action.beats]})
         case 'CHANGE_I_BEATS':
-            return
+            return Object.assign({}, state, {IBeats: [...action.beats]})
+        case 'CHANGE_KEY':
+            return Object.assign({}, state, {melodyKey: [...action.key]})
+        case 'CHANGE_MODE':
+            return Object.assign({}, state, {melodyMode: [...action.mode]})
+        case 'CLEAR_MELODY':
+            clearedBeats = {
+                iBeats: [...action.iBeats],        
+                iiBeats: [...action.iiBeats],
+                iiiBeats: [...action.iiiBeats],
+                ivBeats: [...action.ivBeats],
+                vBeats: [...action.vBeats],        
+                viBeats: [...action.viBeats],
+                viiBeats: [...action.viiBeats],
+                IBeats: [...action.IBeats] 
+            }
+            return Object.assign({}, state, clearedBeats)
         default:
             return state
     }
