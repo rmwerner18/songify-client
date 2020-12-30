@@ -54,9 +54,9 @@ export const currentSongReducer = (state = initialState, action) => {
         case 'CHANGE_I_BEATS':
             return Object.assign({}, state, {IBeats: [...action.beats]})
         case 'CHANGE_KEY':
-            return Object.assign({}, state, {melodyKey: [...action.key]})
+            return Object.assign({}, state, {melodyKey: action.key})
         case 'CHANGE_MODE':
-            return Object.assign({}, state, {melodyMode: [...action.mode]})
+            return Object.assign({}, state, {melodyMode: action.mode})
         case 'CLEAR_MELODY':
             clearedBeats = {
                 iBeats: [...action.iBeats],        

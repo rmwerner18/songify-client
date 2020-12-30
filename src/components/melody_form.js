@@ -191,10 +191,10 @@ class MelodyForm extends React.Component {
                     </div>
                 </div>
                 <div className='mode-select'>
-                    <select onChange={(e) => this.props.changeKey(e.target.value)}>
+                    <select onChange={e => this.props.changeKey(e.target.value)}>
                         {this.rootOptions()}
                     </select>
-                    <select onChange={(e) => this.props.changeMode(e.target.value)}>
+                    <select onChange={e => this.props.changeMode(e.target.value)}>
                         {this.modeOptions()}
                     </select>
                     <button onClick={this.props.clearMelody}>Clear Melody</button>
