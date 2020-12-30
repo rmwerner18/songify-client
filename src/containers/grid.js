@@ -9,121 +9,40 @@ import SongNameForm from '../components/song_name_form'
 import modes from '../modes'
 import defaultChords from '../default_chords'
 import chordPresets from '../chord_presets'
-import { startLoop, stopLoop } from '../loop_handling'
+import { setNumOfEigthNotes } from '../helper_functions.js/set_num_of_eigth_notes'
+import { stopLoop } from '../helper_functions.js/stop_loop'
+// import startLoop, { stopLoop } from '../loop_handling'
+import player from '../player'
 import { connect } from 'react-redux'
 
 class Grid extends React.Component {
-    // state = {
-    //     user_id: null,
-    //     likes: 0,
-    //     chords: defaultChords,
-    //     bpm: 100,
-    //     snareBeats: [],
-    //     kickBeats: [],
-    //     hhBeats: [],
-    //     instrument: "synth",
-    //     iBeats: [],
-    //     iiBeats: [],
-    //     iiiBeats: [],
-    //     ivBeats: [],
-    //     vBeats: [],
-    //     viBeats: [],
-    //     viiBeats: [],
-    //     IBeats: [],
-    //     melodyKey: "C5",
-    //     melodyMode: "ionian"
-    // }
+    playerCaller = (index, time, props) => {
+        return player(index, time,props)
+    }
 
+    startLoop = () => {
+        let array = []
+        setNumOfEigthNotes(32, array)
+        new Tone.Sequence((time, index) => {
+            this.playerCaller(index, time, this.props)
+        }, array).start(0)
+        Tone.Transport.start();
+    }
 
-  player = (index, time) => {
-    
-    let chords = this.props.chords.map(chord => chord.freqs)
-    Tone.Transport.bpm.value = parseInt(this.props.bpm)
-    let instrument
-    if (this.props.instrument === 'synth') {
-      instrument = this.props.synth
-    } else if (this.props.instrument === 'piano') {
-      instrument = this.props.piano
+    playHandler = (e) => {
+        if (Tone.Transport.state === "stopped") {
+            Tone.Destination.context.resume().then(() => {
+                this.startLoop()
+            })
+            e.target.innerHTML = '<span>||</span>'
+        } else {
+            stopLoop()
+            e.target.innerHTML = '<span>▶</span>'
+        }
     }
-    if ([0, 4].includes(index)) {
-        instrument.triggerAttackRelease(chords[0], '2n', time)
-    } else if ([8, 12].includes(index)) {
-        instrument.triggerAttackRelease(chords[1], '2n', time)
-    } else if ([16, 20].includes(index)) {
-        instrument.triggerAttackRelease(chords[2], '2n', time)
-    } else if ([24, 28].includes(index)) {
-        instrument.triggerAttackRelease(chords[3], '2n', time)
-    } 
-    if (this.props.kickBeats.includes(index)) {
-        this.props.kick.start(time)
-    }
-    if (this.props.snareBeats.includes(index)) {
-        this.props.snare.start(time)
-    }
-    if (this.props.hhBeats.includes(index)) {
-        this.props.hh.start(time);
-    }
-    if (this.props.iBeats.includes(index)) {
-        instrument.triggerAttackRelease(modes[this.props.melodyMode](this.props.melodyKey)[0], '8n', time)
-    }
-    if (this.props.iiBeats.includes(index)) {
-        instrument.triggerAttackRelease(modes[this.props.melodyMode](this.props.melodyKey)[1], '8n', time)
-    }
-    if (this.props.iiiBeats.includes(index)) {
-        instrument.triggerAttackRelease(modes[this.props.melodyMode](this.props.melodyKey)[2], '8n', time)
-    }
-    if (this.props.ivBeats.includes(index)) {
-        instrument.triggerAttackRelease(modes[this.props.melodyMode](this.props.melodyKey)[3], '8n', time)
-    }
-    if (this.props.vBeats.includes(index)) {
-        instrument.triggerAttackRelease(modes[this.props.melodyMode](this.props.melodyKey)[4], '8n', time)
-    }
-    if (this.props.viBeats.includes(index)) {
-        instrument.triggerAttackRelease(modes[this.props.melodyMode](this.props.melodyKey)[5], '8n', time)
-    }
-    if (this.props.viiBeats.includes(index)) {
-        instrument.triggerAttackRelease(modes[this.props.melodyMode](this.props.melodyKey)[6], '8n', time)
-    }
-    if (this.props.IBeats.includes(index)) {
-        instrument.triggerAttackRelease(modes[this.props.melodyMode](this.props.melodyKey)[7], '8n', time)
-    }
-  }
-
-  setNumOfEigthNotes = (n, array) => {
-    for (let i=0; i<n; i++) {
-        array.push(i)
-    }
-  }
-
-  startLoop = () => {
-    let array = []
-    this.setNumOfEigthNotes(32, array)
-    new Tone.Sequence((time, index) => {
-        this.player(index, time)
-    }, array).start(0)
-    Tone.Transport.start();
-  }
-
-  stopLoop = () => {
-    Tone.Transport.stop()
-    Tone.Transport.cancel()
-  }
-
-  playHandler = (e) => {
-    // HANDLES LOOP
-    if (Tone.Transport.state === "stopped") {
-        Tone.Destination.context.resume().then(() => {
-            this.startLoop()
-        })
-        e.target.innerHTML = '<span>||</span>'
-    } else {
-        this.stopLoop()
-        e.target.innerHTML = '<span>▶</span>'
-    }
-  }
 
     componentDidMount = () => {
-        this.stopLoop()
+        stopLoop()
         document.querySelector('.navbar').style.display = 'none'
         if (this.props.song_id) {
             fetch(`http://localhost:3000/songs/${this.props.song_id}`)
@@ -133,16 +52,6 @@ class Grid extends React.Component {
             })
         }
     }
-
-    // componentDidUpdate = () => {
-    //     if (Tone.Transport.state != "stopped") {
-    //         this.stopLoop()
-    //         Tone.Destination.context.resume().then(() => {
-    //             startLoop(this.state, this.props)
-    //         })
-    //     }
-
-    // }
 
     chordSubmitHandler = (e, id, state) => {
         // e.preventDefault()
@@ -289,31 +198,10 @@ class Grid extends React.Component {
                         {/* <TempoForm bpm={this.state.bpm} changeHandler={this.tempoChangeHandler} />
                         <InstrumentForm changeHandler={this.instrumentChangeHandler}/> */}
                     </div>
-                    <BeatForm
-                        // hhBeats={this.state.hhBeats} 
-                        // snareBeats={this.state.snareBeats} 
-                        // kickBeats={this.state.kickBeats}
-                        // changeHandler={this.beatChangeHandler}
-                        // presetChangeHandler={this.beatPresetChangeHandler} 
-                        // clearState={this.clearDrumState}
-                    />
+                    <BeatForm/>
                     <br/>
                     <br/>
-                    <MelodyForm
-                        // song_id={this.props.song_id ? this.props.song_id : null}
-                        // IBeats={this.state.IBeats}
-                        // viiBeats={this.state.viiBeats}
-                        // viBeats={this.state.viBeats}
-                        // vBeats={this.state.vBeats}
-                        // ivBeats={this.state.ivBeats}
-                        // iiiBeats={this.state.iiiBeats}
-                        // iiBeats={this.state.iiBeats}
-                        // iBeats={this.state.iBeats}
-                        // changeHandler={this.melodyChangeHandler} 
-                        // rootHandler={this.rootHandler}
-                        // modeHandler={this.modeHandler}
-                        // clearState={this.clearMelodyState}
-                    />
+                    <MelodyForm/>
                 </div>
             </>
         )
