@@ -1,33 +1,41 @@
 import React from 'react'
 import BeatSelect from './beat_select'
 import drumPresets from '../drum_presets'
-import { changeHHBeats } from '../actions/change_hh_beats'
-import { changeSnareBeats } from '../actions/change_snare_beats'
-import { changeKickBeats } from '../actions/change_kick_beats'
+import { changeHHBeats, changeSnareBeats, changeKickBeats } from '../actions/change_drums'
+import { clearDrums } from '../actions/clear_drums'
 import { connect } from 'react-redux'
+import { addOrRemoveBeat } from '../helper_functions.js/add_or_remove_beat'
 
 const BeatForm = (props) => {
 
     const presetChangeHandler = (e) => {
         if (e.target.value !== 'no preset') {
             let beat = drumPresets[e.target.value]
-            props.changeHandler('all', beat)
+            props.changeHHBeats(beat.hhBeats) 
+            props.changeSnareBeats(beat.snareBeats)
+            props.changeKickBeats(beat.kickBeats)
         }
     }
 
-    const changeHandler = (e, beats=null) => {
+    const changeHandler = (e) => {
         if (e.target.matches('.drum-preset-select')) {
             presetChangeHandler(e)
         } else {
-            let newArray = beats 
-            if (beats.includes(parseInt(e.target.id))) {
-                let index = newArray.findIndex(n => n === parseInt(e.target.id))
-                newArray.splice(index, 1)
-            } else {
-                newArray.push(parseInt(e.target.id))
-            }
-            // props.changeHandler(e.target.name, newArray)
-            if 
+            let newArray
+            let id = e.target.id
+            if (e.target.name === 'hhBeats') {
+                newArray = props.hhBeats
+                addOrRemoveBeat(newArray, id)
+                props.changeHHBeats(newArray)
+            } else if (e.target.name === 'snareBeats') {
+                newArray = props.snareBeats
+                addOrRemoveBeat(newArray, id)
+                props.changeSnareBeats(newArray)
+            } else if (e.target.name === 'kickBeats') {
+                newArray = props.kickBeats
+                addOrRemoveBeat(newArray, id)
+                props.changeKickBeats(newArray)
+            } 
         }
     }
 
@@ -84,7 +92,7 @@ const BeatForm = (props) => {
             </div>
             <div className='beat-options'>
                 <BeatSelect changeHandler={e => changeHandler(e)} />
-                <button onClick={props.clearState}>Clear Drums</button>
+                <button onClick={props.clearDrums}>Clear Drums</button>
             </div>
         </div>
     )
@@ -93,14 +101,15 @@ const BeatForm = (props) => {
 const mapDispatchToProps = {
     changeHHBeats,
     changeSnareBeats,
-    changeKickBeats
+    changeKickBeats,
+    clearDrums
 }
 
 const mapStateToProps = (state) => {
     return {
-        hhBeats: state.hhBeats,
-        snareBeats: state.snareBeats,
-        kickBeats: state.kickBeats
+        hhBeats: state.currentSong.hhBeats,
+        snareBeats: state.currentSong.snareBeats,
+        kickBeats: state.currentSong.kickBeats
     }
 }
 

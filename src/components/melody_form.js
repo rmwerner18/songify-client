@@ -1,19 +1,31 @@
 import { render } from '@testing-library/react'
 import React from 'react'
+import { addOrRemoveBeat } from '../helper_functions.js/add_or_remove_beat'
+import {
+    changeiBeats,
+    changeiiBeats,
+    changeiiiBeats,
+    changeivBeats,
+    changevBeats,
+    changeviBeats,
+    changeviiBeats,
+    changeIBeats
+} from '../actions/change_melody'
+import { connect } from 'react-redux'
 
 class MelodyForm extends React.Component {
 
-    state = {
-        song: {}
-    }
+    // state = {
+    //     song: {}
+    // }
 
-    componentDidMount = () => {
-        if (this.props.song_id) {
-            fetch(`http://localhost:3000/songs/${this.props.song_id}`)
-            .then(resp => resp.json())
-            .then(song => this.setState({song: song}))
-        }
-    }
+    // componentDidMount = () => {
+    //     if (this.props.song_id) {
+    //         fetch(`http://localhost:3000/songs/${this.props.song_id}`)
+    //         .then(resp => resp.json())
+    //         .then(song => this.setState({song: song}))
+    //     }
+    // }
 
     array = () => {
         let array = []
@@ -49,17 +61,42 @@ class MelodyForm extends React.Component {
     ]
 
 
-    changeHandler = (e, beats) => {
-        
-        let newArray = beats 
-        if (beats.includes(parseInt(e.target.id))) {
-            let index = newArray.findIndex(n => n === parseInt(e.target.id))
-            newArray.splice(index, 1)
-        } else {
-            newArray.push(parseInt(e.target.id))
-        }
-
-        this.props.changeHandler(e.target.name, newArray)
+    changeHandler = (e) => {
+        let newArray
+        let id = e.target.id
+        if (e.target.name === 'iBeats') {
+            newArray = this.props.iBeats
+            addOrRemoveBeat(newArray, id)
+            this.props.changeiBeats(newArray)
+        } else if (e.target.name === 'iiBeats') {
+            newArray = this.props.iiBeats
+            addOrRemoveBeat(newArray, id)
+            this.props.changeiiBeats(newArray)
+        } else if (e.target.name === 'iiiBeats') {
+            newArray = this.props.iiiBeats
+            addOrRemoveBeat(newArray, id)
+            this.props.changeiiiBeats(newArray)
+        } else if (e.target.name === 'ivBeats') {
+            newArray = this.props.vBeats
+            addOrRemoveBeat(newArray, id)
+            this.props.changevBeats(newArray)
+        } else if (e.target.name === 'vBeats') {
+            newArray = this.props.vBeats
+            addOrRemoveBeat(newArray, id)
+            this.props.changevBeats(newArray)
+        } else if (e.target.name === 'viBeats') {
+            newArray = this.props.viBeats
+            addOrRemoveBeat(newArray, id)
+            this.props.changeviBeats(newArray)
+        } else if (e.target.name === 'viiBeats') {
+            newArray = this.props.viiBeats
+            addOrRemoveBeat(newArray, id)
+            this.props.changeviiBeats(newArray)
+        } else if (e.target.name === 'IBeats') {
+            newArray = this.props.IBeats
+            addOrRemoveBeat(newArray, id)
+            this.props.changeIBeats(newArray)
+        } 
     }
 
     isOnMeasureLine = (i) => {
@@ -192,4 +229,19 @@ class MelodyForm extends React.Component {
     }
 }
 
-export default MelodyForm
+const mapDispatchToProps = {
+    changeiBeats,
+    changeiiBeats,
+    changeiiiBeats,
+    changeivBeats,
+    changevBeats,
+    changeviBeats,
+    changeviiBeats,
+    changeIBeats
+}
+
+const mapStateToProps = {
+    
+}
+
+export default connect(null, mapDispatchToProps)(MelodyForm)

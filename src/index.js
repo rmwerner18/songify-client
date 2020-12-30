@@ -4,14 +4,19 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
-import { applyMiddleware, createStore} from 'redux'
+import { applyMiddleware, createStore, combineReducers} from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
-import { songCreationReducer } from './reducers/song_creation_reducer'
+import { currentSongReducer } from './reducers/ current_song_reducer'
 import { soundsReducer } from './reducers/sounds_reducer'
 
+let reducer = combineReducers({
+  currentSong: currentSongReducer,
+  sounds: soundsReducer
+})
+
 let store = createStore(
-  soundsReducer,
+  reducer,
   composeWithDevTools(applyMiddleware(thunk))
 )
 
