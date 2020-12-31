@@ -69,6 +69,8 @@ export const currentSongReducer = (state = initialState, action) => {
                 IBeats: [...action.IBeats] 
             }
             return Object.assign({}, state, clearedBeats)
+        case 'CHANGE_INSTRUMENT':
+            return Object.assign({}, state, {instrument: action.instrument})
         default:
             return state
     }

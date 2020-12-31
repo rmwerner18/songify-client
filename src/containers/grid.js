@@ -98,14 +98,6 @@ class Grid extends React.Component {
     //     this.setState({chords: chordPresets[int]})
     // }
 
-    // rootHandler = (e) => {
-    //     this.setState({melodyKey: e.target.value})
-    // }
-
-    // modeHandler = (e) => {
-    //     this.setState({melodyMode: e.target.value})
-    // }
-
     // saveSongHandler = (e, songname) => {  
     //     e.preventDefault()
     //         let newObj
@@ -195,8 +187,8 @@ class Grid extends React.Component {
                         </div> */}
                     </div>
                     <div className='playback-options'>
-                        {/* <TempoForm bpm={this.state.bpm} changeHandler={this.tempoChangeHandler} />
-                        <InstrumentForm changeHandler={this.instrumentChangeHandler}/> */}
+                        {/* <TempoForm bpm={this.state.bpm} changeHandler={this.tempoChangeHandler} /> */}
+                        <InstrumentForm/>
                     </div>
                     <BeatForm/>
                     <br/>
