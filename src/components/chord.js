@@ -1,35 +1,51 @@
 import React from 'react';
 import ChordForm from './chord_form'
+import { connect } from 'react-redux'
 
 
-const Chord = (props) => {
-    let clickHandler = () => {
-        document.getElementById(`chord-form-modal-${props.id}`).style.display = "block"
+class Chord extends React.Component {
+    state = {
+        modalIsOpen: false
     }
 
-    let closeHandler = () => {
-        document.getElementById(`chord-form-modal-${props.id}`).style.display = "none"
-
+    clickHandler = () => {
+        this.setState({modalIsOpen: true})
     }
 
-    return (
+    closeHandler = () => {
+        this.setState({modalIsOpen: false})
+    }
+
+    render() {
+        console.log(this.state)
+        return (
         <>
-        <div id={`chord-form-modal-${props.id}`} className="modal">
-            <div className="modal-content">
-                <span className="close" onClick={closeHandler}>&times;</span>
-                <div>
-                    {<ChordForm id={props.id} chord={props.chord} submitHandler={props.submitHandler} />}
+            {this.state.modalIsOpen ?
+            <div id={`chord-form-modal-${this.props.id}`} className="modal">
+                <div className="modal-content">
+                    <span className="close" onClick={this.closeHandler}>&times;</span>
+                    <div>
+                        {<ChordForm id={this.props.id} chord={this.props.chord} closeHandler={this.closeHandler}/>}
+                    </div>
                 </div>
             </div>
-        </div>
-        <div className="chord-box" onClick={clickHandler}>
-            <span className="chord-name">
-                {props.chord.formattedName} {props.chord.formattedQuality} 
-                {props.chord.bass.length > 0 ? "/" + props.chord.formattedBass : null}
-            </span>
-        </div>
+            :
+            null
+            }
+            <div className="chord-box" onClick={this.clickHandler}>
+                <span className="chord-name">
+                    {this.props.chords[this.props.id].formattedName} {this.props.chords[this.props.id].formattedQuality} 
+                    {this.props.chords[this.props.id].bass.length > 0 ? "/" + this.props.chords[this.props.id].formattedBass : null}
+                </span>
+            </div>
         </>
-    )
+    )}
 }
 
-export default Chord
+const mapStateToProps = state => {
+    return {
+        chords: state.currentSong.chords
+    }
+}
+
+export default connect(mapStateToProps)(Chord)

@@ -6,16 +6,19 @@ import BeatForm from '../components/beat_form'
 import InstrumentForm from '../components/instrument_form'
 import MelodyForm from '../components/melody_form'
 import SongNameForm from '../components/song_name_form'
-import modes from '../modes'
-import defaultChords from '../default_chords'
 import chordPresets from '../chord_presets'
 import { setNumOfEigthNotes } from '../helper_functions.js/set_num_of_eigth_notes'
 import { stopLoop } from '../helper_functions.js/stop_loop'
-// import startLoop, { stopLoop } from '../loop_handling'
+import { changeAllChords } from '../actions/change_all_chords'
 import player from '../player'
 import { connect } from 'react-redux'
 
 class Grid extends React.Component {
+    state = {
+        modalIsOpen: false,
+        songIsPlaying: false
+    }
+    
     playerCaller = (index, time, props) => {
         return player(index, time,props)
     }
@@ -34,15 +37,16 @@ class Grid extends React.Component {
             Tone.Destination.context.resume().then(() => {
                 this.startLoop()
             })
-            e.target.innerHTML = '<span>||</span>'
+            this.setState({songIsPlaying: true})
         } else {
             stopLoop()
-            e.target.innerHTML = '<span>▶</span>'
+            this.setState({songIsPlaying: false})
         }
     }
 
     componentDidMount = () => {
         stopLoop()
+        this.setState({songIsPlaying: false})
         document.querySelector('.navbar').style.display = 'none'
         if (this.props.song_id) {
             fetch(`http://localhost:3000/songs/${this.props.song_id}`)
@@ -66,37 +70,16 @@ class Grid extends React.Component {
     }
 
     showChords = () => {
-            return this.props.chords.map((chord, index) => {
-                return <Chord id={index} key={index} chord={chord} submitHandler={this.chordSubmitHandler}/>
-            })
+        return this.props.chords.map((chord, index) => {
+            return <Chord id={index} key={index}/>
+        })
     }
 
-    // instrumentChangeHandler = (e) => {
-    //     this.setState({instrument: e.target.value})
-    // }
-
-    // melodyChangeHandler = (degree, array) => {
-    //     this.setState({[degree]: array})
-    // }
-
-    // clearMelodyState = () => {
-    //     this.setState({
-    //         IBeats: [],
-    //         viiBeats: [],
-    //         viBeats: [],
-    //         vBeats: [],
-    //         ivBeats: [],
-    //         iiiBeats: [],
-    //         iiBeats: [],
-    //         iBeats: []
-    //     })
-    // }
-
-    // randomProgGenereator = () => {
-    //     let max = chordPresets.length
-    //     let int =  Math.floor(Math.random() * Math.floor(max));
-    //     this.setState({chords: chordPresets[int]})
-    // }
+    randomProgGenereator = () => {
+        let max = chordPresets.length
+        let int =  Math.floor(Math.random() * Math.floor(max));
+        this.props.changeAllChords(chordPresets[int])
+    }
 
     // saveSongHandler = (e, songname) => {  
     //     e.preventDefault()
@@ -137,25 +120,27 @@ class Grid extends React.Component {
     // }
     
 
-    // modalClickHandler = () => {
-    //     Tone.Transport.stop()
-    //     Tone.Transport.cancel()
-    //     document.getElementById("grid-start-button").innerHTML = "<span>▶</span>"
-    //     if (this.props.state.user.id) {
-    //         document.getElementById(`song-name-form-modal`).style.display = "block"
-    //     } else {
-    //         alert('Please login to save a song')
-    //     }
-    // }
+    modalClickHandler = () => {
+        Tone.Transport.stop()
+        Tone.Transport.cancel()
+        this.setState({songIsPlaying: false})
+        if (this.props.user.id) {
+            this.setState({modalIsOpen: true})
+        } else {
+            alert('Please login to save a song')
+        }
+    }
 
-    // modalCloseHandler = () => {
-    //     document.getElementById(`song-name-form-modal`).style.display = "none"
-    // }
+    modalCloseHandler = () => {
+        this.setState({modalIsOpen: false})
+    }
 
  
     render() {
         return (
             <>
+                {this.state.modalIsOpen 
+                ?
                 <div id={`song-name-form-modal`} className="modal">
                     <div className="modal-content">
                         <span className="close" onClick={this.modalCloseHandler}>&times;</span>
@@ -164,6 +149,9 @@ class Grid extends React.Component {
                         </div>
                     </div>
                 </div>
+                :
+                null       
+                }
                 {this.props.song_id
                 ?
                 <h1>Edit {this.state.name}</h1>
@@ -177,17 +165,19 @@ class Grid extends React.Component {
                     <div className='chord-options'>
                         {/* <PlayButton clickHandler={this.playHandler} /> */}
                         <div className='grid-start-button-container'>
-                            <button id='grid-start-button' onClick={(e) => this.playHandler(e)}><span>▶</span></button>
+                            <button id='grid-start-button' onClick={(e) => this.playHandler(e)}>
+                                    {this.state.songIsPlaying ? <span>||</span> : <span>▶</span>}
+                            </button>
                         </div>
-                        {/* <div className='save-container' >
+                        <div className='save-container' >
                             <button className='save-button' onClick={this.props.song_id ? this.saveSongHandler : this.modalClickHandler}><span>Save</span></button>
                         </div>
                         <div className='random-chords-button-container'>
                             <button className='random-chords-button' onClick={this.randomProgGenereator}><span>Randomize Chords</span></button>
-                        </div> */}
+                        </div>
                     </div>
                     <div className='playback-options'>
-                        {/* <TempoForm bpm={this.state.bpm} changeHandler={this.tempoChangeHandler} /> */}
+                        <TempoForm />
                         <InstrumentForm/>
                     </div>
                     <BeatForm/>
@@ -230,4 +220,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(Grid)
+export default connect(mapStateToProps, { changeAllChords })(Grid)

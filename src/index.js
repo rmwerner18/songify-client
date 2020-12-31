@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 import { applyMiddleware, createStore, combineReducers} from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
-import { currentSongReducer } from './reducers/ current_song_reducer'
+import { currentSongReducer } from './reducers/current_song_reducer'
 import { soundsReducer } from './reducers/sounds_reducer'
 
 let reducer = combineReducers({

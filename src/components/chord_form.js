@@ -1,4 +1,6 @@
 import React from 'react';
+import { changeSingleChord } from '../actions/change_single_chord'
+import { connect } from 'react-redux'
 
 var Octavian = require('octavian')
 
@@ -72,11 +74,12 @@ class ChordForm extends React.Component {
         let newObj = this.state
         let freqs = this.getFrequencies(this.state.bass, this.state.name, this.state.quality)
         newObj.freqs = freqs
-        this.props.submitHandler(e, this.props.id, newObj)
-        document.getElementById(`chord-form-modal-${this.props.id}`).style.display = "none"
+        this.props.changeSingleChord(this.props.id, newObj)
+        this.props.closeHandler()
     }
 
     render() {
+        console.log(this.state)
         return (
             <form onSubmit={this.submitHandler} className='chord-form'>
                 <div className="chord-form-chord">
@@ -168,4 +171,4 @@ class ChordForm extends React.Component {
     }
 }
 
-export default ChordForm
+export default connect(null, { changeSingleChord })(ChordForm)
