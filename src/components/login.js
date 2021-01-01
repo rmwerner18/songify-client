@@ -1,5 +1,7 @@
 import React from 'react'
 import * as Tone from 'tone'
+import { login, signUp } from '../actions/set_user'
+import { connect } from 'react-redux'
 
 class Login extends React.Component {
     state = {
@@ -46,7 +48,7 @@ class Login extends React.Component {
     signUpHandler = (e) => {
         e.preventDefault()
         if (this.usernameIsTaken() === false && this.state.hasAccount === false) {
-            this.props.signUpHandler(e, this.state)
+            this.props.signUp({ username: this.state.username, password: this.state.password })
         } else {
             let message = document.querySelector('span')
             message.style.display = 'block'
@@ -58,7 +60,7 @@ class Login extends React.Component {
         if (this.usernameIsTaken() === false && this.state.hasAccount === true) {
             const message = document.querySelector('span')
             message.style.display = 'block'
-        } else this.props.loginHandler(e, this.state)
+        } else this.props.login({ username: this.state.username, password: this.state.password })
     }
 
     render() {
@@ -97,4 +99,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login
+export default connect(null, { login, signUp })(Login)

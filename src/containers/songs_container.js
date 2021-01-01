@@ -1,6 +1,8 @@
 import React from 'react'
 import Song from '../components/song'
 import * as Tone from 'tone'
+import { connect } from 'react-redux'
+import { fetchSongs } from '../actions/set_all_songs'
 
 
 class SongsContainer extends React.Component {
@@ -10,13 +12,21 @@ class SongsContainer extends React.Component {
     }
 
     renderSongs = () => {
-        return this.state.songs.map(song => {
+        let header = "ALL SONGS"
+        let filteredSongs = this.props.songs
+        if (this.props.usersSongs) {
+            filteredSongs = this.props.songs.filter(song => song.user_id === this.props.user.id)
+            header = "YOUR SONGS"
+        } else if (this.props.favoritedSongs) {
+            filteredSongs = this.props.songs.filter(song => song.likes.find(like => like.user_id === this.props.user.id))
+            header = "LIKED SONGS"
+        }
+        return filteredSongs.map(song => {
             return (<Song 
+                id={song.id}
+                user_id={song.user_id}
                 key={song.id}
-                song={song} 
-                state={this.props.state}        
-                player={this.props.player} 
-                playHandler={this.props.playHandler} 
+                song={song}
                 deleteHandler={this.deleteHandler} 
                 editHandler={this.editHandler} 
                 likeHandler={this.likeHandler}
@@ -41,33 +51,17 @@ class SongsContainer extends React.Component {
         // })
     }
 
-    filterSongs = (songs) => {
-        let header = "ALL SONGS"
-        let filteredSongs = songs
-        if (this.props.usersSongs) {
-            filteredSongs = songs.filter(song => song.user.id === this.props.state.user.id)
-            header = "YOUR SONGS"
-        } else if (this.props.favoritedSongs) {
-            filteredSongs = songs.filter(song => song.likes.find(like => like.user_id === this.props.state.user.id))
-            header = "LIKED SONGS"
-        }
-        this.setState({loaded: true, songs: filteredSongs, header: header})
-    }
-
-
     componentDidMount = () => {
         document.querySelector('.navbar').style.display = 'none'
-        fetch('http://localhost:3000/songs')
-        .then(resp => resp.json())
-        .then(songs => this.filterSongs(songs))
+        this.props.fetchSongs()
     }
 
     likeHandler = (e) => {
         let songId = e.target.id.split('-')[2]
         let song = this.state.songs.find(song => song.id === parseInt(songId))
-        if (this.props.state.user.id) {
-            if (song.likes.find(like => like.user_id === this.props.state.user.id)) {
-                let like = song.likes.find(like => like.user_id === this.props.state.user.id && like.song_id === song.id)
+        if (this.props.user.id) {
+            if (song.likes.find(like => like.user_id === this.props.user.id)) {
+                let like = song.likes.find(like => like.user_id === this.props.user.id && like.song_id === song.id)
                 fetch(`http://localhost:3000/likes/${like.id}`, {
                     method: 'DELETE',
                     headers: {
@@ -87,7 +81,7 @@ class SongsContainer extends React.Component {
                     },
                     body: JSON.stringify({
                         song_id: song.id,
-                        user_id: this.props.state.user.id
+                        user_id: this.props.user.id
                     })
                 }).then(resp => resp.json())
                 .then(songs => this.filterSongs(songs))
@@ -107,7 +101,7 @@ class SongsContainer extends React.Component {
 
     render() {
         return (
-            this.state.loaded 
+            this.props.songs.length > 0
             ?
             <div className="songs-container">
                 <h1>{this.state.header}</h1>
@@ -119,4 +113,12 @@ class SongsContainer extends React.Component {
     }
 }
 
-export default SongsContainer
+const mapStateToProps = state => {
+    return {
+        user: state.user,
+        songs: state.allSongs,
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps, { fetchSongs })(SongsContainer)

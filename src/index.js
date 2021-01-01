@@ -10,9 +10,11 @@ import thunk from 'redux-thunk'
 import { currentSongReducer } from './reducers/current_song_reducer'
 import { soundsReducer } from './reducers/sounds_reducer'
 import { userReducer } from './reducers/user_reducer'
+import { allSongsReducer } from './reducers/all_songs_reducer'
 
 let reducer = combineReducers({
   currentSong: currentSongReducer,
+  allSongs: allSongsReducer,
   sounds: soundsReducer,
   user: userReducer
 })

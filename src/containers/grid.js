@@ -10,24 +10,24 @@ import chordPresets from '../chord_presets'
 import { setNumOfEigthNotes } from '../helper_functions.js/set_num_of_eigth_notes'
 import { stopLoop } from '../helper_functions.js/stop_loop'
 import { changeAllChords } from '../actions/change_all_chords'
+import { startSong, stopSong } from '../actions/set_is_playing'
 import player from '../player'
 import { connect } from 'react-redux'
 
 class Grid extends React.Component {
     state = {
-        modalIsOpen: false,
-        songIsPlaying: false
+        modalIsOpen: false
     }
     
-    playerCaller = (index, time, props) => {
-        return player(index, time,props)
+    playerCaller = (index, time) => {
+        return player(index, time, this.props)
     }
 
     startLoop = () => {
         let array = []
         setNumOfEigthNotes(32, array)
         new Tone.Sequence((time, index) => {
-            this.playerCaller(index, time, this.props)
+            this.playerCaller(index, time)
         }, array).start(0)
         Tone.Transport.start();
     }
@@ -37,16 +37,16 @@ class Grid extends React.Component {
             Tone.Destination.context.resume().then(() => {
                 this.startLoop()
             })
-            this.setState({songIsPlaying: true})
+            this.props.startSong()
         } else {
             stopLoop()
-            this.setState({songIsPlaying: false})
+            this.props.stopSong()
         }
     }
 
     componentDidMount = () => {
         stopLoop()
-        this.setState({songIsPlaying: false})
+        this.props.stopSong()
         document.querySelector('.navbar').style.display = 'none'
         if (this.props.song_id) {
             fetch(`http://localhost:3000/songs/${this.props.song_id}`)
@@ -55,10 +55,6 @@ class Grid extends React.Component {
                 this.setState(song)
             })
         }
-    }
-
-    tempoChangeHandler = (bpm) => {
-        this.setState({bpm: bpm})
     }
 
     showChords = () => {
@@ -77,7 +73,7 @@ class Grid extends React.Component {
         e.preventDefault()
             let newObj
             newObj = this.state
-            newObj.user_id = this.props.state.user.id
+            newObj.user_id = this.props.user.id
             newObj.name = songname
             this.props.song_id
             ?
@@ -113,13 +109,13 @@ class Grid extends React.Component {
     
 
     modalClickHandler = () => {
-        // stopLoop()
-        // this.setState({songIsPlaying: false})
-        // if (this.props.user.id) {
-        //     this.setState({modalIsOpen: true})
-        // } else {
-        //     alert('Please login to save a song')
-        // }
+        stopLoop()
+        this.props.stopSong()
+        if (this.props.user.id) {
+            this.setState({modalIsOpen: true})
+        } else {
+            alert('Please login to save a song')
+        }
     }
 
     modalCloseHandler = () => {
@@ -156,7 +152,7 @@ class Grid extends React.Component {
                     <div className='chord-options'>
                         <div className='grid-start-button-container'>
                             <button id='grid-start-button' onClick={(e) => this.playHandler(e)}>
-                                    {this.state.songIsPlaying ? <span>||</span> : <span>▶</span>}
+                                    {this.props.isPlaying ? <span>||</span> : <span>▶</span>}
                             </button>
                         </div>
                         <div className='save-container' >
@@ -206,8 +202,10 @@ const mapStateToProps = state => {
         viiBeats: song.viiBeats,
         IBeats: song.IBeats,
         melodyKey: song.melodyKey,
-        melodyMode: song.melodyMode
+        melodyMode: song.melodyMode,
+        isPlaying: song.isPlaying,
+        user: state.user
     }
 }
 
-export default connect(mapStateToProps, { changeAllChords })(Grid)
+export default connect(mapStateToProps, { changeAllChords, startSong, stopSong })(Grid)

@@ -10,30 +10,26 @@ import Login from './components/login'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { fetchSounds } from './actions/fetch_sounds'
 import { connect } from 'react-redux'
+import { fetchUserFromToken, login, signUp } from './actions/set_user'
 
 class App extends React.Component {
-  state = {
-    synth: null,
-    piano: null,
-    snare: null,
-    kick: null,
-    hh: null,
-    user: {}
-  }
+  // state = {
+  //   synth: null,
+  //   piano: null,
+  //   snare: null,
+  //   kick: null,
+  //   hh: null,
+  //   user: {}
+  // }
 
   componentDidMount = () => {
     this.props.fetchSounds()
     let token = localStorage.getItem('token')
     if (token) {
-      fetch('http://localhost:3000/profile', {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`
-        }}).then(resp => resp.json())
-        .then(resp => this.setState({user: resp.user}))
+      this.props.fetchUserFromToken(token)
     }
   }
-  
+
   editHandler = (song) => {
     return <Grid player={this.player} playHandler={this.playHandler} song={song}/>
   }
@@ -47,50 +43,50 @@ class App extends React.Component {
     }
   }
 
-  loginHandler = (e, state) => {
-    // e.preventDefault()
-    let user = {
-      username: state.username,
-      password: state.password
-    }
-    fetch('http://localhost:3000/login', {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': "application/json"
-      },
-      body: JSON.stringify({user: user})
-    }).then(resp => resp.json())
-    .then(result => {
-      if (result.user) {
-        localStorage.setItem('token', result.jwt)
-        this.setState({user: result.user})
-      } else {
-        const message = document.querySelector('span')
-        message.style.display = 'block'
-      }
-    })
-  }
+  // loginHandler = (e, state) => {
+  //   // e.preventDefault()
+  //   let user = {
+  //     username: state.username,
+  //     password: state.password
+  //   }
+  //   fetch('http://localhost:3000/login', {
+  //     method: "POST",
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Accept': "application/json"
+  //     },
+  //     body: JSON.stringify({user: user})
+  //   }).then(resp => resp.json())
+  //   .then(result => {
+  //     if (result.user) {
+  //       localStorage.setItem('token', result.jwt)
+  //       this.setState({user: result.user})
+  //     } else {
+  //       const message = document.querySelector('span')
+  //       message.style.display = 'block'
+  //     }
+  //   })
+  // }
 
-  signUpHandler = (e, state) => {
-    // e.preventDefault()
-    let user = {
-      username: state.username,
-      password: state.password
-    }
-    fetch('http://localhost:3000/users', {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': "application/json"
-      },
-      body: JSON.stringify({user: user})
-    }).then(resp => resp.json())
-    .then(result => {
-      localStorage.setItem('token', result.jwt);
-      this.setState({user: result.user});
-    })
-  }
+  // signUpHandler = (e, state) => {
+  //   // e.preventDefault()
+  //   let user = {
+  //     username: state.username,
+  //     password: state.password
+  //   }
+  //   fetch('http://localhost:3000/users', {
+  //     method: "POST",
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Accept': "application/json"
+  //     },
+  //     body: JSON.stringify({user: user})
+  //   }).then(resp => resp.json())
+  //   .then(result => {
+  //     localStorage.setItem('token', result.jwt);
+  //     this.setState({user: result.user});
+  //   })
+  // }
 
   logoutHandler = () => {
     localStorage.removeItem('token')
@@ -109,16 +105,16 @@ class App extends React.Component {
           <BrowserRouter className='App-Content'>
             <div className='navbar-with-image'>
               <MenuIcon displayNav={this.displayNav}/>
-              <NavBar user={this.state.user} />
+              <NavBar user={this.props.user} />
             </div>
             <Route exact path={'/users/:id'} render={(routerProps) => <UserPage state={this.state} id={routerProps.match.params.id}/>}/>
             <Route exact path='/songs/:id/edit' render={(routerProps) => <Grid state={this.state} song_id={routerProps.match.params.id} />}/>
             <Route exact path='/songs' render={() => <SongsContainer state={this.state} editHandler={this.editHandler} />}/>
-            <Route exact path='/login' render={() => this.state.user.id ?
+            <Route exact path='/login' render={() => this.props.user.id ?
               <Redirect to='/'/>
               :
               <Login loginHandler={this.loginHandler} signUpHandler={this.signUpHandler}/>}/>
-            <Route path="/logout" render={() => this.state.user.id ?
+            <Route path="/logout" render={() => this.props.user.id ?
               this.logoutHandler()
               :
               <Redirect to={'/login'}/>}/>
@@ -135,4 +131,4 @@ class App extends React.Component {
     return state
   }
 
-export default connect(mapStateToProps, { fetchSounds })(App);
+export default connect(mapStateToProps, { fetchSounds, fetchUserFromToken })(App);
