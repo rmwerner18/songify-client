@@ -2,81 +2,21 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import * as Tone from 'tone'
 import modes from '../modes'
+import { setNumOfEigthNotes } from '../helper_functions.js/set_num_of_eigth_notes'
+import { stopLoop } from '../helper_functions.js/stop_loop'
+import player from '../player'
+import { connect } from 'react-redux'
 
 
 const Song = (props) => {
-
-    const player = (index, time) => {
-        let chords = props.song.chords.map(chord => chord.freqs)
-        Tone.Transport.bpm.value = parseInt(props.song.bpm)
-        let instrument
-        if (props.song.instrument === 'synth') {
-        instrument = props.state.synth
-        } else if (props.song.instrument === 'piano') {
-        instrument = props.state.piano
-        }
-        if ([0, 4].includes(index)) {
-            instrument.triggerAttackRelease(chords[0], '2n', time)
-        } else if ([8, 12].includes(index)) {
-            instrument.triggerAttackRelease(chords[1], '2n', time)
-        } else if ([16, 20].includes(index)) {
-            instrument.triggerAttackRelease(chords[2], '2n', time)
-        } else if ([24, 28].includes(index)) {
-            instrument.triggerAttackRelease(chords[3], '2n', time)
-        } 
-        if (props.song.kickBeats.includes(index)) {
-            props.state.kick.start(time)
-        }
-        if (props.song.snareBeats.includes(index)) {
-            props.state.snare.start(time)
-        }
-        if (props.song.hhBeats.includes(index)) {
-            props.state.hh.start(time);
-        }
-        if (props.song.iBeats.includes(index)) {
-            instrument.triggerAttackRelease(modes[props.song.melodyMode](props.song.melodyKey)[0], '8n', time)
-        }
-        if (props.song.iiBeats.includes(index)) {
-            instrument.triggerAttackRelease(modes[props.song.melodyMode](props.song.melodyKey)[1], '8n', time)
-        }
-        if (props.song.iiiBeats.includes(index)) {
-            instrument.triggerAttackRelease(modes[props.song.melodyMode](props.song.melodyKey)[2], '8n', time)
-        }
-        if (props.song.ivBeats.includes(index)) {
-            instrument.triggerAttackRelease(modes[props.song.melodyMode](props.song.melodyKey)[3], '8n', time)
-        }
-        if (props.song.vBeats.includes(index)) {
-            instrument.triggerAttackRelease(modes[props.song.melodyMode](props.song.melodyKey)[4], '8n', time)
-        }
-        if (props.song.viBeats.includes(index)) {
-            instrument.triggerAttackRelease(modes[props.song.melodyMode](props.song.melodyKey)[5], '8n', time)
-        }
-        if (props.song.viiBeats.includes(index)) {
-            instrument.triggerAttackRelease(modes[props.song.melodyMode](props.song.melodyKey)[6], '8n', time)
-        }
-        if (props.song.IBeats.includes(index)) {
-            instrument.triggerAttackRelease(modes[props.song.melodyMode](props.song.melodyKey)[7], '8n', time)
-        }
-    }
-
-    const setNumOfEigthNotes = (n, array) => {
-        for (let i=0; i<n; i++) {
-            array.push(i)
-        }
-    }
 
     const startLoop = () => {
         let array = []
         setNumOfEigthNotes(32, array)
         new Tone.Sequence((time, index) => {
-            player(index, time)
+            player(index, time, props)
         }, array).start(0)
         Tone.Transport.start();
-    }
-
-    const stopLoop = () => {
-        Tone.Transport.stop()
-        Tone.Transport.cancel()
     }
 
     const playHandler = (e) => {
@@ -155,5 +95,35 @@ const Song = (props) => {
     )
 
 }
+
+const mapStateToProps = state => {
+    let sounds = state.sounds
+    let song = state.currentSong
+    return {
+        synth: sounds.synth,
+        piano: sounds.piano,
+        snare: sounds.snare,
+        kick: sounds.kick,
+        hh: sounds.hh,
+        user_id: song.user_id,
+        likes: song.likes,
+        chords: song.chords,
+        bpm: song.bpm,
+        snareBeats: song.snareBeats,
+        kickBeats: song.kickBeats,
+        hhBeats: song.hhBeats,
+        instrument: song.instrument,
+        iBeats: song.iBeats,
+        iiBeats: song.iiBeats,
+        iiiBeats: song.iiiBeats,
+        ivBeats: song.ivBeats,
+        vBeats: song.vBeats,
+        viBeats: song.viBeats,
+        viiBeats: song.viiBeats,
+        IBeats: song.IBeats,
+        melodyKey: song.melodyKey,
+        melodyMode: song.melodyMode
+    }
+}
  
-export default Song
+export default connect(mapStateToProps)(Song)

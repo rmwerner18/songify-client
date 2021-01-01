@@ -57,14 +57,6 @@ class Grid extends React.Component {
         }
     }
 
-    chordSubmitHandler = (e, id, state) => {
-        // e.preventDefault()
-        // let newArray = this.props.chords
-        // newArray.splice(id, 1, state)
-        // this.setState({chords: newArray})
-
-    }
-
     tempoChangeHandler = (bpm) => {
         this.setState({bpm: bpm})
     }
@@ -81,54 +73,53 @@ class Grid extends React.Component {
         this.props.changeAllChords(chordPresets[int])
     }
 
-    // saveSongHandler = (e, songname) => {  
-    //     e.preventDefault()
-    //         let newObj
-    //         newObj = this.state
-    //         newObj.user_id = this.props.state.user.id
-    //         newObj.name = songname
-    //         this.props.song_id
-    //         ?
-    //         fetch(`http://localhost:3000/songs/${this.props.song_id}`, {
-    //             method: "PATCH",
-    //             headers: {
-    //                 "content-type": "application/json",
-    //                 accepts: "application/json",
-    //                 Authorization: `Bearer ${localStorage.getItem('token')}`
-    //             },
-    //             body: JSON.stringify(
-    //                 newObj
-    //             )
-    //         }).then(resp => resp.json())
-    //         .then(() => {
-    //             this.stopLoop()
-    //             alert("Your changes have been saved!")
-    //         })
-    //         :
-    //         fetch('http://localhost:3000/songs', {
-    //             method: "POST",
-    //             headers: {
-    //                 "content-type": "application/json",
-    //                 accepts: "application/json",
-    //                 Authorization: `Bearer ${localStorage.getItem('token')}`
-    //             },
-    //             body: JSON.stringify(
-    //                 newObj
-    //             )
-    //         }).then(resp => resp.json())
-    //         .then(song => alert("Your song has been saved!"))
-    // }
+    saveSongHandler = (e, songname) => {  
+        e.preventDefault()
+            let newObj
+            newObj = this.state
+            newObj.user_id = this.props.state.user.id
+            newObj.name = songname
+            this.props.song_id
+            ?
+            fetch(`http://localhost:3000/songs/${this.props.song_id}`, {
+                method: "PATCH",
+                headers: {
+                    "content-type": "application/json",
+                    accepts: "application/json",
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                },
+                body: JSON.stringify(
+                    newObj
+                )
+            }).then(resp => resp.json())
+            .then(() => {
+                this.stopLoop()
+                alert("Your changes have been saved!")
+            })
+            :
+            fetch('http://localhost:3000/songs', {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                    accepts: "application/json",
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                },
+                body: JSON.stringify(
+                    newObj
+                )
+            }).then(resp => resp.json())
+            .then(song => alert("Your song has been saved!"))
+    }
     
 
     modalClickHandler = () => {
-        Tone.Transport.stop()
-        Tone.Transport.cancel()
-        this.setState({songIsPlaying: false})
-        if (this.props.user.id) {
-            this.setState({modalIsOpen: true})
-        } else {
-            alert('Please login to save a song')
-        }
+        // stopLoop()
+        // this.setState({songIsPlaying: false})
+        // if (this.props.user.id) {
+        //     this.setState({modalIsOpen: true})
+        // } else {
+        //     alert('Please login to save a song')
+        // }
     }
 
     modalCloseHandler = () => {
@@ -163,7 +154,6 @@ class Grid extends React.Component {
                         {this.showChords()}
                     </div>
                     <div className='chord-options'>
-                        {/* <PlayButton clickHandler={this.playHandler} /> */}
                         <div className='grid-start-button-container'>
                             <button id='grid-start-button' onClick={(e) => this.playHandler(e)}>
                                     {this.state.songIsPlaying ? <span>||</span> : <span>▶</span>}

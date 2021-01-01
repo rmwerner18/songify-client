@@ -9,10 +9,12 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import { currentSongReducer } from './reducers/current_song_reducer'
 import { soundsReducer } from './reducers/sounds_reducer'
+import { userReducer } from './reducers/user_reducer'
 
 let reducer = combineReducers({
   currentSong: currentSongReducer,
-  sounds: soundsReducer
+  sounds: soundsReducer,
+  user: userReducer
 })
 
 let store = createStore(
