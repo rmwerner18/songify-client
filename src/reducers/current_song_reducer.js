@@ -26,6 +26,8 @@ let initialState = {
 export const currentSongReducer = (state = initialState, action) => {
     let clearedBeats
     switch (action.type) {
+        case 'SET_CURRENT_SONG':
+            return Object.assign({}, state, action.song)
         case 'CHANGE_HH_BEATS':
             return Object.assign({}, state, {hhBeats: [...action.beats]})
         case 'CHANGE_SNARE_BEATS':

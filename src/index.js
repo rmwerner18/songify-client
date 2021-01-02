@@ -11,12 +11,14 @@ import { currentSongReducer } from './reducers/current_song_reducer'
 import { soundsReducer } from './reducers/sounds_reducer'
 import { userReducer } from './reducers/user_reducer'
 import { allSongsReducer } from './reducers/all_songs_reducer'
+import { nowPlayingReducer } from './reducers/now_playing_reducer'
 
 let reducer = combineReducers({
   currentSong: currentSongReducer,
   allSongs: allSongsReducer,
   sounds: soundsReducer,
-  user: userReducer
+  user: userReducer,
+  nowPlaying: nowPlayingReducer
 })
 
 let store = createStore(

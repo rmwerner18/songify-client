@@ -8,7 +8,7 @@ import { fetchSongs } from '../actions/set_all_songs'
 class SongsContainer extends React.Component {
     state = {
         loaded: false,
-        songs: [],
+        songs: []
     }
 
     renderSongs = () => {

@@ -5,6 +5,9 @@ import modes from '../modes'
 import { setNumOfEigthNotes } from '../helper_functions.js/set_num_of_eigth_notes'
 import { stopLoop } from '../helper_functions.js/stop_loop'
 import { startSong, stopSong } from '../actions/set_is_playing'
+import { setCurrentSong } from '../actions/set_current_song'
+import { setNowPlaying } from '../actions/set_now_playing'
+import { endNowPlaying } from '../actions/end_now_playing' 
 import player from '../player'
 import { useState } from 'react'
 import { connect } from 'react-redux'
@@ -14,60 +17,25 @@ const Song = (props) => {
 
     const startLoop = () => {
         let array = []
+        let newObj = Object.assign({}, props, props.song)
         setNumOfEigthNotes(32, array)
         new Tone.Sequence((time, index) => {
-            player(index, time, props)
+            player(index, time, newObj)
         }, array).start(0)
         Tone.Transport.start();
     }
 
     const playHandler = (e) => {
-        // console.log(e.target.innerHTML)
-        // console.log(e.target.innerText)
-
-        // // HANDLES LOOP
-        // if (Tone.Transport.state === "stopped") {
-        //     Tone.Destination.context.resume().then(() => {
-        //         startLoop()
-        //     })
-        //     if (e.target.innerHTML === "<span>▶</span>") {
-        //         e.target.innerHTML = "<span>||</span>"
-        //     } else if (e.target.innerHTML === "▶") {
-        //         e.target.innerHTML = "||"
-        //     }
-        // } else if (Tone.Transport.state === "started" && e.target.innerText === "▶") {
-        //     let elements = document.getElementsByClassName('song-list-start-button')
-        //     let array = Array.from(elements)
-        //     let item = array.find(el => el.innerHTML === "<span>||</span>")
-        //     console.log('item', item)
-        //     item.innerHTML = "<span>▶</span>"
-        //     if (e.target.innerHTML === "<span>▶</span>") {
-        //         e.target.innerHTML = "<span>||</span>"
-        //     } else if (e.target.innerHTML === "▶") {
-        //         e.target.innerHTML = "||"
-        //     }
-        //     stopLoop()
-        //     Tone.Destination.context.resume().then(() => {
-        //         startLoop()
-        //     })
-        // }
-        // else {
-        //     stopLoop()
-        //     if (e.target.innerHTML === "<span>||</span>") {
-        //         e.target.innerHTML = "<span>▶</span>"
-        //     } else if (e.target.innerHTML === "||") {
-        //         e.target.innerHTML = "▶"
-        //     }
-        // }
-
-        // if (Tone.Transport.state === "stopped") {
-        //     Tone.Destination.context.resume().then(() => {
-        //         startLoop()
-        //         props.startSong()
-        //     })
-        // } else if (Tone.Transport.state === "started" && props.id != props.song_id)
-
-        
+        if (Tone.Transport.state === "started" && props.nowPlaying.id === props.song.id) {
+            props.endNowPlaying()
+            stopLoop()
+        } else {
+            stopLoop()
+            props.setNowPlaying(props.song)
+            Tone.Destination.context.resume().then(() => {
+                startLoop()
+            })
+        }
     }
 
     const userLikesSong = () => {
@@ -81,7 +49,7 @@ const Song = (props) => {
             <h2 className="song-title">{props.song.name}</h2>
             <p className="song-maker">Created By: {props.song.user.username}</p>
             <div className='song-list-start-button-container'>
-    <button className="song-list-start-button" onClick={(e) => playHandler(e, props.song)}>{props.isPlaying ? <span>||</span> : <span>▶</span>}</button>
+    <button className="song-list-start-button" onClick={(e) => playHandler(e, props.song)}>{props.nowPlaying.id === props.song.id ? <span>||</span> : <span>▶</span>}</button>
             </div>
             <div className='song-options'>
                 {props.user.id === props.user_id
@@ -109,34 +77,15 @@ const Song = (props) => {
 
 const mapStateToProps = state => {
     let sounds = state.sounds
-    let song = state.currentSong
     return {
         synth: sounds.synth,
         piano: sounds.piano,
         snare: sounds.snare,
         kick: sounds.kick,
         hh: sounds.hh,
-        user_id: song.user_id,
-        likes: song.likes,
-        chords: song.chords,
-        bpm: song.bpm,
-        snareBeats: song.snareBeats,
-        kickBeats: song.kickBeats,
-        hhBeats: song.hhBeats,
-        instrument: song.instrument,
-        iBeats: song.iBeats,
-        iiBeats: song.iiBeats,
-        iiiBeats: song.iiiBeats,
-        ivBeats: song.ivBeats,
-        vBeats: song.vBeats,
-        viBeats: song.viBeats,
-        viiBeats: song.viiBeats,
-        IBeats: song.IBeats,
-        melodyKey: song.melodyKey,
-        melodyMode: song.melodyMode,
-        isPlaying: song.isPlaying,
+        nowPlaying: state.nowPlaying,
         user: state.user
     }
 }
  
-export default connect(mapStateToProps, { startSong, stopSong })(Song)
+export default connect(mapStateToProps, { startSong, stopSong, setCurrentSong, setNowPlaying, endNowPlaying})(Song)
