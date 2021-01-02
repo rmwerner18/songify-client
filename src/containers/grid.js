@@ -10,6 +10,8 @@ import chordPresets from '../chord_presets'
 import { setNumOfEigthNotes } from '../helper_functions.js/set_num_of_eigth_notes'
 import { stopLoop } from '../helper_functions.js/stop_loop'
 import { changeAllChords } from '../actions/change_all_chords'
+import { setNowPlaying } from '../actions/set_now_playing'
+import { endNowPlaying } from '../actions/end_now_playing'
 import { startSong, stopSong } from '../actions/set_is_playing'
 import player from '../player'
 import { connect } from 'react-redux'
@@ -20,7 +22,8 @@ class Grid extends React.Component {
     }
     
     playerCaller = (index, time) => {
-        return player(index, time, this.props)
+        let newObj = Object.assign({}, this.props.sounds, this.props.song)
+        return player(index, time, newObj)
     }
 
     startLoop = () => {
@@ -37,16 +40,16 @@ class Grid extends React.Component {
             Tone.Destination.context.resume().then(() => {
                 this.startLoop()
             })
-            this.props.startSong()
+            this.props.setNowPlaying({song: 'current song'})
         } else {
             stopLoop()
-            this.props.stopSong()
+            this.props.endNowPlaying()
         }
     }
 
     componentDidMount = () => {
         stopLoop()
-        this.props.stopSong()
+        this.props.endNowPlaying()
         document.querySelector('.navbar').style.display = 'none'
         if (this.props.song_id) {
             fetch(`http://localhost:3000/songs/${this.props.song_id}`)
@@ -58,7 +61,7 @@ class Grid extends React.Component {
     }
 
     showChords = () => {
-        return this.props.chords.map((chord, index) => {
+        return this.props.song.chords.map((chord, index) => {
             return <Chord id={index} key={index}/>
         })
     }
@@ -72,7 +75,7 @@ class Grid extends React.Component {
     saveSongHandler = (e, songname) => {  
         e.preventDefault()
             let newObj
-            newObj = this.state
+            newObj = this.props.song
             newObj.user_id = this.props.user.id
             newObj.name = songname
             this.props.song_id
@@ -104,13 +107,17 @@ class Grid extends React.Component {
                     newObj
                 )
             }).then(resp => resp.json())
-            .then(song => alert("Your song has been saved!"))
+            .then(song => {
+                if (song.id) {
+                    alert("Your song has been saved!")
+                }
+            })
     }
     
 
     modalClickHandler = () => {
         stopLoop()
-        this.props.stopSong()
+        this.props.endNowPlaying()
         if (this.props.user.id) {
             this.setState({modalIsOpen: true})
         } else {
@@ -124,6 +131,7 @@ class Grid extends React.Component {
 
  
     render() {
+        console.log(this.props.nowPlaying)
         return (
             <>
                 {this.state.modalIsOpen 
@@ -152,7 +160,7 @@ class Grid extends React.Component {
                     <div className='chord-options'>
                         <div className='grid-start-button-container'>
                             <button id='grid-start-button' onClick={(e) => this.playHandler(e)}>
-                                    {this.props.isPlaying ? <span>||</span> : <span>▶</span>}
+                                    {this.props.nowPlaying.song ? <span>||</span> : <span>▶</span>}
                             </button>
                         </div>
                         <div className='save-container' >
@@ -177,35 +185,12 @@ class Grid extends React.Component {
 }
 
 const mapStateToProps = state => {
-    let sounds = state.sounds
-    let song = state.currentSong
     return {
-        synth: sounds.synth,
-        piano: sounds.piano,
-        snare: sounds.snare,
-        kick: sounds.kick,
-        hh: sounds.hh,
-        user_id: song.user_id,
-        likes: song.likes,
-        chords: song.chords,
-        bpm: song.bpm,
-        snareBeats: song.snareBeats,
-        kickBeats: song.kickBeats,
-        hhBeats: song.hhBeats,
-        instrument: song.instrument,
-        iBeats: song.iBeats,
-        iiBeats: song.iiBeats,
-        iiiBeats: song.iiiBeats,
-        ivBeats: song.ivBeats,
-        vBeats: song.vBeats,
-        viBeats: song.viBeats,
-        viiBeats: song.viiBeats,
-        IBeats: song.IBeats,
-        melodyKey: song.melodyKey,
-        melodyMode: song.melodyMode,
-        isPlaying: song.isPlaying,
-        user: state.user
+        sounds: state.sounds,
+        song: state.currentSong,
+        user: state.user,
+        nowPlaying: state.nowPlaying
     }
 }
 
-export default connect(mapStateToProps, { changeAllChords, startSong, stopSong })(Grid)
+export default connect(mapStateToProps, { changeAllChords, setNowPlaying, endNowPlaying })(Grid)

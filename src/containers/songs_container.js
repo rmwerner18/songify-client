@@ -15,12 +15,13 @@ class SongsContainer extends React.Component {
         let header = "ALL SONGS"
         let filteredSongs = this.props.songs
         if (this.props.usersSongs) {
-            filteredSongs = this.props.songs.filter(song => song.user_id === this.props.user.id)
+            filteredSongs = this.props.songs.filter(song => song.user.id === this.props.user.id)
             header = "YOUR SONGS"
         } else if (this.props.favoritedSongs) {
             filteredSongs = this.props.songs.filter(song => song.likes.find(like => like.user_id === this.props.user.id))
             header = "LIKED SONGS"
         }
+        // this.setState({header: header})
         return filteredSongs.map(song => {
             return (<Song 
                 id={song.id}
@@ -100,6 +101,8 @@ class SongsContainer extends React.Component {
     }
 
     render() {
+        console.log(this.props.songs)
+        console.log(this.props.user.id)
         return (
             this.props.songs.length > 0
             ?

@@ -13,14 +13,6 @@ import { connect } from 'react-redux'
 import { fetchUserFromToken, login, signUp } from './actions/set_user'
 
 class App extends React.Component {
-  // state = {
-  //   synth: null,
-  //   piano: null,
-  //   snare: null,
-  //   kick: null,
-  //   hh: null,
-  //   user: {}
-  // }
 
   componentDidMount = () => {
     this.props.fetchSounds()
@@ -43,57 +35,10 @@ class App extends React.Component {
     }
   }
 
-  // loginHandler = (e, state) => {
-  //   // e.preventDefault()
-  //   let user = {
-  //     username: state.username,
-  //     password: state.password
-  //   }
-  //   fetch('http://localhost:3000/login', {
-  //     method: "POST",
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Accept': "application/json"
-  //     },
-  //     body: JSON.stringify({user: user})
-  //   }).then(resp => resp.json())
-  //   .then(result => {
-  //     if (result.user) {
-  //       localStorage.setItem('token', result.jwt)
-  //       this.setState({user: result.user})
-  //     } else {
-  //       const message = document.querySelector('span')
-  //       message.style.display = 'block'
-  //     }
-  //   })
-  // }
-
-  // signUpHandler = (e, state) => {
-  //   // e.preventDefault()
-  //   let user = {
-  //     username: state.username,
-  //     password: state.password
-  //   }
-  //   fetch('http://localhost:3000/users', {
-  //     method: "POST",
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Accept': "application/json"
-  //     },
-  //     body: JSON.stringify({user: user})
-  //   }).then(resp => resp.json())
-  //   .then(result => {
-  //     localStorage.setItem('token', result.jwt);
-  //     this.setState({user: result.user});
-  //   })
-  // }
-
   logoutHandler = () => {
     localStorage.removeItem('token')
     this.setState({user: {}})
   }
-
-  
 
   render() {
       return (
@@ -107,7 +52,7 @@ class App extends React.Component {
               <MenuIcon displayNav={this.displayNav}/>
               <NavBar user={this.props.user} />
             </div>
-            <Route exact path={'/users/:id'} render={(routerProps) => <UserPage state={this.state} id={routerProps.match.params.id}/>}/>
+            <Route exact path={'/users/:id'} render={(routerProps) => <UserPage id={routerProps.match.params.id}/>}/>
             <Route exact path='/songs/:id/edit' render={(routerProps) => <Grid state={this.state} song_id={routerProps.match.params.id} />}/>
             <Route exact path='/songs' render={() => <SongsContainer state={this.state} editHandler={this.editHandler} />}/>
             <Route exact path='/login' render={() => this.props.user.id ?
