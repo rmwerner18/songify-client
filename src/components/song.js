@@ -11,6 +11,7 @@ import { endNowPlaying } from '../actions/end_now_playing'
 import player from '../player'
 import { useState } from 'react'
 import { connect } from 'react-redux'
+// import userLikesSong from '../helper_functions.js/user_likes_song'
 
 
 const Song = (props) => {
@@ -52,7 +53,7 @@ const Song = (props) => {
     <button className="song-list-start-button" onClick={(e) => playHandler(e, props.song)}>{props.nowPlaying.id === props.song.id ? <span>||</span> : <span>▶</span>}</button>
             </div>
             <div className='song-options'>
-                {props.user.id === props.user_id
+                {props.user.id === props.song.user.id
                 ?
                 <>
                     <button onClick={() => props.deleteHandler(props)}>Delete</button>
@@ -63,7 +64,7 @@ const Song = (props) => {
                 :
                 null
                 }
-                {(props.user_id !== props.user.id && props.user.id)
+                {(props.song.user.id !== props.user.id && props.user.id)
                 ?
                 <button id={`like-button-${props.song.id}`} onClick={(e) => props.likeHandler(e)}>{userLikesSong() ? "Unlike" : "Like"}</button>       
                 :

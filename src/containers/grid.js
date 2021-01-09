@@ -92,7 +92,7 @@ class Grid extends React.Component {
                 )
             }).then(resp => resp.json())
             .then(() => {
-                this.stopLoop()
+                stopLoop()
                 alert("Your changes have been saved!")
             })
             :

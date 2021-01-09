@@ -11,6 +11,7 @@ import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { fetchSounds } from './actions/fetch_sounds'
 import { connect } from 'react-redux'
 import { fetchUserFromToken, login, signUp } from './actions/set_user'
+import { logout } from './actions/logout'
 
 class App extends React.Component {
 
@@ -35,12 +36,8 @@ class App extends React.Component {
     }
   }
 
-  logoutHandler = () => {
-    localStorage.removeItem('token')
-    this.setState({user: {}})
-  }
-
   render() {
+    console.log(this.props.user)
       return (
         // this.state.synth 
         // ?
@@ -59,10 +56,10 @@ class App extends React.Component {
               <Redirect to='/'/>
               :
               <Login loginHandler={this.loginHandler} signUpHandler={this.signUpHandler}/>}/>
-            <Route path="/logout" render={() => this.props.user.id ?
-              this.logoutHandler()
-              :
-              <Redirect to={'/login'}/>}/>
+            <Route path="/logout" render={() => {
+                this.props.logout()
+                return <Redirect to={'/login'}/>
+              }} />
             <Route exact path='/' render={() => <Grid state={this.state} />}/>
           </BrowserRouter>
         </div>
@@ -76,4 +73,4 @@ class App extends React.Component {
     return state
   }
 
-export default connect(mapStateToProps, { fetchSounds, fetchUserFromToken })(App);
+export default connect(mapStateToProps, { logout, fetchSounds, fetchUserFromToken })(App);
