@@ -13,6 +13,7 @@ import { changeAllChords } from '../actions/change_all_chords'
 import { setNowPlaying } from '../actions/set_now_playing'
 import { endNowPlaying } from '../actions/end_now_playing'
 import { startSong, stopSong } from '../actions/set_is_playing'
+import { hideNavbar } from '../actions/hide_navbar'
 import player from '../player'
 import { connect } from 'react-redux'
 
@@ -49,8 +50,8 @@ class Grid extends React.Component {
 
     componentDidMount = () => {
         stopLoop()
+        this.props.hideNavbar()
         this.props.endNowPlaying()
-        document.querySelector('.navbar').style.display = 'none'
         if (this.props.song_id) {
             fetch(`http://localhost:3000/songs/${this.props.song_id}`)
             .then(resp => resp.json())
@@ -193,4 +194,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { changeAllChords, setNowPlaying, endNowPlaying })(Grid)
+export default connect(mapStateToProps, { changeAllChords, setNowPlaying, endNowPlaying, hideNavbar })(Grid)

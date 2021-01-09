@@ -27,27 +27,19 @@ class App extends React.Component {
     return <Grid player={this.player} playHandler={this.playHandler} song={song}/>
   }
 
-  displayNav = () => {
-    let navbar = document.querySelector('.navbar')
-    if (navbar.style.display === 'none') {
-      return navbar.style.display ='flex'
-    } else {
-      return navbar.style.display = 'none'
-    }
-  }
+  // displayNav = () => {
+  //   this.props.toggleNavbar()
+  // }
 
   render() {
-    console.log(this.props.user)
       return (
-        // this.state.synth 
-        // ?
         <div className="App">
           {/* <header className="App-header">
           </header> */}
           <BrowserRouter className='App-Content'>
             <div className='navbar-with-image'>
               <MenuIcon displayNav={this.displayNav}/>
-              <NavBar user={this.props.user} />
+              { this.props.navbar ? <NavBar user={this.props.user}/> : null }
             </div>
             <Route exact path={'/users/:id'} render={(routerProps) => <UserPage id={routerProps.match.params.id}/>}/>
             <Route exact path='/songs/:id/edit' render={(routerProps) => <Grid state={this.state} song_id={routerProps.match.params.id} />}/>
@@ -63,8 +55,6 @@ class App extends React.Component {
             <Route exact path='/' render={() => <Grid state={this.state} />}/>
           </BrowserRouter>
         </div>
-        // :
-        // "loading sounds"
       );
     }
   }

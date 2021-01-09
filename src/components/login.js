@@ -1,5 +1,6 @@
 import React from 'react'
 import * as Tone from 'tone'
+import { hideNavbar } from '../actions/hide_navbar'
 import { login, signUp } from '../actions/set_user'
 import { connect } from 'react-redux'
 
@@ -23,6 +24,7 @@ class Login extends React.Component {
     }
 
     componentDidMount = () => {
+        this.props.hideNavbar()
         fetch('http://localhost:3000/users')
         .then(resp => resp.json())
         .then(users => this.setState({users: users}))
@@ -64,10 +66,6 @@ class Login extends React.Component {
     }
 
     render() {
-        if (document.querySelector('.navbar')) {
-            document.querySelector('.navbar').style.display = 'none'
-        }
-
         this.stopLoop()
 
         return (
@@ -99,4 +97,4 @@ class Login extends React.Component {
     }
 }
 
-export default connect(null, { login, signUp })(Login)
+export default connect(null, { login, signUp, hideNavbar })(Login)

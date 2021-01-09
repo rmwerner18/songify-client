@@ -16,11 +16,8 @@ class Chord extends React.Component {
         this.setState({modalIsOpen: false})
     }
 
-    render() {
-        console.log(this.state)
+    modal = () => {
         return (
-        <>
-            {this.state.modalIsOpen ?
             <div id={`chord-form-modal-${this.props.id}`} className="modal">
                 <div className="modal-content">
                     <span className="close" onClick={this.closeHandler}>&times;</span>
@@ -29,6 +26,14 @@ class Chord extends React.Component {
                     </div>
                 </div>
             </div>
+        )
+    }
+
+    render() {
+        return (
+        <>
+            {this.state.modalIsOpen ?
+            this.modal()
             :
             null
             }

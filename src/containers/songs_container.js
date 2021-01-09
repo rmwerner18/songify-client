@@ -2,6 +2,7 @@ import React from 'react'
 import Song from '../components/song'
 import { connect } from 'react-redux'
 import { fetchSongs } from '../actions/set_all_songs'
+import { hideNavbar } from '../actions/hide_navbar'
 // import userLikesSong from '../helper_functions.js/user_likes_song'
 
 
@@ -54,7 +55,7 @@ class SongsContainer extends React.Component {
     }
 
     componentDidMount = () => {
-        document.querySelector('.navbar').style.display = 'none'
+        this.props.hideNavbar()
         this.props.fetchSongs()
     }
 
@@ -124,4 +125,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { fetchSongs })(SongsContainer)
+export default connect(mapStateToProps, { fetchSongs, hideNavbar })(SongsContainer)
