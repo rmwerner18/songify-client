@@ -161,8 +161,6 @@ class MelodyForm extends React.Component {
 
     render() {
         return(
-            // this.state.song.id || this.props.song_id === null
-            // ?
             <div className='melody-form'>
                 <div className="melody-container">
                     <div className='checkbox-row'>   
@@ -200,8 +198,6 @@ class MelodyForm extends React.Component {
                     <button onClick={this.props.clearMelody}>Clear Melody</button>
                 </div>
             </div>
-            // : 
-            // "loading melody"
         )
 
     }

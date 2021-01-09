@@ -4,14 +4,11 @@ import * as Tone from 'tone'
 import modes from '../modes'
 import { setNumOfEigthNotes } from '../helper_functions.js/set_num_of_eigth_notes'
 import { stopLoop } from '../helper_functions.js/stop_loop'
-import { startSong, stopSong } from '../actions/set_is_playing'
 import { setCurrentSong } from '../actions/set_current_song'
 import { setNowPlaying } from '../actions/set_now_playing'
 import { endNowPlaying } from '../actions/end_now_playing' 
 import player from '../player'
-import { useState } from 'react'
 import { connect } from 'react-redux'
-// import userLikesSong from '../helper_functions.js/user_likes_song'
 
 
 const Song = (props) => {
@@ -89,4 +86,4 @@ const mapStateToProps = state => {
     }
 }
  
-export default connect(mapStateToProps, { startSong, stopSong, setCurrentSong, setNowPlaying, endNowPlaying})(Song)
+export default connect(mapStateToProps, { setCurrentSong, setNowPlaying, endNowPlaying})(Song)

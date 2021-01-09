@@ -3,7 +3,6 @@ import Song from '../components/song'
 import { connect } from 'react-redux'
 import { fetchSongs } from '../actions/set_all_songs'
 import { hideNavbar } from '../actions/hide_navbar'
-// import userLikesSong from '../helper_functions.js/user_likes_song'
 
 
 class SongsContainer extends React.Component {
@@ -19,11 +18,9 @@ class SongsContainer extends React.Component {
         return filteredSongs.map(song => {
             return (<Song 
                 id={song.id}
-                // user_id={song.user.id}
                 key={song.id}
                 song={song}
-                deleteHandler={this.deleteHandler} 
-                editHandler={this.editHandler} 
+                deleteHandler={this.deleteHandler}
                 likeHandler={this.likeHandler}
             />)
         })
