@@ -1,4 +1,3 @@
-import { render } from '@testing-library/react'
 import React from 'react'
 import { addOrRemoveBeat } from '../helper_functions.js/add_or_remove_beat'
 import { makeBeatArray } from '../helper_functions.js/make_beat_array'

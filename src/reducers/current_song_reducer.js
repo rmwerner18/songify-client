@@ -83,8 +83,6 @@ export const currentSongReducer = (state = initialState, action) => {
             let newArr = state.chords
             newArr.splice(action.id, 1, action.chord)
             return Object.assign({}, state, {chords: newArr})
-        case 'SET_IS_PLAYING':
-            return Object.assign({}, state, {isPlaying: action.value})
         default:
             return state
     }

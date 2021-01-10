@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import * as Tone from 'tone'
 import Grid from './containers/grid'
 import SongsContainer from './containers/songs_container'
 import UserPage from './containers/user_page'
@@ -10,7 +9,7 @@ import Login from './components/login'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { fetchSounds } from './actions/fetch_sounds'
 import { connect } from 'react-redux'
-import { fetchUserFromToken, login, signUp } from './actions/set_user'
+import { fetchUserFromToken} from './actions/set_user'
 import { logout } from './actions/logout'
 
 class App extends React.Component {
@@ -23,36 +22,38 @@ class App extends React.Component {
     }
   }
 
-  editHandler = (song) => {
-    return <Grid player={this.player} playHandler={this.playHandler} song={song}/>
-  }
-
-  // displayNav = () => {
-  //   this.props.toggleNavbar()
-  // }
-
   render() {
       return (
         <div className="App">
-          {/* <header className="App-header">
-          </header> */}
           <BrowserRouter className='App-Content'>
             <div className='navbar-with-image'>
               <MenuIcon displayNav={this.displayNav}/>
               { this.props.navbar ? <NavBar user={this.props.user}/> : null }
             </div>
-            <Route exact path={'/users/:id'} render={(routerProps) => <UserPage id={routerProps.match.params.id}/>}/>
-            <Route exact path='/songs/:id/edit' render={(routerProps) => <Grid state={this.state} song_id={routerProps.match.params.id} />}/>
-            <Route exact path='/songs' render={() => <SongsContainer state={this.state} editHandler={this.editHandler} />}/>
-            <Route exact path='/login' render={() => this.props.user.id ?
-              <Redirect to='/'/>
-              :
-              <Login loginHandler={this.loginHandler} signUpHandler={this.signUpHandler}/>}/>
-            <Route path="/logout" render={() => {
-                this.props.logout()
-                return <Redirect to={'/login'}/>
-              }} />
-            <Route exact path='/' render={() => <Grid state={this.state} />}/>
+            <Route 
+              exact path={'/users/:id'} 
+              render={(routerProps) => <UserPage id={routerProps.match.params.id}/>}/>
+            <Route 
+              exact path='/songs/:id/edit' 
+              render={(routerProps) => <Grid song_id={routerProps.match.params.id} />}/>
+            <Route 
+              exact path='/songs' 
+              render={() => <SongsContainer/>}/>
+            <Route 
+              exact path='/login' 
+              render={() => this.props.user.id ?
+                <Redirect to='/'/>
+                :
+                <Login/>}/>
+            <Route 
+              path="/logout" 
+                render={() => {
+                  this.props.logout()
+                  return <Redirect to={'/login'}/>
+                }} />
+            <Route 
+              exact path='/' 
+              render={() => <Grid/>}/>
           </BrowserRouter>
         </div>
       );
