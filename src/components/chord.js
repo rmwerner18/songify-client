@@ -1,50 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ChordForm from './chord_form'
 import { connect } from 'react-redux'
 
 
-class Chord extends React.Component {
-    state = {
-        modalIsOpen: false
+const Chord = props => {
+    const [modalIsOpen, setModalIsOpen] = useState(false)
+
+    const clickHandler = () => {
+        setModalIsOpen(true)
     }
 
-    clickHandler = () => {
-        this.setState({modalIsOpen: true})
+    const closeHandler = () => {
+        setModalIsOpen(false)
     }
 
-    closeHandler = () => {
-        this.setState({modalIsOpen: false})
-    }
-
-    modal = () => {
+    const modal = () => {
         return (
-            <div id={`chord-form-modal-${this.props.id}`} className="modal">
+            <div id={`chord-form-modal-${props.id}`} className="modal">
                 <div className="modal-content">
-                    <span className="close" onClick={this.closeHandler}>&times;</span>
+                    <span className="close" onClick={closeHandler}>&times;</span>
                     <div>
-                        {<ChordForm id={this.props.id} chord={this.props.chord} closeHandler={this.closeHandler}/>}
+                        {<ChordForm id={props.id} chord={props.chord} closeHandler={closeHandler}/>}
                     </div>
                 </div>
             </div>
         )
     }
-
-    render() {
-        return (
+    return (
         <>
-            {this.state.modalIsOpen ?
-            this.modal()
+            {modalIsOpen ?
+            modal()
             :
             null
             }
-            <div className="chord-box" onClick={this.clickHandler}>
+            <div className="chord-box" onClick={clickHandler}>
                 <span className="chord-name">
-                    {this.props.chords[this.props.id].formattedName} {this.props.chords[this.props.id].formattedQuality} 
-                    {this.props.chords[this.props.id].bass.length > 0 ? "/" + this.props.chords[this.props.id].formattedBass : null}
+                    {props.chords[props.id].formattedName} {props.chords[props.id].formattedQuality} 
+                    {props.chords[props.id].bass.length > 0 ? "/" + props.chords[props.id].formattedBass : null}
                 </span>
             </div>
         </>
-    )}
+    )
 }
 
 const mapStateToProps = state => {
