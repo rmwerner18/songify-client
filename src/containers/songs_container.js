@@ -8,22 +8,25 @@ import { hideNavbar } from '../actions/hide_navbar'
 class SongsContainer extends React.Component {
 
     renderSongs = (songs = this.props.songs) => {
-        console.log(songs)
-        let filteredSongs = songs
-        if (this.props.usersSongs) {
-            filteredSongs = songs.filter(song => song.user.id === this.props.user.id)
-        } else if (this.props.favoritedSongs) {
-            filteredSongs = songs.filter(song => song.likes.find(like => like.user_id === this.props.user.id))
-        }
-        return filteredSongs.map(song => {
+        songs = this.filterSongs(songs)
+        return songs.map(song => {
             return (<Song 
                 id={song.id}
                 key={song.id}
                 song={song}
+                userPage={this.props.favoritedSongs}
                 deleteHandler={this.deleteHandler}
                 likeHandler={this.likeHandler}
             />)
         })
+    }
+
+    filterSongs = (songs) => {
+        if (this.props.usersSongs) {
+            return songs.filter(song => song.user.id === this.props.user.id)
+        } else if (this.props.favoritedSongs) {
+            return songs.filter(song => song.likes.find(like => like.user_id === this.props.user.id))
+        } else return songs
     }
 
     header = () => {
@@ -89,7 +92,7 @@ class SongsContainer extends React.Component {
     }
 
     likeHandler = (e) => {
-        let songId = e.target.id.split('-')[2]
+        let songId = e.target.id.split('-')[2] 
         let song = this.props.songs.find(song => song.id === parseInt(songId))
         if (this.props.user.id) {
             if (this.userLikesSong(song)) {
@@ -117,8 +120,7 @@ class SongsContainer extends React.Component {
 const mapStateToProps = state => {
     return {
         user: state.user,
-        songs: state.allSongs,
-        user: state.user
+        songs: state.allSongs
     }
 }
 

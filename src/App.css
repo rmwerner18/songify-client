@@ -390,8 +390,7 @@ button:focus {
 }
 
 .login-all span {
-  color: red;
-  display: none; 
+  color: red; 
 }
 
 .login-fields {

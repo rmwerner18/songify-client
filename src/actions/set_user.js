@@ -1,3 +1,5 @@
+import { fetchHeaders } from '../fetch_headers'
+
 const setUser = (user) => {
     return {
         type: 'SET_USER',
@@ -15,22 +17,17 @@ export const fetchUserFromToken = (token) => dispatch => {
 }
 
 export const login = (user) => dispatch => {
-    fetch('http://localhost:3000/login', {
+    return fetch('http://localhost:3000/login', {
         method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': "application/json"
-        },
+        headers: fetchHeaders,
         body: JSON.stringify({user: user})
       }).then(resp => resp.json())
       .then(result => {
         if (result.user) {
           localStorage.setItem('token', result.jwt)
           dispatch(setUser(result.user))
-        } else {
-          const message = document.querySelector('span')
-          message.style.display = 'block'
-        }
+          return true
+        } else alert('invalid username or password')
       })
 }
 

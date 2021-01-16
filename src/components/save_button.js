@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { stopLoop } from '../helper_functions.js/stop_loop'
 import { endNowPlaying } from '../actions/end_now_playing'
 import SongNameForm from '../components/song_name_form'
+import { fetchHeaders } from '../fetch_headers'
 import { connect } from 'react-redux'
 
 const SaveButton = props => {
@@ -10,11 +11,7 @@ const SaveButton = props => {
     const saveEdit = newObj => {
         return fetch(`http://localhost:3000/songs/${props.song_id}`, {
             method: "PATCH",
-            headers: {
-                "content-type": "application/json",
-                accepts: "application/json",
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            },
+            headers: fetchHeaders,
             body: JSON.stringify(
                 newObj
             )
@@ -29,11 +26,7 @@ const SaveButton = props => {
     const saveSong = newObj => {
         return     fetch('http://localhost:3000/songs', {
             method: "POST",
-            headers: {
-                "content-type": "application/json",
-                accepts: "application/json",
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            },
+            headers: fetchHeaders,
             body: JSON.stringify(
                 newObj
             )
@@ -53,16 +46,16 @@ const SaveButton = props => {
             newObj.name = songname
             props.song_id ? saveEdit(newObj) : saveSong(newObj)
     }
+
+    const openModalOrAlert = () => {
+        props.user.id ? setModalIsOpen(true) : alert('Please login to save a song')
+    }
     
 
     const modalClickHandler = () => {
         stopLoop()
         props.endNowPlaying()
-        if (props.user.id) {
-            setModalIsOpen(true)
-        } else {
-            alert('Please login to save a song')
-        }
+        openModalOrAlert()
     }
 
     const modalCloseHandler = () => {

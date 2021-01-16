@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import * as Tone from 'tone'
-import modes from '../modes'
 import { setNumOfEigthNotes } from '../helper_functions.js/set_num_of_eigth_notes'
 import { stopLoop } from '../helper_functions.js/stop_loop'
 import { setCurrentSong } from '../actions/set_current_song'
@@ -12,6 +11,11 @@ import { connect } from 'react-redux'
 
 
 const Song = (props) => {
+
+    const [userLikesSong, setUserLikesSong] = useState(props.song.likes.find(like => like.user_id === props.user.id))
+    const [likes, setLikes] = useState(props.song.likes.length)
+    const [hasBeenUnlikedOnUserPage, setHasBeenUnlikedOnUserPage] = useState(false)
+
 
     const startLoop = () => {
         let array = []
@@ -36,13 +40,24 @@ const Song = (props) => {
         }
     }
 
-    const userLikesSong = () => {
-        return props.song.likes.find(like => like.user_id === props.user.id)
+    const likeHandler = (e) => {
+        userLikesSong ? setLikes(likes - 1) : setLikes(likes + 1)
+        if (userLikesSong && props.userPage) {
+            setHasBeenUnlikedOnUserPage(true)
+        }
+        setUserLikesSong(!userLikesSong)
+        props.likeHandler(e)
     }
+
+    const songBelongsToUser = () => props.song.user.id !== props.user.id && props.user.id
 
     stopLoop()
 
     return (
+        hasBeenUnlikedOnUserPage
+        ?
+        null
+        : 
         <div className="song-box">
             <h2 className="song-title">{props.song.name}</h2>
             <p className="song-maker">Created By: {props.song.user.username}</p>
@@ -61,12 +76,12 @@ const Song = (props) => {
                 :
                 null
                 }
-                {(props.song.user.id !== props.user.id && props.user.id)
+                {songBelongsToUser()
                 ?
-                <button id={`like-button-${props.song.id}`} onClick={(e) => props.likeHandler(e)}>{userLikesSong() ? "Unlike" : "Like"}</button>       
+                <button id={`like-button-${props.song.id}`} onClick={likeHandler}>{userLikesSong ? "Unlike" : "Like"}</button>       
                 :
                 null}
-                <span>likes: <span id={`like-count-${props.id}`}>{props.song.likes.length}</span></span>
+                <span>likes: <span id={`like-count-${props.id}`}>{likes}</span></span>
             </div>
         </div>
     )

@@ -5,7 +5,7 @@ import SongsContainer from './containers/songs_container'
 import UserPage from './containers/user_page'
 import NavBar from './containers/nav_bar'
 import MenuIcon from './components/menu_icon'
-import Login from './components/login'
+import LoginPage from './containers/login_page'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { fetchSounds } from './actions/fetch_sounds'
 import { connect } from 'react-redux'
@@ -44,7 +44,7 @@ class App extends React.Component {
               render={() => this.props.user.id ?
                 <Redirect to='/'/>
                 :
-                <Login/>}/>
+                <LoginPage/>}/>
             <Route 
               path="/logout" 
                 render={() => {

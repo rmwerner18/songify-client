@@ -7,13 +7,15 @@ var Octavian = require('octavian')
 
 
 class ChordForm extends React.Component {
+    chord = this.props.chords[this.props.id]
+
     state = {
-        bass: "",
-        name: "",
-        quality: "",
-        formattedBass: "",
-        formattedName: "",
-        formattedQuality: ""
+        bass: this.chord.bass,
+        name:  this.chord.name,
+        quality:  this.chord.quality,
+        formattedBass: this.chord.formattedBass,
+        formattedName: this.chord.formattedName,
+        formattedQuality: this.chord.formattedQuality
     }
 
     changeHandler = (e) => {
@@ -157,4 +159,9 @@ class ChordForm extends React.Component {
     }
 }
 
-export default connect(null, { changeSingleChord })(ChordForm)
+const mapStateToProps = state => {
+    return {
+        chords: state.currentSong.chords
+    }
+}
+export default connect(mapStateToProps, { changeSingleChord })(ChordForm)

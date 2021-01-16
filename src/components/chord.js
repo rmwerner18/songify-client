@@ -26,17 +26,25 @@ const Chord = props => {
             </div>
         )
     }
+
+    const chordAndQuality = () => {
+        return props.chords[props.id].formattedName + props.chords[props.id].formattedQuality
+    }
+
+    const bassExists = () => {
+        return props.chords[props.id].bass.length > 0
+    }
+
+    const bass = () => {
+        return "/" + props.chords[props.id].formattedBass
+    }
+
     return (
         <>
-            {modalIsOpen ?
-            modal()
-            :
-            null
-            }
+            {modalIsOpen ? modal() : null}
             <div className="chord-box" onClick={clickHandler}>
                 <span className="chord-name">
-                    {props.chords[props.id].formattedName} {props.chords[props.id].formattedQuality} 
-                    {props.chords[props.id].bass.length > 0 ? "/" + props.chords[props.id].formattedBass : null}
+                    {chordAndQuality()} {bassExists() ? bass() : null}
                 </span>
             </div>
         </>
