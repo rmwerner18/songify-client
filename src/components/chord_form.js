@@ -1,6 +1,7 @@
 import React from 'react';
 import { changeSingleChord } from '../actions/change_single_chord'
-import { notes } from '../notes'
+import { notes, trebleNotes, bassNotes } from '../notes'
+import { chordQualityAbbreviations, chordQualityFullNames } from '../chord_qualities'
 import { connect } from 'react-redux'
 
 var Octavian = require('octavian')
@@ -66,91 +67,79 @@ class ChordForm extends React.Component {
         this.props.closeHandler()
     }
 
+    makeNameOptions = () => {
+        return notes.map((note, index) => {return (
+            <>
+                <label 
+                    id="formattedName">
+                    <span>{note}</span>
+                </label>
+                <input 
+                    type="checkbox" 
+                    checked={this.state.name === trebleNotes[index]} 
+                    onChange={this.changeHandler} 
+                    name="name" 
+                    value={trebleNotes[index]} 
+                    id={trebleNotes[index]}/>
+                <br/>
+            </>
+        )})
+    }
+
+    makeQualityOptions = () => {
+        return chordQualityAbbreviations.map((quality, index) => {return (
+            <>
+                <label 
+                    id="formattedQuality">
+                    <span>{quality}</span>
+                </label>
+                <input 
+                    type="checkbox" 
+                    checked={this.state.quality === chordQualityFullNames[index]} 
+                    onChange={this.changeHandler} 
+                    name="quality" 
+                    value={chordQualityFullNames[index]}/>
+                <br/>
+            </>
+        )})
+    }
+
+    makeBassOptions = () => {
+        return notes.map((note, index) => {return (
+            <>
+                <label 
+                    id="formattedBass">
+                    <span>{note}</span>
+                </label>
+                <input 
+                    type="checkbox" 
+                    checked={this.state.bass === bassNotes[index]}
+                    onChange={this.changeHandler} 
+                    name="bass" 
+                    value={bassNotes[index]}/>
+                <br/>
+            </>
+        )
+        })
+    }
+
+    
+
     render() {
-        console.log(this.state)
         return (
             <form onSubmit={this.submitHandler} className='chord-form'>
                 <div className="chord-form-chord">
                     <fieldset className='chord-name-selection'>
                         <legend><span>Chord Name:</span></legend>
-                        <label id="formattedName"><span>{notes[0]}</span></label>
-                        <input type="checkbox" checked={this.state.name === "A4"} onChange={this.changeHandler} name="name" value="A4" id="A4"/><br/>
-                        <label id="formattedName"><span>{notes[1]}</span></label>
-                        <input type="checkbox" checked={this.state.name === "A#4"} onChange={this.changeHandler} name="name" value="A#4" id="A#4"/><br/>
-                        <label id="formattedName"><span>{notes[2]}</span></label>
-                        <input type="checkbox" checked={this.state.name === "B4"} onChange={this.changeHandler} name="name" value="B4" id="B4"/><br/>
-                        <label id="formattedName"><span>{notes[3]}</span></label>
-                        <input type="checkbox" checked={this.state.name === 'C4'} onChange={this.changeHandler} name="name" value="C4" id="C4"/><br/>
-                        <label id="formattedName"><span>{notes[4]}</span></label>
-                        <input type="checkbox" checked={this.state.name === 'C#4'} onChange={this.changeHandler} name="name" value="C#4" id="C#4"/><br/>
-                        <label id="formattedName"><span>{notes[5]}</span></label>
-                        <input type="checkbox" checked={this.state.name === 'D4'} onChange={this.changeHandler} name="name" value="D4" id="D4"/><br/>  
-                        <label id="formattedName"><span>{notes[6]}</span></label>             
-                        <input type="checkbox" checked={this.state.name === 'D#4'} onChange={this.changeHandler} name="name" value="D#4" id="D#4"/><br/>
-                        <label id="formattedName"><span>{notes[7]}</span></label>
-                        <input type="checkbox" checked={this.state.name === 'E4'} onChange={this.changeHandler} name="name" value="E4" id="E4"/><br/>  
-                        <label id="formattedName"><span>{notes[8]}</span></label>             
-                        <input type="checkbox" checked={this.state.name === 'F4'} onChange={this.changeHandler} name="name" value="F4" id="F4"/><br/>  
-                        <label id="formattedName"><span>{notes[9]}</span></label>              
-                        <input type="checkbox" checked={this.state.name === 'F#4'} onChange={this.changeHandler} name="name" value="F#4" id="F#4"/><br/>
-                        <label id="formattedName"><span>{notes[10]}</span></label>
-                        <input type="checkbox" checked={this.state.name === 'G4'} onChange={this.changeHandler} name="name" value="G4" id="G4"/><br/>   
-                        <label id="formattedName"><span>{notes[11]}</span></label>             
-                        <input type="checkbox" checked={this.state.name === 'G#4'} onChange={this.changeHandler} name="name" value="G#4" id="G#4"/><br/>
+                        {this.makeNameOptions()}
                     </fieldset>
                     <fieldset className='chord-quality-selection'>
                         <legend><span>Chord Quality:</span></legend>
-                        <label id="formattedQuality"><span>M</span></label>
-                        <input type="checkbox" checked={this.state.quality === "major"} onChange={this.changeHandler} name="quality" value="major"/><br/>
-                        <label id="formattedQuality"><span>m</span></label>
-                        <input type="checkbox" checked={this.state.quality === "minor"} onChange={this.changeHandler} name="quality" value="minor"/><br/>
-                        <label id="formattedQuality"><span>maj7</span></label>
-                        <input type="checkbox" checked={this.state.quality === "majorSeventh"} onChange={this.changeHandler} name="quality" value="majorSeventh"/><br/>
-                        <label id="formattedQuality"><span>m7</span></label>
-                        <input type="checkbox" checked={this.state.quality === 'minorSeventh'} onChange={this.changeHandler} name="quality" value="minorSeventh"/><br/>
-                        <label id="formattedQuality"><span>7</span></label>
-                        <input type="checkbox" checked={this.state.quality === 'dominantSeventh'} onChange={this.changeHandler} name="quality" value="dominantSeventh"/><br/>
-                        <label id="formattedQuality"><span>maj6</span></label>
-                        <input type="checkbox" checked={this.state.quality === 'majorSixth'} onChange={this.changeHandler} name="quality" value="majorSixth"/><br/>  
-                        <label id="formattedQuality"><span>m6</span></label>             
-                        <input type="checkbox" checked={this.state.quality === 'minorSixth'} onChange={this.changeHandler} name="quality" value="minorSixth"/><br/>
-                        <label id="formattedQuality"><span>dim</span></label>
-                        <input type="checkbox" checked={this.state.quality === 'diminished'} onChange={this.changeHandler} name="quality" value="diminished"/><br/>
-                        <label id="formattedQuality"><span>dim7</span></label>
-                        <input type="checkbox" checked={this.state.quality === 'diminishedSeventh'} onChange={this.changeHandler} name="quality" value="diminishedSeventh"/><br/>  
-                        <label id="formattedQuality"><span>half dim</span></label>             
-                        <input type="checkbox" checked={this.state.quality === 'halfDimished'} onChange={this.changeHandler} name="quality" value="halfDimished"/><br/>  
-                        <label id="formattedQuality"><span>aug</span></label>              
-                        <input type="checkbox" checked={this.state.quality === 'augmented'} onChange={this.changeHandler} name="quality" value="augmented"/><br/>
-                        <label id="formattedQuality"><span>5</span></label>  
-                        <input type="checkbox" checked={this.state.quality === '5'} onChange={this.changeHandler} name="quality" value="5"/><br/>
+                        {this.makeQualityOptions()}
                     </fieldset>
                     <fieldset className='chord-bass-selection'>
                         <legend><span>Bass(optional):</span></legend>
-                        <label id="formattedBass"><span>{notes[0]}</span></label>
-                        <input type="checkbox" checked={this.state.bass === "A3"} onChange={this.changeHandler} name="bass" value="A3"/><br/>
-                        <label id="formattedBass"><span>{notes[1]}</span></label>
-                        <input type="checkbox" checked={this.state.bass === "A#3"} onChange={this.changeHandler} name="bass" value="A#3"/><br/>
-                        <label id="formattedBass"><span>{notes[2]}</span></label>
-                        <input type="checkbox" checked={this.state.bass === "B3"} onChange={this.changeHandler} name="bass" value="B3"/><br/>
-                        <label id="formattedBass"><span>{notes[3]}</span></label>
-                        <input type="checkbox" checked={this.state.bass === 'C3'} onChange={this.changeHandler} name="bass" value="C3"/><br/>
-                        <label id="formattedBass"><span>{notes[4]}</span></label>
-                        <input type="checkbox" checked={this.state.bass === 'C#3'} onChange={this.changeHandler} name="bass" value="C#3"/><br/>
-                        <label id="formattedBass"><span>{notes[5]}</span></label>
-                        <input type="checkbox" checked={this.state.bass === 'D3'} onChange={this.changeHandler} name="bass" value="D3"/><br/>  
-                        <label id="formattedBass"><span>{notes[6]}</span></label>             
-                        <input type="checkbox" checked={this.state.bass === 'D#3'} onChange={this.changeHandler} name="bass" value="D#3"/><br/>
-                        <label id="formattedBass"><span>{notes[7]}</span></label>
-                        <input type="checkbox" checked={this.state.bass === 'E3'} onChange={this.changeHandler} name="bass" value="E3"/><br/>  
-                        <label id="formattedBass"><span>{notes[8]}</span></label>             
-                        <input type="checkbox" checked={this.state.bass === 'F3'} onChange={this.changeHandler} name="bass" value="F3"/><br/>  
-                        <label id="formattedBass"><span>{notes[9]}</span></label>              
-                        <input type="checkbox" checked={this.state.bass === 'F#3'} onChange={this.changeHandler} name="bass" value="F#3"/><br/>
-                        <label id="formattedBass"><span>{notes[10]}</span></label>
-                        <input type="checkbox" checked={this.state.bass === 'G3'} onChange={this.changeHandler} name="bass" value="G3"/><br/>   
-                        <label id="formattedBass"><span>{notes[11]}</span></label>             
-                        <input type="checkbox" checked={this.state.bass === 'G#3'} onChange={this.changeHandler} name="bass" value="G#3"/><br/>
+                        {this.makeBassOptions()}
                     </fieldset>
                 </div>
                 <input type="submit"/>
