@@ -37,20 +37,21 @@ const Grid = props => {
             <div className="song-maker-container">
                 <ChordsContainer/>
 
-                <div className='chord-options'>
-                    <PlayButton/>
-                    <SaveButton song_id={props.song_id}/>
-                    <RandomProgButton/>
-                </div>
+            <div className='chord-options'>
+                <PlayButton/>
+                <SaveButton song_id={props.song_id}/>
+                <RandomProgButton/>
+            </div>
 
-                <div className='playback-options'>
-                    <TempoForm />
-                    <InstrumentForm/>
-                </div>
+            <div className='playback-options'>
+                <TempoForm />
+                <InstrumentForm/>
+            </div>
 
                 <BeatForm/>
                 <MelodyForm/>
             </div>
+            
         </>
     )
 }

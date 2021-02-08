@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Grid from './containers/grid'
 import SongsContainer from './containers/songs_container'
+import SongsPage from './containers/songs_page'
 import UserPage from './containers/user_page'
 import NavBar from './containers/nav_bar'
 import MenuIcon from './components/menu_icon'
@@ -38,7 +39,7 @@ class App extends React.Component {
               render={(routerProps) => <Grid song_id={routerProps.match.params.id} />}/>
             <Route 
               exact path='/songs' 
-              render={() => <SongsContainer/>}/>
+              render={() => <SongsPage/>}/>
             <Route 
               exact path='/login' 
               render={() => this.props.user.id ?

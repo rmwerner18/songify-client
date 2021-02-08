@@ -5,9 +5,7 @@ import { connect } from 'react-redux'
 const ChordsContainer = props => {
     
     const showChords = () => {
-        return props.song.chords.map((chord, index) => {
-            return <Chord id={index} key={index}/>
-        })
+        return props.song.chords.map((chord, index) => <Chord id={index} key={index}/>)
     }
 
     return (

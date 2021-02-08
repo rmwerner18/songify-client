@@ -2,6 +2,9 @@ import React from 'react'
 import { addOrRemoveBeat } from '../helper_functions.js/add_or_remove_beat'
 import { makeBeatArray } from '../helper_functions.js/make_beat_array'
 import { isOnMeasureLine } from '../helper_functions.js/is_on_measure_line'
+import { clearMelody } from '../actions/clear_melody'
+import { changeKey, changeMode } from '../actions/change_key_and_mode'
+import { connect } from 'react-redux'
 import {
     changeiBeats,
     changeiiBeats,
@@ -12,9 +15,6 @@ import {
     changeviiBeats,
     changeIBeats
 } from '../actions/change_melody'
-import { clearMelody } from '../actions/clear_melody'
-import { changeKey, changeMode } from '../actions/change_key_and_mode'
-import { connect } from 'react-redux'
 
 class MelodyForm extends React.Component {
 

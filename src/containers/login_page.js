@@ -45,10 +45,10 @@ class LoginPage extends React.Component {
         return (
             <div className='login-all'>
                 {this.state.hasAccount 
-                    ? 
-                    <LoginForm changeHandler={this.changeHandler} state={this.state}/> 
-                    :
-                    <SignupForm findUser={this.findUser} changeHandler={this.changeHandler} state={this.state}/>
+                ? 
+                <LoginForm changeHandler={this.changeHandler} state={this.state}/> 
+                :
+                <SignupForm findUser={this.findUser} changeHandler={this.changeHandler} state={this.state}/>
                 }
                 <button onClick={this.changeModeHandler}>{this.formButtonContents()}</button> 
             </div>
