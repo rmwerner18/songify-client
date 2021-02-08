@@ -33,25 +33,27 @@ const Grid = props => {
     return (
         <>
             {props.song_id ? <h1>Edit</h1> : <h1>Create a Song</h1>}
+            <div className='song-maker-page'>
+                <div className="song-maker-container">
+                    <ChordsContainer/>
+                    <BeatForm/>
+                    <MelodyForm/>
+                </div>
+                
+                <div className='song-options-container'>
+                    <div className='chord-options'>
+                        <PlayButton/>
+                        <SaveButton song_id={props.song_id}/>
+                        <RandomProgButton/>
+                    </div>
 
-            <div className="song-maker-container">
-                <ChordsContainer/>
+                    <div className='playback-options'>
+                        <TempoForm />
+                        <InstrumentForm/>
+                    </div>
+                </div>
 
-            <div className='chord-options'>
-                <PlayButton/>
-                <SaveButton song_id={props.song_id}/>
-                <RandomProgButton/>
             </div>
-
-            <div className='playback-options'>
-                <TempoForm />
-                <InstrumentForm/>
-            </div>
-
-                <BeatForm/>
-                <MelodyForm/>
-            </div>
-            
         </>
     )
 }

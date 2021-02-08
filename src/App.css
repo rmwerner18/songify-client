@@ -79,6 +79,11 @@ body {
   background-size: cover;
 }
 
+.song-maker-page {
+  display: flex;
+  flex-direction: row
+}
+
 .song-maker-container {
   background-color: #FFFDF0;
   display: grid;
@@ -86,11 +91,17 @@ body {
   box-shadow: inset 0px 0px 10px 3px rgba(0,0,0,0.5), 0 6px 20px 0 rgba(0,0,0,0.4);
   grid-template-areas:
   "chords"
-  "co"
-  "po"
+  
   "beat"
   "mel"
   "save"
+}
+
+.song-options-container {
+  display: grid;
+  grid-template-areas: 
+  "co"
+  "po"
 }
 
 .bpm-meter{
