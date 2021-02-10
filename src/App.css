@@ -1,6 +1,7 @@
 .App {
   display: grid;
   place-items: center;
+  /* grid-template-rows: 10vh 90vh; */
   height: 100vh;
   width: auto;
 }
@@ -48,7 +49,6 @@ fieldset span {
   margin-left: 5px;
   margin-top: 5px;
   margin-bottom: 3px;
-  /* background-color: black; */
   opacity: 100%;
   flex-direction: column;
   align-items: center;
@@ -79,9 +79,14 @@ body {
   background-size: cover;
 }
 
-.song-maker-page {
+.grid {
   display: flex;
   flex-direction: row
+}
+
+.grid-page {
+  display: grid;
+  place-items: center;
 }
 
 .song-maker-container {
@@ -99,6 +104,9 @@ body {
 
 .song-options-container {
   display: grid;
+  background-color: #FFFDF0;
+  border-radius: 25px;
+  box-shadow: inset 0px 0px 10px 3px rgba(0,0,0,0.5), 0 6px 20px 0 rgba(0,0,0,0.4);
   grid-template-areas: 
   "co"
   "po"
@@ -150,27 +158,11 @@ h2 {
   padding-bottom: 0px;
   height: 15px;
 }
-/* 
-input[type='checkbox'] {
-  height: 15px;
-  width: 15px;
-  background-color: #eee;
-  margin: 0px;
-  padding: 0px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-} */
 
 .checkbox-container {
   height: 15px;
   width: 15px;
   display: flex;
-  /* padding-left: 35px; */
-  /* margin-bottom: 12px;  */
-  /* cursor: pointer; */
-  /* -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; */
 }
 
 .checkbox-container input {
@@ -272,12 +264,6 @@ input[type='checkbox'] {
   background: linear-gradient(-20deg, #FFFDF0 0%, #B2854E 100%, #B2854E 100%)
 }
 
-/* .song-list-start-button span {
-  height: 85px;
-  width: 85px;
-  border-radius: 50%;
-} */
-
 .song-list-start-button:focus {
   outline: 0;
 }
@@ -349,21 +335,6 @@ input[type='checkbox'] {
   background: linear-gradient(-20deg,  #FFFDF0 0%, #B2854E 100%, #B2854E 100%)
 }
 
-/* button {
-  background: linear-gradient(-20deg, #FFFDF0 0%, #B2854E 100%, #B2854E 100%)
-} */
-
-/* 
-AF6A40
-7B8F93
-7B8F93
-311910
-311910 
-
-A5582E
-D09A7B 
-*/
-
 
 #grid-start-button:focus {
   outline:0;
@@ -373,19 +344,14 @@ button:focus {
   outline:0;
 }
 
-/* .chord-options {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin-bottom: 20px;
-} */
-
 .chord-options {
   grid-area: co;
   display: grid;
   margin: 10px;
   grid-template-areas:
-  "rand start save"
+  "start"
+  "rand"
+  "save"
 }
 
 .login-all {

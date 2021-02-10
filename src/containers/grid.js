@@ -32,8 +32,7 @@ const Grid = props => {
 
     return (
         <>
-            {props.song_id ? <h1>Edit</h1> : <h1>Create a Song</h1>}
-            <div className='song-maker-page'>
+            <div className='grid'>
                 <div className="song-maker-container">
                     <ChordsContainer/>
                     <BeatForm/>
@@ -51,8 +50,7 @@ const Grid = props => {
                         <TempoForm />
                         <InstrumentForm/>
                     </div>
-                </div>
-
+                </div>  
             </div>
         </>
     )

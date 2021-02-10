@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
-import Grid from './containers/grid'
-import SongsContainer from './containers/songs_container'
+import GridPage from './containers/grid_page'
 import SongsPage from './containers/songs_page'
 import UserPage from './containers/user_page'
 import NavBar from './containers/nav_bar'
@@ -36,7 +35,7 @@ class App extends React.Component {
               render={(routerProps) => <UserPage id={routerProps.match.params.id}/>}/>
             <Route 
               exact path='/songs/:id/edit' 
-              render={(routerProps) => <Grid song_id={routerProps.match.params.id} />}/>
+              render={(routerProps) => <GridPage song_id={routerProps.match.params.id} />}/>
             <Route 
               exact path='/songs' 
               render={() => <SongsPage/>}/>
@@ -54,7 +53,7 @@ class App extends React.Component {
                 }} />
             <Route 
               exact path='/' 
-              render={() => <Grid/>}/>
+              render={() => <GridPage/>}/>
           </BrowserRouter>
         </div>
       );
