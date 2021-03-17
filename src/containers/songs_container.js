@@ -22,9 +22,14 @@ class SongsContainer extends React.Component {
     }
 
     applySearch = (songs) => {
-        return songs.filter(song => {
-            return song.name.includes(this.props.searchInput)
-        })
+        if (this.props.searchInput) {
+            return songs.filter(song => {
+                let formattedName = song.name.toLowerCase()
+                let formattedUsername = song.user.username.toLowerCase()
+                return formattedName.includes(this.props.searchInput.toLowerCase()) || formattedUsername.includes(this.props.searchInput.toLowerCase())
+            })
+        }
+        return songs
     }
 
     filterSongs = (songs) => {

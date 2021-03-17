@@ -19,6 +19,12 @@ header {
   position: absolute;
 }
 
+.search-bar {
+  position: absolute;
+  top: 5%;
+  right: 3%;
+}
+
 fieldset {
   border-radius: 25px;
   background-color: #FFFDF0;
@@ -239,11 +245,12 @@ h2 {
 
 
 .song-box {
-  height: minmax(15vh auto);
+  height: minmax(15vh 20vh);
   width: 90%;
   display: grid;
   background-color: #FFFDF0;
   grid-template-columns: 110px auto;
+  grid-template-rows: 34% 33% 33%;
   border-radius: 25px;
   align-items: center;
   text-align: center;
@@ -281,15 +288,20 @@ h2 {
   margin-bottom: 5px;
   text-align: left;
   overflow-x: scroll;
-  height: 27px;
+  /* height: 27px; */
 }
 
 .song-options {
   grid-area: opt;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
+  height: 100%;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.like-count {
+  font: 100%;
 }
 
 .song-options button {

@@ -49,7 +49,7 @@ const Song = (props) => {
         props.likeHandler(e)
     }
 
-    const songBelongsToUser = () => props.song.user.id !== props.user.id && props.user.id
+    const songBelongsToUser = () => props.song.user.id === props.user.id && props.user.id
 
     stopLoop()
 
@@ -60,12 +60,12 @@ const Song = (props) => {
         : 
         <div className="song-box">
             <h2 className="song-title">{props.song.name}</h2>
-            <p className="song-maker">Created By: {props.song.user.username}</p>
+            <p className="song-maker">By: {props.song.user.username}</p>
             <div className='song-list-start-button-container'>
     <button className="song-list-start-button" onClick={(e) => playHandler(e, props.song)}>{props.nowPlaying.id === props.song.id ? <span>||</span> : <span>▶</span>}</button>
             </div>
             <div className='song-options'>
-                {props.user.id === props.song.user.id
+                {songBelongsToUser()
                 ?
                 <>
                     <button onClick={() => props.deleteHandler(props)}>Delete</button>
@@ -74,14 +74,9 @@ const Song = (props) => {
                     </NavLink>
                 </>
                 :
-                null
+                <button id={`like-button-${props.song.id}`} className='like-button' onClick={likeHandler}>{userLikesSong ? "Unlike" : "Like"}</button>
                 }
-                {songBelongsToUser()
-                ?
-                <button id={`like-button-${props.song.id}`} onClick={likeHandler}>{userLikesSong ? "Unlike" : "Like"}</button>       
-                :
-                null}
-                <span>likes: <span id={`like-count-${props.id}`}>{likes}</span></span>
+                <span>likes: <span id={`like-count-${props.id}`} className='like-count'>{likes}</span></span>
             </div>
         </div>
     )
