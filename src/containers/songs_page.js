@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
+import SearchBar from '../components/search_bar'
 import SongsContainer from './songs_container'
 
-const SongsPage = props => {
+const SongsPage = () => {
+    let [searchInput, setSearchInput] = useState('')
+
+    const handleSearch = (e) => {
+        setSearchInput(e.target.value)
+    }
+
     return (
         <div className='songs-page'>
-            <SongsContainer/>
+            <SearchBar searchInput={searchInput} handleSearch={handleSearch}/>
+            <SongsContainer searchInput={searchInput}/>
         </div>
     )
 }

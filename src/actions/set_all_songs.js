@@ -1,4 +1,4 @@
-const setAllSongs = (songs) => {
+export const setAllSongs = (songs) => {
     return {
         type: 'SET_ALL_SONGS',
         songs: songs

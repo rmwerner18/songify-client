@@ -8,7 +8,7 @@ import { hideNavbar } from '../actions/hide_navbar'
 class SongsContainer extends React.Component {
 
     renderSongs = (songs = this.props.songs) => {
-        songs = this.filterSongs(songs)
+        songs = this.applySearch(this.filterSongs(songs))
         return songs.map(song => {
             return (<Song 
                 id={song.id}
@@ -18,6 +18,12 @@ class SongsContainer extends React.Component {
                 deleteHandler={this.deleteHandler}
                 likeHandler={this.likeHandler}
             />)
+        })
+    }
+
+    applySearch = (songs) => {
+        return songs.filter(song => {
+            return song.name.includes(this.props.searchInput)
         })
     }
 
