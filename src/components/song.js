@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import DeleteAndEditButtons from './delete_and_edit_buttons'
 import * as Tone from 'tone'
 import { setNumOfEigthNotes } from '../helper_functions.js/set_num_of_eigth_notes'
 import { stopLoop } from '../helper_functions.js/stop_loop'
@@ -61,23 +61,21 @@ const Song = (props) => {
         <div className="song-box">
             <h2 className="song-title">{props.song.name}</h2>
             <p className="song-maker">By: {props.song.user.username}</p>
+            
             <div className='song-list-start-button-container'>
-    <button className="song-list-start-button" onClick={(e) => playHandler(e, props.song)}>{props.nowPlaying.id === props.song.id ? <span>||</span> : <span>▶</span>}</button>
+                <button className="song-list-start-button" onClick={(e) => playHandler(e, props.song)}>{props.nowPlaying.id === props.song.id ? <span>||</span> : <span>▶</span>}</button>
             </div>
+
             <div className='song-options'>
-                {songBelongsToUser()
-                ?
-                <>
-                    <button onClick={() => props.deleteHandler(props)}>Delete</button>
-                    <NavLink to={`/songs/${props.id}/edit`}>
-                        <button onClick={stopLoop}>Edit</button>
-                    </NavLink>
-                </>
+                {songBelongsToUser() 
+                ? 
+                <DeleteAndEditButtons id={props.id} deleteHandler={props.deleteHandler}/> 
                 :
                 <button id={`like-button-${props.song.id}`} className='like-button' onClick={likeHandler}>{userLikesSong ? "Unlike" : "Like"}</button>
                 }
                 <span>likes: <span id={`like-count-${props.id}`} className='like-count'>{likes}</span></span>
             </div>
+
         </div>
     )
 

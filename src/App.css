@@ -294,14 +294,10 @@ h2 {
 .song-options {
   grid-area: opt;
   display: flex;
-  /* align-items: center; */
+  align-items: center;
   height: 100%;
   margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-.like-count {
-  font: 100%;
+  margin-bottom: 10px;
 }
 
 .song-options button {
