@@ -99,7 +99,7 @@ class SongsContainer extends React.Component {
                 user_id: this.props.user.id
             })
         }).then(resp => resp.json())
-        .then(songs => this.props.fetchSongs())
+        .then(this.props.fetchSongs)
     }
 
     likeHandler = (e) => {
