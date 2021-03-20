@@ -67,12 +67,8 @@ const Song = (props) => {
             </div>
 
             <div className='song-options'>
-                {songBelongsToUser() 
-                ? 
-                <DeleteAndEditButtons id={props.id} deleteHandler={props.deleteHandler}/> 
-                :
-                <button id={`like-button-${props.song.id}`} className='like-button' onClick={likeHandler}>{userLikesSong ? "Unlike" : "Like"}</button>
-                }
+                {songBelongsToUser() ? <DeleteAndEditButtons id={props.id} deleteHandler={props.deleteHandler}/> : null}
+                {!songBelongsToUser() && props.user.id ? <button id={`like-button-${props.song.id}`} className='like-button' onClick={likeHandler}>{userLikesSong ? "Unlike" : "Like"}</button> : null}
                 <span>likes: <span id={`like-count-${props.id}`} className='like-count'>{likes}</span></span>
             </div>
 

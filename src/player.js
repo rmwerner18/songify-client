@@ -2,7 +2,6 @@ import * as Tone from 'tone'
 import modes from './modes'
 
 const player = (index, time, props) => {
-    console.log(props.hhBeats)
     let chords = props.chords.map(chord => chord.freqs)
     Tone.Transport.bpm.value = parseInt(props.bpm)
     let instrument
