@@ -1,4 +1,8 @@
-import * as Tone from 'tone'
+import * as Tone from 'tone';
+import Snare from "./sounds/snare.wav" 
+import Kick from "./sounds/kick.wav" 
+import Hh from "./sounds/hh.wav" 
+
 
 const setSounds = (sounds) => {
     return {
@@ -8,9 +12,9 @@ const setSounds = (sounds) => {
 }
 
 export const fetchSounds = () => dispatch => {
-    const snare = new Tone.Player("https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/snare.wav").toDestination();
-    const kick = new Tone.Player("https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/kick.wav").toDestination();
-    const hh = new Tone.Player("https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/hihat-close.wav").toDestination();
+    const snare = new Tone.Player(Snare).toDestination();
+    const kick = new Tone.Player(Kick).toDestination();
+    const hh = new Tone.Player(Hh).toDestination();
     const synth = new Tone.PolySynth().toDestination();
     const piano = new Tone.Sampler({
         urls: {
