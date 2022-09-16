@@ -153,7 +153,7 @@ body:before {
 }
 
 .song-options-container {
-  max-width: 196px;
+  width: 196px;
   display: grid;
   background-color: #FFFDF0;
   border-radius: 15px;
@@ -662,5 +662,21 @@ how to remove the virtical space around the range input in IE*/
   input[type=range] {
     margin: 0;
     /*Edge starts the margin from the thumb, not the track as other browsers do*/
+  }
+}
+
+@media (max-width: 752px) {
+  .grid {
+    flex-direction: column;
+  }
+
+  .chord-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .song-options-container {
+    width: 555px;
   }
 }
