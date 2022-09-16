@@ -18,6 +18,28 @@ header {
 
 button {
   cursor: pointer;
+  border: 1px solid #888;
+  background-color: #E0CFB8;
+  padding: 2px;
+  border-radius: 4px;
+  height: 21px;
+  padding: 0 5px;
+  font-family: "Courier New";
+  font-weight: bold;
+}
+
+select {
+  border: none;
+  cursor: pointer;
+  background-color: #E0CFB8;
+  padding: 2px;
+  border-radius: 4px;
+  font-family: "Courier New";
+  font-weight: bold;
+}
+
+select:focus {
+  outline: none;
 }
 
 .navbar-with-image {
@@ -107,8 +129,9 @@ body {
 
 .song-maker-container {
   background-color: #FFFDF0;
+  padding: 15px 10px;
   display: grid;
-  border-radius: 25px;
+  border-radius: 15px;
   /* box-shadow: inset 0px 0px 10px 3px rgba(0,0,0,0.5), 0 6px 20px 0 rgba(0,0,0,0.4); */
   grid-template-areas:
   "chords"
@@ -122,7 +145,7 @@ body {
   max-width: 196px;
   display: grid;
   background-color: #FFFDF0;
-  border-radius: 25px;
+  border-radius: 15px;
   border-left: 1px solid #aaa;
   /* box-shadow: inset 0px 0px 10px 3px rgba(0,0,0,0.5), 0 6px 20px 0 rgba(0,0,0,0.4); */
   grid-template-areas: 
@@ -192,8 +215,7 @@ h2 {
 }
 
 .checkmark {
-  border-style: solid;
-  border-width: thin;
+  border: 1px solid #888;
   height: 15px;
   width: 15px;
   background-color: #DAC6AA;
@@ -279,6 +301,7 @@ h2 {
   width: 85px;
   border-radius: 50%;
   font-size: x-large;
+  border: 1px solid;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15), 0 2px 10px 0 rgba(0, 0, 0, 0.1);
   background: linear-gradient(-20deg, #FFFDF0 0%, #B2854E 100%, #B2854E 100%);
   cursor: pointer;
@@ -354,6 +377,7 @@ h2 {
   width: 85px;
   border-radius: 50%;
   font-size: x-large;
+  border: 1px solid;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15), 0 2px 10px 0 rgba(0, 0, 0, 0.1);
   background: linear-gradient(-20deg,  #FFFDF0 0%, #B2854E 100%, #B2854E 100%);
   cursor: pointer;
@@ -479,7 +503,7 @@ button:focus {
   width: 100px;
   border: 0.5px solid #aaa;
   background-color: #DAC6AA;
-  border-radius: 25px;
+  border-radius: 15px;
   align-items: center;
   text-align: center;
   box-shadow: 0 6px 4px -4px rgba(0, 0, 0, 0.2), 0 6px 20px -20px rgba(0, 0, 0, 0.19);
