@@ -674,9 +674,12 @@ how to remove the virtical space around the range input in IE*/
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+
   }
 
   .song-options-container {
     width: 555px;
+    border-left: none;
+    border-top: 1px solid #aaa;
   }
 }
