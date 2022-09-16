@@ -1,4 +1,5 @@
 .App {
+  position: relative;
   display: grid;
   place-items: center;
   /* grid-template-rows: 10vh 90vh; */
@@ -17,6 +18,8 @@ header {
 
 .navbar-with-image {
   position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .search-bar {
@@ -465,12 +468,13 @@ button:focus {
   border-radius: 25px;
   align-items: center;
   text-align: center;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+  box-shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.2), 0 6px 20px -20px rgba(0, 0, 0, 0.19)
 }
 
 .chord-box:hover {
   height: 99px;
   width: 99px;  
+  margin: 0 0.5px;
   box-shadow: none;
 }
 
