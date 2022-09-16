@@ -16,10 +16,15 @@ header {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2)
 }
 
+button {
+  cursor: pointer;
+}
+
 .navbar-with-image {
   position: absolute;
   top: 0;
   left: 0;
+
 }
 
 .search-bar {
@@ -62,6 +67,7 @@ fieldset span {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .menu-icon-bar {
@@ -77,6 +83,7 @@ fieldset span {
 .navbar {
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 
 
@@ -102,7 +109,7 @@ body {
   background-color: #FFFDF0;
   display: grid;
   border-radius: 25px;
-  box-shadow: inset 0px 0px 10px 3px rgba(0,0,0,0.5), 0 6px 20px 0 rgba(0,0,0,0.4);
+  /* box-shadow: inset 0px 0px 10px 3px rgba(0,0,0,0.5), 0 6px 20px 0 rgba(0,0,0,0.4); */
   grid-template-areas:
   "chords"
   
@@ -112,10 +119,12 @@ body {
 }
 
 .song-options-container {
+  max-width: 196px;
   display: grid;
   background-color: #FFFDF0;
   border-radius: 25px;
-  box-shadow: inset 0px 0px 10px 3px rgba(0,0,0,0.5), 0 6px 20px 0 rgba(0,0,0,0.4);
+  border-left: 1px solid #aaa;
+  /* box-shadow: inset 0px 0px 10px 3px rgba(0,0,0,0.5), 0 6px 20px 0 rgba(0,0,0,0.4); */
   grid-template-areas: 
   "co"
   "po"
@@ -271,7 +280,8 @@ h2 {
   border-radius: 50%;
   font-size: x-large;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15), 0 2px 10px 0 rgba(0, 0, 0, 0.1);
-  background: linear-gradient(-20deg, #FFFDF0 0%, #B2854E 100%, #B2854E 100%)
+  background: linear-gradient(-20deg, #FFFDF0 0%, #B2854E 100%, #B2854E 100%);
+  cursor: pointer;
 }
 
 .song-list-start-button:focus {
@@ -317,11 +327,13 @@ h2 {
 
 .random-chords-button {
   grid-area: rand;
+  border: 1px solid;
   height: 85px;
   width: 85px;
   border-radius: 50%;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15), 0 2px 10px 0 rgba(0, 0, 0, 0.1);
-  background: linear-gradient(-20deg,  #FFFDF0 0%, #B2854E 100%, #B2854E 100%)
+  background: linear-gradient(-20deg,  #FFFDF0 0%, #B2854E 100%, #B2854E 100%);
+  cursor: pointer;
 }
 
 .grid-start-button-container {
@@ -343,7 +355,8 @@ h2 {
   border-radius: 50%;
   font-size: x-large;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15), 0 2px 10px 0 rgba(0, 0, 0, 0.1);
-  background: linear-gradient(-20deg,  #FFFDF0 0%, #B2854E 100%, #B2854E 100%)
+  background: linear-gradient(-20deg,  #FFFDF0 0%, #B2854E 100%, #B2854E 100%);
+  cursor: pointer;
 }
 
 
@@ -453,22 +466,24 @@ button:focus {
 .save-button {
   height: 85px;
   width: 85px;
+  border: 1px solid;
   border-radius: 50%;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15), 0 2px 10px 0 rgba(0, 0, 0, 0.1);
-  background: linear-gradient(-20deg,  #FFFDF0 0%, #B2854E 100%, #B2854E 100%)
+  background: linear-gradient(-20deg,  #FFFDF0 0%, #B2854E 100%, #B2854E 100%);
+  cursor: pointer;
 }
 
 .chord-box {
   display: flex;
   height: 100px;
   width: 100px;
-  border-style: solid;
-  border-width: thin;
+  border: 0.5px solid #aaa;
   background-color: #DAC6AA;
   border-radius: 25px;
   align-items: center;
   text-align: center;
-  box-shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.2), 0 6px 20px -20px rgba(0, 0, 0, 0.19)
+  box-shadow: 0 6px 4px -4px rgba(0, 0, 0, 0.2), 0 6px 20px -20px rgba(0, 0, 0, 0.19);
+  cursor: pointer;
 }
 
 .chord-box:hover {
