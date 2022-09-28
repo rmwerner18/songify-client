@@ -517,14 +517,14 @@ button:focus {
   border-radius: 15px;
   align-items: center;
   text-align: center;
-  box-shadow: 0 6px 4px -4px rgba(0, 0, 0, 0.2), 0 6px 20px -20px rgba(0, 0, 0, 0.19);
+  box-shadow: 1px 1px 2px 0.5px rgba(70, 70, 70, 0.2);
   cursor: pointer;
 }
 
 .chord-box:hover {
-  height: 99px;
-  width: 99px;  
-  margin: 0 0.5px;
+  height: 99.7px;
+  width: 99.7px;  
+  margin: 0 0.3px;
   box-shadow: none;
 }
 
