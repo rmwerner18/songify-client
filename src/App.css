@@ -517,7 +517,7 @@ button:focus {
   border-radius: 15px;
   align-items: center;
   text-align: center;
-  box-shadow: 1px 1px 2px 0.5px rgba(70, 70, 70, 0.2);
+  box-shadow: 1px 1px 5px 0.5px rgba(70, 70, 70, 0.2);
   cursor: pointer;
 }
 
@@ -525,7 +525,7 @@ button:focus {
   height: 99.7px;
   width: 99.7px;  
   margin: 0 0.3px;
-  box-shadow: none;
+  box-shadow: 1px 1px 2px 0.5px rgba(70, 70, 70, 0.2);
 }
 
 .chord-name {
