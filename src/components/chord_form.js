@@ -70,17 +70,19 @@ class ChordForm extends React.Component {
     makeNameOptions = () => {
         return notes.map((note, index) => {return (
             <>
-                <label 
-                    id="formattedName">
-                    <span>{note}</span>
-                </label>
-                <input 
-                    type="checkbox" 
-                    checked={this.state.name === trebleNotes[index]} 
-                    onChange={this.changeHandler} 
-                    name="name" 
-                    value={trebleNotes[index]} 
-                    id={trebleNotes[index]}/>
+                <div class="chord-checkbox-container">
+                    <label 
+                        id="formattedName">
+                        <span>{note}</span>
+                    </label>
+                    <input 
+                        type="checkbox" 
+                        checked={this.state.name === trebleNotes[index]} 
+                        onChange={this.changeHandler} 
+                        name="name" 
+                        value={trebleNotes[index]} 
+                        id={trebleNotes[index]}/>
+                </div>
                 <br/>
             </>
         )})

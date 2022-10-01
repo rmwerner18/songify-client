@@ -454,6 +454,25 @@ button:focus {
   margin-bottom: 15px;
 }
 
+.chord-checkbox-container {
+  display: flex;
+  margin-top: 0;
+  align-items: center;
+  justify-content: center;
+  background-color: #B2854E;
+  border-radius: 5px;
+  
+}
+
+.chord-checkbox-container input {
+  display: none;
+  margin-top: 0;
+}
+
+.chord-checkbox-container span {
+  background: transparent;
+  color: #fff;
+}
 
 
 .chord-form input[type='submit'] {
