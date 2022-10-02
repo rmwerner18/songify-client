@@ -70,11 +70,10 @@ class ChordForm extends React.Component {
     makeNameOptions = () => {
         return notes.map((note, index) => {return (
             <>
-                <div class="chord-checkbox-container">
+                <div className="chord-checkbox-container">
                     <label 
                         id="formattedName">
-                        <span>{note}</span>
-                    </label>
+                    </label>        
                     <input 
                         type="checkbox" 
                         checked={this.state.name === trebleNotes[index]} 
@@ -82,8 +81,10 @@ class ChordForm extends React.Component {
                         name="name" 
                         value={trebleNotes[index]} 
                         id={trebleNotes[index]}/>
+                    <div className='checkmark'>
+                        <span>{note}</span>
+                    </div>
                 </div>
-                <br/>
             </>
         )})
     }
@@ -131,20 +132,20 @@ class ChordForm extends React.Component {
         return (
             <form onSubmit={this.submitHandler} className='chord-form'>
                 <div className="chord-form-chord">
-                    <fieldset className='chord-name-selection'>
+                    <fieldset className='chord-selection'>
                         <legend><span>Chord Name:</span></legend>
                         {this.makeNameOptions()}
                     </fieldset>
-                    <fieldset className='chord-quality-selection'>
+                    <fieldset className='chord-selection'>
                         <legend><span>Chord Quality:</span></legend>
                         {this.makeQualityOptions()}
                     </fieldset>
-                    <fieldset className='chord-bass-selection'>
+                    <fieldset className='chord-selection'>
                         <legend><span>Bass(optional):</span></legend>
                         {this.makeBassOptions()}
                     </fieldset>
                 </div>
-                <input type="submit"/>
+                <input type="submit" className='modal-button button'/>
             </form>
         )
     }

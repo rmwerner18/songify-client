@@ -80,7 +80,7 @@ const BeatForm = (props) => {
             </div>
             <div className='beat-options'>
                 <BeatSelect changeHandler={e => changeHandler(e)} />
-                <button onClick={props.clearDrums}>Clear Drums</button>
+                <button className='button' onClick={props.clearDrums}>Clear Drums</button>
             </div>
         </div>
     )

@@ -194,7 +194,7 @@ class MelodyForm extends React.Component {
                     <select onChange={e => this.props.changeMode(e.target.value)}>
                         {this.modeOptions()}
                     </select>
-                    <button onClick={this.props.clearMelody}>Clear Melody</button>
+                    <button className='button'onClick={this.props.clearMelody}>Clear Melody</button>
                 </div>
             </div>
         )

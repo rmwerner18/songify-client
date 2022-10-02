@@ -16,7 +16,7 @@ header {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2)
 }
 
-button {
+.button {
   cursor: pointer;
   border: 1px solid #888;
   background-color: #E0CFB8;
@@ -26,6 +26,13 @@ button {
   padding: 0 5px;
   font-family: "Courier New";
   font-weight: bold;
+}
+
+.modal-button {
+  background-color: #B2854E;
+  height: 40px;
+  width: 100px;
+  color: #fff;
 }
 
 select {
@@ -65,15 +72,7 @@ fieldset span {
   border-radius: 5px;
   margin-top: 3px;
 }
-.chord-name-selection {
-  width: 200px;
-}
-
-.chord-quality-selection {
-  width: 200px;
-}
-
-.chord-bass-selection {
+.chord-selection {
   width: 200px;
 }
 
@@ -238,6 +237,49 @@ h2 {
 
 .checkbox-container input:checked ~ .checkmark {
   background-color: #36241A;
+}
+
+.chord-checkbox-container {
+  display: flex;
+  margin: 5px 0;
+  height: 20px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: #B2854E;
+  border-radius: 5px;
+}
+
+.chord-checkbox-container input {
+  margin: 0 0;
+  opacity: 0;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+}
+
+.chord-checkbox-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.chord-checkbox-container input:checked ~ .checkmark {
+  margin: 0 0;
+  background-color: #36241A;
+}
+
+.chord-checkbox-container span {
+  background: transparent;
+  color: #fff;
+}
+
+.chord-checkbox-container .checkmark {
+  height: 100%;
+  width: 100%;
+  background-color: #B2854E;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .measure-line {
@@ -452,26 +494,6 @@ button:focus {
   font-size: x-large;
   font-family:  "Courier New";
   margin-bottom: 15px;
-}
-
-.chord-checkbox-container {
-  display: flex;
-  margin-top: 0;
-  align-items: center;
-  justify-content: center;
-  background-color: #B2854E;
-  border-radius: 5px;
-  
-}
-
-.chord-checkbox-container input {
-  display: none;
-  margin-top: 0;
-}
-
-.chord-checkbox-container span {
-  background: transparent;
-  color: #fff;
 }
 
 
