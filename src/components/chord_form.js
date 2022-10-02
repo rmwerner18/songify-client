@@ -22,7 +22,7 @@ class ChordForm extends React.Component {
     changeHandler = (e) => {
         this.setState({
             [e.target.name]: e.target.value,
-            [e.target.previousSibling.id]: e.target.previousSibling.innerText
+            [e.target.parentNode.id]: e.target.parentNode.innerText
         })
     }
 
@@ -70,10 +70,7 @@ class ChordForm extends React.Component {
     makeNameOptions = () => {
         return notes.map((note, index) => {return (
             <>
-                <div className="chord-checkbox-container">
-                    <label 
-                        id="formattedName">
-                    </label>        
+                <label id="formattedName" className="chord-checkbox-container">
                     <input 
                         type="checkbox" 
                         checked={this.state.name === trebleNotes[index]} 
@@ -84,7 +81,7 @@ class ChordForm extends React.Component {
                     <div className='checkmark'>
                         <span>{note}</span>
                     </div>
-                </div>
+                </label>        
             </>
         )})
     }
@@ -92,17 +89,17 @@ class ChordForm extends React.Component {
     makeQualityOptions = () => {
         return chordQualityAbbreviations.map((quality, index) => {return (
             <>
-                <label 
-                    id="formattedQuality">
-                    <span>{quality}</span>
+                <label id="formattedQuality" className="chord-checkbox-container">
+                    <input 
+                        type="checkbox" 
+                        checked={this.state.quality === chordQualityFullNames[index]} 
+                        onChange={this.changeHandler} 
+                        name="quality" 
+                        value={chordQualityFullNames[index]}/>
+                    <div className='checkmark'>
+                        <span>{quality}</span>
+                    </div>
                 </label>
-                <input 
-                    type="checkbox" 
-                    checked={this.state.quality === chordQualityFullNames[index]} 
-                    onChange={this.changeHandler} 
-                    name="quality" 
-                    value={chordQualityFullNames[index]}/>
-                <br/>
             </>
         )})
     }
@@ -110,17 +107,17 @@ class ChordForm extends React.Component {
     makeBassOptions = () => {
         return notes.map((note, index) => {return (
             <>
-                <label 
-                    id="formattedBass">
-                    <span>{note}</span>
+                <label id="formattedBass" className="chord-checkbox-container">
+                    <input 
+                        type="checkbox" 
+                        checked={this.state.bass === bassNotes[index]}
+                        onChange={this.changeHandler} 
+                        name="bass" 
+                        value={bassNotes[index]}/>
+                    <div className='checkmark'>
+                        <span>{note}</span>
+                    </div>
                 </label>
-                <input 
-                    type="checkbox" 
-                    checked={this.state.bass === bassNotes[index]}
-                    onChange={this.changeHandler} 
-                    name="bass" 
-                    value={bassNotes[index]}/>
-                <br/>
             </>
         )
         })
