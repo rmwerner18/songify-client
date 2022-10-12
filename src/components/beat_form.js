@@ -43,26 +43,32 @@ const BeatForm = (props) => {
 
     const makeHHRows = () => {
         return makeBeatArray().map((n, index) => {return (
-        <label className={`checkbox-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
-            <input key={index} type="checkbox" checked={props.hhBeats.includes(n)} name="hhBeats" id={n} onChange={(e) => changeHandler(e, props.hhBeats)}/>
-            <div className='checkmark'></div>
-        </label>
+        <div className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
+            <label className='checkbox-container'>
+                <input key={index} type="checkbox" checked={props.hhBeats.includes(n)} name="hhBeats" id={n} onChange={(e) => changeHandler(e, props.hhBeats)}/>
+                <div className='checkmark'></div>
+            </label>
+        </div>
     )})}
 
     const makeSnareRows = () => {
         return makeBeatArray().map((n, index) => {return (
-        <label className={`checkbox-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
-            <input key={index} type="checkbox" checked={props.snareBeats.includes(n)} name="snareBeats" id={n} onChange={(e) => changeHandler(e, props.snareBeats)}/>
-            <div className='checkmark'></div>
-        </label>
+        <div className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
+            <label className='checkbox-container'>
+                <input key={index} type="checkbox" checked={props.snareBeats.includes(n)} name="snareBeats" id={n} onChange={(e) => changeHandler(e, props.snareBeats)}/>
+                <div className='checkmark'></div>
+            </label>
+        </div>
     )})}
 
     const makeKickRows = () => {
         return makeBeatArray().map((n, index) => {return (
-        <label className={`checkbox-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
-            <input key={index} type="checkbox" checked={props.kickBeats.includes(n)} name="kickBeats" id={n} onChange={(e) => changeHandler(e, props.kickBeats)}/>
-            <div className='checkmark'></div>
-        </label>
+        <div className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
+            <label className='checkbox-container'>
+                <input key={index} type="checkbox" checked={props.kickBeats.includes(n)} name="kickBeats" id={n} onChange={(e) => changeHandler(e, props.kickBeats)}/>
+                <div className='checkmark'></div>
+            </label>
+        </div>
     )})}
     
     return(

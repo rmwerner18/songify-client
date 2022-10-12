@@ -1,8 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
 .App {
   position: relative;
   display: grid;
   place-items: center;
-  /* grid-template-rows: 10vh 90vh; */
   height: 100vh;
   width: auto;
 }
@@ -10,9 +13,11 @@
 
 :root {
   --spotify-green: #1ED760;
+  --dark-green: #056952;
   --dark-background: #121212;
   --header-background: #1A1A1A;
   --card-background: #181818;
+  --controls: #B3B3B3;
 }
 
 /* spotify green 1ED760 */
@@ -25,10 +30,8 @@
 header {
   background-color: darkgray;
   width: 100%;
-  margin: 0px;
-  padding: 0px;
   height: 100%;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2)
+  /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2); */
 }
 
 .button {
@@ -64,12 +67,12 @@ select:focus {
   outline: none;
 }
 
-.navbar-with-image {
+/* .navbar-with-image {
   position: absolute;
   top: 0;
   left: 0;
 
-}
+} */
 
 .search-bar {
   position: absolute;
@@ -87,6 +90,7 @@ fieldset span {
   border-radius: 5px;
   margin-top: 3px;
 }
+
 .chord-selection {
   width: 200px;
 }
@@ -96,9 +100,7 @@ fieldset span {
   height: 50px;
   width: 50px;
   border-radius: 12px;
-  margin-left: 5px;
-  margin-top: 5px;
-  margin-bottom: 3px;
+  margin: 5px 3px 5px 0;
   opacity: 100%;
   flex-direction: column;
   align-items: center;
@@ -109,7 +111,7 @@ fieldset span {
 .menu-icon-bar {
   width: 75%;
   height: 10px;
-  background-color:#FFFDF0;
+  background-color: var(--controls);
   opacity: 100%;
   z-index: 1;
   margin: 2px;
@@ -124,14 +126,15 @@ fieldset span {
 
 
 body {
-  background-image: url("https://3.bp.blogspot.com/-Kj83IXBvWEE/VWNsUP6KYeI/AAAAAAAAABY/IbVEjp3BuOE/s1600/IMG_0278.JPG");
+  /* background-image: url("https://3.bp.blogspot.com/-Kj83IXBvWEE/VWNsUP6KYeI/AAAAAAAAABY/IbVEjp3BuOE/s1600/IMG_0278.JPG"); */
+  background-color: var(--dark-background);
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
 
-body:before {
+/* body:before {
   content: '';
   position: absolute;
   top: 0;
@@ -140,7 +143,7 @@ body:before {
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
   z-index: -1;
-}
+} */
 
 .grid {
   display: flex;
@@ -153,10 +156,11 @@ body:before {
 }
 
 .song-maker-container {
-  background-color: #FFFDF0;
+  background-color: var(--dark-background);
   padding: 15px 10px;
   display: grid;
   border-radius: 15px;
+  border: 1px solid #eee;
   /* box-shadow: inset 0px 0px 10px 3px rgba(0,0,0,0.5), 0 6px 20px 0 rgba(0,0,0,0.4); */
   grid-template-areas:
   "chords"
@@ -169,17 +173,17 @@ body:before {
 .song-options-container {
   width: 196px;
   display: grid;
-  background-color: #FFFDF0;
+  background-color: var(--dark-background);
   border-radius: 15px;
-  border-left: 1px solid #aaa;
+  /* border-left: 1px solid #aaa; */
   /* box-shadow: inset 0px 0px 10px 3px rgba(0,0,0,0.5), 0 6px 20px 0 rgba(0,0,0,0.4); */
   grid-template-areas: 
   "co"
   "po"
 }
 
-.bpm-meter{
-  color: black;
+.bpm-meter {
+  color: #000;
 }
 
 .songs-page .songs-container {
@@ -207,7 +211,6 @@ span, p {
 
 h1 {
   color: white;
-  text-shadow:  2px 2px #2b2020;
   font-family: "Courier New";
 }
 
@@ -218,40 +221,40 @@ h2 {
 .checkbox-row {
   display: flex;
   flex-direction: row;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  padding-top: 0px;
-  padding-bottom: 0px;
+  margin: 1px;
   height: 15px;
+}
+
+.checkbox-meta-container {
+  margin: 1px;
 }
 
 .checkbox-container {
   height: 15px;
   width: 15px;
-  display: flex;
 }
 
 .checkbox-container input {
   display: none;
   opacity: 0;
-  cursor: pointer;
   height: 0;
   width: 0;
 }
 
 .checkmark {
-  border: 1px solid #888;
   height: 15px;
   width: 15px;
-  background-color: #DAC6AA;
+  background-color: #1d1d1d;
+  border-radius: 3px;
 }
 
 .checkbox-container:hover input ~ .checkmark {
   background-color: #ccc;
+  cursor: pointer;
 }
 
 .checkbox-container input:checked ~ .checkmark {
-  background-color: #36241A;
+  background-color: var(--spotify-green);
 }
 
 .chord-checkbox-container {
@@ -279,7 +282,7 @@ h2 {
 
 .chord-checkbox-container input:checked ~ .checkmark {
   margin: 0 0;
-  background-color: #36241A;
+  background-color: var(--spotify-green);
 }
 
 .chord-checkbox-container .checkmark span {
@@ -316,6 +319,8 @@ h2 {
 }
 
 .beat-container {
+  display: flex;
+  flex-direction: column;
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 20px;
@@ -339,9 +344,9 @@ h2 {
 }
 
 .melody-container {
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 3px;
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
 
@@ -388,8 +393,7 @@ h2 {
 
 .song-title {
   grid-area: title;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin: 5px 0;
   text-align: left;
   overflow-x: scroll;
   /* height: 27px; */
@@ -400,8 +404,7 @@ h2 {
   display: flex;
   align-items: center;
   height: 100%;
-  margin-top: 5px;
-  margin-bottom: 10px;
+  margin: 5px 10px 0;
 }
 
 .song-options button {
@@ -462,12 +465,15 @@ button:focus {
 
 .chord-options {
   grid-area: co;
-  display: grid;
+  display: flex;
+  flex-direction: column;
+
+  /* display: grid;
   margin: 10px;
   grid-template-areas:
   "start"
   "rand"
-  "save"
+  "save" */
 }
 
 .login-all {
@@ -480,8 +486,7 @@ button:focus {
 
 .login-all button {
   width: 50%;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
 }
 
 .login-all span {
@@ -526,8 +531,7 @@ button:focus {
 
 .song-maker {
   grid-area: usr;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin: 5px 0;
   text-align: left;
 }
 
@@ -568,20 +572,22 @@ button:focus {
   display: flex;
   height: 100px;
   width: 100px;
-  border: 0.5px solid #aaa;
-  background-color: #DAC6AA;
+  margin: 0 2px;
+  /* border: 0.5px solid #aaa; */
+  background-color: var(--dark-green);
+  color: #fff;
   border-radius: 15px;
   align-items: center;
   text-align: center;
-  box-shadow: 1px 1px 5px 0.5px rgba(70, 70, 70, 0.2);
+  /* box-shadow: 1px 1px 5px 0.5px rgba(70, 70, 70, 0.2); */
   cursor: pointer;
 }
 
 .chord-box:hover {
-  height: 99.7px;
-  width: 99.7px;  
-  margin: 0 0.3px;
-  box-shadow: 1px 1px 2px 0.5px rgba(70, 70, 70, 0.2);
+  height: 99px;
+  width: 99px;  
+  margin: 0 2.5px;
+  /* box-shadow: 1px 1px 2px 0.5px rgba(70, 70, 70, 0.2); */
 }
 
 .chord-name {
@@ -590,6 +596,8 @@ button:focus {
   flex-wrap: wrap;
   flex-flow: column wrap;
 }
+
+/* ################################################################################# */
 
 .modal {
   position: fixed; /* Stay in place */
@@ -627,6 +635,8 @@ button:focus {
   text-decoration: none;
   cursor: pointer;
 }
+
+/* ################################################################################ */
 
 
 

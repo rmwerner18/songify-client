@@ -3,7 +3,8 @@ export const navbarReducer = (state = false, action) => {
         case 'TOGGLE_NAVBAR':
             return !state
         case 'HIDE_NAVBAR':
-            return false
+            // edit this later
+            return true
         default:
             return state
     }
