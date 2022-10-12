@@ -7,6 +7,21 @@
   width: auto;
 }
 
+
+:root {
+  --spotify-green: #1ED760;
+  --dark-background: #121212;
+  --header-background: #1A1A1A;
+  --card-background: #181818;
+}
+
+/* spotify green 1ED760 */
+/* spotify light charcoal B3B3B3 */
+/* spotify charcoal 121212 */
+/* spotify text 595959 */
+/* spotify selection text bg 333333 */
+/* spotify controls B3B3B3 */
+
 header {
   background-color: darkgray;
   width: 100%;
