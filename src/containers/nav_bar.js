@@ -2,33 +2,52 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 const link = {
-  width: '100px',
-  padding: '12px',
-  margin: '3px 6px 3px',
-  background: '#FFFDF0',
-  'font-family': "Courier New",
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  height: '50px',
+  padding: '0 30px',
+  // margin: '3px 6px 3px',
+  background: 'transparent',
+  'font-family': 'Courier New',
   textDecoration: 'none',
   borderRadius: '10px',
-  color: 'black',
+  color: '#595959',
   fontWeight: '900'
 }
+
+const createLink = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  height: '50px',
+  padding: '0 30px',
+  // margin: '3px 6px 3px',
+  background: '#1ED760',
+  'font-family': 'Courier New',
+  textDecoration: 'none',
+  borderRadius: '10px',
+  color: '#595959',
+  fontWeight: '900'
+}
+
   
 const NavBar = (props) =>
 <div className='navbar'> 
   <NavLink
     to="/"
     exact
-    style={link}
+    style={createLink}
     activeStyle={{
-      background: '#B2854E'
+      color: '#fff'
     }}
-  >Home</NavLink>
+  >Create</NavLink>
   <NavLink
     to="/songs"
     exact
     style={link}
     activeStyle={{
-      background: '#B2854E'
+      background: '#fff'
     }}
   >All Songs</NavLink>
   {
@@ -39,7 +58,7 @@ const NavBar = (props) =>
     exact
     style={link}
     activeStyle={{
-      background: '#B2854E'
+      background: '#fff'
     }}
     >Your Songs</NavLink>
     :
@@ -53,7 +72,7 @@ const NavBar = (props) =>
       exact
       style={link}
       activeStyle={{
-        background: '#B2854E'
+        background: '#fff'
       }}
     >Logout</NavLink>
     :
@@ -62,7 +81,7 @@ const NavBar = (props) =>
       exact
       style={link}
       activeStyle={{
-        background: '#B2854E'
+        background: '#fff'
       }}
     >Login</NavLink>
   }

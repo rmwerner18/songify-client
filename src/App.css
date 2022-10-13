@@ -118,9 +118,24 @@ fieldset span {
   border-radius: 5px;
 }
 
+.logo {
+  position: fixed;
+  margin: 0;
+  top: 10px;
+  left: 15px;
+  color: var(--spotify-green);
+}
+
+.logo span {
+  color: var(--controls);
+  font-size: 0.8rem;
+}
+
 .navbar {
+  position: fixed;
+  top: 10px;
+  right: 0;
   display: flex;
-  flex-direction: column;
   cursor: pointer;
 }
 
@@ -183,7 +198,7 @@ body {
 }
 
 .bpm-meter {
-  color: #000;
+  color: var(--controls);
 }
 
 .songs-page .songs-container {
@@ -312,6 +327,7 @@ h2 {
 }
 
 .instrument-form {
+  color: var(--controls);
   height: auto;
   display: flex; 
   align-items: center;
@@ -564,29 +580,28 @@ button:focus {
   border: 1px solid;
   border-radius: 50%;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15), 0 2px 10px 0 rgba(0, 0, 0, 0.1);
-  background: linear-gradient(-20deg,  #FFFDF0 0%, #B2854E 100%, #B2854E 100%);
+  /* background: linear-gradient(-20deg,  var(--spotify-green) 0%, var(--dark-green) 100%, var(--dark-green) 100%); */
   cursor: pointer;
 }
 
 .chord-box {
   display: flex;
-  height: 100px;
-  width: 100px;
-  margin: 0 2px;
+  height: 50px;
+  width: 134px;
+  margin: 0 3px;
   /* border: 0.5px solid #aaa; */
-  background-color: var(--dark-green);
+  background-color: var(--spotify-green);
   color: #fff;
   border-radius: 15px;
   align-items: center;
+  justify-content: center;
   text-align: center;
   /* box-shadow: 1px 1px 5px 0.5px rgba(70, 70, 70, 0.2); */
   cursor: pointer;
 }
 
-.chord-box:hover {
-  height: 99px;
-  width: 99px;  
-  margin: 0 2.5px;
+.chord-box:hover { 
+  /* margin: 0 2.5px; */
   /* box-shadow: 1px 1px 2px 0.5px rgba(70, 70, 70, 0.2); */
 }
 

@@ -26,10 +26,11 @@ class App extends React.Component {
       return (
         <div className="App">
           <BrowserRouter className='App-Content'>
-            <div className='navbar-with-image'>
-              <MenuIcon displayNav={this.displayNav}/>
+            <h1 class="logo">Songify<span>lite</span></h1>
+            {/* <div className='navbar-with-image'> */}
+              {/* <MenuIcon displayNav={this.displayNav}/> */}
               { this.props.navbar ? <NavBar user={this.props.user}/> : null }
-            </div>
+            {/* </div> */}
             <Route 
               exact path={'/users/:id'} 
               render={(routerProps) => <UserPage id={routerProps.match.params.id}/>}/>
