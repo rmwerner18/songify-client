@@ -74,20 +74,27 @@ const BeatForm = (props) => {
     return(
         <div className='beat-form'>
             <div className="beat-container">
-                <div className='checkbox-row'>   
-                    {makeHHRows()}
+                <div className='beat-labels'>
+                    <p>hi-hat</p>
+                    <p>snare</p>
+                    <p>kick</p>
                 </div>
-                <div className='checkbox-row'>
-                    {makeSnareRows()}
-                </div>
-                <div className='checkbox-row'>
-                    {makeKickRows()}
+                <div>
+                    <div className='checkbox-row'>   
+                        {makeHHRows()}
+                    </div>
+                    <div className='checkbox-row'>
+                        {makeSnareRows()}
+                    </div>
+                    <div className='checkbox-row'>
+                        {makeKickRows()}
+                    </div>
                 </div>
             </div>
-            <div className='beat-options'>
+            {/* <div className='beat-options'>
                 <BeatSelect changeHandler={e => changeHandler(e)} />
                 <button className='button' onClick={props.clearDrums}>Clear Drums</button>
-            </div>
+            </div> */}
         </div>
     )
 }

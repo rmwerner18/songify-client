@@ -6,7 +6,7 @@ const link = {
   alignItems: 'center',
   justifyContent: 'center',
   height: '40px',
-  padding: '0 30px',
+  padding: '0 20px',
   // margin: '3px 6px 3px',
   background: 'transparent',
   'font-family': 'Courier New',

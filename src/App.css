@@ -9,6 +9,7 @@
   place-items: center;
   height: 100vh;
   width: auto;
+
 }
 
 
@@ -33,8 +34,11 @@ header {
   background-color: darkgray;
   width: 100%;
   height: 100%;
-  /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2); */
 }
+
+/* .font-awesome {
+  color: #fff;
+} */
 
 .button {
   cursor: pointer;
@@ -141,52 +145,48 @@ fieldset span {
   cursor: pointer;
 }
 
-
 body {
-  /* background-image: url("https://3.bp.blogspot.com/-Kj83IXBvWEE/VWNsUP6KYeI/AAAAAAAAABY/IbVEjp3BuOE/s1600/IMG_0278.JPG"); */
   background-color: var(--dark-background);
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  overflow-y: scroll;
 }
 
-/* body:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: -1;
-} */
-
 .grid {
-  position: fixed;
-  top: 100px;
   display: flex;
   flex-direction: column;
 }
 
 .grid-page {
+  position: absolute;
+  top: 70px;
+  right: 150px;
   display: grid;
   place-items: center;
+}
+
+.part-label {
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  border-bottom: solid 1px var(--spotify-text);
+  margin-bottom: 8px;
 }
 
 .song-maker-container {
   background-color: var(--dark-background);
   padding: 15px 10px;
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border-radius: 15px;
   border: 1px solid #eee;
   /* box-shadow: inset 0px 0px 10px 3px rgba(0,0,0,0.5), 0 6px 20px 0 rgba(0,0,0,0.4); */
-  grid-template-areas:
+  /* grid-template-areas:
   "chords"
   
   "beat"
   "mel"
-  "save"
+  "save" */
 }
 
 .song-options-container {
@@ -226,6 +226,7 @@ body {
 span, p {
   font-family: inherit;
   font-weight: 900;
+  color: var(--spotify-text);
 }
 
 h1 {
@@ -340,11 +341,20 @@ h2 {
 
 .beat-container {
   display: flex;
-  flex-direction: column;
-  margin-left: 10px;
+  flex-direction: row;
+  /* margin-left: 10px;
   margin-right: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px; */
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+}
+
+.beat-labels p, .melody-labels p {
+  width: 55px;
+  margin: 0;
+  padding: 0;
+  font-size: 14.6px; 
+  text-align: right;
+  margin-right: 4px;
 }
 
 .beat-form {
@@ -353,6 +363,7 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  transform: translateX(-29.5px)
 }
 
 .melody-form {
@@ -361,11 +372,12 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  transform: translateX(-29.5px)
 }
 
 .melody-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   margin: 10px 3px;
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
@@ -485,7 +497,7 @@ button:focus {
 
 .bar-labels {
   display: flex;
-  width: 620px;
+  width: 730px;
   justify-content: center;
 
 }
@@ -493,8 +505,7 @@ button:focus {
 .bar-label {
   display: flex;
   justify-content: center;
-  width: 134px;
-  color: var(--spotify-text);
+  width: 139px;
   border-left: 1px solid var(--spotify-text);
 }
 

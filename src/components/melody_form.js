@@ -177,33 +177,45 @@ class MelodyForm extends React.Component {
     render() {
         return(
             <div className='melody-form'>
-                <div className="melody-container">
-                    <div className='checkbox-row'>   
-                        {this.IRows()}
+                <div className='melody-container'>
+                    <div className='melody-labels'>
+                        <p>i</p>
+                        <p>vii</p>
+                        <p>vi</p>
+                        <p>v</p>
+                        <p>iv</p>
+                        <p>iii</p>
+                        <p>ii</p>
+                        <p>i</p>
                     </div>
-                    <div className='checkbox-row'>
-                        {this.viiRows()}
-                    </div>
-                    <div className='checkbox-row'>
-                        {this.viRows()}
-                    </div>
-                    <div className='checkbox-row'>   
-                        {this.vRows()}
-                    </div>
-                    <div className='checkbox-row'>
-                        {this.ivRows()}
-                    </div>
-                    <div className='checkbox-row'>
-                        {this.iiiRows()}
-                    </div>
-                    <div className='checkbox-row'>
-                        {this.iiRows()}
-                    </div>
-                    <div className='checkbox-row'>
-                        {this.iRows()}
+                    <div>
+                        <div className='checkbox-row'>   
+                            {this.IRows()}
+                        </div>
+                        <div className='checkbox-row'>
+                            {this.viiRows()}
+                        </div>
+                        <div className='checkbox-row'>
+                            {this.viRows()}
+                        </div>
+                        <div className='checkbox-row'>   
+                            {this.vRows()}
+                        </div>
+                        <div className='checkbox-row'>
+                            {this.ivRows()}
+                        </div>
+                        <div className='checkbox-row'>
+                            {this.iiiRows()}
+                        </div>
+                        <div className='checkbox-row'>
+                            {this.iiRows()}
+                        </div>
+                        <div className='checkbox-row'>
+                            {this.iRows()}
+                        </div>
                     </div>
                 </div>
-                <div className='mode-select'>
+                {/* <div className='mode-select'>
                     <select onChange={e => this.props.changeKey(e.target.value)}>
                         {this.rootOptions()}
                     </select>
@@ -211,7 +223,7 @@ class MelodyForm extends React.Component {
                         {this.modeOptions()}
                     </select>
                     <button className='button'onClick={this.props.clearMelody}>Clear Melody</button>
-                </div>
+                </div> */}
             </div>
         )
 

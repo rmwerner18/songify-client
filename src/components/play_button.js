@@ -6,6 +6,8 @@ import { stopLoop } from '../helper_functions.js/stop_loop'
 import { setNowPlaying } from '../actions/set_now_playing'
 import { endNowPlaying } from '../actions/end_now_playing'
 import { connect } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro' 
 
 class PlayButton extends React.Component {
     playerCaller = (index, time) => {
@@ -38,7 +40,9 @@ class PlayButton extends React.Component {
         return (
             <div className='grid-start-button-container'>
                 <button id='grid-start-button' onClick={(e) => this.playHandler(e)}>
-                        {this.props.nowPlaying.song ? <span>||</span> : <span>▶</span>}
+                        {this.props.nowPlaying.song 
+                        ? <FontAwesomeIcon icon={solid('pause')} className='font-awesome'/> 
+                        : <FontAwesomeIcon icon={solid('play')} />}
                 </button>
             </div>
         )
