@@ -50,12 +50,9 @@ const Grid = props => {
                 
                 <div className='song-options-container'>
                     <div className='chord-options'>
-                        <PlayButton/>
                         <SaveButton song_id={props.song_id}/>
+                        <PlayButton/>
                         <RandomProgButton/>
-                    </div>
-
-                    <div className='playback-options'>
                         <TempoForm />
                         <InstrumentForm/>
                     </div>

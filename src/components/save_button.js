@@ -83,7 +83,7 @@ const SaveButton = props => {
         <>
             {modalIsOpen ? modal() : null}
             <div className='save-container' >
-                <button className='save-button' onClick={props.song_id ? saveSongHandler : modalClickHandler}><span>Save</span></button>
+                <button className='save-button' onClick={props.song_id ? saveSongHandler : modalClickHandler}>Save</button>
             </div>  
         </>
     )
