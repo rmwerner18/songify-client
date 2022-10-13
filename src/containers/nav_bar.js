@@ -5,14 +5,14 @@ const link = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  height: '50px',
+  height: '40px',
   padding: '0 30px',
   // margin: '3px 6px 3px',
   background: 'transparent',
   'font-family': 'Courier New',
   textDecoration: 'none',
   borderRadius: '10px',
-  color: '#595959',
+  color: 'var(--spotify-text)',
   fontWeight: '900'
 }
 
@@ -20,14 +20,16 @@ const createLink = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  height: '50px',
-  padding: '0 30px',
+  marginTop: '5px',
+  marginRight: '10px',
+  height: '30px',
+  padding: '0 20px',
   // margin: '3px 6px 3px',
-  background: '#1ED760',
+  background: 'var(--spotify-green)',
   'font-family': 'Courier New',
   textDecoration: 'none',
   borderRadius: '10px',
-  color: '#595959',
+  color: 'var(--spotify-text)',
   fontWeight: '900'
 }
 

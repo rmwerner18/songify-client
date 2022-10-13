@@ -3,6 +3,7 @@
 }
 
 .App {
+  font-family: "Courier New";
   position: relative;
   display: grid;
   place-items: center;
@@ -18,6 +19,7 @@
   --header-background: #1A1A1A;
   --card-background: #181818;
   --controls: #B3B3B3;
+  --spotify-text: #595959;
 }
 
 /* spotify green 1ED760 */
@@ -42,7 +44,7 @@ header {
   border-radius: 4px;
   height: 21px;
   padding: 0 5px;
-  font-family: "Courier New";
+  font-family: inherit;
   font-weight: bold;
 }
 
@@ -59,7 +61,7 @@ select {
   background-color: #E0CFB8;
   padding: 2px;
   border-radius: 4px;
-  font-family: "Courier New";
+  font-family: inherit;
   font-weight: bold;
 }
 
@@ -161,8 +163,10 @@ body {
 } */
 
 .grid {
+  position: fixed;
+  top: 100px;
   display: flex;
-  flex-direction: row
+  flex-direction: column;
 }
 
 .grid-page {
@@ -220,17 +224,17 @@ body {
 }
 
 span, p {
-  font-family: "Courier New";
+  font-family: inherit;
   font-weight: 900;
 }
 
 h1 {
   color: white;
-  font-family: "Courier New";
+  font-family: inherit;
 }
 
 h2 {
-  font-family: "Courier New";
+  font-family: inherit;
 }
 
 .checkbox-row {
@@ -479,10 +483,29 @@ button:focus {
   outline:0;
 }
 
+.bar-labels {
+  display: flex;
+  width: 620px;
+  justify-content: center;
+
+}
+
+.bar-label {
+  display: flex;
+  justify-content: center;
+  width: 134px;
+  color: var(--spotify-text);
+  border-left: 1px solid var(--spotify-text);
+}
+
+.bar-label.last {
+  border-right: 1px solid var(--spotify-text);
+}
+
 .chord-options {
   grid-area: co;
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
 
   /* display: grid;
   margin: 10px;
@@ -528,7 +551,7 @@ button:focus {
   height: 30px;
   width: 100%;
   font-size: x-large;
-  font-family:  "Courier New";
+  font-family:  inherit;
   margin-bottom: 15px;
 }
 
@@ -747,7 +770,7 @@ how to remove the virtical space around the range input in IE*/
 }
 
 @media (max-width: 752px) {
-  .grid {
+  /* .grid {
     flex-direction: column;
   }
 
@@ -756,7 +779,7 @@ how to remove the virtical space around the range input in IE*/
     flex-direction: row;
     justify-content: space-around;
 
-  }
+  } */
 
   .song-options-container {
     width: 555px;

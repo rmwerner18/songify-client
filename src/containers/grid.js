@@ -33,6 +33,12 @@ const Grid = props => {
     return (
         <>
             <div className='grid'>
+                <div className='bar-labels'>
+                    <p className='bar-label'>Bar 1</p>
+                    <p className='bar-label'>Bar 2</p>
+                    <p className='bar-label'>Bar 3</p>
+                    <p className='bar-label last'>Bar 4</p>
+                </div>
                 <div className="song-maker-container">
                     <ChordsContainer/>
                     <BeatForm/>
