@@ -3,6 +3,7 @@ import TempoForm from '../components/tempo_form'
 import BeatForm from '../components/beat_form'
 import InstrumentForm from '../components/instrument_form'
 import MelodyForm from '../components/melody_form'
+import MelodyOptions from '../components/melody_options'
 import RandomProgButton from '../components/random_prog_button'
 import PlayButton from '../components/play_button'
 import SaveButton from '../components/save_button'
@@ -55,6 +56,7 @@ const Grid = props => {
                         <RandomProgButton/>
                         <TempoForm />
                         <InstrumentForm/>
+                        <MelodyOptions/>
                     </div>
                 </div>  
             </div>

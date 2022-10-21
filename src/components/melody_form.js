@@ -79,7 +79,7 @@ class MelodyForm extends React.Component {
             newArray = this.props.IBeats
             addOrRemoveBeat(newArray, id)
             this.props.changeIBeats(newArray)
-        } 
+        }
     }
 
     IRows = () => {
@@ -162,17 +162,17 @@ class MelodyForm extends React.Component {
         </div>
         )})
     }
-    removeNumber = (string) => {
-        let newString = string.split('')
-        newString.pop()
-        return newString.join('')
-    }
-    rootOptions = () => {
-        return this.keyRoots.map(root => <option key={root} value={root} selected={this.removeNumber(this.props.melodyKey) === this.removeNumber(root) ? "selected" : null}>{this.removeNumber(root)}</option>)
-    }
-    modeOptions = () => {
-        return this.modes.map(mode => <option key={mode} selected={this.props.melodyMode === mode ? "selected" : null} value={mode}>{mode}</option>)
-    }
+    // removeNumber = (string) => {
+    //     let newString = string.split('')
+    //     newString.pop()
+    //     return newString.join('')
+    // }
+    // rootOptions = () => {
+    //     return this.keyRoots.map(root => <option key={root} value={root} selected={this.removeNumber(this.props.melodyKey) === this.removeNumber(root) ? "selected" : null}>{this.removeNumber(root)}</option>)
+    // }
+    // modeOptions = () => {
+    //     return this.modes.map(mode => <option key={mode} selected={this.props.melodyMode === mode ? "selected" : null} value={mode}>{mode}</option>)
+    // }
 
     render() {
         return(
@@ -215,18 +215,8 @@ class MelodyForm extends React.Component {
                         </div>
                     </div>
                 </div>
-                {/* <div className='mode-select'>
-                    <select onChange={e => this.props.changeKey(e.target.value)}>
-                        {this.rootOptions()}
-                    </select>
-                    <select onChange={e => this.props.changeMode(e.target.value)}>
-                        {this.modeOptions()}
-                    </select>
-                    <button className='button'onClick={this.props.clearMelody}>Clear Melody</button>
-                </div> */}
             </div>
         )
-
     }
 }
 
