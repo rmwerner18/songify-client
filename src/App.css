@@ -21,6 +21,7 @@
   --card-background: #181818;
   --controls: #B3B3B3;
   --spotify-text: #595959;
+  --checkbox-background: #3f3f3f;
 }
 
 /* spotify green 1ED760 */
@@ -66,7 +67,7 @@ button {
 select {
   border: none;
   cursor: pointer;
-  background-color: var(--spotify-text);
+  background-color: var(--checkbox-background);
   color: #fff;
   padding: 2px;
   border-radius: 4px;
@@ -269,7 +270,7 @@ h2 {
 .checkmark {
   height: 15px;
   width: 15px;
-  background-color: #3f3f3f;
+  background-color: var(--checkbox-background);
   border-radius: 3px;
 }
 
