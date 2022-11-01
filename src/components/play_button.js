@@ -11,8 +11,9 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 class PlayButton extends React.Component {
     playerCaller = (index, time) => {
-        let newObj = Object.assign({}, this.props.sounds, this.props.song)
-        return player(index, time, newObj)
+        // const newObj = Object.assign({}, this.props.sounds, this.props.song)
+        // const songProps = { ...this.props.sounds, ...this.props.song }
+        return player(index, time, { ...this.props.sounds, ...this.props.song })
     }
 
     startLoop = () => {

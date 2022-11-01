@@ -14,7 +14,7 @@ class ChordForm extends React.Component {
         bass: this.chord.bass,
         name:  this.chord.name,
         quality:  this.chord.quality,
-        formattedBass: this.chord.formattedBass,
+        formattedBass: this.chord.formattedBass, // store object to map bass ect onto fomratted version
         formattedName: this.chord.formattedName,
         formattedQuality: this.chord.formattedQuality
     }
