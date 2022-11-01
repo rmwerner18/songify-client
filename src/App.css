@@ -231,7 +231,7 @@ body {
 span, p {
   font-family: inherit;
   font-weight: 900;
-  color: var(--spotify-text);
+  color: #fff;
 }
 
 h1 {
@@ -269,7 +269,7 @@ h2 {
 .checkmark {
   height: 15px;
   width: 15px;
-  background-color: #1d1d1d;
+  background-color: #3f3f3f;
   border-radius: 3px;
 }
 
