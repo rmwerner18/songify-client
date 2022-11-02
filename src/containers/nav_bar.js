@@ -49,7 +49,7 @@ const NavBar = (props) =>
     exact
     style={link}
     activeStyle={{
-      background: '#fff'
+      color: '#fff'
     }}
   >All Songs</NavLink>
   {
@@ -60,7 +60,7 @@ const NavBar = (props) =>
     exact
     style={link}
     activeStyle={{
-      background: '#fff'
+      color: '#fff'
     }}
     >Your Songs</NavLink>
     :
@@ -74,7 +74,7 @@ const NavBar = (props) =>
       exact
       style={link}
       activeStyle={{
-        background: '#fff'
+        color: '#fff'
       }}
     >Logout</NavLink>
     :
@@ -83,7 +83,7 @@ const NavBar = (props) =>
       exact
       style={link}
       activeStyle={{
-        background: '#fff'
+        color: '#fff'
       }}
     >Login</NavLink>
   }
