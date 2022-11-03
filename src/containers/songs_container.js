@@ -128,6 +128,7 @@ class SongsContainer extends React.Component {
                     </span>
                     <span className="songs-container-header-title">Song Title</span>
                     <span className="songs-container-header-artist">Artist</span>
+                    <span className="songs-container-header-likes">Likes</span>
                 </div>
                 {this.renderSongs()}
             </div>

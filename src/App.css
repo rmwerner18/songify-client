@@ -171,6 +171,24 @@ body {
   place-items: center;
 }
 
+.song-maker-container {
+  background-color: var(--dark-background);
+  padding: 15px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  border: 1px solid #eee;
+  /* box-shadow: inset 0px 0px 10px 3px rgba(0,0,0,0.5), 0 6px 20px 0 rgba(0,0,0,0.4); */
+  /* grid-template-areas:
+  "chords"
+  
+  "beat"
+  "mel"
+  "save" */
+}
+
 .part-label {
   width: 500px;
   display: flex;
@@ -233,6 +251,11 @@ body {
 
 .songs-container-header-artist {
   width: 25%;
+  text-align: left;
+}
+
+.songs-container-header-likes {
+  width: 10%;
   text-align: left;
 }
 
@@ -437,10 +460,10 @@ h1, h2 {
 }
 
 .song-options {
+  width: 10%;
   display: flex;
-  width: 730;
-  align-items: center;
-  justify-content: center;
+  align-items: space-around;
+  justify-content: space-around;
   height: 100%;
   margin: 5px 10px 0;
 }
@@ -578,6 +601,11 @@ button:focus {
 
 .song-maker {
   width: 25%;
+  text-align: left;
+}
+
+.song-likes {
+  width: 10%;
   text-align: left;
 }
 

@@ -9,7 +9,7 @@ import { endNowPlaying } from '../actions/end_now_playing'
 import player from '../player'
 import { connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro' 
+import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro' 
 
 
 const Song = (props) => {
@@ -80,13 +80,16 @@ const Song = (props) => {
             }
             <h2 className="song-title">{props.song.name}</h2>
             <p className="song-maker">{props.song.user.username}</p>
+            <span className="song-likes" id={`like-count-${props.id}`}>{likes}</span>
 
-            <div className='song-options'>
+            <div className="song-options">
                 {songBelongsToUser() ? <DeleteAndEditButtons id={props.id} deleteHandler={props.deleteHandler}/> : null}
-                {!songBelongsToUser() && props.user.id ? <button id={`like-button-${props.song.id}`} className='like-button' onClick={likeHandler}>{userLikesSong ? "Unlike" : "Like"}</button> : null}
-                <span>likes: <span id={`like-count-${props.id}`} className='like-count'>{likes}</span></span>
+                {userLikesSong ? 
+                    <FontAwesomeIcon icon={solid("thumbs-up")} className='like-button font-awesome' onClick={likeHandler} id={`like-button-${props.song.id}`}/>
+                    :
+                    <FontAwesomeIcon icon={regular("thumbs-up")} className='like-button font-awesome' onClick={likeHandler} id={`like-button-${props.song.id}`}/>
+                }
             </div>
-
         </div>
     )
 
