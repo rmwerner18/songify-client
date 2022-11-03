@@ -67,7 +67,7 @@ const Song = (props) => {
             onMouseLeave={() => setMouseOver(false)}
         >
             {mouseOver ? 
-                <div className='song-list-start-button-container' onClick={(e) => playHandler(e, props.song)}>
+                <div className='song-number' onClick={(e) => playHandler(e, props.song)}>
                     {props.nowPlaying.id === props.song.id 
                         ? 
                         <FontAwesomeIcon icon={solid('pause')} className='font-awesome' />  

@@ -179,24 +179,6 @@ body {
   margin-bottom: 8px;
 }
 
-.song-maker-container {
-  background-color: var(--dark-background);
-  padding: 15px 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 15px;
-  border: 1px solid #eee;
-  /* box-shadow: inset 0px 0px 10px 3px rgba(0,0,0,0.5), 0 6px 20px 0 rgba(0,0,0,0.4); */
-  /* grid-template-areas:
-  "chords"
-  
-  "beat"
-  "mel"
-  "save" */
-}
-
 .song-options-container {
   width: 196px;
   display: grid;
@@ -245,17 +227,13 @@ body {
 }
 
 .songs-container-header-title {
-  width: 60%;
-  align-content: left;
+  width: 25%;
+  text-align: left;
 }
 
 .songs-container-header-artist {
-  width: 30%;
-}
-
-.songs-container-header-icon .font-awesome {
-  color: #fff;
-  /* width: 12px; */
+  width: 25%;
+  text-align: left;
 }
 
 .user-page {
@@ -426,7 +404,7 @@ h1, h2 {
   border-radius: 4px;
   align-items: center;
   text-align: center;
-  margin: 10px;
+  padding: 10px;
 }
 
 .song-box.active {
@@ -447,15 +425,12 @@ h1, h2 {
   outline: 0;
 }
 
-.song-list-start-button-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.song-number {
+  width: 10%;
 }
 
 .song-title {
-  grid-area: title;
-  margin: 5px 0;
+  width: 25%;
   text-align: left;
   overflow-x: scroll;
   /* height: 27px; */
@@ -602,8 +577,7 @@ button:focus {
 }
 
 .song-maker {
-  grid-area: usr;
-  margin: 5px 0;
+  width: 25%;
   text-align: left;
 }
 
