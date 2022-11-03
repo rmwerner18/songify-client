@@ -10,7 +10,7 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 class SongsContainer extends React.Component {
 
     renderSongs = (songs = this.props.songs) => {
-        songs = this.applySearch(this.filterSongs(songs))
+        // songs = this.applySearch(this.filterSongs(songs))
         return songs.map(song => {
             return (<Song 
                 id={song.id}
@@ -34,21 +34,16 @@ class SongsContainer extends React.Component {
         return songs
     }
 
-    filterSongs = (songs) => {
-        if (this.props.usersSongs) {
-            return songs.filter(song => song.user.id === this.props.user.id)
-        } else if (this.props.favoritedSongs) {
-            return songs.filter(song => song.likes.find(like => like.user_id === this.props.user.id))
-        } else return songs
-    }
+    // filterSongs = (songs) => {
+    //     if (this.props.usersSongs) {
+    //         songs = songs.filter(song => song.user.id === this.props.user.id)
+    //     } 
+    //     if (this.props.favoritedSongs) {
+    //         songs = songs.filter(song => song.likes.find(like => like.user_id === this.props.user.id))
+    //     } 
+    //     return songs
+    // }
 
-    header = () => {
-        if (this.props.usersSongs) {
-            return "YOUR SONGS"
-        } else if (this.props.favoritedSongs) {
-            return "LIKED SONGS"
-        } else return "ALL SONGS"
-    }
 
     deleteSong = song => {
         return fetch(`http://localhost:3000/songs/${song.id}`, {
@@ -57,64 +52,65 @@ class SongsContainer extends React.Component {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
         })
+        .then(this.props.fetchSongs)
     }
 
     deleteHandler = (song) => {
         let newArray = this.props.songs
         let i = newArray.findIndex(s => s.id === song.id)
         newArray.splice(i, 1)
-        this.setState({songs: newArray})
+        // this.setState({songs: newArray})
         this.deleteSong(song)
     }
 
     componentDidMount = () => {
-        this.props.hideNavbar()
+        // this.props.hideNavbar()
         this.props.fetchSongs()
     }
 
-    userLikesSong = song => {
-        return song.likes.find(like => like.user_id === this.props.user.id)
-    }
+    // userLikesSong = song => {
+    //     return song.likes.find(like => like.user_id === this.props.user.id)
+    // }
 
-    deleteLike = like => {
-        return fetch(`http://localhost:3000/likes/${like.id}`, {
-            method: 'DELETE',
-            headers: {
-                'content-type': 'application/json',
-                accepts: 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }
-        }).then(resp => resp.json())
-        .then(songs => this.props.fetchSongs())
-    }
+    // deleteLike = like => {
+    //     return fetch(`http://localhost:3000/likes/${like.id}`, {
+    //         method: 'DELETE',
+    //         headers: {
+    //             'content-type': 'application/json',
+    //             accepts: 'application/json',
+    //             Authorization: `Bearer ${localStorage.getItem('token')}`
+    //         }
+    //     }).then(resp => resp.json())
+    //     .then(this.props.fetchSongs)
+    // }
 
-    createLike = song => {
-        return  fetch('http://localhost:3000/likes/', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-                accepts: 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            },
-            body: JSON.stringify({
-                song_id: song.id,
-                user_id: this.props.user.id
-            })
-        }).then(resp => resp.json())
-        .then(this.props.fetchSongs)
-    }
+    // createLike = song => {
+    //     return  fetch('http://localhost:3000/likes/', {
+    //         method: 'POST',
+    //         headers: {
+    //             'content-type': 'application/json',
+    //             accepts: 'application/json',
+    //             Authorization: `Bearer ${localStorage.getItem('token')}`
+    //         },
+    //         body: JSON.stringify({
+    //             song_id: song.id,
+    //             user_id: this.props.user.id
+    //         })
+    //     }).then(resp => resp.json())
+    //     .then(this.props.fetchSongs)
+    // }
 
-    likeHandler = (e) => {
-        let songId = e.target.id.split('-')[2] 
-        let song = this.props.songs.find(song => song.id === parseInt(songId))
-        if (this.props.user.id) {
-            if (this.userLikesSong(song)) {
-                this.deleteLike(this.userLikesSong(song))
-            } else {
-                this.createLike(song)
-            }
-        } 
-    }
+    // likeHandler = (e) => {
+    //     const songId = e.target.id.split('-')[2] 
+    //     const song = this.props.songs.find(song => song.id === parseInt(songId))
+    //     if (this.props.user.id) {
+    //         if (this.userLikesSong(song)) {
+    //             this.deleteLike(this.userLikesSong(song))
+    //         } else {
+    //             this.createLike(song)
+    //         }
+    //     } 
+    // }
 
     render() {
         return (
@@ -133,16 +129,18 @@ class SongsContainer extends React.Component {
                 {this.renderSongs()}
             </div>
             :
-            "loadingSongs"
+            <span>
+                loading songs
+            </span>
         )
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        user: state.user,
-        songs: state.allSongs
-    }
-}
+// const mapStateToProps = state => {
+//     return {
+//         user: state.user,
+//         songs: state.allSongs
+//     }
+// }
 
-export default connect(mapStateToProps, { fetchSongs, hideNavbar })(SongsContainer)
+export default connect(null, { fetchSongs, hideNavbar })(SongsContainer)

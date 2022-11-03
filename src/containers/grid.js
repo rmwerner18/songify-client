@@ -28,7 +28,7 @@ const Grid = props => {
     
     stopLoop()
     props.endNowPlaying()
-    props.hideNavbar()
+    // props.hideNavbar()
     fetchSongToEdit()
 
     return (
@@ -66,7 +66,7 @@ const Grid = props => {
 
 const mapDispatchToProps = { 
     endNowPlaying, 
-    hideNavbar, 
+    // hideNavbar, 
     setCurrentSong 
 }
 

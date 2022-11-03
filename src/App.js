@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import GridPage from './containers/grid_page'
 import SongsPage from './containers/songs_page'
-import UserPage from './containers/user_page'
+// import UserPage from './containers/user_page'
 import NavBar from './containers/nav_bar'
 import MenuIcon from './components/menu_icon'
 import LoginPage from './containers/login_page'
@@ -27,10 +27,7 @@ class App extends React.Component {
         <div className="App">
           <BrowserRouter className='App-Content'>
             <h1 className="logo">Songify<span>lite</span></h1>
-              { this.props.navbar ? <NavBar user={this.props.user}/> : null }
-            <Route 
-              exact path={'/users/:id'} 
-              render={(routerProps) => <UserPage id={routerProps.match.params.id}/>}/>
+              <NavBar user={this.props.user}/>
             <Route 
               exact path='/songs/:id/edit' 
               render={(routerProps) => <GridPage song_id={routerProps.match.params.id} />}/>

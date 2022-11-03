@@ -213,15 +213,31 @@ body {
   color: var(--controls);
 }
 
-.songs-page .songs-container {
+.songs-page {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: row;
   width: 90vw;
+  height: calc(100vh - 100px);
+}
+
+.songs-page-menu {
+  color: var(--spotify-text);
+  width: 20%;
+  padding: 10px;
+  font-family: inherit;
+}
+
+.songs-page .songs-container-container {
+  width: 80%;
 }
 
 .songs-container {
-  margin-top: 80px;
   border-radius: 10px;
-  height: 100vh;
-  width: 45vw;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  height: calc(100vh - 100px);
+  /* width: 45vw; */
   display: flex;
   flex-direction: column;
   text-align: center;

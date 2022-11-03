@@ -30,7 +30,7 @@ class LoginPage extends React.Component {
 
     componentDidMount = () => {
         stopLoop()
-        this.props.hideNavbar()
+        // this.props.hideNavbar()
         this.setUsers()
     }
 
