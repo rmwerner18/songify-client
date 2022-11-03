@@ -8,6 +8,8 @@ import { setNowPlaying } from '../actions/set_now_playing'
 import { endNowPlaying } from '../actions/end_now_playing' 
 import player from '../player'
 import { connect } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro' 
 
 
 const Song = (props) => {
@@ -15,6 +17,7 @@ const Song = (props) => {
     const [userLikesSong, setUserLikesSong] = useState(props.song.likes.find(like => like.user_id === props.user.id))
     const [likes, setLikes] = useState(props.song.likes.length)
     const [hasBeenUnlikedOnUserPage, setHasBeenUnlikedOnUserPage] = useState(false)
+    const [mouseOver, setMouseOver] = useState(false)
 
 
     const startLoop = () => {
@@ -58,13 +61,25 @@ const Song = (props) => {
         ?
         null
         : 
-        <div className="song-box">
+        <div 
+            className={mouseOver ? "song-box active" : "song-box"}
+            onMouseEnter={() => setMouseOver(true)}
+            onMouseLeave={() => setMouseOver(false)}
+        >
+            {mouseOver ? 
+                <div className='song-list-start-button-container' onClick={(e) => playHandler(e, props.song)}>
+                    {props.nowPlaying.id === props.song.id 
+                        ? 
+                        <FontAwesomeIcon icon={solid('pause')} className='font-awesome' />  
+                        : 
+                        <FontAwesomeIcon icon={solid('play')} className='font-awesome' />
+                    }
+                </div>
+                :
+                <span className="song-number">1</span>
+            }
             <h2 className="song-title">{props.song.name}</h2>
-            <p className="song-maker">By: {props.song.user.username}</p>
-            
-            <div className='song-list-start-button-container'>
-                <button className="song-list-start-button" onClick={(e) => playHandler(e, props.song)}>{props.nowPlaying.id === props.song.id ? <span>||</span> : <span>▶</span>}</button>
-            </div>
+            <p className="song-maker">{props.song.user.username}</p>
 
             <div className='song-options'>
                 {songBelongsToUser() ? <DeleteAndEditButtons id={props.id} deleteHandler={props.deleteHandler}/> : null}
