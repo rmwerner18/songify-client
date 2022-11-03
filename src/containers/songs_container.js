@@ -3,6 +3,8 @@ import Song from '../components/song'
 import { connect } from 'react-redux'
 import { fetchSongs } from '../actions/set_all_songs'
 import { hideNavbar } from '../actions/hide_navbar'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro' 
 
 
 class SongsContainer extends React.Component {
@@ -119,7 +121,14 @@ class SongsContainer extends React.Component {
             this.props.songs.length > 0
             ?
             <div className="songs-container">
-                <h1>{this.header()}</h1>
+                {/* <h1>{this.header()}</h1> */}
+                <div className="songs-container-header">
+                    <span className="songs-container-header-icon">
+                        <FontAwesomeIcon icon={solid('hashtag')} className='font-awesome' />
+                    </span>
+                    <span className="songs-container-header-title">Song Title</span>
+                    <span className="songs-container-header-artist">Artist</span>
+                </div>
                 {this.renderSongs()}
             </div>
             :

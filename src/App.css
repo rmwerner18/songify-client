@@ -218,6 +218,8 @@ body {
 }
 
 .songs-container {
+  margin-top: 80px;
+  border-radius: 10px;
   height: 100vh;
   width: 45vw;
   display: flex;
@@ -225,6 +227,35 @@ body {
   text-align: center;
   align-items: center;
   overflow-y: scroll;
+  background-color: var(--card-background);
+}
+
+.songs-container-header {
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--card-background);
+  border-bottom: 1px solid var(--spotify-text);
+  border-bottom-width: 90%;
+}
+
+.songs-container-header-icon {
+  width: 10%;
+}
+
+.songs-container-header-title {
+  width: 60%;
+  align-content: left;
+}
+
+.songs-container-header-artist {
+  width: 30%;
+}
+
+.songs-container-header-icon .font-awesome {
+  color: #fff;
+  /* width: 12px; */
 }
 
 .user-page {
@@ -798,3 +829,8 @@ how to remove the virtical space around the range input in IE*/
     border-top: 1px solid #aaa;
   }
 }
+/* 
+.fa-solid, .fa-hashtag {
+  width: 10px;
+  color: #fff;
+} */

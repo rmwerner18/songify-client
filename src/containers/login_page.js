@@ -14,6 +14,7 @@ class LoginPage extends React.Component {
     }
 
     findUser = () => {
+        console.log(this.state)
         return this.state.users.find(user => user.username === this.state.username)
     }
 

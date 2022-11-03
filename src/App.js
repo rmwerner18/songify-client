@@ -26,7 +26,7 @@ class App extends React.Component {
       return (
         <div className="App">
           <BrowserRouter className='App-Content'>
-            <h1 class="logo">Songify<span>lite</span></h1>
+            <h1 className="logo">Songify<span>lite</span></h1>
               { this.props.navbar ? <NavBar user={this.props.user}/> : null }
             <Route 
               exact path={'/users/:id'} 
