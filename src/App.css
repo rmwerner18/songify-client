@@ -171,7 +171,7 @@ body {
   place-items: center;
 }
 
-.song-maker-container {
+.grid-container {
   background-color: var(--dark-background);
   padding: 15px 10px;
   display: flex;
