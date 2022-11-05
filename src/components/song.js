@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import DeleteAndEditButtons from './delete_and_edit_buttons'
 import * as Tone from 'tone'
 import { setNumOfEigthNotes } from '../helper_functions.js/set_num_of_eigth_notes'
@@ -15,10 +15,17 @@ import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 const Song = (props) => {
 
-    const [userLikesSong, setUserLikesSong] = useState(props.song.likes.find(like => like.user_id === props.user.id))
+    const like = props.song.likes.find(like => like.user_id === props.user.id)
+
+    const [userLikesSong, setUserLikesSong] = useState(null)
     const [likes, setLikes] = useState(props.song.likes.length)
-    // const [hasBeenUnlikedOnUserPage, setHasBeenUnlikedOnUserPage] = useState(false)
     const [mouseOver, setMouseOver] = useState(false)
+
+    useEffect(() => {
+        setUserLikesSong(!!like)
+    })
+
+    console.log('render Song')
 
 
     const startLoop = () => {
@@ -43,74 +50,17 @@ const Song = (props) => {
             })
         }
     }
-// =================================================================================
 
-    // const deleteLike = like => {
-    //     return fetch(`http://localhost:3000/likes/${like.id}`, {
-    //         method: 'DELETE',
-    //         headers: {
-    //             'content-type': 'application/json',
-    //             accepts: 'application/json',
-    //             Authorization: `Bearer ${localStorage.getItem('token')}`
-    //         }
-    //     }).then(resp => resp.json())
-    //     .then(props.fetchSongs)
-    // }
-
-    // const createLike = song => {
-    //     return  fetch('http://localhost:3000/likes/', {
-    //         method: 'POST',
-    //         headers: {
-    //             'content-type': 'application/json',
-    //             accepts: 'application/json',
-    //             Authorization: `Bearer ${localStorage.getItem('token')}`
-    //         },
-    //         body: JSON.stringify({
-    //             song_id: song.id,
-    //             user_id: props.user.id
-    //         })
-    //     }).then(resp => resp.json())
-    //     .then(props.fetchSongs)
-    // }
-
-    // const likeHandler = (e) => {
-    //     // const songId = e.target.id.split('-')[2] 
-    //     // const song = props.songs.find(song => song.id === parseInt(songId))
-    //     console.log("userLikesSong", userLikesSong)
-    //     console.log("likes", likes)
-    //     if (props.user.id) {
-    //         if (userLikesSong) {
-    //             deleteLike(props.song.likes.find(like => like.user_id === props.user.id))                
-    //         } else {
-    //             createLike(props.song)
-    //         }
-    //         setUserLikesSong(!userLikesSong)
-    //     } 
-    // }
-// =================================================================================
-
-    // const likeHandler = (e) => {
-    //     userLikesSong ? setLikes(likes - 1) : setLikes(likes + 1)
-    //     if (userLikesSong && props.userPage) {
-    //         setHasBeenUnlikedOnUserPage(true)
-    //     }
-    //     setUserLikesSong(!userLikesSong)
-    //     props.likeHandler(e)
-    // }
+    const likeHandler = (e, id) => {
+        userLikesSong ? setLikes(likes - 1) : setLikes(likes + 1)
+        setUserLikesSong(!userLikesSong)
+        props.likeHandler(e, id)
+    }
 
     const songBelongsToUser = () => props.song.user.id === props.user.id && props.user.id
 
-    // const display
-    // props.nowPlaying.id === props.song.id 
-    //     ? 
-    //     <FontAwesomeIcon icon={solid('pause')} className='font-awesome' />  
-    //     : 
-    //     <FontAwesomeIcon icon={solid('play')} className='font-awesome' />
-    
-
-    stopLoop()
-
     return (
+        
         <div 
             className={mouseOver ? "song-box active" : "song-box"}
             onMouseEnter={() => setMouseOver(true)}
@@ -118,6 +68,7 @@ const Song = (props) => {
         >
             {mouseOver ? 
                 <div className='song-number' onClick={(e) => playHandler(e, props.song)}>
+
                     {props.nowPlaying.id === props.song.id 
                         ? 
                         <FontAwesomeIcon icon={solid('pause')} className='font-awesome' />  
@@ -134,13 +85,14 @@ const Song = (props) => {
 
             <div className="song-options">
                 {songBelongsToUser() ? <DeleteAndEditButtons id={props.id} deleteHandler={props.deleteHandler}/> : null}
-                {userLikesSong ? 
-                    <FontAwesomeIcon icon={solid("thumbs-up")} className='like-button font-awesome' id={`like-button-${props.song.id}`}/>
-                    :
-                    <FontAwesomeIcon icon={regular("thumbs-up")} className='like-button font-awesome' id={`like-button-${props.song.id}`}/>
-                }
+                    {userLikesSong ? 
+                        <FontAwesomeIcon icon={solid("thumbs-up")} className='like-button font-awesome' onClick={e => likeHandler(e, props.id)}/>
+                        :
+                        <FontAwesomeIcon icon={regular("thumbs-up")} className='like-button font-awesome' onClick={e => likeHandler(e, props.id)}/>
+                    }
             </div>
         </div>
+        
     )
 
 }

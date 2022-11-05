@@ -16,7 +16,6 @@ class SongsContainer extends React.Component {
                 id={song.id}
                 key={song.id}
                 song={song}
-                userPage={this.props.favoritedSongs}
                 deleteHandler={this.deleteHandler}
                 likeHandler={this.likeHandler}
             />)
@@ -34,17 +33,6 @@ class SongsContainer extends React.Component {
         return songs
     }
 
-    // filterSongs = (songs) => {
-    //     if (this.props.usersSongs) {
-    //         songs = songs.filter(song => song.user.id === this.props.user.id)
-    //     } 
-    //     if (this.props.favoritedSongs) {
-    //         songs = songs.filter(song => song.likes.find(like => like.user_id === this.props.user.id))
-    //     } 
-    //     return songs
-    // }
-
-
     deleteSong = song => {
         return fetch(`http://localhost:3000/songs/${song.id}`, {
             method: "DELETE",
@@ -59,65 +47,66 @@ class SongsContainer extends React.Component {
         let newArray = this.props.songs
         let i = newArray.findIndex(s => s.id === song.id)
         newArray.splice(i, 1)
-        // this.setState({songs: newArray})
+        this.setState({songs: newArray})
         this.deleteSong(song)
     }
 
     componentDidMount = () => {
-        // this.props.hideNavbar()
         this.props.fetchSongs()
     }
 
-    // userLikesSong = song => {
-    //     return song.likes.find(like => like.user_id === this.props.user.id)
-    // }
+    userLikesSong = song => {
+        if(song.likes) {
+            return song.likes.find(like => like.user_id === this.props.user.id)
+        }
+        return false
+    }
 
-    // deleteLike = like => {
-    //     return fetch(`http://localhost:3000/likes/${like.id}`, {
-    //         method: 'DELETE',
-    //         headers: {
-    //             'content-type': 'application/json',
-    //             accepts: 'application/json',
-    //             Authorization: `Bearer ${localStorage.getItem('token')}`
-    //         }
-    //     }).then(resp => resp.json())
-    //     .then(this.props.fetchSongs)
-    // }
+    deleteLike = like => {
+        return fetch(`http://localhost:3000/likes/${like.id}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json',
+                accepts: 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        }).then(resp => resp.json())
+        .then(this.props.fetchSongs)
+    }
 
-    // createLike = song => {
-    //     return  fetch('http://localhost:3000/likes/', {
-    //         method: 'POST',
-    //         headers: {
-    //             'content-type': 'application/json',
-    //             accepts: 'application/json',
-    //             Authorization: `Bearer ${localStorage.getItem('token')}`
-    //         },
-    //         body: JSON.stringify({
-    //             song_id: song.id,
-    //             user_id: this.props.user.id
-    //         })
-    //     }).then(resp => resp.json())
-    //     .then(this.props.fetchSongs)
-    // }
+    createLike = song => {
+        return  fetch('http://localhost:3000/likes/', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                accepts: 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify({
+                song_id: song.id,
+                user_id: this.props.user.id
+            })
+        }).then(resp => resp.json())
+        .then(this.props.fetchSongs)
+    }
 
-    // likeHandler = (e) => {
-    //     const songId = e.target.id.split('-')[2] 
-    //     const song = this.props.songs.find(song => song.id === parseInt(songId))
-    //     if (this.props.user.id) {
-    //         if (this.userLikesSong(song)) {
-    //             this.deleteLike(this.userLikesSong(song))
-    //         } else {
-    //             this.createLike(song)
-    //         }
-    //     } 
-    // }
+    likeHandler = (e, id) => {
+        const song = this.props.songs.find(song => song.id === id)
+        if (this.props.user.id) {
+            console.log(song)
+            if (this.userLikesSong(song)) {
+                this.deleteLike(this.userLikesSong(song))
+            } else {
+                this.createLike(song)
+            }
+        } 
+    }
 
     render() {
         return (
             this.props.songs.length > 0
             ?
             <div className="songs-container">
-                {/* <h1>{this.header()}</h1> */}
                 <div className="songs-container-header">
                     <span className="songs-container-header-icon">
                         <FontAwesomeIcon icon={solid('hashtag')} className='font-awesome' />
@@ -136,11 +125,11 @@ class SongsContainer extends React.Component {
     }
 }
 
-// const mapStateToProps = state => {
-//     return {
-//         user: state.user,
-//         songs: state.allSongs
-//     }
-// }
+const mapStateToProps = state => {
+    return {
+        user: state.user,
+        songs: state.allSongs
+    }
+}
 
 export default connect(null, { fetchSongs, hideNavbar })(SongsContainer)

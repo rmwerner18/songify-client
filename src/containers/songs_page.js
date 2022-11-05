@@ -3,7 +3,6 @@ import SearchBar from '../components/search_bar'
 import SongsContainer from './songs_container'
 import { connect, useSelector } from 'react-redux'
 import { fetchSongs } from '../actions/set_all_songs'
-import { NavLink } from 'react-router-dom'
 
 const SongsPage = (props) => {
     let [searchInput, setSearchInput] = useState('')
@@ -11,14 +10,13 @@ const SongsPage = (props) => {
     let songs = useSelector(state => state.allSongs)
     const user = useSelector(state => state.user)
 
-
+    console.log('render SongsPage')
+    
     const handleSearch = (e) => {
         setSearchInput(e.target.value)
     }
 
     const filterSongs = page => {
-        console.log(page)
-        console.log(songs)
         switch(page) {
             case 'USER_SONGS':
                 songs = songs.filter(song => song.user.id === user.id)

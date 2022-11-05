@@ -221,6 +221,8 @@ body {
   height: calc(100vh - 100px);
 }
 
+
+
 .songs-page-menu {
   color: var(--spotify-text);
   width: 20%;
