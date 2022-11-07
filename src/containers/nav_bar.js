@@ -7,7 +7,6 @@ const link = {
   justifyContent: 'center',
   height: '40px',
   padding: '0 20px',
-  // margin: '3px 6px 3px',
   background: 'transparent',
   'fontFamily': 'Courier New',
   textDecoration: 'none',
@@ -24,12 +23,11 @@ const createLink = {
   marginRight: '10px',
   height: '30px',
   padding: '0 20px',
-  // margin: '3px 6px 3px',
   background: 'var(--spotify-green)',
   'fontFamily': 'Courier New',
   textDecoration: 'none',
   borderRadius: '10px',
-  color: 'var(--spotify-text)',
+  color: '#121212',
   fontWeight: '900'
 }
 
@@ -51,21 +49,7 @@ const NavBar = (props) =>
     activeStyle={{
       color: '#fff'
     }}
-  >All Songs</NavLink>
-  {
-    props.user.id
-    ?
-    <NavLink
-    to={`/users/${props.user.id}`}
-    exact
-    style={link}
-    activeStyle={{
-      color: '#fff'
-    }}
-    >Your Songs</NavLink>
-    :
-    null
-  }
+  >Listen</NavLink>
   {
     props.user.id 
     ?

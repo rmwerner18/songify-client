@@ -20,7 +20,7 @@
   --header-background: #1A1A1A;
   --card-background: #181818;
   --controls: #B3B3B3;
-  --spotify-text: #595959;
+  --spotify-text: #B3B3B3;
   --checkbox-background: #3f3f3f;
 }
 
@@ -217,21 +217,26 @@ body {
   margin-top: 80px;
   display: flex;
   flex-direction: row;
-  width: 90vw;
+  width: 100vw;
   height: calc(100vh - 100px);
 }
 
-
+.songs-page-menu div.active {
+  color: #fff;
+}
 
 .songs-page-menu {
   color: var(--spotify-text);
-  width: 20%;
+  width: 25%;
   padding: 10px;
+  margin: 5px 0px;
   font-family: inherit;
+  font-weight: 900;
+  font-size: 1.3rem;
 }
 
 .songs-page .songs-container-container {
-  width: 80%;
+  width: 75%;
 }
 
 .songs-container {
@@ -258,21 +263,22 @@ body {
   border-bottom-width: 90%;
 }
 
-.songs-container-header-icon {
+.songs-container-header-col{
+  color: var(--spotify-text);
+  width: 25%;
+  text-align: left;
+}
+
+.songs-container-header-col.icon {
   width: 10%;
+  text-align: center;
 }
 
-.songs-container-header-title {
-  width: 25%;
-  text-align: left;
+.songs-container-header-col.icon .font-awesome{
+  color: var(--spotify-text);
 }
 
-.songs-container-header-artist {
-  width: 25%;
-  text-align: left;
-}
-
-.songs-container-header-likes {
+.songs-container-header-col.likes{
   width: 10%;
   text-align: left;
 }

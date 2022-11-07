@@ -11,7 +11,7 @@ const SongsPage = (props) => {
     const user = useSelector(state => state.user)
 
     console.log('render SongsPage')
-    
+
     const handleSearch = (e) => {
         setSearchInput(e.target.value)
     }
@@ -29,6 +29,13 @@ const SongsPage = (props) => {
         }
     }
 
+    const setActiveClass = (pageName) => {
+        if (page === pageName) {
+            return "active"
+        }
+        return ""
+    }
+
     filterSongs(page)
 
 
@@ -36,13 +43,9 @@ const SongsPage = (props) => {
     return (
         <div className='songs-page'>
             <div className='songs-page-menu'>
-                {/* <NavLink to='/songs'>All Songs</NavLink>
-                <NavLink to='/users/:id/songs'>Songs You've Created</NavLink>
-                <NavLink to='/users/:id/likedsongs'>Songs You've Liked</NavLink> */}
-
-                <div onClick={() => setPage('ALL_SONGS')}>All Songs</div>
-                <div onClick={() => setPage('USER_SONGS')}>Songs You've Created</div>
-                <div onClick={() => setPage('LIKED_SONGS')}>Songs You've Liked</div>
+                <div onClick={() => setPage('ALL_SONGS')} className={setActiveClass('ALL_SONGS')} >All Songs</div>
+                <div onClick={() => setPage('USER_SONGS')} className={setActiveClass('USER_SONGS')} >Songs You've Created</div>
+                <div onClick={() => setPage('LIKED_SONGS')} className={setActiveClass('LIKED_SONGS')} >Songs You've Liked</div>
             </div>
             <div className='songs-container-container'>
                 <SearchBar searchInput={searchInput} handleSearch={handleSearch}/>

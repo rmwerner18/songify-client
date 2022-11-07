@@ -108,12 +108,12 @@ class SongsContainer extends React.Component {
             ?
             <div className="songs-container">
                 <div className="songs-container-header">
-                    <span className="songs-container-header-icon">
+                    <span className="songs-container-header-col icon">
                         <FontAwesomeIcon icon={solid('hashtag')} className='font-awesome' />
                     </span>
-                    <span className="songs-container-header-title">Song Title</span>
-                    <span className="songs-container-header-artist">Artist</span>
-                    <span className="songs-container-header-likes">Likes</span>
+                    <span className="songs-container-header-col song-title">SONG TITLE</span>
+                    <span className="songs-container-header-col artist">ARTIST</span>
+                    <span className="songs-container-header-col likes">LIKES</span>
                 </div>
                 {this.renderSongs()}
             </div>
