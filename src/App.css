@@ -86,11 +86,11 @@ select:focus {
 
 } */
 
-.search-bar {
+/* .search-bar {
   position: absolute;
   top: 5%;
   right: 3%;
-}
+} */
 
 
 
@@ -281,6 +281,11 @@ body {
 .songs-container-header-col.likes{
   width: 10%;
   text-align: left;
+}
+
+.songs-container-header-col.search input{
+  width: 30%;
+  align-items: right;
 }
 
 .user-page {

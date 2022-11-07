@@ -23,10 +23,11 @@ const SongsContainer = props => {
     const renderSongs = (songs = props.songs) => {
         // console.log(songs)
         songs = applySearch(songs)
-        return songs.map(song => {
+        return songs.map((song, index) => {
             // console.log(song.id)
             return (<Song 
                 id={song.id}
+                idx={index}
                 key={song.id}
                 song={song}
                 deleteHandler={deleteHandler}
@@ -122,7 +123,7 @@ const SongsContainer = props => {
                 <span className="songs-container-header-col song-title">SONG TITLE</span>
                 <span className="songs-container-header-col artist">ARTIST</span>
                 <span className="songs-container-header-col likes">LIKES</span>
-                <SearchBar searchInput={searchInput} handleSearch={handleSearch}/>
+                <SearchBar className='songs-container-header-col search' searchInput={searchInput} handleSearch={handleSearch}/>
             </div>
             {renderSongs()}
         </div>

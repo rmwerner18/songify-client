@@ -79,7 +79,7 @@ const Song = (props) => {
                     }
                 </div>
                 :
-                <span className="song-number">1</span>
+                <span className="song-number">{props.idx+1}</span>
             }
             <h2 className="song-title">{props.song.name}</h2>
             <p className="song-maker">{props.song.user.username}</p>
