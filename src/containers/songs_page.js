@@ -1,20 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import SearchBar from '../components/search_bar'
 import SongsContainer from './songs_container'
 import { connect, useSelector } from 'react-redux'
 import { fetchSongs } from '../actions/set_all_songs'
 
 const SongsPage = (props) => {
-    let [searchInput, setSearchInput] = useState('')
     let [page, setPage] = useState('ALL_SONGS')
     let songs = useSelector(state => state.allSongs)
     const user = useSelector(state => state.user)
-
-    console.log('render SongsPage')
-
-    const handleSearch = (e) => {
-        setSearchInput(e.target.value)
-    }
+    
+    // console.log('render SongsPage')
+    
+    // let [searchInput, setSearchInput] = useState('')
+    // const handleSearch = (e) => {
+    //     setSearchInput(e.target.value)
+    // }
 
     const filterSongs = page => {
         switch(page) {
@@ -36,8 +36,11 @@ const SongsPage = (props) => {
         return ""
     }
 
-    filterSongs(page)
+    useEffect(() => {
+        songs = props.fetchSongs()
+    }, [])
 
+    filterSongs(page)
 
 
     return (
@@ -48,8 +51,8 @@ const SongsPage = (props) => {
                 <div onClick={() => setPage('LIKED_SONGS')} className={setActiveClass('LIKED_SONGS')} >Songs You've Liked</div>
             </div>
             <div className='songs-container-container'>
-                <SearchBar searchInput={searchInput} handleSearch={handleSearch}/>
-                <SongsContainer searchInput={searchInput} songs={filterSongs(page)} user={user}/>
+                {/* <SearchBar searchInput={searchInput} handleSearch={handleSearch}/> */}
+                <SongsContainer songs={filterSongs(page)} user={user}/>
             </div>
         </div>
     )

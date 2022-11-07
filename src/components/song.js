@@ -20,13 +20,13 @@ const Song = (props) => {
     const [userLikesSong, setUserLikesSong] = useState(null)
     const [likes, setLikes] = useState(props.song.likes.length)
     const [mouseOver, setMouseOver] = useState(false)
-    
+
 
     useEffect(() => {
         setUserLikesSong(!!like)
     })
 
-    console.log('render Song')
+    // console.log('render Song')
 
 
     const startLoop = () => {
@@ -53,6 +53,7 @@ const Song = (props) => {
     }
 
     const likeHandler = (e, id) => {
+        // console.log('run likeHandler in song')
         userLikesSong ? setLikes(likes - 1) : setLikes(likes + 1)
         setUserLikesSong(!userLikesSong)
         props.likeHandler(e, id)

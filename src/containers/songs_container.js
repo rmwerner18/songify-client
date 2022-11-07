@@ -1,68 +1,74 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Song from '../components/song'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import { fetchSongs } from '../actions/set_all_songs'
 import { hideNavbar } from '../actions/hide_navbar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import SearchBar from '../components/search_bar'
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro' 
 
 
-class SongsContainer extends React.Component {
+const SongsContainer = props => {
+    let [searchInput, setSearchInput] = useState('')
+    let [songs, setSongs] = useState(props.songs)
+    const user = useSelector(state => state.user)
 
-    renderSongs = (songs = this.props.songs) => {
-        // songs = this.applySearch(this.filterSongs(songs))
+
+    const handleSearch = (e) => {
+        setSearchInput(e.target.value)
+    }
+
+    // console.log('render songsContainer')
+
+    const renderSongs = (songs = props.songs) => {
+        // console.log(songs)
+        songs = applySearch(songs)
         return songs.map(song => {
+            // console.log(song.id)
             return (<Song 
                 id={song.id}
                 key={song.id}
                 song={song}
-                deleteHandler={this.deleteHandler}
-                likeHandler={this.likeHandler}
+                deleteHandler={deleteHandler}
+                likeHandler={likeHandler}
             />)
         })
     }
 
-    applySearch = (songs) => {
-        if (this.props.searchInput) {
+    const applySearch = (songs) => {
+        if (searchInput) {
             return songs.filter(song => {
                 let formattedName = song.name.toLowerCase()
                 let formattedUsername = song.user.username.toLowerCase()
-                return formattedName.includes(this.props.searchInput.toLowerCase()) || formattedUsername.includes(this.props.searchInput.toLowerCase())
+                return formattedName.includes(searchInput.toLowerCase()) || formattedUsername.includes(searchInput.toLowerCase())
             })
         }
         return songs
     }
 
-    deleteSong = song => {
+    const deleteSong = song => {
         return fetch(`http://localhost:3000/songs/${song.id}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
         })
-        .then(this.props.fetchSongs)
+        .then(props.fetchSongs)
     }
 
-    deleteHandler = (song) => {
-        let newArray = this.props.songs
+    const deleteHandler = (song) => {
+        let newArray = props.songs
         let i = newArray.findIndex(s => s.id === song.id)
         newArray.splice(i, 1)
-        this.setState({songs: newArray})
-        this.deleteSong(song)
+        setSongs(newArray)
+        deleteSong(song)
     }
 
-    componentDidMount = () => {
-        this.props.fetchSongs()
+    const userLikesSong = song => {
+        return song.likes.find(like => like.user_id === user.id)
     }
 
-    userLikesSong = song => {
-        if(song.likes) {
-            return song.likes.find(like => like.user_id === this.props.user.id)
-        }
-        return false
-    }
-
-    deleteLike = like => {
+    const deleteLike = like => {
         return fetch(`http://localhost:3000/likes/${like.id}`, {
             method: 'DELETE',
             headers: {
@@ -71,10 +77,10 @@ class SongsContainer extends React.Component {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
         }).then(resp => resp.json())
-        .then(this.props.fetchSongs)
+        .then(props.fetchSongs)
     }
 
-    createLike = song => {
+    const createLike = song => {
         return  fetch('http://localhost:3000/likes/', {
             method: 'POST',
             headers: {
@@ -84,52 +90,55 @@ class SongsContainer extends React.Component {
             },
             body: JSON.stringify({
                 song_id: song.id,
-                user_id: this.props.user.id
+                user_id: props.user.id
             })
         }).then(resp => resp.json())
-        .then(this.props.fetchSongs)
+        .then(props.fetchSongs)
     }
 
-    likeHandler = (e, id) => {
-        const song = this.props.songs.find(song => song.id === id)
-        if (this.props.user.id) {
-            console.log(song)
-            if (this.userLikesSong(song)) {
-                this.deleteLike(this.userLikesSong(song))
+    const likeHandler = (e, id) => {
+        // console.log('run likeHandler in songscontainer')
+        const song = props.songs.find(song => song.id === id)
+        // console.log(song)
+        // console.log(props)
+        if (props.user.id) {
+            userLikesSong(song)
+            if (userLikesSong(song)) {
+                deleteLike(userLikesSong(song))
             } else {
-                this.createLike(song)
+                createLike(song)
             }
         } 
     }
 
-    render() {
-        return (
-            this.props.songs.length > 0
-            ?
-            <div className="songs-container">
-                <div className="songs-container-header">
-                    <span className="songs-container-header-col icon">
-                        <FontAwesomeIcon icon={solid('hashtag')} className='font-awesome' />
-                    </span>
-                    <span className="songs-container-header-col song-title">SONG TITLE</span>
-                    <span className="songs-container-header-col artist">ARTIST</span>
-                    <span className="songs-container-header-col likes">LIKES</span>
-                </div>
-                {this.renderSongs()}
+    return (
+        props.songs.length > 0
+        ?
+        <div className="songs-container">
+            <div className="songs-container-header">
+                <span className="songs-container-header-col icon">
+                    <FontAwesomeIcon icon={solid('hashtag')} className='font-awesome' />
+                </span>
+                <span className="songs-container-header-col song-title">SONG TITLE</span>
+                <span className="songs-container-header-col artist">ARTIST</span>
+                <span className="songs-container-header-col likes">LIKES</span>
+                <SearchBar searchInput={searchInput} handleSearch={handleSearch}/>
             </div>
-            :
-            <span>
-                loading songs
-            </span>
-        )
-    }
+            {renderSongs()}
+        </div>
+        :
+        <span>
+            loading songs
+        </span>
+    )
+
 }
 
-const mapStateToProps = state => {
-    return {
-        user: state.user,
-        songs: state.allSongs
-    }
-}
+// const mapStateToProps = state => {
+//     return {
+//         user: state.user,
+//         songs: state.allSongs
+//     }
+// }
 
 export default connect(null, { fetchSongs, hideNavbar })(SongsContainer)
