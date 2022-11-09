@@ -155,7 +155,7 @@ fieldset span {
 
 body {
   background-color: var(--dark-background);
-  overflow-y: scroll;
+  overflow-x: scroll;
 }
 
 .grid {
@@ -164,11 +164,12 @@ body {
 }
 
 .grid-page {
-  position: absolute;
+  /* position: absolute; */
   top: 70px;
   right: 150px;
-  display: grid;
+  display: flex;
   place-items: center;
+
 }
 
 .grid-container {
@@ -201,12 +202,13 @@ body {
   width: 196px;
   display: grid;
   background-color: var(--dark-background);
-  border-radius: 15px;
+  /* flex-direction: column; */
+  /* border-radius: 15px; */
   /* border-left: 1px solid #aaa; */
   /* box-shadow: inset 0px 0px 10px 3px rgba(0,0,0,0.5), 0 6px 20px 0 rgba(0,0,0,0.4); */
-  grid-template-areas: 
+  /* grid-template-areas: 
   "co"
-  "po"
+  "po" */
 }
 
 .bpm-meter {
@@ -566,7 +568,8 @@ button:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 730px;
+  /* width: 730px; */
+  flex-direction: column;
   /* display: grid;
   margin: 10px;
   grid-template-areas:
@@ -845,11 +848,9 @@ how to remove the virtical space around the range input in IE*/
 
   } */
 
-  .song-options-container {
+  /* .song-options-container {
     width: 555px;
-    border-left: none;
-    border-top: 1px solid #aaa;
-  }
+  } */
 }
 /* 
 .fa-solid, .fa-hashtag {

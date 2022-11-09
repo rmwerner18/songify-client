@@ -47,18 +47,7 @@ const Grid = props => {
                     <BeatForm/>
                     <p className='part-label'>Melody</p>
                     <MelodyForm/>
-                </div>
-                
-                <div className='song-options-container'>
-                    <div className='chord-options'>
-                        <SaveButton song_id={props.song_id}/>
-                        <PlayButton/>
-                        <RandomProgButton/>
-                        <TempoForm />
-                        <InstrumentForm/>
-                        <MelodyOptions/>
-                    </div>
-                </div>  
+                </div> 
             </div>
         </>
     )
