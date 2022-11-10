@@ -10,19 +10,19 @@ import { isOnMeasureLine } from '../helper_functions.js/is_on_measure_line'
 
 const BeatForm = (props) => {
 
-    const presetChangeHandler = (e) => {
-        if (e.target.value !== 'no preset') {
-            let beat = drumPresets[e.target.value]
-            props.changeHHBeats(beat.hhBeats) 
-            props.changeSnareBeats(beat.snareBeats)
-            props.changeKickBeats(beat.kickBeats)
-        }
-    }
+    // const presetChangeHandler = (e) => {
+    //     if (e.target.value !== 'no preset') {
+    //         let beat = drumPresets[e.target.value]
+    //         props.changeHHBeats(beat.hhBeats) 
+    //         props.changeSnareBeats(beat.snareBeats)
+    //         props.changeKickBeats(beat.kickBeats)
+    //     }
+    // }
 
     const changeHandler = (e) => {
-        if (e.target.matches('.drum-preset-select')) {
-            presetChangeHandler(e)
-        } else {
+        // if (e.target.matches('.drum-preset-select')) {
+        //     presetChangeHandler(e)
+        // } else {
             let newArray
             let id = e.target.id
             if (e.target.name === 'hhBeats') {
@@ -37,7 +37,7 @@ const BeatForm = (props) => {
                 newArray = props.kickBeats
                 addOrRemoveBeat(newArray, id)
                 props.changeKickBeats(newArray)
-            } 
+            // } 
         }
     }
 

@@ -5,17 +5,19 @@ import RandomProgButton from '../components/random_prog_button'
 import TempoForm from '../components/tempo_form'
 import InstrumentForm from '../components/instrument_form'
 import MelodyOptions from '../components/melody_options'
+import BeatSelect from '../components/beat_select'
 
 const SongOptionsContainer = props => {
  return (
   <div className='song-options-container'>
    <div className='chord-options'>
-    <SaveButton song_id={props.song_id}/>
+    <SaveButton song_id={ props.song_id }/>
     <PlayButton/>
     <RandomProgButton/>
+    <BeatSelect />
+    <MelodyOptions/>
     <TempoForm />
     <InstrumentForm/>
-    <MelodyOptions/>
    </div>
   </div> 
  )
