@@ -11,13 +11,13 @@ const SongOptionsContainer = props => {
  return (
   <div className='song-options-container'>
    <div className='chord-options'>
-    <SaveButton song_id={ props.song_id }/>
-    <PlayButton/>
-    <RandomProgButton/>
+    <SaveButton song_id={ props.song_id } />
+    <PlayButton />
+    <RandomProgButton />
     <BeatSelect />
-    <MelodyOptions/>
+    <MelodyOptions />
     <TempoForm />
-    <InstrumentForm/>
+    <InstrumentForm />
    </div>
   </div> 
  )

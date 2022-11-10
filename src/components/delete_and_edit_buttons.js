@@ -7,10 +7,10 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 const DeleteAndEditButtons = props => {
     return (
         <>
-        <FontAwesomeIcon icon={solid("trash-can")} className="font-awesome" onClick={() => props.deleteHandler(props)}/>
-        <NavLink to={`/songs/${props.id}/edit`}>
-            <FontAwesomeIcon icon={solid("pen-to-square")} className="font-awesome" onClick={stopLoop}/>
-        </NavLink>
+            <FontAwesomeIcon icon={solid("trash-can")} className="font-awesome" onClick={() => props.deleteHandler(props)} />
+            <NavLink to={`/songs/${props.id}/edit`}>
+                <FontAwesomeIcon icon={solid("pen-to-square")} className="font-awesome" onClick={stopLoop} />
+            </NavLink>
         </>
     )
 }
