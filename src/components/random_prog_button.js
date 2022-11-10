@@ -12,7 +12,7 @@ const RandomProgButton = (props) => {
     
     return (
         <div className='random-chords-button-container'>
-            <button className='random-chords-button' onClick={randomProgGenerator}>Randomize Chords</button>
+            <button className='random-chords-button button' onClick={randomProgGenerator}>Randomize Chords</button>
         </div>
     )
 }

@@ -43,8 +43,9 @@ header {
 
 .button {
   cursor: pointer;
+  color: #fff;
   border: 1px solid #888;
-  background-color: #E0CFB8;
+  background-color: var(--dark-background);
   padding: 2px;
   border-radius: 4px;
   height: 21px;
@@ -53,9 +54,9 @@ header {
   font-weight: bold;
 }
 
-button {
+/* button {
   font-family: inherit;
-}
+} */
 
 .modal-button {
   background-color: #B2854E;
@@ -199,8 +200,8 @@ body {
 }
 
 .song-options-container {
-  width: 196px;
-  display: grid;
+  width: 200px;
+  display: flex;
   background-color: var(--dark-background);
   /* flex-direction: column; */
   /* border-radius: 15px; */
@@ -209,6 +210,10 @@ body {
   /* grid-template-areas: 
   "co"
   "po" */
+}
+
+.song-options-container * {
+  margin: 5px;
 }
 
 .bpm-meter {
@@ -425,7 +430,6 @@ h1, h2 {
 }
 
 .beat-form {
-  grid-area: beat;
   margin: 10px;
   display: flex;
   flex-direction: column;
@@ -527,8 +531,8 @@ h1, h2 {
 }
 
 #grid-start-button {
-  height: 50px;
-  width: 50px;
+  height: 75px;
+  width: 75px;
   border-radius: 50%;
   font-size: large;
   border: 1px solid;
@@ -566,7 +570,7 @@ button:focus {
 
 .chord-options {
   display: flex;
-  align-items: center;
+  align-items: left;
   justify-content: center;
   /* width: 730px; */
   flex-direction: column;
@@ -654,6 +658,7 @@ button:focus {
 
 .mode-select {
   display: flex;
+  flex-direction: column;
 }
 
 .save-container {
@@ -767,7 +772,7 @@ input[type=range]:focus {
   outline: none;
 }
 input[type=range]::-webkit-slider-runnable-track {
-  background: #E0CFB8;
+  background: var(--controls);
   border: 0.1px solid #010101;
   border-radius: 8.2px;
   width: 100%;
@@ -778,17 +783,17 @@ input[type=range]::-webkit-slider-thumb {
   margin-top: -9.9px;
   width: 15px;
   height: 28px;
-  background: #E0CFB8;
+  background: var(--controls);
   border: 0.9px solid #000105;
   border-radius: 43px;
   cursor: pointer;
   -webkit-appearance: none;
 }
 input[type=range]:focus::-webkit-slider-runnable-track {
-  background: #E0CFB8;
+  background: var(--controls);
 }
 input[type=range]::-moz-range-track {
-  background: #E0CFB8;
+  background: var(--controls);
   border: 0.1px solid #010101;
   border-radius: 8.2px;
   width: 100%;
@@ -798,7 +803,7 @@ input[type=range]::-moz-range-track {
 input[type=range]::-moz-range-thumb {
   width: 15px;
   height: 28px;
-  background: #E0CFB8;
+  background: var(--controls);
   border: 0.9px solid #000105;
   border-radius: 43px;
   cursor: pointer;
@@ -813,19 +818,19 @@ input[type=range]::-ms-track {
   cursor: pointer;
 }
 input[type=range]::-ms-fill-lower {
-  background: #E0CFB8;
+  background: var(--controls);
   border: 0.1px solid #010101;
   border-radius: 16.4px;
 }
 input[type=range]::-ms-fill-upper {
-  background: #E0CFB8;
+  background: var(--controls);
   border: 0.1px solid #010101;
   border-radius: 16.4px;
 }
 input[type=range]::-ms-thumb {
   width: 15px;
   height: 28px;
-  background: #E0CFB8;
+  background: var(--controls);
   border: 0.9px solid #000105;
   border-radius: 43px;
   cursor: pointer;
@@ -833,10 +838,10 @@ input[type=range]::-ms-thumb {
   /*Needed to keep the Edge thumb centred*/
 }
 input[type=range]:focus::-ms-fill-lower {
-  background: #E0CFB8;
+  background: var(--controls);
 }
 input[type=range]:focus::-ms-fill-upper {
-  background: #E0CFB8;
+  background: var(--controls);
 }
 /*TODO: Use one of the selectors from https://stackoverflow.com/a/20541859/7077589 and figure out
 how to remove the virtical space around the range input in IE*/

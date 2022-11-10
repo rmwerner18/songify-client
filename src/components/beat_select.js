@@ -27,7 +27,7 @@ const BeatSelect = () => {
     
     return (
         <select className='drum-preset-select' onChange={ e => changeHandler(e) }>
-            <option value='no preset'>Select a Beat</option>
+            <option value='no preset'>Select Drums</option>
             <option value='no preset'>None</option>
             { options() }
         </select>
