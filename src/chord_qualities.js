@@ -8,7 +8,7 @@ export const chordQualityAbbreviations = [
     "m6",
     "dim",
     "dim7",
-    "half dim",
+    ".5dim",
     "aug",
     "5"
 ]

@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro' 
+import { notes, trebleNotes, bassNotes } from '../notes'
+import { chordQualityAbbreviations, chordQualityFullNames } from '../chord_qualities'
 
 
 const Chord = props => {
     // const [modalIsOpen, setModalIsOpen] = useState(false)
-    const [editMode, setEditMode] = useState(true)
+    const [editMode, setEditMode] = useState(false)
 
     // const clickHandler = () => {
     //     setModalIsOpen(true)
@@ -30,6 +32,36 @@ const Chord = props => {
     //     )
     // }
 
+    const chordNameOptions = () => {
+        return notes.map(note => {
+            return <option 
+                value={note} 
+                selected={props.chords[props.id].formattedName === note ? true : false}
+                >{note}</option>
+        })
+    }
+
+
+    const chordQualityOptions = () => {
+        return chordQualityAbbreviations.map(qual => {
+            return <option 
+                value={qual} 
+                selected={props.chords[props.id].formattedQuality === qual ? true : false}
+                >{qual}</option>
+        })
+    }
+
+    const chordBassOptions = () => {
+        return notes.map(note => {
+            return <option 
+                value={note} 
+                selected={props.chords[props.id].formattedBass === note ? true : false}
+                >{note}</option>
+        })
+    }
+
+    const toggleCheck = () => setEditMode(!editMode)
+
     const chordAndQuality = () => {
         return props.chords[props.id].formattedName + props.chords[props.id].formattedQuality
     }
@@ -46,24 +78,27 @@ const Chord = props => {
         <>
             {/* {modalIsOpen ? modal() : null} */}
             <div className="chord-box">
-            <FontAwesomeIcon icon={solid("pen-to-square")} className="font-awesome" />
                 {editMode ?
                 <div className='chord-edit-selects'>
                     <select className='chord-name-select'>
-
+                        {chordNameOptions()}
                     </select>
                     <select className='chord-quality-select'>
-
+                        {chordQualityOptions()}
                     </select>
                     <span>/</span>
                     <select className='chord-bass-select'>
-
+                        {chordBassOptions()}
                     </select>
+                    <FontAwesomeIcon icon={solid('check')} className="font-awesome" onClick={toggleCheck}/>
                 </div>
                 :
-                <span className="chord-name">
-                    {chordAndQuality()} {bassExists() ? bass() : null}
-                </span>}
+                <>
+                    <FontAwesomeIcon icon={solid("pen-to-square")} className="font-awesome" onClick={toggleCheck}/>
+                    <span className="chord-name">
+                        {chordAndQuality()} {bassExists() ? bass() : null}
+                    </span>
+                </>}
             </div>
         </>
     )

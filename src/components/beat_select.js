@@ -21,7 +21,7 @@ const BeatSelect = () => {
     
     const options = () => {
         return drumPresets.map((preset, index) => {
-            return <option key={index} value={index}>Drum Preset {index + 1}</option>
+            return <option key={ index } value={ index }>Drum Preset { index + 1 }</option>
         })
     }
     

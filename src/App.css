@@ -702,6 +702,18 @@ button:focus {
   flex-flow: column wrap;
 }
 
+.chord-edit-selects {
+  width: 100%
+}
+
+.chord-name-select, .chord-bass-select {
+  width: 30%;
+}
+
+.chord-quality-select {
+  width: 50%;
+}
+
 /* ################################################################################# */
 
 .modal {
