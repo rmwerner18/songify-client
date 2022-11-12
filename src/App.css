@@ -692,7 +692,7 @@ button:focus {
   justify-content: center;
   text-align: center;
   /* box-shadow: 1px 1px 5px 0.5px rgba(70, 70, 70, 0.2); */
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .chord-box:hover { 

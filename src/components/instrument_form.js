@@ -7,8 +7,8 @@ const InstrumentForm = (props) => {
         <div className='instrument-form'>
             <span>Instrument: </span>
             <select onChange={e => props.changeInstrument(e.target.value)}>
-                <option value="synth">Synth</option>
                 <option value="piano">Piano</option>
+                <option value="synth">Synth</option>
             </select>
         </div>
     )

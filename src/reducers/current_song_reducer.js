@@ -9,7 +9,7 @@ let initialState = {
     snareBeats: [],
     kickBeats: [],
     hhBeats: [],
-    instrument: "synth",
+    instrument: "piano",
     iBeats: [],
     iiBeats: [],
     iiiBeats: [],

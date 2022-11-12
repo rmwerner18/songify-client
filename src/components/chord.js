@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 // import ChordForm from './chord_form'
 import { connect } from 'react-redux'
+import { changeSingleChord } from '../actions/change_single_chord'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro' 
 import { notes, trebleNotes, bassNotes } from '../notes'
@@ -52,15 +53,16 @@ const Chord = props => {
     }
 
     const chordBassOptions = () => {
+        // props.chords[props.id].formattedBass === note ? true : false
         return notes.map(note => {
             return <option 
                 value={note} 
-                selected={props.chords[props.id].formattedBass === note ? true : false}
+                selected={false}
                 >{note}</option>
         })
     }
 
-    const toggleCheck = () => setEditMode(!editMode)
+    const toggleEditMode = () => setEditMode(!editMode)
 
     const chordAndQuality = () => {
         return props.chords[props.id].formattedName + props.chords[props.id].formattedQuality
@@ -72,6 +74,11 @@ const Chord = props => {
 
     const bass = () => {
         return "/" + props.chords[props.id].formattedBass
+    }
+
+    const submitChange = () => {
+        toggleEditMode()
+        // changeSingleChord(props.chords[props.id], )
     }
 
     return (
@@ -90,11 +97,11 @@ const Chord = props => {
                     <select className='chord-bass-select'>
                         {chordBassOptions()}
                     </select>
-                    <FontAwesomeIcon icon={solid('check')} className="font-awesome" onClick={toggleCheck}/>
+                    <FontAwesomeIcon icon={solid('check')} className="font-awesome" onClick={submitChange}/>
                 </div>
                 :
                 <>
-                    <FontAwesomeIcon icon={solid("pen-to-square")} className="font-awesome" onClick={toggleCheck}/>
+                    <FontAwesomeIcon icon={solid("pen-to-square")} className="font-awesome" onClick={toggleEditMode}/>
                     <span className="chord-name">
                         {chordAndQuality()} {bassExists() ? bass() : null}
                     </span>
