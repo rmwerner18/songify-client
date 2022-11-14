@@ -2,7 +2,6 @@ import * as Tone from 'tone'
 import modes from './constants/modes'
 
 const player = (index, time, props) => {
-    let chords = props.chords.map(chord => chord.freqs)
     Tone.Transport.bpm.value = parseInt(props.bpm)
     let instrument
     if (props.instrument === 'synth') {
@@ -11,13 +10,13 @@ const player = (index, time, props) => {
       instrument = props.piano
     }
     if ([0, 4].includes(index)) {
-        instrument.triggerAttackRelease(chords[0], '2n', time)
+        instrument.triggerAttackRelease(props.freqs[0], '2n', time)
     } else if ([8, 12].includes(index)) {
-        instrument.triggerAttackRelease(chords[1], '2n', time)
+        instrument.triggerAttackRelease(props.freqs[1], '2n', time)
     } else if ([16, 20].includes(index)) {
-        instrument.triggerAttackRelease(chords[2], '2n', time)
+        instrument.triggerAttackRelease(props.freqs[2], '2n', time)
     } else if ([24, 28].includes(index)) {
-        instrument.triggerAttackRelease(chords[3], '2n', time)
+        instrument.triggerAttackRelease(props.freqs[3], '2n', time)
     } 
     if (props.kickBeats.includes(index)) {
         props.kick.start(time)
@@ -52,6 +51,7 @@ const player = (index, time, props) => {
     if (props.IBeats.includes(index)) {
         instrument.triggerAttackRelease(modes[props.melodyMode](props.melodyKey)[7], '8n', time)
     }
+    return
 }
 
 export default player

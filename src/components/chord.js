@@ -6,13 +6,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro' 
 import { MID_NOTES, BASS_NOTES } from '../constants/notes'
 import { CHORD_QUALITIES } from '../constants/chord_qualities'
+import { useDispatch } from 'react-redux';
+
 
 // var Octavian = require('octavian')
 
 
 const Chord = props => {
+    const dispatch = useDispatch()
+
     // const [modalIsOpen, setModalIsOpen] = useState(false)
     const [editMode, setEditMode] = useState(false)
+    const chord = props.chords[props.id]
+    const [bass, setBass] = useState(chord.bass)
+    const [name, setName] = useState(chord.name)
+    const [quality, setQuality] = useState(chord.quality)
 
     // const clickHandler = () => {
     //     setModalIsOpen(true)
@@ -40,7 +48,7 @@ const Chord = props => {
         return Object.keys(MID_NOTES).map(noteValue => {
             return <option 
                 value={noteValue} 
-                selected={props.chords[props.id].name === noteValue ? true : false}
+                selected={chord.name === noteValue ? true : false}
                 >{MID_NOTES[noteValue]}</option>
         })
     }
@@ -50,7 +58,7 @@ const Chord = props => {
         return Object.keys(CHORD_QUALITIES).map(qual => {
             return <option 
                 value={qual} 
-                selected={props.chords[props.id].quality === qual ? true : false}
+                selected={chord.quality === qual ? true : false}
                 >{CHORD_QUALITIES[qual]}</option>
         })
     }
@@ -59,7 +67,7 @@ const Chord = props => {
         return Object.keys(BASS_NOTES).map(noteValue => {
             return <option 
                 value={noteValue} 
-                selected={props.chords[props.id].bass === noteValue ? true : false}
+                selected={chord.bass === noteValue ? true : false}
                 >{BASS_NOTES[noteValue]}</option>
         })
     }
@@ -67,10 +75,11 @@ const Chord = props => {
     const toggleEditMode = () => setEditMode(!editMode)
 
     const displayChord = () => {
-        return MID_NOTES[props.chords[props.id].name] + CHORD_QUALITIES[props.chords[props.id].quality] + "/" + BASS_NOTES[props.chords[props.id].bass]
+        return MID_NOTES[chord.name] + CHORD_QUALITIES[chord.quality] + "/" + BASS_NOTES[chord.bass]
     }
 
     const submitChange = () => {
+        dispatch(changeSingleChord(props.id, {bass: bass, name: name, quality: quality}))
         toggleEditMode()
     }
 
@@ -80,14 +89,14 @@ const Chord = props => {
             <div className="chord-box">
                 {editMode ?
                 <div className='chord-edit-selects'>
-                    <select className='chord-name-select'>
+                    <select className='chord-name-select' onChange={e => setName(e.target.value)}>
                         {chordNameOptions()}
                     </select>
-                    <select className='chord-quality-select'>
+                    <select className='chord-quality-select' onChange={e => setQuality(e.target.value)}>
                         {chordQualityOptions()}
                     </select>
                     <span>/</span>
-                    <select className='chord-bass-select'>
+                    <select className='chord-bass-select' onChange={e => setBass(e.target.value)}>
                         {chordBassOptions()}
                     </select>
                     <FontAwesomeIcon icon={solid('check')} className="font-awesome" onClick={submitChange}/>

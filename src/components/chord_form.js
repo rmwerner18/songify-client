@@ -30,7 +30,7 @@
 //         if (bass.length > 0) {
 //             return new Octavian.Note(bass)
 //         } else {
-//             return new Octavian.Note(allNotes.B.bass ('B3')).downOctave()
+//             return new Octavian.Note(bass).downOctave()
 //         }
 //     }
 
