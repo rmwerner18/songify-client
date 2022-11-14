@@ -3,7 +3,7 @@ export const CHORD_QUALITIES = {
     "minor": 'm', 
     "majorSeventh": 'maj7', 
     'minorSeventh': 'm7', 
-    'dominantSeventh': 'dim7', 
+    'dominantSeventh': '7', 
     'majorSixth': 'maj6',
     'minorSixth': 'm6',
     'diminished': 'dim',

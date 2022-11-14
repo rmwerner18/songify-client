@@ -40,7 +40,7 @@ const Chord = props => {
         return Object.keys(MID_NOTES).map(noteValue => {
             return <option 
                 value={noteValue} 
-                defaultValue={props.chords[props.id].name}
+                selected={props.chords[props.id].name === noteValue ? true : false}
                 >{MID_NOTES[noteValue]}</option>
         })
     }
@@ -50,7 +50,7 @@ const Chord = props => {
         return Object.keys(CHORD_QUALITIES).map(qual => {
             return <option 
                 value={qual} 
-                defaultValue={props.chords[props.id].quality}
+                selected={props.chords[props.id].quality === qual ? true : false}
                 >{CHORD_QUALITIES[qual]}</option>
         })
     }
@@ -59,7 +59,7 @@ const Chord = props => {
         return Object.keys(BASS_NOTES).map(noteValue => {
             return <option 
                 value={noteValue} 
-                defaultValue={BASS_NOTES[props.chords[props.id].bass]}
+                selected={props.chords[props.id].bass === noteValue ? true : false}
                 >{BASS_NOTES[noteValue]}</option>
         })
     }
