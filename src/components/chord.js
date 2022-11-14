@@ -4,8 +4,10 @@ import { connect } from 'react-redux'
 import { changeSingleChord } from '../actions/change_single_chord'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro' 
-import { notes, trebleNotes, bassNotes } from '../notes'
-import { chordQualityAbbreviations, chordQualityFullNames } from '../chord_qualities'
+import { MID_NOTES, BASS_NOTES } from '../constants/notes'
+import { CHORD_QUALITIES } from '../constants/chord_qualities'
+
+// var Octavian = require('octavian')
 
 
 const Chord = props => {
@@ -33,52 +35,43 @@ const Chord = props => {
     //     )
     // }
 
+
     const chordNameOptions = () => {
-        return notes.map(note => {
+        return Object.keys(MID_NOTES).map(noteValue => {
             return <option 
-                value={note} 
-                selected={props.chords[props.id].formattedName === note ? true : false}
-                >{note}</option>
+                value={noteValue} 
+                defaultValue={props.chords[props.id].name}
+                >{MID_NOTES[noteValue]}</option>
         })
     }
 
 
     const chordQualityOptions = () => {
-        return chordQualityAbbreviations.map(qual => {
+        return Object.keys(CHORD_QUALITIES).map(qual => {
             return <option 
                 value={qual} 
-                selected={props.chords[props.id].formattedQuality === qual ? true : false}
-                >{qual}</option>
+                defaultValue={props.chords[props.id].quality}
+                >{CHORD_QUALITIES[qual]}</option>
         })
     }
 
     const chordBassOptions = () => {
-        // props.chords[props.id].formattedBass === note ? true : false
-        return notes.map(note => {
+        return Object.keys(BASS_NOTES).map(noteValue => {
             return <option 
-                value={note} 
-                selected={false}
-                >{note}</option>
+                value={noteValue} 
+                defaultValue={BASS_NOTES[props.chords[props.id].bass]}
+                >{BASS_NOTES[noteValue]}</option>
         })
     }
 
     const toggleEditMode = () => setEditMode(!editMode)
 
-    const chordAndQuality = () => {
-        return props.chords[props.id].formattedName + props.chords[props.id].formattedQuality
-    }
-
-    const bassExists = () => {
-        return props.chords[props.id].bass.length > 0
-    }
-
-    const bass = () => {
-        return "/" + props.chords[props.id].formattedBass
+    const displayChord = () => {
+        return MID_NOTES[props.chords[props.id].name] + CHORD_QUALITIES[props.chords[props.id].quality] + "/" + BASS_NOTES[props.chords[props.id].bass]
     }
 
     const submitChange = () => {
         toggleEditMode()
-        // changeSingleChord(props.chords[props.id], )
     }
 
     return (
@@ -103,7 +96,7 @@ const Chord = props => {
                 <>
                     <FontAwesomeIcon icon={solid("pen-to-square")} className="font-awesome" onClick={toggleEditMode}/>
                     <span className="chord-name">
-                        {chordAndQuality()} {bassExists() ? bass() : null}
+                        {displayChord()}
                     </span>
                 </>}
             </div>

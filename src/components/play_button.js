@@ -8,6 +8,21 @@ import { endNowPlaying } from '../actions/end_now_playing'
 import { connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro' 
+import { createSelector } from '@reduxjs/toolkit'
+
+const getCurrentSong = state => state.currentSong
+
+const getCurrentSongWithFrequencies = createSelector(
+    [getCurrentSong], currentSong => {
+        const freqs = currentSong.chords.map(chord => {
+            //logic to get freqs
+            //returns [[], [], [], []]
+        }) 
+        return { ...currentSong, freqs }
+    }
+)
+
+// const currentSong = useSelector()
 
 class PlayButton extends React.Component {
     playerCaller = (index, time) => {

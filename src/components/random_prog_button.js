@@ -1,6 +1,6 @@
 import React from 'react'
 import { changeAllChords } from '../actions/change_all_chords'
-import chordPresets from '../chord_presets'
+import chordPresets from '../constants/chord_presets'
 import { connect } from 'react-redux'
 
 const RandomProgButton = (props) => {

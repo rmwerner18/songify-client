@@ -30,14 +30,14 @@
 //         if (bass.length > 0) {
 //             return new Octavian.Note(bass)
 //         } else {
-//             return new Octavian.Note(name).downOctave()
+//             return new Octavian.Note(allNotes.B.bass ('B3')).downOctave()
 //         }
 //     }
 
 //     createChord = (name, qual) => {
 //         let chord
 //         if (qual === "augmented") {
-//             chord = new Octavian.Chord(name)
+//             chord = new Octavian.Chord(allNotes.C.mid ('C4'))
 //             chord.addInterval('majorThird')
 //             chord.addInterval('minorSixth')
 //         } else if (qual === "5") {

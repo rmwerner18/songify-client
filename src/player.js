@@ -1,5 +1,5 @@
 import * as Tone from 'tone'
-import modes from './modes'
+import modes from './constants/modes'
 
 const player = (index, time, props) => {
     let chords = props.chords.map(chord => chord.freqs)

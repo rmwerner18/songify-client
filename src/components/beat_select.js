@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { changeKickBeats, changeHHBeats, changeSnareBeats } from '../actions/change_drums'
-import drumPresets from '../drum_presets'
+import drumPresets from '../constants/drum_presets'
 
 const BeatSelect = () => {   
     const dispatch = useDispatch()

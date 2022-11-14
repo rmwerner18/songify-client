@@ -1,4 +1,4 @@
-import defaultChords from '../default_chords'
+import defaultChords from '../constants/default_chords'
 
 let initialState = {
     id: null,

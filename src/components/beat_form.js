@@ -1,6 +1,6 @@
 import React from 'react'
 import BeatSelect from './beat_select'
-import drumPresets from '../drum_presets'
+import drumPresets from '../constants/drum_presets'
 import { changeHHBeats, changeSnareBeats, changeKickBeats } from '../actions/change_drums'
 import { clearDrums } from '../actions/clear_drums'
 import { connect } from 'react-redux'

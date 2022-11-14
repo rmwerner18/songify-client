@@ -1,4 +1,4 @@
-import { fetchHeaders } from '../fetch_headers'
+import { fetchHeaders } from '../constants/fetch_headers'
 
 const setUser = (user) => {
     return {
