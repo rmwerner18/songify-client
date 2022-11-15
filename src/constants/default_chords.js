@@ -21,9 +21,4 @@ const defaultChords = [
     }
 ]
 
-const QUALITIES = {
-    aug: "augmented",
-    M: "major"
-}
-
 export default defaultChords

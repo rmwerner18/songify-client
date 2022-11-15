@@ -1,6 +1,6 @@
 import React from 'react'
 import BeatSelect from './beat_select'
-import drumPresets from '../constants/drum_presets'
+import DRUM_PRESETS from '../constants/drum_presets'
 import { changeHHBeats, changeSnareBeats, changeKickBeats } from '../actions/change_drums'
 import { clearDrums } from '../actions/clear_drums'
 import { connect } from 'react-redux'
@@ -12,7 +12,7 @@ const BeatForm = (props) => {
 
     // const presetChangeHandler = (e) => {
     //     if (e.target.value !== 'no preset') {
-    //         let beat = drumPresets[e.target.value]
+    //         let beat = DRUM_PRESETS[e.target.value]
     //         props.changeHHBeats(beat.hhBeats) 
     //         props.changeSnareBeats(beat.snareBeats)
     //         props.changeKickBeats(beat.kickBeats)

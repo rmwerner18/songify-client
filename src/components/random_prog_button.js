@@ -1,13 +1,13 @@
 import React from 'react'
 import { changeAllChords } from '../actions/change_all_chords'
-import chordPresets from '../constants/chord_presets'
+import CHORD_PROG_PRESETS from '../constants/chord_prog_presets'
 import { connect } from 'react-redux'
 
 const RandomProgButton = (props) => {
     const randomProgGenerator = () => {
-        let max = chordPresets.length
+        let max = CHORD_PROG_PRESETS.length
         let int =  Math.floor(Math.random() * Math.floor(max));
-        props.changeAllChords(chordPresets[int])
+        props.changeAllChords(CHORD_PROG_PRESETS[int])
     }
     
     return (

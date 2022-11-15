@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { changeKickBeats, changeHHBeats, changeSnareBeats } from '../actions/change_drums'
-import drumPresets from '../constants/drum_presets'
+import DRUM_PRESETS from '../constants/drum_presets'
 
 const BeatSelect = () => {   
     const dispatch = useDispatch()
@@ -12,7 +12,7 @@ const BeatSelect = () => {
             dispatch(changeSnareBeats([]))
             dispatch(changeKickBeats([]))
         } else {
-            let beat = drumPresets[e.target.value]
+            let beat = DRUM_PRESETS[e.target.value]
             dispatch(changeHHBeats(beat.hhBeats))
             dispatch(changeSnareBeats(beat.snareBeats))
             dispatch(changeKickBeats(beat.kickBeats))
@@ -20,7 +20,7 @@ const BeatSelect = () => {
     }
     
     const options = () => {
-        return drumPresets.map((preset, index) => {
+        return DRUM_PRESETS.map((preset, index) => {
             return <option key={ index } value={ index }>Drum Preset { index + 1 }</option>
         })
     }

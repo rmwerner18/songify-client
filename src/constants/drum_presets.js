@@ -1,4 +1,4 @@
-const drumPresets = [
+const DRUM_PRESETS = [
     {
         hhBeats: [2, 14, 18, 22, 26, 30, 6, 10],
         kickBeats: [0, 3, 16, 19, 24, 27, 29, 8, 11, 13],
@@ -33,4 +33,4 @@ const drumPresets = [
 
 
 
-export default drumPresets
+export default DRUM_PRESETS
