@@ -112,10 +112,9 @@ const SongsContainer = props => {
         } 
     }
 
-    return (
-        props.songs.length > 0
-        ?
-        <div className="songs-container">
+    const renderContent = () => {
+        return (
+            <div className="songs-container">
             <div className="songs-container-header">
                 <span className="songs-container-header-col icon">
                     <FontAwesomeIcon icon={solid('hashtag')} className='font-awesome' />
@@ -127,10 +126,41 @@ const SongsContainer = props => {
             </div>
             {renderSongs()}
         </div>
+        )
+    }
+
+    const renderNoSongsMessage = () => {
+        switch(props.page) {
+            case 'USER_SONGS':
+                return (
+                    <>
+                        <h1>You have not created any songs.</h1>
+                        <span>Click the 'Create' tab to create a new song.</span>
+                    </>
+                )
+            case 'LIKED_SONGS':
+                return (
+                    <>
+                        <h1>You have not liked any songs.</h1>
+                        <span>Click the like icon on a song to see it appear here</span>
+                    </>
+                )
+            default:
+                return (
+                    <>
+                        <h1>No songs have been created</h1>
+                        <span>Click the 'Create' tab to create a new song.</span>
+                    </>
+                )
+        }
+    }
+
+    return (
+        props.songs
+        ?
+        props.songs.length > 0 ? renderContent() : renderNoSongsMessage()
         :
-        <span>
-            loading songs
-        </span>
+        <h1>Loading Songs...</h1>   
     )
 
 }

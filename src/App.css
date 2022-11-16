@@ -227,6 +227,9 @@ body {
   width: 100vw;
   height: calc(100vh - 100px);
 }
+.songs-page-menu div {
+  cursor: pointer;
+}
 
 .songs-page-menu div.active {
   color: #fff;

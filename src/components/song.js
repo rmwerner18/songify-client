@@ -24,7 +24,7 @@ const Song = (props) => {
 
     useEffect(() => {
         setUserLikesSong(!!like)
-    })
+    }, [like])
 
     // console.log('render Song')
 
