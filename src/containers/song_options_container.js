@@ -9,7 +9,7 @@ import BeatSelect from '../components/beat_select'
 
 const SongOptionsContainer = props => {
  return (
-  <div className='song-options-container'>
+ <div className='song-options-container'>
    <div className='chord-options'>
     <PlayButton />
     <RandomProgButton />

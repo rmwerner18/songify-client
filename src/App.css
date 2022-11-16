@@ -59,7 +59,7 @@ header {
 } */
 
 .modal-button {
-  background-color: #B2854E;
+  background-color: var(--card-background);
   height: 40px;
   width: 100px;
   color: #fff;
@@ -203,6 +203,9 @@ body {
   width: 200px;
   display: flex;
   background-color: var(--dark-background);
+  align-self: flex-end;
+
+  margin-right: 20px;
   /* flex-direction: column; */
   /* border-radius: 15px; */
   /* border-left: 1px solid #aaa; */
@@ -297,6 +300,54 @@ body {
   width: 30%;
   align-items: right;
 }
+
+/* _______________________________________________ */
+
+.search {
+  position: relative;
+  height: 30px;
+}
+
+.search .search-bar {
+  padding: 18px;
+  background-color: var(--checkbox-background);
+  border: 0;
+  font-size: 15px;
+  height: 30px;
+  width: 30px;
+  transition: width 0.3s ease;
+  border-radius: 18px;
+}
+
+.search-icon {
+  padding: 8px;
+  background-color: var(--checkbox-background);
+  color: var(--controls);
+  border: 0;
+  cursor: pointer;
+  font-size: 3px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  transition: transform 0.3s ease;
+  border-radius: 18px;
+}
+
+.search-icon:focus, .search-bar:focus {
+  outline: none;
+}
+
+.search.active .search-bar {
+  width: 150px;
+}
+
+.search.active .search-icon {
+  transform: translateX(118px);
+}
+
+/* _______________________________________________ */
 
 .user-page {
   display: flex;
@@ -438,6 +489,11 @@ h1, h2 {
   flex-direction: column;
   align-items: center;
   transform: translateX(-29.5px)
+}
+
+.drum-preset-select {
+  margin: 10px;
+  margin-bottom: 0px;
 }
 
 .melody-form {
@@ -722,6 +778,8 @@ button:focus {
   width: 50%;
 }
 
+
+
 /* ################################################################################# */
 
 .modal {
@@ -738,7 +796,7 @@ button:focus {
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #E0CEB8;
+  background-color: var(--card-background);
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border-radius: 25px;
