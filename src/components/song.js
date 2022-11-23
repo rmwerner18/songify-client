@@ -26,7 +26,7 @@ const Song = (props) => {
         setUserLikesSong(!!like)
     }, [like])
 
-    // console.log('render Song')
+    console.log(props.song)
 
 
     const startLoop = () => {

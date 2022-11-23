@@ -2,7 +2,7 @@ import * as Tone from 'tone'
 import modes from './constants/modes'
 
 const player = (index, time, props) => {
-    console.log(props)
+    // console.log('player props', props)
     Tone.Transport.bpm.value = parseInt(props.bpm)
     let instrument
     if (props.instrument === 'synth') {

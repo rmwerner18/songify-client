@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 const SearchBar = props => {
-    let [active, setActive] = useState('false')
+    let [active, setActive] = useState(false)
 
     return (
         <div className={active ? 'search active' : 'search'}>

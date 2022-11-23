@@ -5,132 +5,138 @@ import { setNumOfEigthNotes } from '../helper_functions.js/set_num_of_eigth_note
 import { stopLoop } from '../helper_functions.js/stop_loop'
 import { setNowPlaying } from '../actions/set_now_playing'
 import { endNowPlaying } from '../actions/end_now_playing'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro' 
-// import { createSelector } from '@reduxjs/toolkit'
-// import { useSelector } from 'react-redux'
-// import { useEffect } from 'react'
+import { createSelector } from '@reduxjs/toolkit'
+import { useSelector } from 'react-redux'
+import { useEffect, useRef } from 'react'
 
 var Octavian = require('octavian')
 
-// const getCurrentSong = state => state.currentSong
+const getCurrentSong = state => state.currentSong
 
-// const getCurrentSongWithFrequencies = createSelector(
-//     [getCurrentSong], currentSong => {
-//         const freqs = currentSong.chords.map(chord => {
-//             const createChord = (name, qual) => {
-//                 let chord
-//                 if (qual === "augmented") {
-//                     chord = new Octavian.Chord(name)
-//                     chord.addInterval('majorThird')
-//                     chord.addInterval('minorSixth')
-//                 } else if (qual === "5") {
-//                     chord = new Octavian.Chord(name)
-//                     chord.addInterval('perfectFifth')
-//                     chord.addInterval('perfectOctave')
-//                 } else {
-//                     chord = new Octavian.Chord(name, qual)
-//                 }
-//                 return chord
-//             }
+const getCurrentSongWithFrequencies = createSelector(
+    [getCurrentSong], currentSong => {
+        const freqs = currentSong.chords.map(chord => {
+            const createChord = (name, qual) => {
+                let chord
+                if (qual === "augmented") {
+                    chord = new Octavian.Chord(name)
+                    chord.addInterval('majorThird')
+                    chord.addInterval('minorSixth')
+                } else if (qual === "5") {
+                    chord = new Octavian.Chord(name)
+                    chord.addInterval('perfectFifth')
+                    chord.addInterval('perfectOctave')
+                } else {
+                    chord = new Octavian.Chord(name, qual)
+                }
+                return chord
+            }
 
-//             const getFrequencies = (bass, name, qual) => {
-//                 let chord = createChord(name, qual)
-//                 let freqs = chord.frequencies
-//                 let b = new Octavian.Note(bass)
-//                 freqs.push(b.frequency)
-//                 return freqs
-//             }
+            const getFrequencies = (bass, name, qual) => {
+                let chord = createChord(name, qual)
+                let freqs = chord.frequencies
+                let b = new Octavian.Note(bass)
+                freqs.push(b.frequency)
+                return freqs
+            }
 
-//             return getFrequencies(chord.bass, chord.name, chord.quality)
-//         }) 
-//         return { ...currentSong, freqs }
-//     }
-// )
+            return getFrequencies(chord.bass, chord.name, chord.quality)
+        }) 
+        return { ...currentSong, freqs }
+    }
+)
 
-class PlayButton extends React.Component {
+const PlayButton = () => {
  
-    // const currentSong = useSelector(getCurrentSongWithFrequencies)
+    const currentSong = useSelector(getCurrentSongWithFrequencies)
+    const sounds = useSelector(state => state.sounds)
+    const nowPlaying = useSelector(state => state.nowPlaying)
+    const user = useSelector(state => state.user)
+    const songRef = useRef(currentSong)
 
-    // useEffect(() => {
-    // }, [currentSong])
+    const dispatch = useDispatch()
+    console.log('kicks', currentSong.kickBeats)
 
-    playerCaller = (index, time) => {
-        return player(index, time, { ...this.props.sounds, ...this.props.song })
+    useEffect(() => {
+        songRef.current = currentSong
+    }, [currentSong])
+
+    const playerCaller = (index, time) => {
+        console.log('kicks in playerCaller', currentSong.kickBeats)
+        return player(index, time, { ...sounds, ...songRef.current})
     }
 
-    startLoop = () => {
-        // console.log(currentSong)
+    const startLoop = () => {
         let array = []
         setNumOfEigthNotes(32, array)
         new Tone.Sequence((time, index) => {
-            this.playerCaller(index, time)
+            playerCaller(index, time)
         }, array).start(0)
         Tone.Transport.start();
     }
 
-    playHandler = (e) => {
+    const playHandler = (e) => {
         if (Tone.Transport.state === "stopped") {
             Tone.Destination.context.resume().then(() => {
-                this.startLoop()
+                startLoop()
             })
-            this.props.setNowPlaying({song: 'current song'})
+            dispatch(setNowPlaying({song: 'current song'}))
         } else {
             stopLoop()
-            this.props.endNowPlaying()
+            dispatch(endNowPlaying())
         }
     }
 
-    render() {
-        return (
-            <div className='grid-start-button-container'>
-                <button id='grid-start-button' onClick={(e) => this.playHandler(e)}>
-                        {this.props.nowPlaying.song 
-                        ? <FontAwesomeIcon icon={solid('pause')} className='font-awesome'/> 
-                        : <FontAwesomeIcon icon={solid('play')} />}
-                </button>
-            </div>
-        )
-    }
+    return (
+        <div className='grid-start-button-container'>
+            <button id='grid-start-button' onClick={(e) => playHandler(e)}>
+                    {nowPlaying.song 
+                    ? <FontAwesomeIcon icon={solid('pause')} className='font-awesome'/> 
+                    : <FontAwesomeIcon icon={solid('play')} />}
+            </button>
+        </div>
+    )
 }
 
-const mapStateToProps = state => {
+// const mapStateToProps = state => {
 
-    const freqs = state.currentSong.chords.map(chord => {
-        const createChord = (name, qual) => {
-            let chord
-            if (qual === "augmented") {
-                chord = new Octavian.Chord(name)
-                chord.addInterval('majorThird')
-                chord.addInterval('minorSixth')
-            } else if (qual === "5") {
-                chord = new Octavian.Chord(name)
-                chord.addInterval('perfectFifth')
-                chord.addInterval('perfectOctave')
-            } else {
-                chord = new Octavian.Chord(name, qual)
-            }
-            return chord
-        }
-        const getFrequencies = (bass, name, qual) => {
-            let chord = createChord(name, qual)
-            let freqs = chord.frequencies
-            let b = new Octavian.Note(bass)
-            freqs.push(b.frequency)
-            return freqs
-        }
+//     // const freqs = state.currentSong.chords.map(chord => {
+//     //     const createChord = (name, qual) => {
+//     //         let chord
+//     //         if (qual === "augmented") {
+//     //             chord = new Octavian.Chord(name)
+//     //             chord.addInterval('majorThird')
+//     //             chord.addInterval('minorSixth')
+//     //         } else if (qual === "5") {
+//     //             chord = new Octavian.Chord(name)
+//     //             chord.addInterval('perfectFifth')
+//     //             chord.addInterval('perfectOctave')
+//     //         } else {
+//     //             chord = new Octavian.Chord(name, qual)
+//     //         }
+//     //         return chord
+//     //     }
+//     //     const getFrequencies = (bass, name, qual) => {
+//     //         let chord = createChord(name, qual)
+//     //         let freqs = chord.frequencies
+//     //         let b = new Octavian.Note(bass)
+//     //         freqs.push(b.frequency)
+//     //         return freqs
+//     //     }
 
-        return getFrequencies(chord.bass, chord.name, chord.quality)
-    })
+//     //     return getFrequencies(chord.bass, chord.name, chord.quality)
+//     // })
 
 
-    return {
-        sounds: state.sounds,
-        song: { ...state.currentSong, freqs },
-        user: state.user,
-        nowPlaying: state.nowPlaying
-    }
-}
+//     return {
+//         sounds: state.sounds,
+//         song: { ...state.currentSong, freqs },
+//         user: state.user,
+//         nowPlaying: state.nowPlaying
+//     }
+// }
 
-export default connect(mapStateToProps, { setNowPlaying, endNowPlaying })(PlayButton)
+export default PlayButton

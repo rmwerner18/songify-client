@@ -310,6 +310,7 @@ body {
 
 .search .search-bar {
   padding: 18px;
+  color: #fff;
   background-color: var(--checkbox-background);
   border: 0;
   font-size: 15px;
