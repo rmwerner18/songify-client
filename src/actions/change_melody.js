@@ -1,7 +1,7 @@
-export const changeiBeats = (beats) => {
+export const changeMelody = (beats) => {
     return {
-        type: 'CHANGE_i_BEATS',
-        beats: beats
+        type: 'MELODY',
+        payload: beats
     }
 }
 

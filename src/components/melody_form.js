@@ -6,7 +6,7 @@ import { clearMelody } from '../actions/clear_melody'
 import { changeKey, changeMode } from '../actions/change_key_and_mode'
 import { connect } from 'react-redux'
 import {
-    changeiBeats,
+    changeMelody,
     changeiiBeats,
     changeiiiBeats,
     changeivBeats,
@@ -45,41 +45,9 @@ class MelodyForm extends React.Component {
 
 
     changeHandler = (e) => {
-        let newArray
-        let id = e.target.id
-        if (e.target.name === 'iBeats') {
-            newArray = this.props.iBeats
-            addOrRemoveBeat(newArray, id)
-            this.props.changeiBeats(newArray)
-        } else if (e.target.name === 'iiBeats') {
-            newArray = this.props.iiBeats
-            addOrRemoveBeat(newArray, id)
-            this.props.changeiiBeats(newArray)
-        } else if (e.target.name === 'iiiBeats') {
-            newArray = this.props.iiiBeats
-            addOrRemoveBeat(newArray, id)
-            this.props.changeiiiBeats(newArray)
-        } else if (e.target.name === 'ivBeats') {
-            newArray = this.props.ivBeats
-            addOrRemoveBeat(newArray, id)
-            this.props.changeivBeats(newArray)
-        } else if (e.target.name === 'vBeats') {
-            newArray = this.props.vBeats
-            addOrRemoveBeat(newArray, id)
-            this.props.changevBeats(newArray)
-        } else if (e.target.name === 'viBeats') {
-            newArray = this.props.viBeats
-            addOrRemoveBeat(newArray, id)
-            this.props.changeviBeats(newArray)
-        } else if (e.target.name === 'viiBeats') {
-            newArray = this.props.viiBeats
-            addOrRemoveBeat(newArray, id)
-            this.props.changeviiBeats(newArray)
-        } else if (e.target.name === 'IBeats') {
-            newArray = this.props.IBeats
-            addOrRemoveBeat(newArray, id)
-            this.props.changeIBeats(newArray)
-        }
+        const { name: beatType, id } = e.target
+        const newArray = addOrRemoveBeat(this.props[beatType], id)
+        this.props.changeMelody({beatType: newArray})
     }
 
     IRows = () => {
@@ -221,7 +189,7 @@ class MelodyForm extends React.Component {
 }
 
 const mapDispatchToProps = {
-    changeiBeats,
+    // changeiBeats,
     changeiiBeats,
     changeiiiBeats,
     changeivBeats,
