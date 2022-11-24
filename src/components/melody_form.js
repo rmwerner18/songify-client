@@ -4,21 +4,24 @@ import { makeBeatArray } from '../helper_functions.js/make_beat_array'
 import { isOnMeasureLine } from '../helper_functions.js/is_on_measure_line'
 import { clearMelody } from '../actions/clear_melody'
 import { changeKey, changeMode } from '../actions/change_key_and_mode'
+import { useSelector, useDispatch } from 'react-redux'
 import { connect } from 'react-redux'
-import {
-    changeMelody,
-    changeiiBeats,
-    changeiiiBeats,
-    changeivBeats,
-    changevBeats,
-    changeviBeats,
-    changeviiBeats,
-    changeIBeats
-} from '../actions/change_melody'
+import { changeSongAttribute } from '../actions/change_song_attribute'
 
-class MelodyForm extends React.Component {
+const MelodyForm = () => {
+    const currentSong = useSelector(state => state.currentSong)
+    const iBeats = useSelector(state => state.currentSong.iBeats)
+    const iiBeats = useSelector(state => state.currentSong.iiBeats)
+    const iiiBeats = useSelector(state => state.currentSong.iiiBeats)
+    const ivBeats = useSelector(state => state.currentSong.ivBeats)
+    const vBeats = useSelector(state => state.currentSong.vBeats)
+    const viBeats = useSelector(state => state.currentSong.viBeats)
+    const viiBeats = useSelector(state => state.currentSong.viiBeats)
+    const IBeats = useSelector(state => state.currentSong.IBeats)
 
-    keyRoots = [
+    const dispatch = useDispatch()
+
+    const keyRoots = [
         'C5',
         'C#5',
         'D5',
@@ -33,7 +36,7 @@ class MelodyForm extends React.Component {
         'B5'
     ]
 
-    modes = [
+    const modes = [
         "ionian",
         "dorian",
         "phrygian",
@@ -43,88 +46,98 @@ class MelodyForm extends React.Component {
         "locrian"
     ]
 
+    const beatTypes = {
+        'iBeats': iBeats,
+        'iiBeats': iiBeats,
+        'iiiBeats': iiiBeats,
+        'ivBeats': ivBeats,
+        'vBeats': vBeats,
+        'viBeats': viBeats,
+        'viiBeats': viiBeats,
+        'IBeats': IBeats,
+    }
 
-    changeHandler = (e) => {
+    const changeHandler = (e) => {
         const { name: beatType, id } = e.target
-        const newArray = addOrRemoveBeat(this.props[beatType], id)
-        this.props.changeMelody({beatType: newArray})
+        const newArray = addOrRemoveBeat(beatTypes[beatType], id)
+        dispatch(changeSongAttribute({beatType: newArray}))
     }
 
-    IRows = () => {
+    const IRows = () => {
         return makeBeatArray().map((n, index) => {return (
         <div className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
             <label className='checkbox-container'>
-                <input key={index} type="checkbox" checked={this.props.IBeats.includes(n)} name="IBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.IBeats)}/>
+                <input key={index} type="checkbox" checked={IBeats.includes(n)} name="IBeats" id={n} onChange={(e) => changeHandler(e, IBeats)}/>
                 <div className='checkmark'></div>
             </label>
         </div>
         )})
     }
-    viiRows = () => {
+    const viiRows = () => {
         return makeBeatArray().map((n, index) => {return (
         <div className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
             <label className='checkbox-container'>
-                <input key={index} type="checkbox" checked={this.props.viiBeats.includes(n)}name="viiBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.viiBeats)}/>
+                <input key={index} type="checkbox" checked={viiBeats.includes(n)}name="viiBeats" id={n} onChange={(e) => changeHandler(e, viiBeats)}/>
                 <div className='checkmark'></div>
             </label>
         </div>
         )})
     }
-    viRows = () => {
+    const viRows = () => {
         return makeBeatArray().map((n, index) => {return (
         <div className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
             <label className='checkbox-container'>
-                <input key={index} type="checkbox" checked={this.props.viBeats.includes(n)}name="viBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.viBeats)}/>
+                <input key={index} type="checkbox" checked={viBeats.includes(n)}name="viBeats" id={n} onChange={(e) => changeHandler(e, viBeats)}/>
                 <div className='checkmark'></div>
             </label>
         </div>
         )})
     }
-    vRows = () => {
+    const vRows = () => {
         return makeBeatArray().map((n, index) => {return (
         <div className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
             <label className='checkbox-container'>
-                <input key={index} type="checkbox" checked={this.props.vBeats.includes(n)} name="vBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.vBeats)}/>
+                <input key={index} type="checkbox" checked={vBeats.includes(n)} name="vBeats" id={n} onChange={(e) => changeHandler(e, vBeats)}/>
                 <div className='checkmark'></div>
             </label>
         </div>
         )})
     }
-    ivRows = () => {
+    const ivRows = () => {
         return makeBeatArray().map((n, index) => {return (
         <div className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
             <label className='checkbox-container'>
-                <input key={index} type="checkbox" checked={this.props.ivBeats.includes(n)} name="ivBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.ivBeats)}/>
+                <input key={index} type="checkbox" checked={ivBeats.includes(n)} name="ivBeats" id={n} onChange={(e) => changeHandler(e, ivBeats)}/>
                 <div className='checkmark'></div>
             </label>
         </div>
         )})
     }
-    iiiRows = () => {
+    const iiiRows = () => {
         return makeBeatArray().map((n, index) => {return (
         <div className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
             <label className='checkbox-container'>
-                <input key={index} type="checkbox" checked={this.props.iiiBeats.includes(n)} name="iiiBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.iiiBeats)}/>
+                <input key={index} type="checkbox" checked={iiiBeats.includes(n)} name="iiiBeats" id={n} onChange={(e) => changeHandler(e, iiiBeats)}/>
                 <div className='checkmark'></div>
             </label>
         </div>
         )})
     }
-    iiRows = () => {
+    const iiRows = () => {
         return makeBeatArray().map((n, index) => {return (
         <div className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
             <label className='checkbox-container'>
-                <input key={index} type="checkbox" checked={this.props.iiBeats.includes(n)} name="iiBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.iiBeats)}/>
+                <input key={index} type="checkbox" checked={iiBeats.includes(n)} name="iiBeats" id={n} onChange={(e) => changeHandler(e, iiBeats)}/>
                 <div className='checkmark'></div>
             </label>
         </div>
         )})
     }
-    iRows = () => {
+    const iRows = () => {
         return makeBeatArray().map((n, index) => {return (
         <div className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
             <label className='checkbox-container'>
-                <input key={index} type="checkbox" checked={this.props.iBeats.includes(n)} name="iBeats" id={n} onChange={(e) => this.changeHandler(e, this.props.iBeats)}/>
+                <input key={index} type="checkbox" checked={iBeats.includes(n)} name="iBeats" id={n} onChange={(e) => changeHandler(e, iBeats)}/>
                 <div className='checkmark'></div>
             </label>
         </div>
@@ -136,70 +149,66 @@ class MelodyForm extends React.Component {
     //     return newString.join('')
     // }
     // rootOptions = () => {
-    //     return this.keyRoots.map(root => <option key={root} value={root} selected={this.removeNumber(this.props.melodyKey) === this.removeNumber(root) ? "selected" : null}>{this.removeNumber(root)}</option>)
+    //     return keyRoots.map(root => <option key={root} value={root} selected={removeNumber(melodyKey) === removeNumber(root) ? "selected" : null}>{removeNumber(root)}</option>)
     // }
     // modeOptions = () => {
-    //     return this.modes.map(mode => <option key={mode} selected={this.props.melodyMode === mode ? "selected" : null} value={mode}>{mode}</option>)
+    //     return modes.map(mode => <option key={mode} selected={melodyMode === mode ? "selected" : null} value={mode}>{mode}</option>)
     // }
 
-    render() {
-        return(
-            <div className='melody-form'>
-                <div className='melody-container'>
-                    <div className='melody-labels'>
-                        <p>i</p>
-                        <p>vii</p>
-                        <p>vi</p>
-                        <p>v</p>
-                        <p>iv</p>
-                        <p>iii</p>
-                        <p>ii</p>
-                        <p>i</p>
+    return(
+        <div className='melody-form'>
+            <div className='melody-container'>
+                <div className='melody-labels'>
+                    <p>i</p>
+                    <p>vii</p>
+                    <p>vi</p>
+                    <p>v</p>
+                    <p>iv</p>
+                    <p>iii</p>
+                    <p>ii</p>
+                    <p>i</p>
+                </div>
+                <div>
+                    <div className='checkbox-row'>   
+                        {IRows()}
                     </div>
-                    <div>
-                        <div className='checkbox-row'>   
-                            {this.IRows()}
-                        </div>
-                        <div className='checkbox-row'>
-                            {this.viiRows()}
-                        </div>
-                        <div className='checkbox-row'>
-                            {this.viRows()}
-                        </div>
-                        <div className='checkbox-row'>   
-                            {this.vRows()}
-                        </div>
-                        <div className='checkbox-row'>
-                            {this.ivRows()}
-                        </div>
-                        <div className='checkbox-row'>
-                            {this.iiiRows()}
-                        </div>
-                        <div className='checkbox-row'>
-                            {this.iiRows()}
-                        </div>
-                        <div className='checkbox-row'>
-                            {this.iRows()}
-                        </div>
+                    <div className='checkbox-row'>
+                        {viiRows()}
+                    </div>
+                    <div className='checkbox-row'>
+                        {viRows()}
+                    </div>
+                    <div className='checkbox-row'>   
+                        {vRows()}
+                    </div>
+                    <div className='checkbox-row'>
+                        {ivRows()}
+                    </div>
+                    <div className='checkbox-row'>
+                        {iiiRows()}
+                    </div>
+                    <div className='checkbox-row'>
+                        {iiRows()}
+                    </div>
+                    <div className='checkbox-row'>
+                        {iRows()}
                     </div>
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 const mapDispatchToProps = {
     // changeiBeats,
-    changeiiBeats,
-    changeiiiBeats,
-    changeivBeats,
-    changevBeats,
-    changeviBeats,
-    changeviiBeats,
-    changeIBeats,
-    changeKey,
-    changeMode,
-    clearMelody
+    // changeiiBeats,
+    // changeiiiBeats,
+    // changeivBeats,
+    // changevBeats,
+    // changeviBeats,
+    // changeviiBeats,
+    // changeIBeats,
+    changeSongAttribute
 }
 
 const mapStateToProps = state => {

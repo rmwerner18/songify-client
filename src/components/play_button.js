@@ -58,14 +58,14 @@ const PlayButton = () => {
     const songRef = useRef(currentSong)
 
     const dispatch = useDispatch()
-    console.log('kicks', currentSong.kickBeats)
+
+    // console.log(currentSong)
 
     useEffect(() => {
         songRef.current = currentSong
     }, [currentSong])
 
     const playerCaller = (index, time) => {
-        console.log('kicks in playerCaller', currentSong.kickBeats)
         return player(index, time, { ...sounds, ...songRef.current})
     }
 

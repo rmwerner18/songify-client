@@ -1,7 +1,7 @@
-export const changeMelody = (beats) => {
+export const changeSongAttribute = (attr) => {
     return {
-        type: 'MELODY',
-        payload: beats
+        type: 'SONG_ATTR',
+        payload: attr
     }
 }
 
