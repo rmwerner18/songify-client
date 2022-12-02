@@ -271,6 +271,7 @@ body {
   width: 100%;
   display: flex;
   flex-direction: row;
+  align-items: center;
   background-color: var(--card-background);
   border-bottom: 1px solid var(--spotify-text);
   border-bottom-width: 90%;
@@ -305,7 +306,7 @@ body {
 
 .search {
   position: relative;
-  height: 30px;
+  height: 37px;
 }
 
 .search .search-bar {

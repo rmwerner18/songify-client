@@ -10,7 +10,8 @@ import { fetchSongs } from '../actions/set_all_songs'
 import player from '../player'
 import { connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro' 
+import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro'
+import PlayButton from './play_button' 
 
 
 const Song = (props) => {
@@ -71,12 +72,13 @@ const Song = (props) => {
             {mouseOver ? 
                 <div className='song-number' onClick={(e) => playHandler(e, props.song)}>
 
-                    {props.nowPlaying.id === props.song.id 
+                    {/* {props.nowPlaying.id === props.song.id 
                         ? 
                         <FontAwesomeIcon icon={solid('pause')} className='font-awesome' />  
                         : 
                         <FontAwesomeIcon icon={solid('play')} className='font-awesome' />
-                    }
+                    } */}
+                    <PlayButton/>
                 </div>
                 :
                 <span className="song-number">{props.idx+1}</span>

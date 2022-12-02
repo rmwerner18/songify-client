@@ -2,8 +2,6 @@ import React from 'react'
 import { addOrRemoveBeat } from '../helper_functions.js/add_or_remove_beat'
 import { makeBeatArray } from '../helper_functions.js/make_beat_array'
 import { isOnMeasureLine } from '../helper_functions.js/is_on_measure_line'
-import { clearMelody } from '../actions/clear_melody'
-import { changeKey, changeMode } from '../actions/change_key_and_mode'
 import { useSelector, useDispatch } from 'react-redux'
 import { connect } from 'react-redux'
 import { changeSongAttribute } from '../actions/change_song_attribute'
@@ -143,17 +141,6 @@ const MelodyForm = () => {
         </div>
         )})
     }
-    // removeNumber = (string) => {
-    //     let newString = string.split('')
-    //     newString.pop()
-    //     return newString.join('')
-    // }
-    // rootOptions = () => {
-    //     return keyRoots.map(root => <option key={root} value={root} selected={removeNumber(melodyKey) === removeNumber(root) ? "selected" : null}>{removeNumber(root)}</option>)
-    // }
-    // modeOptions = () => {
-    //     return modes.map(mode => <option key={mode} selected={melodyMode === mode ? "selected" : null} value={mode}>{mode}</option>)
-    // }
 
     return(
         <div className='melody-form'>
