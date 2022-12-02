@@ -33,9 +33,9 @@ const BeatForm = () => {
 
     const makeHHRows = () => {
         return makeBeatArray().map((n, index) => {return (
-        <div className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
+        <div key={index} className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
             <label className='checkbox-container'>
-                <input key={index} type="checkbox" checked={hhBeats.includes(n)} name="hhBeats" id={n} onChange={(e) => changeHandler(e)}/>
+                <input type="checkbox" checked={hhBeats.includes(n)} name="hhBeats" id={n} onChange={(e) => changeHandler(e)}/>
                 <div className='checkmark'></div>
             </label>
         </div>
@@ -43,9 +43,9 @@ const BeatForm = () => {
 
     const makeSnareRows = () => {
         return makeBeatArray().map((n, index) => {return (
-        <div className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
+        <div key={index} className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
             <label className='checkbox-container'>
-                <input key={index} type="checkbox" checked={snareBeats.includes(n)} name="snareBeats" id={n} onChange={(e) => changeHandler(e, snareBeats)}/>
+                <input type="checkbox" checked={snareBeats.includes(n)} name="snareBeats" id={n} onChange={(e) => changeHandler(e, snareBeats)}/>
                 <div className='checkmark'></div>
             </label>
         </div>
@@ -53,9 +53,9 @@ const BeatForm = () => {
 
     const makeKickRows = () => {
         return makeBeatArray().map((n, index) => {return (
-        <div className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
+        <div key={index} className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
             <label className='checkbox-container'>
-                <input key={index} type="checkbox" checked={kickBeats.includes(n)} name="kickBeats" id={n} onChange={(e) => changeHandler(e, kickBeats)}/>
+                <input type="checkbox" checked={kickBeats.includes(n)} name="kickBeats" id={n} onChange={(e) => changeHandler(e, kickBeats)}/>
                 <div className='checkmark'></div>
             </label>
         </div>

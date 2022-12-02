@@ -63,9 +63,9 @@ const MelodyForm = () => {
 
     const IRows = () => {
         return makeBeatArray().map((n, index) => {return (
-        <div className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
+        <div key={index} className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
             <label className='checkbox-container'>
-                <input key={index} type="checkbox" checked={IBeats.includes(n)} name="IBeats" id={n} onChange={(e) => changeHandler(e, IBeats)}/>
+                <input type="checkbox" checked={IBeats.includes(n)} name="IBeats" id={n} onChange={(e) => changeHandler(e, IBeats)}/>
                 <div className='checkmark'></div>
             </label>
         </div>
@@ -73,9 +73,9 @@ const MelodyForm = () => {
     }
     const viiRows = () => {
         return makeBeatArray().map((n, index) => {return (
-        <div className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
+        <div key={index} className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
             <label className='checkbox-container'>
-                <input key={index} type="checkbox" checked={viiBeats.includes(n)}name="viiBeats" id={n} onChange={(e) => changeHandler(e, viiBeats)}/>
+                <input type="checkbox" checked={viiBeats.includes(n)}name="viiBeats" id={n} onChange={(e) => changeHandler(e, viiBeats)}/>
                 <div className='checkmark'></div>
             </label>
         </div>
@@ -83,9 +83,9 @@ const MelodyForm = () => {
     }
     const viRows = () => {
         return makeBeatArray().map((n, index) => {return (
-        <div className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
+        <div key={index} className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
             <label className='checkbox-container'>
-                <input key={index} type="checkbox" checked={viBeats.includes(n)}name="viBeats" id={n} onChange={(e) => changeHandler(e, viBeats)}/>
+                <input type="checkbox" checked={viBeats.includes(n)}name="viBeats" id={n} onChange={(e) => changeHandler(e, viBeats)}/>
                 <div className='checkmark'></div>
             </label>
         </div>
@@ -93,9 +93,9 @@ const MelodyForm = () => {
     }
     const vRows = () => {
         return makeBeatArray().map((n, index) => {return (
-        <div className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
+        <div key={index} className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
             <label className='checkbox-container'>
-                <input key={index} type="checkbox" checked={vBeats.includes(n)} name="vBeats" id={n} onChange={(e) => changeHandler(e, vBeats)}/>
+                <input type="checkbox" checked={vBeats.includes(n)} name="vBeats" id={n} onChange={(e) => changeHandler(e, vBeats)}/>
                 <div className='checkmark'></div>
             </label>
         </div>
@@ -103,9 +103,9 @@ const MelodyForm = () => {
     }
     const ivRows = () => {
         return makeBeatArray().map((n, index) => {return (
-        <div className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
+        <div key={index} className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
             <label className='checkbox-container'>
-                <input key={index} type="checkbox" checked={ivBeats.includes(n)} name="ivBeats" id={n} onChange={(e) => changeHandler(e, ivBeats)}/>
+                <input type="checkbox" checked={ivBeats.includes(n)} name="ivBeats" id={n} onChange={(e) => changeHandler(e, ivBeats)}/>
                 <div className='checkmark'></div>
             </label>
         </div>
@@ -113,9 +113,9 @@ const MelodyForm = () => {
     }
     const iiiRows = () => {
         return makeBeatArray().map((n, index) => {return (
-        <div className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
+        <div key={index} className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
             <label className='checkbox-container'>
-                <input key={index} type="checkbox" checked={iiiBeats.includes(n)} name="iiiBeats" id={n} onChange={(e) => changeHandler(e, iiiBeats)}/>
+                <input type="checkbox" checked={iiiBeats.includes(n)} name="iiiBeats" id={n} onChange={(e) => changeHandler(e, iiiBeats)}/>
                 <div className='checkmark'></div>
             </label>
         </div>
@@ -123,9 +123,9 @@ const MelodyForm = () => {
     }
     const iiRows = () => {
         return makeBeatArray().map((n, index) => {return (
-        <div className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
+        <div key={index} className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
             <label className='checkbox-container'>
-                <input key={index} type="checkbox" checked={iiBeats.includes(n)} name="iiBeats" id={n} onChange={(e) => changeHandler(e, iiBeats)}/>
+                <input type="checkbox" checked={iiBeats.includes(n)} name="iiBeats" id={n} onChange={(e) => changeHandler(e, iiBeats)}/>
                 <div className='checkmark'></div>
             </label>
         </div>
@@ -133,9 +133,9 @@ const MelodyForm = () => {
     }
     const iRows = () => {
         return makeBeatArray().map((n, index) => {return (
-        <div className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
+        <div key={index} className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
             <label className='checkbox-container'>
-                <input key={index} type="checkbox" checked={iBeats.includes(n)} name="iBeats" id={n} onChange={(e) => changeHandler(e, iBeats)}/>
+                <input type="checkbox" checked={iBeats.includes(n)} name="iBeats" id={n} onChange={(e) => changeHandler(e, iBeats)}/>
                 <div className='checkmark'></div>
             </label>
         </div>
