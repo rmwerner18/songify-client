@@ -27,34 +27,7 @@ const Song = (props) => {
         setUserLikesSong(!!like)
     }, [like])
 
-    console.log(props.song)
-
-
-    const startLoop = () => {
-        let array = []
-        let newObj = Object.assign({}, props, props.song)
-        setNumOfEigthNotes(32, array)
-        new Tone.Sequence((time, index) => {
-            player(index, time, newObj)
-        }, array).start(0)
-        Tone.Transport.start();
-    }
-
-    const playHandler = (e) => {
-        if (Tone.Transport.state === "started" && props.nowPlaying.id === props.song.id) {
-            props.endNowPlaying()
-            stopLoop()
-        } else {
-            stopLoop()
-            props.setNowPlaying(props.song)
-            Tone.Destination.context.resume().then(() => {
-                startLoop()
-            })
-        }
-    }
-
     const likeHandler = (e, id) => {
-        // console.log('run likeHandler in song')
         userLikesSong ? setLikes(likes - 1) : setLikes(likes + 1)
         setUserLikesSong(!userLikesSong)
         props.likeHandler(e, id)
@@ -70,7 +43,9 @@ const Song = (props) => {
             onMouseLeave={() => setMouseOver(false)}
         >
             {mouseOver ? 
-                <div className='song-number' onClick={(e) => playHandler(e, props.song)}>
+                <div className='song-number' 
+                // onClick={(e) => playHandler(e, props.song)}
+                >
 
                     {/* {props.nowPlaying.id === props.song.id 
                         ? 
@@ -78,7 +53,7 @@ const Song = (props) => {
                         : 
                         <FontAwesomeIcon icon={solid('play')} className='font-awesome' />
                     } */}
-                    <PlayButton/>
+                    <PlayButton songPage={true}/>
                 </div>
                 :
                 <span className="song-number">{props.idx+1}</span>

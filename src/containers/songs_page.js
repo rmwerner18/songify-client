@@ -7,10 +7,8 @@ const SongsPage = (props) => {
     let [page, setPage] = useState('ALL_SONGS')
     let songs = useSelector(state => state.allSongs)
     const user = useSelector(state => state.user)
-    // let filterSongsCompleted = false
 
     const filterSongs = page => {
-        // filterSongsCompleted = true
         switch(page) {
             case 'USER_SONGS':
                 songs = songs.filter(song => song.user.id === user.id)
@@ -34,37 +32,8 @@ const SongsPage = (props) => {
         songs = props.fetchSongs()
     }, [])
 
-    console.log(songs)
-
-    // const renderNoSongsMessage = () => {
-    //     switch(props.page) {
-    //         case 'USER_SONGS':
-    //             return (
-    //                 <>
-    //                     <h1>You have not created any songs.</h1>
-    //                     <span>Click the 'Create' tab to create a new song.</span>
-    //                 </>
-    //             )
-    //         case 'LIKED_SONGS':
-    //             return (
-    //                 <>
-    //                     <h1>You have not liked any songs.</h1>
-    //                     <span>Click the like icon on a song to see it appear here</span>
-    //                 </>
-    //             )
-    //         default:
-    //             return (
-    //                 <>
-    //                     <h1>No songs have been created</h1>
-    //                     <span>Click the 'Create' tab to create a new song.</span>
-    //                 </>
-    //             )
-    //     }
-    // }
-
     filterSongs(page)
 
-    // console.log(filterSongsCompleted)
     return (
         <div className='songs-page'>
             <div className='songs-page-menu'>

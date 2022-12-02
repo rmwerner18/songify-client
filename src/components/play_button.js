@@ -49,7 +49,7 @@ const getCurrentSongWithFrequencies = createSelector(
     }
 )
 
-const PlayButton = () => {
+const PlayButton = props => {
  
     const currentSong = useSelector(getCurrentSongWithFrequencies)
     const sounds = useSelector(state => state.sounds)
@@ -58,8 +58,6 @@ const PlayButton = () => {
     const songRef = useRef(currentSong)
 
     const dispatch = useDispatch()
-
-    // console.log(currentSong)
 
     useEffect(() => {
         songRef.current = currentSong
@@ -91,8 +89,8 @@ const PlayButton = () => {
     }
 
     return (
-        <div className='grid-start-button-container'>
-            <button id='grid-start-button' onClick={(e) => playHandler(e)}>
+        <div className='start-button-container'>
+            <button className={props.songPage ? 'song start-button' : 'grid start-button'} onClick={(e) => playHandler(e)}>
                     {nowPlaying.song 
                     ? <FontAwesomeIcon icon={solid('pause')} className='font-awesome'/> 
                     : <FontAwesomeIcon icon={solid('play')} />}

@@ -11,7 +11,6 @@ import { isOnMeasureLine } from '../helper_functions.js/is_on_measure_line'
 import { useEffect } from 'react'
 
 const BeatForm = () => {
-    console.log('render beat form')
 
     const hhBeats = useSelector(state => state.currentSong.hhBeats)
     const currentSong = useSelector(state => state.currentSong)
@@ -23,16 +22,8 @@ const BeatForm = () => {
         'snareBeats': snareBeats,
         'kickBeats': kickBeats
     }
-    
-    useEffect(() => {
-        console.log(hhBeats)
-    }, [hhBeats])
-    
-    console.log(currentSong)
-
 
     const dispatch = useDispatch()   
-
 
     const changeHandler = (e) => {
         const { name: beatType, id } = e.target

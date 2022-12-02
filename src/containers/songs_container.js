@@ -18,13 +18,9 @@ const SongsContainer = props => {
         setSearchInput(e.target.value)
     }
 
-    // console.log('render songsContainer')
-
     const renderSongs = (songs = props.songs) => {
-        // console.log(songs)
         songs = applySearch(songs)
         return songs.map((song, index) => {
-            // console.log(song.id)
             return (<Song 
                 id={song.id}
                 idx={index}
@@ -98,10 +94,7 @@ const SongsContainer = props => {
     }
 
     const likeHandler = (e, id) => {
-        // console.log('run likeHandler in songscontainer')
         const song = props.songs.find(song => song.id === id)
-        // console.log(song)
-        // console.log(props)
         if (props.user.id) {
             userLikesSong(song)
             if (userLikesSong(song)) {
