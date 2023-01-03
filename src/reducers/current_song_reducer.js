@@ -1,29 +1,6 @@
-import defaultChords from '../constants/default_chords'
+import DEFAULT_SONG_STATE from "../constants/default_song_state"
 
-let initialState = {
-    id: null,
-    user_id: null,
-    likes: 0,
-    chords: defaultChords,
-    bpm: 100,
-    snareBeats: [],
-    kickBeats: [],
-    hhBeats: [],
-    instrument: "piano",
-    iBeats: [],
-    iiBeats: [],
-    iiiBeats: [],
-    ivBeats: [],
-    vBeats: [],
-    viBeats: [],
-    viiBeats: [],
-    IBeats: [],
-    melodyKey: "C5",
-    melodyMode: "ionian",
-    isPlaying: false
-}
-
-export const currentSongReducer = (state = initialState, action) => {
+export const currentSongReducer = (state = DEFAULT_SONG_STATE, action) => {
     let clearedBeats
     switch (action.type) {
         case 'SET_CURRENT_SONG':

@@ -1,4 +1,4 @@
-const defaultChords = [
+const DEFAULT_CHORDS = [
     {
         bass: "C3",
         name: "C4", 
@@ -21,4 +21,4 @@ const defaultChords = [
     }
 ]
 
-export default defaultChords
+export default DEFAULT_CHORDS
