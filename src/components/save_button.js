@@ -24,6 +24,7 @@ const SaveButton = props => {
     }
 
     const saveSong = newObj => {
+        console.log(newObj)
         return     fetch('http://localhost:3000/songs', {
             method: "POST",
             headers: {
@@ -39,7 +40,7 @@ const SaveButton = props => {
             if (song.id) {
                 alert("Your song has been saved!")
             }
-        })
+        }).catch(alert('could not save song'))
     }
 
     const saveSongHandler = (e, songname) => {  

@@ -83,7 +83,7 @@ const GridPlayButton = props => {
             Tone.Destination.context.resume().then(() => {
                 startLoop()
             })
-            dispatch({song: 'current song'})
+            dispatch(setNowPlaying({song: 'current song'}))
         } else {
             stopLoop()
             dispatch(endNowPlaying())

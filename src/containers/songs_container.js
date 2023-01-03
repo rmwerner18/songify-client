@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import Song from '../components/song'
-import { connect, useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { fetchSongs } from '../actions/set_all_songs'
-import { hideNavbar } from '../actions/hide_navbar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import SearchBar from '../components/search_bar'
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro' 
+import { stopLoop } from '../helper_functions.js/stop_loop'
 
 
 const SongsContainer = props => {
     let [searchInput, setSearchInput] = useState('')
     let [songs, setSongs] = useState(props.songs)
     const user = useSelector(state => state.user)
-
+    const nowPlaying = useSelector(state => state.nowPlaying)
+    const dispatch = useDispatch()
 
     const handleSearch = (e) => {
         setSearchInput(e.target.value)
@@ -50,7 +51,7 @@ const SongsContainer = props => {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
         })
-        .then(props.fetchSongs)
+        .then(() => dispatch(fetchSongs))
     }
 
     const deleteHandler = (song) => {
@@ -58,6 +59,9 @@ const SongsContainer = props => {
         let i = newArray.findIndex(s => s.id === song.id)
         newArray.splice(i, 1)
         setSongs(newArray)
+        if (nowPlaying.song && nowPlaying.song.id === song.id) {
+            stopLoop()
+        }
         deleteSong(song)
     }
 
@@ -74,7 +78,7 @@ const SongsContainer = props => {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
         }).then(resp => resp.json())
-        .then(props.fetchSongs)
+        .then(() => dispatch(fetchSongs))
     }
 
     const createLike = song => {
@@ -90,7 +94,7 @@ const SongsContainer = props => {
                 user_id: props.user.id
             })
         }).then(resp => resp.json())
-        .then(props.fetchSongs)
+        .then(() => dispatch(fetchSongs))
     }
 
     const likeHandler = (e, id) => {
@@ -158,11 +162,4 @@ const SongsContainer = props => {
 
 }
 
-// const mapStateToProps = state => {
-//     return {
-//         user: state.user,
-//         songs: state.allSongs
-//     }
-// }
-
-export default connect(null, { fetchSongs, hideNavbar })(SongsContainer)
+export default SongsContainer
