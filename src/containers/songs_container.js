@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Song from '../components/song'
-import { useSelector, useDispatch } from 'react-redux'
+import { connect, useSelector, useDispatch } from 'react-redux'
 import { fetchSongs } from '../actions/set_all_songs'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import SearchBar from '../components/search_bar'
@@ -51,7 +51,7 @@ const SongsContainer = props => {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
         })
-        .then(() => dispatch(fetchSongs))
+        .then(() => dispatch(fetchSongs()))
     }
 
     const deleteHandler = (song) => {
@@ -78,7 +78,7 @@ const SongsContainer = props => {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
         }).then(resp => resp.json())
-        .then(() => dispatch(fetchSongs))
+        .then(() => dispatch(fetchSongs()))
     }
 
     const createLike = song => {
@@ -94,7 +94,7 @@ const SongsContainer = props => {
                 user_id: props.user.id
             })
         }).then(resp => resp.json())
-        .then(() => dispatch(fetchSongs))
+        .then(() => dispatch(fetchSongs()))
     }
 
     const likeHandler = (e, id) => {
@@ -162,4 +162,4 @@ const SongsContainer = props => {
 
 }
 
-export default SongsContainer
+export default connect(null, { fetchSongs })(SongsContainer)
