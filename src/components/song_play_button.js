@@ -82,7 +82,7 @@ const SongPlayButton = props => {
   dispatch(setCurrentSong(allSongs.find(song => song.id === props.id)))
   if (!nowPlaying.song) {
    // Tone.Destination.context.resume().then(() => {
-    startLoop()
+   startLoop()
    // })
    dispatch(setNowPlaying({song: allSongs.find(song => song.id === props.id)}))
   } else if (nowPlaying.song.id !== props.id) {
@@ -104,7 +104,7 @@ const SongPlayButton = props => {
    }
   } 
   if (nowPlaying.song && nowPlaying.song.id === props.id) {
-   return <FontAwesomeIcon icon={solid('pause')} className='font-awesome'/>
+   return <FontAwesomeIcon icon={solid('volume-high')} className='font-awesome'/>
   }
   return props.idx+1
  }
