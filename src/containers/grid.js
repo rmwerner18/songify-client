@@ -1,14 +1,8 @@
 import React from 'react';
-import TempoForm from '../components/tempo_form'
 import BeatForm from '../components/beat_form'
-import InstrumentForm from '../components/instrument_form'
 import MelodyForm from '../components/melody_form'
-import MelodyOptions from '../components/melody_options'
-import RandomProgButton from '../components/random_prog_button'
-import SaveButton from '../components/save_button'
 import { stopLoop } from '../helper_functions.js/stop_loop'
 import { endNowPlaying } from '../actions/end_now_playing'
-import { hideNavbar } from '../actions/hide_navbar'
 import DEFAULT_SONG_STATE from '../constants/default_song_state';
 import { setCurrentSong } from '../actions/set_current_song'
 import { connect } from 'react-redux'
@@ -29,7 +23,6 @@ const Grid = props => {
     stopLoop()
     props.endNowPlaying()
     props.setCurrentSong(DEFAULT_SONG_STATE)
-    // props.hideNavbar()
     fetchSongToEdit()
 
     return (
@@ -55,8 +48,7 @@ const Grid = props => {
 }
 
 const mapDispatchToProps = { 
-    endNowPlaying, 
-    // hideNavbar, 
+    endNowPlaying,
     setCurrentSong 
 }
 
