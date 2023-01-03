@@ -11,7 +11,7 @@ import player from '../player'
 import { connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro'
-import PlayButton from './play_button' 
+import SongPlayButton from './song_play_button' 
 
 
 const Song = (props) => {
@@ -42,22 +42,9 @@ const Song = (props) => {
             onMouseEnter={() => setMouseOver(true)}
             onMouseLeave={() => setMouseOver(false)}
         >
-            {mouseOver ? 
-                <div className='song-number' 
-                // onClick={(e) => playHandler(e, props.song)}
-                >
-
-                    {/* {props.nowPlaying.id === props.song.id 
-                        ? 
-                        <FontAwesomeIcon icon={solid('pause')} className='font-awesome' />  
-                        : 
-                        <FontAwesomeIcon icon={solid('play')} className='font-awesome' />
-                    } */}
-                    <PlayButton songPage={true}/>
-                </div>
-                :
-                <span className="song-number">{props.idx+1}</span>
-            }
+            <div className='song-number'>
+                <SongPlayButton id={props.id} mouseOver={mouseOver} idx={props.idx}/>
+            </div>
             <h2 className="song-title">{props.song.name}</h2>
             <p className="song-maker">{props.song.user.username}</p>
             <span className="song-likes" id={`like-count-${props.id}`}>{likes}</span>

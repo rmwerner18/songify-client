@@ -5,6 +5,7 @@ import { setNumOfEigthNotes } from '../helper_functions.js/set_num_of_eigth_note
 import { stopLoop } from '../helper_functions.js/stop_loop'
 import { setNowPlaying } from '../actions/set_now_playing'
 import { endNowPlaying } from '../actions/end_now_playing'
+import { setCurrentSong } from '../actions/set_current_song'
 import { useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro' 
@@ -49,9 +50,10 @@ const getCurrentSongWithFrequencies = createSelector(
     }
 )
 
-const PlayButton = props => {
+const GridPlayButton = props => {
  
-    const currentSong = useSelector(getCurrentSongWithFrequencies)
+    let currentSong = useSelector(getCurrentSongWithFrequencies)
+    const allSongs = useSelector(state => state.allSongs)
     const sounds = useSelector(state => state.sounds)
     const nowPlaying = useSelector(state => state.nowPlaying)
     const user = useSelector(state => state.user)
@@ -81,7 +83,7 @@ const PlayButton = props => {
             Tone.Destination.context.resume().then(() => {
                 startLoop()
             })
-            dispatch(setNowPlaying({song: 'current song'}))
+            dispatch({song: 'current song'})
         } else {
             stopLoop()
             dispatch(endNowPlaying())
@@ -90,7 +92,7 @@ const PlayButton = props => {
 
     return (
         <div className='start-button-container'>
-            <button className={props.songPage ? 'song start-button' : 'grid start-button'} onClick={(e) => playHandler(e)}>
+            <button className='grid start-button' onClick={(e) => playHandler(e)}>
                     {nowPlaying.song 
                     ? <FontAwesomeIcon icon={solid('pause')} className='font-awesome'/> 
                     : <FontAwesomeIcon icon={solid('play')} />}
@@ -99,4 +101,4 @@ const PlayButton = props => {
     )
 }
 
-export default PlayButton
+export default GridPlayButton
