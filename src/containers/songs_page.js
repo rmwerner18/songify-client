@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import SongsContainer from './songs_container'
 import { connect, useSelector } from 'react-redux'
 import { fetchSongs } from '../actions/set_all_songs'
@@ -7,6 +7,8 @@ const SongsPage = (props) => {
     let [page, setPage] = useState('ALL_SONGS')
     let songs = useSelector(state => state.allSongs)
     const user = useSelector(state => state.user)
+    console.log(songs)
+    // const songs = useRef(songs)
 
     const filterSongs = page => {
         switch(page) {
@@ -32,7 +34,7 @@ const SongsPage = (props) => {
         songs = props.fetchSongs()
     }, [])
 
-    filterSongs(page)
+    // filterSongs(page)
 
     return (
         <div className='songs-page'>

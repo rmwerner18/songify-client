@@ -5,6 +5,7 @@ import { isOnMeasureLine } from '../helper_functions.js/is_on_measure_line'
 import { useSelector, useDispatch } from 'react-redux'
 import { connect } from 'react-redux'
 import { changeSongAttribute } from '../actions/change_song_attribute'
+import DEFAULT_SONG_STATE from '../constants/default_song_state'
 
 const MelodyForm = () => {
     const currentSong = useSelector(state => state.currentSong)
@@ -59,6 +60,7 @@ const MelodyForm = () => {
         const { name: beatType, id } = e.target
         const newArray = addOrRemoveBeat(beatTypes[beatType], id)
         dispatch(changeSongAttribute({beatType: newArray}))
+        console.log(DEFAULT_SONG_STATE)
     }
 
     const IRows = () => {

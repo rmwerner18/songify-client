@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Song from '../components/song'
-import { connect, useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { fetchSongs } from '../actions/set_all_songs'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import SearchBar from '../components/search_bar'
@@ -162,4 +162,4 @@ const SongsContainer = props => {
 
 }
 
-export default connect(null, { fetchSongs })(SongsContainer)
+export default SongsContainer
