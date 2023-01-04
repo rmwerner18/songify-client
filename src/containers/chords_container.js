@@ -1,11 +1,12 @@
 import React from 'react'
 import Chord from '../components/chord'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 
 const ChordsContainer = props => {
+    const chords = useSelector(state => state.currentSong.chords)
     
     const showChords = () => {
-        return props.song.chords.map((chord, index) => <Chord id={index} key={index}/>)
+        return chords.map((chord, index) => <Chord id={index} key={index} bass={chord.bass} name={chord.name} quality={chord.quality}/>)
     }
 
     return (
@@ -15,10 +16,4 @@ const ChordsContainer = props => {
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        song: state.currentSong
-    }
-}
-
-export default connect(mapStateToProps)(ChordsContainer)
+export default ChordsContainer

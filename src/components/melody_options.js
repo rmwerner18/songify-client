@@ -1,10 +1,15 @@
 import React from 'react'
 import { clearMelody } from '../actions/clear_melody'
-import { changeKey, changeMode } from '../actions/change_key_and_mode'
-import { connect } from 'react-redux'
+import { changeSongAttribute } from '../actions/change_song_attribute'
+import { useDispatch, useSelector } from 'react-redux'
 
-class MelodyOptions extends React.Component {
- keyRoots = [
+const MelodyOptions = () => {
+ const dispatch = useDispatch()
+
+ const melodyKey = useSelector(state => state.currentSong.melodyKey)
+ const melodyMode = useSelector(state => state.currentSong.melodyMode)
+
+ const keyRoots = [
   'C5',
   'C#5',
   'D5',
@@ -19,7 +24,7 @@ class MelodyOptions extends React.Component {
   'B5'
  ]
 
- modes = [
+ const modes = [
   "ionian",
   "dorian",
   "phrygian",
@@ -29,46 +34,31 @@ class MelodyOptions extends React.Component {
   "locrian"
  ]
 
- removeNumber = (string) => {
+ const removeNumber = (string) => {
   let newString = string.split('')
   newString.pop()
   return newString.join('')
  }
- rootOptions = () => {
-  return this.keyRoots.map(root => <option key={root} value={root} selected={this.removeNumber(this.props.melodyKey) === this.removeNumber(root) ? "selected" : null}>{this.removeNumber(root)}</option>)
+ const rootOptions = () => {
+  return keyRoots.map(root => <option key={root} value={root} selected={removeNumber(melodyKey) === removeNumber(root) ? "selected" : null}>{removeNumber(root)}</option>)
  }
- modeOptions = () => {
-  return this.modes.map(mode => <option key={mode} selected={this.props.melodyMode === mode ? "selected" : null} value={mode}>{mode}</option>)
+ const modeOptions = () => {
+  return modes.map(mode => <option key={mode} selected={melodyMode === mode ? "selected" : null} value={mode}>{mode}</option>)
  } 
 
- render() {
   return (
-   <div className='mode-select'>
-    <select onChange={e => this.props.changeKey(e.target.value)}>
-     {this.rootOptions()}
+    <div className='mode-select'>
+    <select onChange={e => dispatch(changeSongAttribute({melodyMode: e.target.value}))}>
+      {rootOptions()}
     </select>
-    <select onChange={e => this.props.changeMode(e.target.value)}>
-     {this.modeOptions()}
+    <select onChange={e => dispatch(changeSongAttribute({melodyKey: e.target.value}))}>
+      {modeOptions()}
     </select>
-    <button className='button'onClick={this.props.clearMelody}>Clear Melody</button>
-   </div>)
- }
+    <button className='button'onClick={() => dispatch(clearMelody)}>Clear Melody</button>
+    </div>)
 }
 
-const mapDispatchToProps = {
- changeKey,
- changeMode,
- clearMelody
-}
-
-const mapStateToProps = state => {
- return {
-  melodyKey: state.currentSong.melodyKey,
-  melodyMode: state.currentSong.melodyMode
- }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MelodyOptions)
+export default MelodyOptions
 
 
 

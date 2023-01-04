@@ -9,12 +9,15 @@ import { isOnMeasureLine } from '../helper_functions.js/is_on_measure_line'
 import { useEffect } from 'react'
 
 const BeatForm = () => {
-
+    // console.log("BEAT FROM DRUM PRESETS 1", DRUM_PRESETS)
+    
     const currentSong = useSelector(state => state.currentSong)
     const hhBeats = currentSong.hhBeats
     const snareBeats = currentSong.snareBeats
     const kickBeats = currentSong.kickBeats
     
+    // console.log("BEAT FROM DRUM PRESETS 2",DRUM_PRESETS)
+
     const beatTypes = {
         'hhBeats': hhBeats,
         'snareBeats': snareBeats,

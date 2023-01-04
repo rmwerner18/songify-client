@@ -5,50 +5,27 @@ import { stopLoop } from '../helper_functions.js/stop_loop'
 import { endNowPlaying } from '../actions/end_now_playing'
 import DEFAULT_SONG_STATE from '../constants/default_song_state';
 import { setCurrentSong } from '../actions/set_current_song'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import ChordsContainer from './chords_container';
 import DEFAULT_CHORDS from '../constants/default_chords';
 
 const Grid = props => {
-    // const DEFAULT_SONG_STATE = {
-    //     id: null,
-    //     user_id: null,
-    //     likes: 0,
-    //     chords: DEFAULT_CHORDS,
-    //     bpm: 100,
-    //     snareBeats: [],
-    //     kickBeats: [],
-    //     hhBeats: [],
-    //     instrument: "piano",
-    //     iBeats: [],
-    //     iiBeats: [],
-    //     iiiBeats: [],
-    //     ivBeats: [],
-    //     vBeats: [],
-    //     viBeats: [],
-    //     viiBeats: [],
-    //     IBeats: [],
-    //     melodyKey: "C5",
-    //     melodyMode: "ionian",
-    //     isPlaying: false
-    //    }
+    const dispatch = useDispatch()
 
-    console.log('0', DEFAULT_SONG_STATE)
     const fetchSongToEdit = () => {
         if (props.song_id) {
             fetch(`http://localhost:3000/songs/${props.song_id}`)
             .then(resp => resp.json())
             .then(song => {
-                props.setCurrentSong(song)
+                dispatch(setCurrentSong(song))
             })
         }
     }
     
     stopLoop()
-    props.endNowPlaying()
-    console.log('1', DEFAULT_SONG_STATE)
-    props.setCurrentSong(DEFAULT_SONG_STATE)
-    console.log('2', DEFAULT_SONG_STATE)
+    dispatch(() => endNowPlaying())
+    dispatch(() => setCurrentSong(DEFAULT_SONG_STATE))
+    console.log(DEFAULT_SONG_STATE)
     fetchSongToEdit()
 
     return (
@@ -73,9 +50,4 @@ const Grid = props => {
     )
 }
 
-const mapDispatchToProps = { 
-    endNowPlaying,
-    setCurrentSong 
-}
-
-export default connect(null, mapDispatchToProps)(Grid)
+export default Grid

@@ -14,7 +14,7 @@ const Chord = props => {
     const [bass, setBass] = useState(chord.bass)
     const [name, setName] = useState(chord.name)
     const [quality, setQuality] = useState(chord.quality)
-    
+
     const dispatch = useDispatch()
 
     const chordNameOptions = () => {
@@ -75,10 +75,10 @@ const Chord = props => {
                 </div>
                 :
                 <>
-                    <FontAwesomeIcon icon={solid("pen-to-square")} className="font-awesome" onClick={toggleEditMode}/>
                     <span className="chord-name">
                         {displayChord()}
                     </span>
+                    <FontAwesomeIcon icon={solid("pen-to-square")} className="font-awesome" onClick={toggleEditMode}/>
                 </>}
             </div>
         </>

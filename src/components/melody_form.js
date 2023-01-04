@@ -60,7 +60,6 @@ const MelodyForm = () => {
         const { name: beatType, id } = e.target
         const newArray = addOrRemoveBeat(beatTypes[beatType], id)
         dispatch(changeSongAttribute({beatType: newArray}))
-        console.log(DEFAULT_SONG_STATE)
     }
 
     const IRows = () => {

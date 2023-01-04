@@ -4,7 +4,6 @@ import GridPage from './containers/grid_page'
 import SongsPage from './containers/songs_page'
 // import UserPage from './containers/user_page'
 import NavBar from './containers/nav_bar'
-import MenuIcon from './components/menu_icon'
 import LoginPage from './containers/login_page'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { fetchSounds } from './actions/fetch_sounds'
