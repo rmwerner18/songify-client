@@ -9,6 +9,9 @@ const MelodyOptions = () => {
  const melodyKey = useSelector(state => state.currentSong.melodyKey)
  const melodyMode = useSelector(state => state.currentSong.melodyMode)
 
+ console.log(melodyKey)
+ console.log(melodyMode)
+
  const keyRoots = [
   'C5',
   'C#5',
@@ -54,7 +57,7 @@ const MelodyOptions = () => {
     <select onChange={e => dispatch(changeSongAttribute({melodyKey: e.target.value}))}>
       {modeOptions()}
     </select>
-    <button className='button'onClick={() => dispatch(clearMelody)}>Clear Melody</button>
+    <button className='button'onClick={() => dispatch(clearMelody())}>Clear Melody</button>
     </div>)
 }
 

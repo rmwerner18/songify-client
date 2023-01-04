@@ -7,7 +7,7 @@ const SongsPage = (props) => {
     let [page, setPage] = useState('ALL_SONGS')
     let songs = useSelector(state => state.allSongs)
     const user = useSelector(state => state.user)
-    console.log(songs)
+    // console.log(songs)
     // const songs = useRef(songs)
 
     const filterSongs = page => {

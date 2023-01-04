@@ -20,11 +20,12 @@ export const currentSongReducer = (state = DEFAULT_SONG_STATE, action) => {
         //     return Object.assign({}, state, clearedBeats)
         case 'SONG_ATTR':
             return Object.assign({}, state, action.payload)
-        case 'CHANGE_KEY':
-            return Object.assign({}, state, {melodyKey: action.key})
-        case 'CHANGE_MODE':
-            return Object.assign({}, state, {melodyMode: action.mode})
+        // case 'CHANGE_KEY':
+        //     return Object.assign({}, state, {melodyKey: action.key})
+        // case 'CHANGE_MODE':
+        //     return Object.assign({}, state, {melodyMode: action.mode})
         case 'CLEAR_MELODY':
+            // console.log('clear melody reducer')
             clearedBeats = {
                 iBeats: [...action.iBeats],        
                 iiBeats: [...action.iiBeats],
@@ -46,6 +47,8 @@ export const currentSongReducer = (state = DEFAULT_SONG_STATE, action) => {
             let newArr = state.chords
             newArr.splice(action.id, 1, action.chord)
             return Object.assign({}, state, {chords: newArr})
+        // case 'RESET_STATE':
+        //     return DEFAULT_SONG_STATE
         default:
             return state
     }
