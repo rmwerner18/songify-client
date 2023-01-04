@@ -1,7 +1,5 @@
 import React from 'react'
 import { stopLoop } from '../helper_functions.js/stop_loop'
-import { hideNavbar } from '../actions/hide_navbar'
-import { connect } from 'react-redux'
 import SignupForm from '../components/signup_form'
 import LoginForm from '../components/login_form'
 
@@ -29,7 +27,6 @@ class LoginPage extends React.Component {
 
     componentDidMount = () => {
         stopLoop()
-        // this.props.hideNavbar()
         this.setUsers()
     }
 
@@ -56,4 +53,4 @@ class LoginPage extends React.Component {
     }
 }
 
-export default connect(null, { hideNavbar })(LoginPage)
+export default LoginPage

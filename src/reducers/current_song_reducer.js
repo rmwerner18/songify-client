@@ -5,19 +5,19 @@ export const currentSongReducer = (state = DEFAULT_SONG_STATE, action) => {
     switch (action.type) {
         case 'SET_CURRENT_SONG':
             return Object.assign({}, state, action.song)
-        case 'CHANGE_HH_BEATS':
-            return Object.assign({}, state, {hhBeats: [...action.beats]})
-        case 'CHANGE_SNARE_BEATS':
-            return Object.assign({}, state, {snareBeats: [...action.beats]})
-        case 'CHANGE_KICK_BEATS':
-            return Object.assign({}, state, {kickBeats: [...action.beats]})
-        case 'CLEAR_DRUMS':
-            clearedBeats = {
-                hhBeats: [...action.hhBeats], 
-                snareBeats: [...action.snareBeats], 
-                kickBeats: [...action.kickBeats]
-            }
-            return Object.assign({}, state, clearedBeats)
+        // case 'CHANGE_HH_BEATS':
+        //     return Object.assign({}, state, {hhBeats: [...action.beats]})
+        // case 'CHANGE_SNARE_BEATS':
+        //     return Object.assign({}, state, {snareBeats: [...action.beats]})
+        // case 'CHANGE_KICK_BEATS':
+        //     return Object.assign({}, state, {kickBeats: [...action.beats]})
+        // case 'CLEAR_DRUMS':
+        //     clearedBeats = {
+        //         hhBeats: [...action.hhBeats], 
+        //         snareBeats: [...action.snareBeats], 
+        //         kickBeats: [...action.kickBeats]
+        //     }
+        //     return Object.assign({}, state, clearedBeats)
         case 'SONG_ATTR':
             return Object.assign({}, state, action.payload)
         case 'CHANGE_KEY':

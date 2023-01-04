@@ -8,12 +8,14 @@ import { CHORD_QUALITIES } from '../constants/chord_qualities'
 import { useDispatch } from 'react-redux';
 
 const Chord = props => {
-    const dispatch = useDispatch()
-    const [editMode, setEditMode] = useState(false)
     const chord = useSelector(state => state.currentSong.chords[props.id])
+
+    const [editMode, setEditMode] = useState(false)
     const [bass, setBass] = useState(chord.bass)
     const [name, setName] = useState(chord.name)
     const [quality, setQuality] = useState(chord.quality)
+    
+    const dispatch = useDispatch()
 
     const chordNameOptions = () => {
         return Object.keys(MID_NOTES).map(noteValue => {
