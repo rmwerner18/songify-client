@@ -12,10 +12,10 @@ import { useEffect } from 'react'
 
 const BeatForm = () => {
 
-    const hhBeats = useSelector(state => state.currentSong.hhBeats)
     const currentSong = useSelector(state => state.currentSong)
-    const snareBeats = useSelector(state => state.currentSong.snareBeats)
-    const kickBeats = useSelector(state => state.currentSong.kickBeats)
+    const hhBeats = currentSong.hhBeats
+    const snareBeats = currentSong.snareBeats
+    const kickBeats = currentSong.kickBeats
     
     const beatTypes = {
         'hhBeats': hhBeats,

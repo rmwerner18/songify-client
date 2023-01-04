@@ -9,14 +9,14 @@ import DEFAULT_SONG_STATE from '../constants/default_song_state'
 
 const MelodyForm = () => {
     const currentSong = useSelector(state => state.currentSong)
-    const iBeats = useSelector(state => state.currentSong.iBeats)
-    const iiBeats = useSelector(state => state.currentSong.iiBeats)
-    const iiiBeats = useSelector(state => state.currentSong.iiiBeats)
-    const ivBeats = useSelector(state => state.currentSong.ivBeats)
-    const vBeats = useSelector(state => state.currentSong.vBeats)
-    const viBeats = useSelector(state => state.currentSong.viBeats)
-    const viiBeats = useSelector(state => state.currentSong.viiBeats)
-    const IBeats = useSelector(state => state.currentSong.IBeats)
+    const iBeats = currentSong.iBeats
+    const iiBeats = currentSong.iiBeats
+    const iiiBeats = currentSong.iiiBeats
+    const ivBeats = currentSong.ivBeats
+    const vBeats = currentSong.vBeats
+    const viBeats = currentSong.viBeats
+    const viiBeats = currentSong.viiBeats
+    const IBeats = currentSong.IBeats
 
     const dispatch = useDispatch()
 
@@ -188,32 +188,4 @@ const MelodyForm = () => {
     )
 }
 
-const mapDispatchToProps = {
-    // changeiBeats,
-    // changeiiBeats,
-    // changeiiiBeats,
-    // changeivBeats,
-    // changevBeats,
-    // changeviBeats,
-    // changeviiBeats,
-    // changeIBeats,
-    changeSongAttribute
-}
-
-const mapStateToProps = state => {
-    return {
-        iBeats: state.currentSong.iBeats,
-        iiBeats: state.currentSong.iiBeats,
-        iiiBeats: state.currentSong.iiiBeats,
-        ivBeats: state.currentSong.ivBeats,
-        vBeats: state.currentSong.vBeats,
-        viBeats: state.currentSong.viBeats,
-        viiBeats: state.currentSong.viiBeats,
-        IBeats: state.currentSong.IBeats,
-        songId: state.currentSong.id,
-        melodyKey: state.currentSong.melodyKey,
-        melodyMode: state.currentSong.melodyMode
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MelodyForm)
+export default MelodyForm

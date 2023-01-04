@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { changeKickBeats, changeHHBeats, changeSnareBeats } from '../actions/change_drums'
+import { changeSongAttribute } from '../actions/change_song_attribute'
 import DRUM_PRESETS from '../constants/drum_presets'
 
 const BeatSelect = () => {   
@@ -8,14 +8,10 @@ const BeatSelect = () => {
 
     const changeHandler = (e) => {
         if (e.target.value === 'no preset') {
-            dispatch(changeHHBeats([]))
-            dispatch(changeSnareBeats([]))
-            dispatch(changeKickBeats([]))
+            dispatch(changeSongAttribute({hhBeats: [], kickBeats: [], snareBeats: []}))
         } else {
             let beat = DRUM_PRESETS[e.target.value]
-            dispatch(changeHHBeats(beat.hhBeats))
-            dispatch(changeSnareBeats(beat.snareBeats))
-            dispatch(changeKickBeats(beat.kickBeats))
+            dispatch(changeSongAttribute({hhBeats: beat.hhBeats, kickBeats: beat.kickBeats, snareBeats: beat.snareBeats}))
         }
     }
     

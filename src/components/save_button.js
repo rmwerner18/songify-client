@@ -37,10 +37,13 @@ const SaveButton = props => {
             )
         }).then(resp => resp.json())
         .then(song => {
+            console.log("Save song", song)
             if (song.id) {
                 alert("Your song has been saved!")
             }
-        }).catch(alert('could not save song'))
+        }).catch(() => {
+            alert('could not save song')
+        })
     }
 
     const saveSongHandler = (e, songname) => {  

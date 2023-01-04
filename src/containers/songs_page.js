@@ -34,7 +34,7 @@ const SongsPage = (props) => {
         songs = props.fetchSongs()
     }, [])
 
-    // filterSongs(page)
+    filterSongs(page)
 
     return (
         <div className='songs-page'>
