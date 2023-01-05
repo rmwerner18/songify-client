@@ -2,7 +2,7 @@ import React from 'react'
 import { changeInstrument } from '../actions/change_instrument'
 import { useSelector, useDispatch } from 'react-redux'
 
-const InstrumentForm = (props) => {
+const InstrumentForm = () => {
     const instrument = useSelector(state => state.currentSong.instrument)
     const dispatch = useDispatch()
 

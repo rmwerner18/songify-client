@@ -2,6 +2,7 @@ import DEFAULT_SONG_STATE from "../constants/default_song_state"
 
 export const currentSongReducer = (state = DEFAULT_SONG_STATE, action) => {
     let clearedBeats
+    console.log(state)
     switch (action.type) {
         case 'SET_CURRENT_SONG':
             return Object.assign({}, state, action.song)

@@ -9,14 +9,11 @@ import { isOnMeasureLine } from '../helper_functions.js/is_on_measure_line'
 import { useEffect } from 'react'
 
 const BeatForm = () => {
-    // console.log("BEAT FROM DRUM PRESETS 1", DRUM_PRESETS)
     
     const currentSong = useSelector(state => state.currentSong)
     const hhBeats = currentSong.hhBeats
     const snareBeats = currentSong.snareBeats
     const kickBeats = currentSong.kickBeats
-    
-    // console.log("BEAT FROM DRUM PRESETS 2",DRUM_PRESETS)
 
     const beatTypes = {
         'hhBeats': hhBeats,
@@ -29,7 +26,9 @@ const BeatForm = () => {
     const changeHandler = (e) => {
         const { name: beatType, id } = e.target
         const newArray = addOrRemoveBeat(beatTypes[beatType], id)
-        dispatch(changeSongAttribute({beatType: newArray}))
+        const payload = {}
+        payload[beatType] = newArray
+        dispatch(changeSongAttribute(payload))
     }
 
     const makeHHRows = () => {

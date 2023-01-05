@@ -59,7 +59,9 @@ const MelodyForm = () => {
     const changeHandler = (e) => {
         const { name: beatType, id } = e.target
         const newArray = addOrRemoveBeat(beatTypes[beatType], id)
-        dispatch(changeSongAttribute({beatType: newArray}))
+        const payload = {}
+        payload[beatType] = newArray
+        dispatch(changeSongAttribute(payload))
     }
 
     const IRows = () => {
