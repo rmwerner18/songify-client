@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { connect } from 'react-redux'
 import { changeSongAttribute } from '../actions/change_song_attribute'
 import { MakeCheckboxRows } from '../helper_functions.js/make_checkbox_rows'
-import DEFAULT_SONG_STATE from '../constants/default_song_state'
 
 const MelodyForm = () => {
     // const currentSong = useSelector(state => state.currentSong)
