@@ -6,9 +6,6 @@ export const logout = () => {
     }
 }
 
-// export const logout = () => dispatch => {
-//     localStorage.removeItem('token')
-// }
 
 
 
