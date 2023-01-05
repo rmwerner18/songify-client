@@ -14,7 +14,6 @@ const BeatSelect = () => {
             dispatch(changeSongAttribute({hhBeats: beat.hhBeats, kickBeats: beat.kickBeats, snareBeats: beat.snareBeats}))
         }
     }
-    // console.log("BEAT SELECT DRUMS PRESETS", DRUM_PRESETS)
 
     const options = () => {
         return DRUM_PRESETS.map((preset, index) => {

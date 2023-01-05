@@ -23,11 +23,9 @@ const Grid = props => {
         }
     }
 
-    console.log('GRID RERENDER')
     dispatch(() => endNowPlaying())
     dispatch(() => setCurrentSong(currentSong))
     fetchSongToEdit()
-
 
     return (
         <>

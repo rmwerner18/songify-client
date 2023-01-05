@@ -38,8 +38,6 @@ const Checkbox = props => {
 
   const dispatch = useDispatch()
 
-  // console.log(currentBeat === n)
-
   const changeHandler = (e) => {
     const { name: beatType, id } = e.target
     const newArray = addOrRemoveBeat(beatTypes[beatType], id)

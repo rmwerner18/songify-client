@@ -1,5 +1,4 @@
 export const clearMelody = () => {
-    // console.log('clear melody')
     return {
         type: 'CLEAR_MELODY',
         iBeats: [],        

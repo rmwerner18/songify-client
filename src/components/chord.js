@@ -8,7 +8,9 @@ import { CHORD_QUALITIES } from '../constants/chord_qualities'
 import { useDispatch } from 'react-redux';
 
 const Chord = props => {
-    const chord = useSelector(state => state.currentSong.chords[props.id])
+    const { id } = props
+    const chord = useSelector(state => state.currentSong.chords[id])
+    const currentBeat = useSelector(state => state.currentBeat)
 
     const [editMode, setEditMode] = useState(false)
     const [bass, setBass] = useState(chord.bass)
@@ -52,13 +54,25 @@ const Chord = props => {
     }
 
     const submitChange = () => {
-        dispatch(changeSingleChord(props.id, {bass: bass, name: name, quality: quality}))
+        dispatch(changeSingleChord(id, {bass: bass, name: name, quality: quality}))
         toggleEditMode()
+    }
+
+    const chordIsPlaying = () => {
+        const barMax = 8*(id+1)
+        const barMin = 8*id
+        if (currentBeat === -1) {
+            return false
+        }
+        if (currentBeat >= barMin && currentBeat < barMax) {
+            return true
+        }
+        return false
     }
 
     return (
         <>
-            <div className="chord-box">
+            <div className={chordIsPlaying() ? 'chord-box playing' : 'chord-box'}>
                 {editMode ?
                 <div className='chord-edit-selects'>
                     <select className='chord-name-select' onChange={e => setName(e.target.value)}>

@@ -9,9 +9,6 @@ const MelodyOptions = () => {
  const melodyKey = useSelector(state => state.currentSong.melodyKey)
  const melodyMode = useSelector(state => state.currentSong.melodyMode)
 
- console.log(melodyKey)
- console.log(melodyMode)
-
  const keyRoots = [
   'C5',
   'C#5',
