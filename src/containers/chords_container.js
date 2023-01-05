@@ -2,7 +2,7 @@ import React from 'react'
 import Chord from '../components/chord'
 import { connect, useSelector } from 'react-redux'
 
-const ChordsContainer = props => {
+const ChordsContainer = () => {
     const chords = useSelector(state => state.currentSong.chords)
     
     const showChords = () => {
