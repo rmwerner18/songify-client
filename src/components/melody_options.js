@@ -48,13 +48,13 @@ const MelodyOptions = () => {
  const modeOptions = () => {
   return modes.map(mode => <option key={mode} selected={melodyMode === mode ? "selected" : null} value={mode}>{mode}</option>)
  } 
-
+ 
   return (
     <div className='mode-select'>
-    <select onChange={e => dispatch(changeSongAttribute({melodyMode: e.target.value}))}>
+    <select onChange={e => dispatch(changeSongAttribute({melodyKey: e.target.value}))}>
       {rootOptions()}
     </select>
-    <select onChange={e => dispatch(changeSongAttribute({melodyKey: e.target.value}))}>
+    <select onChange={e => dispatch(changeSongAttribute({melodyMode: e.target.value}))}>
       {modeOptions()}
     </select>
     <button className='button'onClick={() => dispatch(clearMelody())}>Clear Melody</button>
