@@ -12,6 +12,8 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 import { createSelector } from '@reduxjs/toolkit'
 import { useSelector } from 'react-redux'
 import { useEffect, useRef } from 'react'
+import { setCurrentBeat } from '../actions/set_current_beat'
+import { clearCurrentBeat } from '../actions/clear_current_beat'
 
 var Octavian = require('octavian')
 
@@ -58,6 +60,7 @@ const GridPlayButton = props => {
     const nowPlaying = useSelector(state => state.nowPlaying)
     const user = useSelector(state => state.user)
     const songRef = useRef(currentSong)
+    const currentBeat = useSelector(state => state.currentBeat)
 
     const dispatch = useDispatch()
 
@@ -74,6 +77,7 @@ const GridPlayButton = props => {
         setNumOfEigthNotes(32, array)
         new Tone.Sequence((time, index) => {
             playerCaller(index, time)
+            dispatch(setCurrentBeat(index))
         }, array).start(0)
         Tone.Transport.start();
     }
@@ -86,6 +90,7 @@ const GridPlayButton = props => {
             dispatch(setNowPlaying({song: 'current song'}))
         } else {
             stopLoop()
+            dispatch(clearCurrentBeat())
             dispatch(endNowPlaying())
         }
     }

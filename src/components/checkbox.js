@@ -18,6 +18,7 @@ const Checkbox = props => {
   const hhBeats = currentSong.hhBeats
   const snareBeats = currentSong.snareBeats
   const kickBeats = currentSong.kickBeats 
+  const currentBeat = useSelector(state => state.currentBeat)
 
   const { beatType, n, index } = props
 
@@ -37,6 +38,8 @@ const Checkbox = props => {
 
   const dispatch = useDispatch()
 
+  // console.log(currentBeat === n)
+
   const changeHandler = (e) => {
     const { name: beatType, id } = e.target
     const newArray = addOrRemoveBeat(beatTypes[beatType], id)
@@ -48,7 +51,7 @@ const Checkbox = props => {
   return (
     <div key={index} className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
     <label className='checkbox-container'>
-      <input type="checkbox" checked={beatTypes[beatType].includes(n)} name={beatType} id={n} onChange={(e) => changeHandler(e, beatTypes[beatType])}/>
+      <input type="checkbox" className={currentBeat === n ? 'checkbox playing' : 'checkbox'} checked={beatTypes[beatType].includes(n)} name={beatType} id={n} onChange={(e) => changeHandler(e, beatTypes[beatType])}/>
       <div className='checkmark'></div>
     </label>
     </div>

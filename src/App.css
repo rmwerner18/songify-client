@@ -396,6 +396,10 @@ h1, h2 {
   border-radius: 3px;
 }
 
+/* .checkmark.playing {
+  background-color: var(--spotify-text);
+} */
+
 .checkbox-container:hover input ~ .checkmark {
   background-color: #ccc;
   cursor: pointer;
@@ -403,6 +407,10 @@ h1, h2 {
 
 .checkbox-container input:checked ~ .checkmark {
   background-color: var(--spotify-green);
+}
+
+.checkbox-container input:checked.playing ~ .checkmark {
+  background-color: var(--dark-green);
 }
 
 .chord-checkbox-container {
