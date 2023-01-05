@@ -11,22 +11,23 @@ import DEFAULT_CHORDS from '../constants/default_chords';
 
 const Grid = props => {
     const dispatch = useDispatch()
-    // const currentSong = useSelector(state => state.currentSong)
+    let currentSong = useSelector(state => state.currentSong)
 
     const fetchSongToEdit = () => {
         if (props.song_id) {
             fetch(`http://localhost:3000/songs/${props.song_id}`)
             .then(resp => resp.json())
             .then(song => {
-                dispatch(setCurrentSong(song))
+                currentSong = song
             })
         }
     }
 
     console.log('GRID RERENDER')
     dispatch(() => endNowPlaying())
-    dispatch(() => setCurrentSong(DEFAULT_SONG_STATE))
+    dispatch(() => setCurrentSong(currentSong))
     fetchSongToEdit()
+
 
     return (
         <>
