@@ -72,7 +72,9 @@ const Chord = props => {
 
     return (
         <>
-            <div className={chordIsPlaying() ? 'chord-box playing' : 'chord-box'}>
+            <div className='chord-box'
+            // {chordIsPlaying() ? 'chord-box playing' : 'chord-box'}
+            >
                 {editMode ?
                 <div className='chord-edit-selects'>
                     <select className='chord-name-select' onChange={e => setName(e.target.value)}>

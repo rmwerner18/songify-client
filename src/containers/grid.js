@@ -11,7 +11,8 @@ import DEFAULT_CHORDS from '../constants/default_chords';
 
 const Grid = props => {
     const dispatch = useDispatch()
-    let currentSong = useSelector(state => state.currentSong)
+    let currentSong 
+    // = useSelector(state => state.currentSong)
 
     const fetchSongToEdit = () => {
         if (props.song_id) {
@@ -24,7 +25,7 @@ const Grid = props => {
     }
 
     dispatch(() => endNowPlaying())
-    dispatch(() => setCurrentSong(currentSong))
+    // dispatch(() => setCurrentSong(currentSong))
     fetchSongToEdit()
 
     return (

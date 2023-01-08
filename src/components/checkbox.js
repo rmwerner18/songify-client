@@ -3,8 +3,17 @@ import { useSelector, useDispatch } from 'react-redux'
 import { changeSongAttribute } from '../actions/change_song_attribute'
 import { isOnMeasureLine } from '../helper_functions.js/is_on_measure_line'
 import { addOrRemoveBeat } from '../helper_functions.js/add_or_remove_beat'
+import { createSelector } from '@reduxjs/toolkit'
 
-const Checkbox = props => {
+const getIsCurrentBeat = createSelector(
+  [
+      state => state.currentBeat,
+      (state, props) => props.beatIndex,
+    ],
+    (currentBeat, beatIndex) => beatIndex === currentBeat
+  )
+    
+const Checkbox = ({ beatType, n })=> {
 
   const currentSong = useSelector(state => state.currentSong)
   const iBeats = currentSong.iBeats
@@ -17,11 +26,13 @@ const Checkbox = props => {
   const IBeats = currentSong.IBeats
   const hhBeats = currentSong.hhBeats
   const snareBeats = currentSong.snareBeats
-  const kickBeats = currentSong.kickBeats 
-  const currentBeat = useSelector(state => state.currentBeat)
+  const kickBeats = currentSong.kickBeats
+  
 
-  const { beatType, n, index } = props
+  const isCurrentBeat = useSelector(state => getIsCurrentBeat(state, { beatIndex: n } )) 
+  // const currentBeat = useSelector(state => state.currentBeat)
 
+  // move beatType out of checkBox
   const beatTypes = {
     'iBeats': iBeats,
     'iiBeats': iiBeats,
@@ -46,10 +57,12 @@ const Checkbox = props => {
     dispatch(changeSongAttribute(payload))
   }
 
+  // console.log("CHECKBOX")
   return (
-    <div key={index} className={`checkbox-meta-container ${isOnMeasureLine(index) ? 'measure-line' : null}`}>
+    <div key={n} className={`checkbox-meta-container ${isOnMeasureLine(n) ? 'measure-line' : null}`}>
     <label className='checkbox-container'>
-      <input type="checkbox" className={currentBeat === n ? 'checkbox playing' : 'checkbox'} checked={beatTypes[beatType].includes(n)} name={beatType} id={n} onChange={(e) => changeHandler(e, beatTypes[beatType])}/>
+      <input type="checkbox" className={isCurrentBeat ? 'checkbox playing' : 'checkbox'} 
+      checked={beatTypes[beatType].includes(n)} name={beatType} id={n} onChange={(e) => changeHandler(e, beatTypes[beatType])}/>
       <div className='checkmark'></div>
     </label>
     </div>
