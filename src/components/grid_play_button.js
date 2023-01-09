@@ -55,12 +55,9 @@ const getCurrentSongWithFrequencies = createSelector(
 const GridPlayButton = props => {
  
     let currentSong = useSelector(getCurrentSongWithFrequencies)
-    const allSongs = useSelector(state => state.allSongs)
     const sounds = useSelector(state => state.sounds)
     const nowPlaying = useSelector(state => state.nowPlaying)
-    const user = useSelector(state => state.user)
     const songRef = useRef(currentSong)
-    const currentBeat = useSelector(state => state.currentBeat)
 
     const dispatch = useDispatch()
 

@@ -3,6 +3,7 @@ import Grid from './grid'
 import SongOptionsContainer from './song_options_container'
 
 const GridPage = props => {
+    console.log('GRID PAGE')
     return (
         <div className='grid-page'>
             <SongOptionsContainer song_id={props.song_id ? props.song_id : null} />

@@ -22,6 +22,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log('APP')
       return (
         <div className="App">
           <BrowserRouter className='App-Content'>
@@ -55,7 +56,9 @@ class App extends React.Component {
   }
 
   const mapStateToProps = (state) => {
-    return state
+    return {
+      user: state.user
+    }
   }
 
 export default connect(mapStateToProps, { logout, fetchSounds, fetchUserFromToken })(App);

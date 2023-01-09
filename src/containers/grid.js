@@ -24,6 +24,8 @@ const Grid = props => {
         }
     }
 
+    console.log('GRID')
+
     dispatch(() => endNowPlaying())
     // dispatch(() => setCurrentSong(currentSong))
     fetchSongToEdit()
