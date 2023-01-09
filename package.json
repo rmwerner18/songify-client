@@ -12,7 +12,6 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "babel-plugin-macros": "^3.1.0",
-    "immer": "^9.0.17",
     "octavian": "^2.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
