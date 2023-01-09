@@ -1,31 +1,23 @@
-import React, { useEffect } from 'react';
-import BeatForm from '../components/beat_form'
-import MelodyForm from '../components/melody_form'
-import { stopLoop } from '../helper_functions.js/stop_loop'
-import { endNowPlaying } from '../actions/end_now_playing'
-import DEFAULT_SONG_STATE from '../constants/default_song_state';
-import { setCurrentSong } from '../actions/set_current_song'
-import { connect, useDispatch, useSelector } from 'react-redux'
+import React from 'react';
+import BeatForm from '../components/beat_form';
+import MelodyForm from '../components/melody_form';
+import { setCurrentSong } from '../actions/set_current_song';
+import { useDispatch } from 'react-redux';
 import ChordsContainer from './chords_container';
-import DEFAULT_CHORDS from '../constants/default_chords';
 
 const Grid = props => {
     const dispatch = useDispatch()
-    let currentSong 
-    // = useSelector(state => state.currentSong)
 
     const fetchSongToEdit = () => {
         if (props.song_id) {
             fetch(`http://localhost:3000/songs/${props.song_id}`)
             .then(resp => resp.json())
             .then(song => {
-                currentSong = song
+                dispatch(setCurrentSong(song))
             })
         }
     }
 
-    dispatch(() => endNowPlaying())
-    // dispatch(() => setCurrentSong(currentSong))
     fetchSongToEdit()
 
     return (

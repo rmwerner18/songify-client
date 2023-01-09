@@ -14,15 +14,12 @@ import { logout } from './actions/logout'
 const App = () => {
   const dispatch = useDispatch()
   const user = useSelector(state => state.user) 
-  
+
   dispatch(fetchSounds())
   const token = localStorage.getItem('token')
-  console.log(token)
-  console.log('APP')
   if (token && (!user.id)) {
     dispatch(fetchUserFromToken(token))
   }
-  
   
   return (
     <div className="App">
