@@ -72,8 +72,7 @@ const Chord = props => {
 
     return (
         <>
-            <div className='chord-box'
-            // {chordIsPlaying() ? 'chord-box playing' : 'chord-box'}
+            <div className={chordIsPlaying() ? 'chord-box playing' : 'chord-box'}
             >
                 {editMode ?
                 <div className='chord-edit-selects'>

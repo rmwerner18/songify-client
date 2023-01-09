@@ -1,4 +1,5 @@
 import DEFAULT_SONG_STATE from "../constants/default_song_state"
+import produce from 'immer'
 
 export const currentSongReducer = (state = DEFAULT_SONG_STATE, action) => {
     let clearedBeats
@@ -6,7 +7,10 @@ export const currentSongReducer = (state = DEFAULT_SONG_STATE, action) => {
         case 'SET_CURRENT_SONG':
             return Object.assign({}, state, action.song)
         // case 'CHANGE_HH_BEATS':
-        //     return Object.assign({}, state, {hhBeats: [...action.beats]})
+        //     return produce((state, draft) => {
+        //         draft.hhBeats = action.payload
+        //     })
+            // return Object.assign({}, state, {hhBeats: [...action.beats]})
         // case 'CHANGE_SNARE_BEATS':
         //     return Object.assign({}, state, {snareBeats: [...action.beats]})
         // case 'CHANGE_KICK_BEATS':
@@ -19,7 +23,7 @@ export const currentSongReducer = (state = DEFAULT_SONG_STATE, action) => {
         //     }
         //     return Object.assign({}, state, clearedBeats)
         case 'SONG_ATTR':
-            return Object.assign({}, state, action.payload)
+            return { ...state, ...action.payload}
         // case 'CHANGE_KEY':
         //     return Object.assign({}, state, {melodyKey: action.key})
         // case 'CHANGE_MODE':

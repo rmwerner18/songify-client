@@ -9,18 +9,17 @@ const CheckboxRow = ({ beatType }) => {
  const dispatch = useDispatch()
  const rowBeats = useSelector(state => state.currentSong[beatType])
 
-
  const changeHandler = (e) => {
   const { id } = e.target
-  const newArray = addOrRemoveBeat(rowBeats, id)
+  const newBeatArray = addOrRemoveBeat(rowBeats, id)
   const payload = {}
-  payload[beatType] = newArray
+  payload[beatType] = [...newBeatArray]
   dispatch(changeSongAttribute(payload))
  }
 
- console.log('checkboxRow', beatType)
  return <div className='checkbox-row'> 
   {numberOfBeatsArray.map(n => {return <Checkbox 
+   key = {n}
    beatType={beatType} 
    n={n} 
    checked={rowBeats.includes(n)}

@@ -1,5 +1,6 @@
 import React from 'react'
 import CheckboxRow from '../containers/checkbox_row'
+import { useSelector } from 'react-redux'
 
 const MelodyForm = () => {
 
@@ -28,7 +29,7 @@ const MelodyForm = () => {
                     <p>i</p>
                 </div>
                 <div>
-                    {beatTypes.map(beatType => <CheckboxRow beatType={beatType}/>)}
+                    {beatTypes.map((beatType, n) => <CheckboxRow key={n} beatType={beatType}/>)}
                 </div>
             </div>
         </div>

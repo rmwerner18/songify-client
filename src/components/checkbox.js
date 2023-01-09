@@ -18,7 +18,7 @@ const Checkbox = ({ n, checked, changeHandler })=> {
     <div key={n} className={`checkbox-meta-container ${isOnMeasureLine(n)}`}>
     <label className='checkbox-container'>
       <input type="checkbox" className={isCurrentBeat ? 'checkbox playing' : 'checkbox'} 
-      checked={checked} id={n} onChange={changeHandler}/>
+      checked={checked} id={n} key={n} onChange={changeHandler}/>
       <div className='checkmark'></div>
     </label>
     </div>

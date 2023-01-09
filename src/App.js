@@ -7,58 +7,49 @@ import NavBar from './containers/nav_bar'
 import LoginPage from './containers/login_page'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { fetchSounds } from './actions/fetch_sounds'
-import { connect } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { fetchUserFromToken} from './actions/set_user'
 import { logout } from './actions/logout'
 
-class App extends React.Component {
+const App = () => {
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.user) 
+  console.log('APP')
+  dispatch(fetchSounds())
+  // const token = localStorage.getItem('token')
+  // if (token) {
+  //   dispatch(fetchUserFromToken(token))
+  // }
 
-  componentDidMount = () => {
-    this.props.fetchSounds()
-    let token = localStorage.getItem('token')
-    if (token) {
-      this.props.fetchUserFromToken(token)
-    }
-  }
+  return (
+    <div className="App">
+      <BrowserRouter className='App-Content'>
+        <h1 className="logo">Songify<span>lite</span></h1>
+          <NavBar user={user}/>
+        <Route 
+          exact path='/songs/:id/edit' 
+          render={(routerProps) => <GridPage song_id={routerProps.match.params.id} />}/>
+        <Route 
+          exact path='/songs' 
+          render={() => <SongsPage/>}/>
+        <Route 
+          exact path='/login' 
+          render={() => user.id ?
+            <Redirect to='/'/>
+            :
+            <LoginPage/>}/>
+        <Route 
+          path="/logout" 
+            render={() => {
+              dispatch(logout())
+              return <Redirect to={'/login'}/>
+            }} />
+        <Route 
+          exact path='/' 
+          render={() => <GridPage/>}/>
+      </BrowserRouter>
+    </div>
+  );
+}
 
-  render() {
-    console.log('APP')
-      return (
-        <div className="App">
-          <BrowserRouter className='App-Content'>
-            <h1 className="logo">Songify<span>lite</span></h1>
-              <NavBar user={this.props.user}/>
-            <Route 
-              exact path='/songs/:id/edit' 
-              render={(routerProps) => <GridPage song_id={routerProps.match.params.id} />}/>
-            <Route 
-              exact path='/songs' 
-              render={() => <SongsPage/>}/>
-            <Route 
-              exact path='/login' 
-              render={() => this.props.user.id ?
-                <Redirect to='/'/>
-                :
-                <LoginPage/>}/>
-            <Route 
-              path="/logout" 
-                render={() => {
-                  this.props.logout()
-                  return <Redirect to={'/login'}/>
-                }} />
-            <Route 
-              exact path='/' 
-              render={() => <GridPage/>}/>
-          </BrowserRouter>
-        </div>
-      );
-    }
-  }
-
-  const mapStateToProps = (state) => {
-    return {
-      user: state.user
-    }
-  }
-
-export default connect(mapStateToProps, { logout, fetchSounds, fetchUserFromToken })(App);
+export default App;
