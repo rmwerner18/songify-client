@@ -1,20 +1,18 @@
 import React from 'react';
-import { changeTempo } from '../actions/change_tempo'
-import { connect } from 'react-redux'
+// import { changeTempo } from '../actions/change_tempo'
+import { useDispatch, useSelector } from 'react-redux'
+import { changeSongAttribute } from '../actions/change_song_attribute';
 
 const TempoForm = (props) => {
+    const dispatch = useDispatch()
+    const bpm = useSelector(state => state.currentSong.bpm)
+
     return (
         <div className='tempo-form'>
-            <p className="bpm-meter">bpm: {props.bpm}</p>
-            <input type="range" min="30" max='300' value={props.bpm} onChange={(e) => props.changeTempo(e.target.value)}/>
+            <p className="bpm-meter">bpm: {bpm}</p>
+            <input type="range" min="30" max='300' value={props.bpm} onChange={(e) => dispatch(changeSongAttribute({ bpm: e.target.value }))}/>
         </div>
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        bpm: state.currentSong.bpm
-    }
-}
-
-export default connect(mapStateToProps, { changeTempo })(TempoForm)
+export default TempoForm

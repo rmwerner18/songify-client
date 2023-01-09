@@ -1,5 +1,5 @@
 import React from 'react'
-import { clearMelody } from '../actions/clear_melody'
+// import { clearMelody } from '../actions/clear_melody'
 import { changeSongAttribute } from '../actions/change_song_attribute'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -45,7 +45,18 @@ const MelodyOptions = () => {
  const modeOptions = () => {
   return modes.map(mode => <option key={mode} selected={melodyMode === mode ? "selected" : null} value={mode}>{mode}</option>)
  } 
- 
+
+ const clearedBeats = {
+  iBeats: [],        
+  iiBeats: [],
+  iiiBeats: [],
+  ivBeats: [],
+  vBeats: [],        
+  viBeats: [],
+  viiBeats: [],
+  IBeats: []
+ }
+
   return (
     <div className='mode-select'>
     <select onChange={e => dispatch(changeSongAttribute({melodyKey: e.target.value}))}>
@@ -54,7 +65,7 @@ const MelodyOptions = () => {
     <select onChange={e => dispatch(changeSongAttribute({melodyMode: e.target.value}))}>
       {modeOptions()}
     </select>
-    <button className='button'onClick={() => dispatch(clearMelody())}>Clear Melody</button>
+    <button className='button'onClick={() => dispatch(changeSongAttribute(clearedBeats))}>Clear Melody</button>
     </div>)
 }
 

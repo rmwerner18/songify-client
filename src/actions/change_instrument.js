@@ -1,6 +1,6 @@
-export const changeInstrument = (instrument) => {
-    return {
-        type: 'CHANGE_INSTRUMENT',
-        instrument: instrument
-    }
-}
+// export const changeInstrument = (instrument) => {
+//     return {
+//         type: 'CHANGE_INSTRUMENT',
+//         instrument: instrument
+//     }
+// }
