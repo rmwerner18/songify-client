@@ -1,23 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react'
 import SongsContainer from './songs_container'
-import { connect, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { fetchSongs } from '../actions/set_all_songs'
 
-const SongsPage = (props) => {
+const SongsPage = () => {
     let [page, setPage] = useState('ALL_SONGS')
-    let songs = useSelector(state => state.allSongs)
+    const songs = useSelector(state => state.allSongs)
     const user = useSelector(state => state.user)
+    const dispatch = useDispatch()
 
     const filterSongs = page => {
-        switch(page) {
-            case 'USER_SONGS':
-                songs = songs.filter(song => song.user.id === user.id)
-                return songs
-            case 'LIKED_SONGS':
-                songs = songs.filter(song => song.likes.find(like => like.user_id === user.id))
-                return songs
-            default:
-                return songs
+        if (songs !== 'loading') {           
+            switch(page) {
+                case 'USER_SONGS':
+                    return songs.filter(song => song.user.id === user.id)  
+                case 'LIKED_SONGS':
+                    return songs.filter(song => song.likes.find(like => like.user_id === user.id))
+                default:
+                    return songs
+            }
         }
     }
 
@@ -29,23 +30,26 @@ const SongsPage = (props) => {
     }
 
     useEffect(() => {
-        songs = props.fetchSongs()
+        dispatch(fetchSongs())
     }, [])
-
-    filterSongs(page)
 
     return (
         <div className='songs-page'>
             <div className='songs-page-menu'>
                 <div onClick={() => setPage('ALL_SONGS')} className={setActiveClass('ALL_SONGS')} >All Songs</div>
-                <div onClick={() => setPage('USER_SONGS')} className={setActiveClass('USER_SONGS')} >Songs You've Created</div>
-                <div onClick={() => setPage('LIKED_SONGS')} className={setActiveClass('LIKED_SONGS')} >Songs You've Liked</div>
+                {user.id ?
+                <>
+                    <div onClick={() => setPage('USER_SONGS')} className={setActiveClass('USER_SONGS')} >Songs You've Created</div>
+                    <div onClick={() => setPage('LIKED_SONGS')} className={setActiveClass('LIKED_SONGS')} >Songs You've Liked</div>
+                </>
+                :
+                null}
             </div>
             <div className='songs-container-container'>
-                <SongsContainer songs={songs} user={user} page={page}/>
+                <SongsContainer songs={filterSongs(page)} user={user} page={page}/>
             </div>
         </div>
     )
 }
 
-export default connect(null, { fetchSongs })(SongsPage)
+export default SongsPage

@@ -8,20 +8,19 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 import { stopLoop } from '../helper_functions.js/stop_loop'
 
 
-const SongsContainer = props => {
+const SongsContainer = ({ songs, user, page}) => {
+    // console.log(songs, user, page)
     let [searchInput, setSearchInput] = useState('')
-    let [songs, setSongs] = useState(props.songs)
-    const user = useSelector(state => state.user)
     const nowPlaying = useSelector(state => state.nowPlaying)
     const dispatch = useDispatch()
+    
 
     const handleSearch = (e) => {
         setSearchInput(e.target.value)
     }
 
-    const renderSongs = (songs = props.songs) => {
-        songs = applySearch(songs)
-        return songs.map((song, index) => {
+    const renderSongs = () => {
+        return applySearch(songs).map((song, index) => {
             return (<Song 
                 id={song.id}
                 idx={index}
@@ -55,10 +54,6 @@ const SongsContainer = props => {
     }
 
     const deleteHandler = (song) => {
-        let newArray = props.songs
-        let i = newArray.findIndex(s => s.id === song.id)
-        newArray.splice(i, 1)
-        setSongs(newArray)
         if (nowPlaying.song && nowPlaying.song.id === song.id) {
             stopLoop()
         }
@@ -91,15 +86,15 @@ const SongsContainer = props => {
             },
             body: JSON.stringify({
                 song_id: song.id,
-                user_id: props.user.id
+                user_id: user.id
             })
         }).then(resp => resp.json())
         .then(() => dispatch(fetchSongs()))
     }
 
     const likeHandler = (e, id) => {
-        const song = props.songs.find(song => song.id === id)
-        if (props.user.id) {
+        const song = songs.find(song => song.id === id)
+        if (user.id) {
             userLikesSong(song)
             if (userLikesSong(song)) {
                 deleteLike(userLikesSong(song))
@@ -109,25 +104,8 @@ const SongsContainer = props => {
         } 
     }
 
-    const renderContent = () => {
-        return (
-            <div className="songs-container">
-            <div className="songs-container-header">
-                <span className="songs-container-header-col icon">
-                    <FontAwesomeIcon icon={solid('hashtag')} className='font-awesome' />
-                </span>
-                <span className="songs-container-header-col song-title">SONG TITLE</span>
-                <span className="songs-container-header-col artist">ARTIST</span>
-                <span className="songs-container-header-col likes">LIKES</span>
-                <SearchBar className='songs-container-header-col search' searchInput={searchInput} handleSearch={handleSearch}/>
-            </div>
-            {renderSongs()}
-        </div>
-        )
-    }
-
     const renderNoSongsMessage = () => {
-        switch(props.page) {
+        switch(page) {
             case 'USER_SONGS':
                 return (
                     <>
@@ -153,13 +131,19 @@ const SongsContainer = props => {
     }
 
     return (
-        props.songs !== {}
-        ?
-        props.songs !== 'loaded' > 0 ? renderContent() : renderNoSongsMessage()
-        :
-        <h1>Loading Songs...</h1>   
+        <div className="songs-container">
+            <div className="songs-container-header">
+                <span className="songs-container-header-col icon">
+                    <FontAwesomeIcon icon={solid('hashtag')} className='font-awesome' />
+                </span>
+                <span className="songs-container-header-col song-title">SONG TITLE</span>
+                <span className="songs-container-header-col artist">ARTIST</span>
+                <span className="songs-container-header-col likes">LIKES</span>
+                <SearchBar className='songs-container-header-col search' searchInput={searchInput} handleSearch={handleSearch}/>
+            </div>
+            {renderSongs()}
+        </div>
     )
-
 }
 
 export default SongsContainer

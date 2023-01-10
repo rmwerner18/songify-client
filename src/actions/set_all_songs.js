@@ -8,7 +8,7 @@ export const setAllSongs = (songs) => {
 export const setSongsLoaded = () => {
     return {
         // type: 'SET_SONGS_LOADED',
-        // songs: songs
+        // songs: ['loaded']
     }
 }
 
@@ -16,9 +16,9 @@ export const fetchSongs = () => dispatch => {
     return fetch('http://localhost:3000/songs')
     .then(resp => resp.json())
     .then(songs => {
-        if (songs === {}) {
-            songs = 'loaded'
-        }
+        // if (songs === []) {
+        //     songs = 'loaded'
+        // }
         dispatch(setAllSongs(songs))
     })
 }
