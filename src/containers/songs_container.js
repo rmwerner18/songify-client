@@ -153,9 +153,9 @@ const SongsContainer = props => {
     }
 
     return (
-        props.songs
+        props.songs !== {}
         ?
-        props.songs.length > 0 ? renderContent() : renderNoSongsMessage()
+        props.songs !== 'loaded' > 0 ? renderContent() : renderNoSongsMessage()
         :
         <h1>Loading Songs...</h1>   
     )
