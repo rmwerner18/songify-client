@@ -1,5 +1,4 @@
 import React from 'react'
-// import { clearMelody } from '../actions/clear_melody'
 import { changeSongAttribute } from '../actions/change_song_attribute'
 import { useDispatch, useSelector } from 'react-redux'
 

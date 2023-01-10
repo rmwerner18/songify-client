@@ -2,12 +2,11 @@ import React from 'react';
 import './App.css';
 import GridPage from './containers/grid_page'
 import SongsPage from './containers/songs_page'
-// import UserPage from './containers/user_page'
 import NavBar from './containers/nav_bar'
 import LoginPage from './containers/login_page'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { fetchSounds } from './actions/fetch_sounds'
-import { connect, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { fetchUserFromToken} from './actions/set_user'
 import { logout } from './actions/logout'
 

@@ -1,12 +1,13 @@
 import React from 'react'
 import { login } from '../actions/set_user'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 const LoginForm = (props) => {
+    const dispatch = useDispatch()
 
     const loginHandler = (e) => {
         e.preventDefault()
-        props.login({ username: props.state.username, password: props.state.password })
+        dispatch(login({ username: props.state.username, password: props.state.password }))
     }
 
     return (
@@ -34,4 +35,4 @@ const LoginForm = (props) => {
     )
 }
 
-export default connect(null, { login })(LoginForm)
+export default LoginForm

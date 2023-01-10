@@ -1,6 +1,5 @@
 import React from 'react'
 import CheckboxRow from '../containers/checkbox_row'
-import { useSelector } from 'react-redux'
 
 const MelodyForm = () => {
 

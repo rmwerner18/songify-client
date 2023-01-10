@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Checkbox from "../components/checkbox";
 import { numberOfBeatsArray } from "../helper_functions.js/make_beat_array";

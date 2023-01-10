@@ -4,29 +4,7 @@ import { useDispatch } from 'react-redux'
 import { setCurrentSong } from '../actions/set_current_song'
 import { endNowPlaying } from '../actions/end_now_playing'
 import { stopLoop } from '../helper_functions.js/stop_loop'
-import DEFAULT_CHORDS from "../constants/default_chords"
-
-const DEFAULT_SONG_STATE = {
- id: null,
- user_id: null,
- likes: 0,
- chords: DEFAULT_CHORDS,
- bpm: 100,
- snareBeats: [],
- kickBeats: [],
- hhBeats: [],
- instrument: "piano",
- iBeats: [],
- iiBeats: [],
- iiiBeats: [],
- ivBeats: [],
- vBeats: [],
- viBeats: [],
- viiBeats: [],
- IBeats: [],
- melodyKey: "C5",
- melodyMode: "ionian"
-}
+import DEFAULT_SONG_STATE from '../constants/default_song_state'
 
 const link = {
   display: 'flex',

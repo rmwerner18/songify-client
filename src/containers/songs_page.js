@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import SongsContainer from './songs_container'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchSongs } from '../actions/set_all_songs'
@@ -9,16 +9,14 @@ const SongsPage = () => {
     const user = useSelector(state => state.user)
     const dispatch = useDispatch()
 
-    const filterSongs = page => {
-        if (songs !== 'loading') {           
-            switch(page) {
-                case 'USER_SONGS':
-                    return songs.filter(song => song.user.id === user.id)  
-                case 'LIKED_SONGS':
-                    return songs.filter(song => song.likes.find(like => like.user_id === user.id))
-                default:
-                    return songs
-            }
+    const filterSongs = page => {         
+        switch(page) {
+            case 'USER_SONGS':
+                return songs.filter(song => song.user.id === user.id)  
+            case 'LIKED_SONGS':
+                return songs.filter(song => song.likes.find(like => like.user_id === user.id))
+            default:
+                return songs
         }
     }
 

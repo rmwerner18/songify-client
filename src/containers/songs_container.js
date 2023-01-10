@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Song from '../components/song'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchSongs } from '../actions/set_all_songs'
@@ -9,7 +9,6 @@ import { stopLoop } from '../helper_functions.js/stop_loop'
 
 
 const SongsContainer = ({ songs, user, page}) => {
-    // console.log(songs, user, page)
     let [searchInput, setSearchInput] = useState('')
     const nowPlaying = useSelector(state => state.nowPlaying)
     const dispatch = useDispatch()
@@ -44,13 +43,13 @@ const SongsContainer = ({ songs, user, page}) => {
     }
 
     const deleteSong = song => {
-        return fetch(`http://localhost:3000/songs/${song.id}`, {
-            method: "DELETE",
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-        .then(() => dispatch(fetchSongs()))
+            return fetch(`http://localhost:3000/songs/${song.id}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            .then(() => dispatch(fetchSongs()))
     }
 
     const deleteHandler = (song) => {

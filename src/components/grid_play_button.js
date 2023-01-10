@@ -5,7 +5,6 @@ import { setNumOfEigthNotes } from '../helper_functions.js/set_num_of_eigth_note
 import { stopLoop } from '../helper_functions.js/stop_loop'
 import { setNowPlaying } from '../actions/set_now_playing'
 import { endNowPlaying } from '../actions/end_now_playing'
-import { setCurrentSong } from '../actions/set_current_song'
 import { useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro' 
