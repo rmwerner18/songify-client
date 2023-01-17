@@ -26,6 +26,7 @@ const App = () => {
         <h1 className="logo">Songify<span>lite</span></h1>
           <NavBar user={user}/>
         <Route 
+        // filter out non-logged-in users
           exact path='/songs/:id/edit' 
           render={(routerProps) => <GridPage song_id={routerProps.match.params.id} />}/>
         <Route 

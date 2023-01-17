@@ -16,10 +16,14 @@ const SaveButton = props => {
                 newObj
             )
         }).then(resp => resp.json())
-        .then(() => {
+        .then(data => {
             stopLoop()
             props.endNowPlaying()
-            alert("Your changes have been saved!")
+            // check response object in back end
+            if (data.message !== 'Please log in') {
+                alert('Your changes have been saved!')
+            } else alert(data.message)
+            console.log(data.message)
         })
     }
 
