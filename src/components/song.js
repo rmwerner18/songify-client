@@ -1,75 +1,64 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import DeleteAndEditButtons from './delete_and_edit_buttons'
-import { setCurrentSong } from '../actions/set_current_song'
-import { setNowPlaying } from '../actions/set_now_playing'
-import { endNowPlaying } from '../actions/end_now_playing' 
-import { fetchSongs } from '../actions/set_all_songs'
-import { connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro'
 import SongPlayButton from './song_play_button' 
+import SongOptionsContainer from '../containers/song_options_container'
 
 
-const Song = (props) => {
+const Song = ({ id, idx, deleteHandler, likeHandler, song }) => { 
 
-    const like = props.song.likes.find(like => like.user_id === props.user.id)
-
+    const user = useSelector(state => state.user)
+    const like = song.likes.find(like => like.user_id === user.id)
     const [userLikesSong, setUserLikesSong] = useState(null)
-    const [likes, setLikes] = useState(props.song.likes.length)
+    const [likes, setLikes] = useState(song.likes.length)
     const [mouseOver, setMouseOver] = useState(false)
-
 
     useEffect(() => {
         setUserLikesSong(!!like)
     }, [like])
 
-    const likeHandler = (e, id) => {
+    const songLikeHandler = (e, id) => {
         userLikesSong ? setLikes(likes - 1) : setLikes(likes + 1)
         setUserLikesSong(!userLikesSong)
-        props.likeHandler(e, id)
+        likeHandler(e, id)
     }
 
-    const songBelongsToUser = () => props.song.user.id === props.user.id && props.user.id
+    const songBelongsToUser = () => song.user.id === user.id && user.id
 
     return (
-        
-        <div 
+
+        <div
             className={mouseOver ? "song-box active" : "song-box"}
             onMouseEnter={() => setMouseOver(true)}
             onMouseLeave={() => setMouseOver(false)}
         >
             <div className='song-number'>
-                <SongPlayButton id={props.id} mouseOver={mouseOver} idx={props.idx}/>
+                <SongPlayButton id={id} mouseOver={mouseOver} idx={idx}/>
             </div>
-            <h2 className="song-title">{props.song.name}</h2>
-            <p className="song-maker">{props.song.user.username}</p>
-            <span className="song-likes" id={`like-count-${props.id}`}>{likes}</span>
+            <h2 className="song-title">{song.name}</h2>
+            <p className="song-maker">{song.user.username}</p>
+            <span className="song-likes" id={`like-count-${id}`}>{likes}</span>
+            <SongOptionsContainer 
+                id={id} 
+                deleteHandler={deleteHandler}
+                song={song}
+                likeHandler={songLikeHandler}
+                user={user}
+                userLikesSong={userLikesSong}
+            />
+            {/* <div className="song-options">
 
-            <div className="song-options">
-                {songBelongsToUser() ? <DeleteAndEditButtons id={props.id} deleteHandler={props.deleteHandler}/> : null}
+                {songBelongsToUser() ? <DeleteAndEditButtons id={id} deleteHandler={deleteHandler}/> : null}
                     {userLikesSong ? 
-                        <FontAwesomeIcon icon={solid("thumbs-up")} className='like-button font-awesome' onClick={e => likeHandler(e, props.id)}/>
+                        <FontAwesomeIcon icon={solid("thumbs-up")} className='like-button font-awesome' onClick={e => songLikeHandler(e, id)}/>
                         :
-                        <FontAwesomeIcon icon={regular("thumbs-up")} className='like-button font-awesome' onClick={e => likeHandler(e, props.id)}/>
+                        <FontAwesomeIcon icon={regular("thumbs-up")} className='like-button font-awesome' onClick={e => songLikeHandler(e, id)}/>
                     }
-            </div>
+            </div> */}
         </div>
-        
     )
-
-}
-
-const mapStateToProps = state => {
-    const sounds = state.sounds
-    return {
-        synth: sounds.synth,
-        piano: sounds.piano,
-        snare: sounds.snare,
-        kick: sounds.kick,
-        hh: sounds.hh,
-        nowPlaying: state.nowPlaying,
-        user: state.user
-    }
 }
  
-export default connect(mapStateToProps, { setCurrentSong, setNowPlaying, endNowPlaying, fetchSongs })(Song)
+export default Song

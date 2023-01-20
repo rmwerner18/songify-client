@@ -199,7 +199,7 @@ body {
   margin-bottom: 8px;
 }
 
-.song-options-container {
+.grid-options-container {
   width: 200px;
   display: flex;
   background-color: var(--dark-background);
@@ -215,7 +215,7 @@ body {
   "po" */
 }
 
-.song-options-container * {
+.grid-options-container * {
   margin: 5px;
 }
 
@@ -646,7 +646,7 @@ button:focus {
   border-right: 1px solid var(--spotify-text);
 }
 
-.chord-options {
+.grid-options {
   display: flex;
   align-items: left;
   justify-content: center;
@@ -942,14 +942,14 @@ how to remove the virtical space around the range input in IE*/
     flex-direction: column;
   }
 
-  .chord-options {
+  .grid-options {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 
   } */
 
-  /* .song-options-container {
+  /* .grid-options-container {
     width: 555px;
   } */
 }

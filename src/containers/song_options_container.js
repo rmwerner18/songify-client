@@ -1,26 +1,26 @@
 import React from 'react'
-import SaveButton from '../components/save_button'
-import GridPlayButton from '../components/grid_play_button'
-import RandomProgButton from '../components/random_prog_button'
-import TempoForm from '../components/tempo_form'
-import InstrumentForm from '../components/instrument_form'
-import MelodyOptions from '../components/melody_options'
-import BeatSelect from '../components/beat_select'
+import { useSelector } from 'react-redux'
+import DeleteAndEditButtons from '../components/delete_and_edit_buttons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro'
 
-const SongOptionsContainer = props => {
- return (
- <div className='song-options-container'>
-   <div className='chord-options'>
-    <GridPlayButton />
-    <RandomProgButton />
-    <BeatSelect />
-    <MelodyOptions />
-    <TempoForm />
-    <InstrumentForm />
-    <SaveButton song_id={ props.song_id } />
-   </div>
+const SongOptionsContainer = ({id, deleteHandler, song, user, likeHandler, userLikesSong}) => {
+
+ const songBelongsToUser = () => song.user.id === user.id && user.id
+
+ const songOptions = () => {
+  return <div className='song-options'>
+   {songBelongsToUser() ? <DeleteAndEditButtons id={id} deleteHandler={deleteHandler}/> : null}
+    {userLikesSong ? 
+     <FontAwesomeIcon icon={solid('thumbs-up')} className='like-button font-awesome' onClick={e => likeHandler(e, id)}/>
+     :
+     <FontAwesomeIcon icon={regular('thumbs-up')} className='like-button font-awesome' onClick={e => likeHandler(e, id)}/>
+    }
   </div> 
- )
+ }
+
+ return user ? songOptions() : null
 }
+
 
 export default SongOptionsContainer
