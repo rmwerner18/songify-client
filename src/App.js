@@ -29,11 +29,7 @@ const App = () => {
         <NavBar user={user}/>
         <Route 
           exact path='/songs/:id/edit' 
-          render={(routerProps) => {
-            <PrivateRoute>
-              <GridPage song_id={routerProps.match.params.id} />
-            </PrivateRoute>
-          }}
+          render={(routerProps) => <PrivateRoute><GridPage song_id={routerProps.match.params.id} /></PrivateRoute>}
         /> 
         <Route 
           exact path='/songs' 

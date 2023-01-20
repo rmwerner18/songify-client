@@ -21,7 +21,6 @@ const SongsContainer = ({ songs, user, page}) => {
     const renderSongs = () => {
         return applySearch(songs).map((song, index) => {
             return (<Song 
-                id={song.id}
                 idx={index}
                 key={song.id}
                 song={song}
@@ -103,31 +102,31 @@ const SongsContainer = ({ songs, user, page}) => {
         } 
     }
 
-    const renderNoSongsMessage = () => {
-        switch(page) {
-            case 'USER_SONGS':
-                return (
-                    <>
-                        <h1>You have not created any songs.</h1>
-                        <span>Click the 'Create' tab to create a new song.</span>
-                    </>
-                )
-            case 'LIKED_SONGS':
-                return (
-                    <>
-                        <h1>You have not liked any songs.</h1>
-                        <span>Click the like icon on a song to see it appear here</span>
-                    </>
-                )
-            default:
-                return (
-                    <>
-                        <h1>No songs have been created</h1>
-                        <span>Click the 'Create' tab to create a new song.</span>
-                    </>
-                )
-        }
-    }
+    // const renderNoSongsMessage = () => {
+    //     switch(page) {
+    //         case 'USER_SONGS':
+    //             return (
+    //                 <>
+    //                     <h1>You have not created any songs.</h1>
+    //                     <span>Click the 'Create' tab to create a new song.</span>
+    //                 </>
+    //             )
+    //         case 'LIKED_SONGS':
+    //             return (
+    //                 <>
+    //                     <h1>You have not liked any songs.</h1>
+    //                     <span>Click the like icon on a song to see it appear here</span>
+    //                 </>
+    //             )
+    //         default:
+    //             return (
+    //                 <>
+    //                     <h1>No songs have been created</h1>
+    //                     <span>Click the 'Create' tab to create a new song.</span>
+    //                 </>
+    //             )
+    //     }
+    // }
 
     return (
         <div className="songs-container">
