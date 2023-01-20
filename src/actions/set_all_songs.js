@@ -1,3 +1,5 @@
+import BASE_API_URL from "../constants/base_api_url"
+
 export const setAllSongs = (songs) => {
     return {
         type: 'SET_ALL_SONGS',
@@ -6,7 +8,7 @@ export const setAllSongs = (songs) => {
 }
 
 export const fetchSongs = () => dispatch => {
-    return fetch('http://localhost:3000/songs')
+    return fetch(BASE_API_URL + 'songs')
     .then(resp => resp.json())
     .then(songs => dispatch(setAllSongs(songs)))
 }

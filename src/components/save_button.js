@@ -4,12 +4,13 @@ import { endNowPlaying } from '../actions/end_now_playing'
 import SongNameForm from '../components/song_name_form'
 import { fetchHeaders } from '../constants/fetch_headers'
 import { connect } from 'react-redux'
+import BASE_API_URL from '../constants/base_api_url'
 
 const SaveButton = props => {
     const [modalIsOpen, setModalIsOpen] = useState(false)
 
     const saveEdit = newObj => {
-        return fetch(`http://localhost:3000/songs/${props.song_id}`, {
+        return fetch(BASE_API_URL + `songs/${props.song_id}`, {
             method: "PATCH",
             headers: fetchHeaders,
             body: JSON.stringify(
@@ -28,7 +29,7 @@ const SaveButton = props => {
     }
 
     const saveSong = newObj => {
-        return     fetch('http://localhost:3000/songs', {
+        return     fetch(BASE_API_URL + '/songs', {
             method: "POST",
             headers: {
                 'content-type': 'application/json',

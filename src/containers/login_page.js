@@ -2,6 +2,7 @@ import React from 'react'
 import { stopLoop } from '../helper_functions.js/stop_loop'
 import SignupForm from '../components/signup_form'
 import LoginForm from '../components/login_form'
+import BASE_API_URL from '../constants/base_api_url'
 
 class LoginPage extends React.Component {
     state = {
@@ -20,7 +21,7 @@ class LoginPage extends React.Component {
     }
 
     setUsers = () => {
-        fetch('http://localhost:3000/users')
+        fetch(BASE_API_URL + '/users')
         .then(resp => resp.json())
         .then(users => this.setState({users: users}))
     }

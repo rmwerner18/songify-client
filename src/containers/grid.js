@@ -4,13 +4,14 @@ import MelodyForm from '../components/melody_form';
 import { setCurrentSong } from '../actions/set_current_song';
 import { useDispatch } from 'react-redux';
 import ChordsContainer from './chords_container';
+import BASE_API_URL from '../constants/base_api_url';
 
 const Grid = props => {
     const dispatch = useDispatch()
 
     const fetchSongToEdit = () => {
         if (props.song_id) {
-            fetch(`http://localhost:3000/songs/${props.song_id}`)
+            fetch(BASE_API_URL + `songs/${props.song_id}`)
             .then(resp => resp.json())
             .then(song => {
                 dispatch(setCurrentSong(song))

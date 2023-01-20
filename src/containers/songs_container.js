@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import SearchBar from '../components/search_bar'
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro' 
 import { stopLoop } from '../helper_functions.js/stop_loop'
+import BASE_API_URL from '../constants/base_api_url'
 
 
 const SongsContainer = ({ songs, user, page}) => {
@@ -42,7 +43,7 @@ const SongsContainer = ({ songs, user, page}) => {
     }
 
     const deleteSong = song => {
-            return fetch(`http://localhost:3000/songs/${song.id}`, {
+            return fetch(BASE_API_URL + `songs/${song.id}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -63,7 +64,7 @@ const SongsContainer = ({ songs, user, page}) => {
     }
 
     const deleteLike = like => {
-        return fetch(`http://localhost:3000/likes/${like.id}`, {
+        return fetch(BASE_API_URL + `likes/${like.id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json',
@@ -75,7 +76,7 @@ const SongsContainer = ({ songs, user, page}) => {
     }
 
     const createLike = song => {
-        return  fetch('http://localhost:3000/likes/', {
+        return  fetch(BASE_API_URL + '/likes/', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
