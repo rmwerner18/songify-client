@@ -9,23 +9,23 @@ import BASE_API_URL from '../constants/base_api_url'
 const SaveButton = props => {
     const [modalIsOpen, setModalIsOpen] = useState(false)
 
-    const saveEdit = newObj => {
-        return fetch(BASE_API_URL + `songs/${props.song_id}`, {
+    const saveEdit = async newObj => {
+        const fetchConfig = {
             method: "PATCH",
             headers: fetchHeaders,
             body: JSON.stringify(
                 newObj
             )
-        }).then(resp => resp.json())
-        .then(data => {
-            stopLoop()
-            props.endNowPlaying()
-            // check response object in back end
-            if (data.message !== 'Please log in') {
-                alert('Your changes have been saved!')
-            } else alert(data.message)
-            console.log(data.message)
-        })
+        }
+        const response = await fetch(BASE_API_URL + `songs/${props.song_id}`, fetchConfig)
+        const result = await response.json()
+        stopLoop()
+        props.endNowPlaying()
+        // check response object in back end
+        if (result.message !== 'Please log in') {
+            alert('Your changes have been saved!')
+        } else alert(result.message)
+        console.log(result.message)
     }
 
     const saveSong = newObj => {

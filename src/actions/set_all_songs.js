@@ -7,8 +7,8 @@ export const setAllSongs = (songs) => {
     }
 }
 
-export const fetchSongs = () => dispatch => {
-    return fetch(BASE_API_URL + 'songs')
-    .then(resp => resp.json())
-    .then(songs => dispatch(setAllSongs(songs)))
+export const fetchSongs = () => async dispatch => {
+    const response = await fetch(BASE_API_URL + 'songs')
+    const songs = await response.json()
+    dispatch(setAllSongs(songs))
 }

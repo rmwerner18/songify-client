@@ -18,7 +18,11 @@ export const fetchUserFromToken = (token) => async dispatch => {
 
   const response = await fetch(BASE_API_URL + 'profile', fetchConfig)
   const result = await response.json()
-  dispatch(setUser(result.user))
+  console.log('user from token', result)
+  console.log(result)
+  if (result.user.id) {
+    dispatch(setUser(result.user))
+  }
 }
 
 export const login = (user) => async dispatch => {

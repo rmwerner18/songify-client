@@ -2,12 +2,12 @@ import React from 'react'
 import { login } from '../actions/set_user'
 import { useDispatch } from 'react-redux'
 
-const LoginForm = (props) => {
+const LoginForm = ({ username, password, changeHandler }) => {
     const dispatch = useDispatch()
 
     const loginHandler = (e) => {
         e.preventDefault()
-        dispatch(login({ username: props.state.username, password: props.state.password }))
+        dispatch(login({ username: username, password: password }))
     }
 
     return (
@@ -17,15 +17,15 @@ const LoginForm = (props) => {
                 <input 
                     type='text' 
                     name='username' 
-                    onChange={props.changeHandler} 
-                    value={props.state.username} 
+                    onChange={changeHandler} 
+                    value={username} 
                     placeholder='username' 
                     className='username'/>
                 <input 
                     type='password' 
                     name='password' 
-                    onChange={props.changeHandler} 
-                    value={props.state.password} 
+                    onChange={changeHandler} 
+                    value={password} 
                     placeholder='password' 
                     className='password'/>
                 <input 

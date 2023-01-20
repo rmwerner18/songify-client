@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { Provider } from 'react-redux'
+import { Provider, useDispatch } from 'react-redux'
 import { applyMiddleware, createStore, combineReducers} from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
@@ -27,7 +27,6 @@ let store = createStore(
   reducer,
   composeWithDevTools(applyMiddleware(thunk))
 )
-
 
 ReactDOM.render(
   <React.StrictMode>
