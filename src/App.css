@@ -219,9 +219,9 @@ body {
   margin: 5px;
 }
 
-.bpm-meter {
+.bpm-meter, .volume-meter {
   color: var(--controls);
-  width: 50px;
+  display: flex;
 }
 
 .songs-page {
@@ -463,9 +463,9 @@ h1, h2 {
 
 .tempo-form {
   display: flex;
-  width: 90%;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  /* align-items: center;
+  justify-content: center; */
 }
 
 .instrument-form {
