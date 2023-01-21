@@ -14,7 +14,7 @@ const VolumeForm = () => {
    <p className='volume-meter'>volume</p>
    <input type='range' min='-70' max='1' value={volume || -30} onChange={changeHandler}/>
   </div>
-)
+ )
 }
 
 export default VolumeForm

@@ -17,7 +17,7 @@ import { numberOfBeatsArray } from '../../helper_functions/make_beat_array'
 
 const GridPlayButton = () => {
     // console.log(Tone.Transport.swing)
-    Tone.Transport.swing = 0.4
+    // Tone.Transport.swing = 0.4
     // Tone.Transport.swingSubdivision = '8n'
     // Tone.Destination.volume.value = -10
     // console.log(Tone.Destination.volume)

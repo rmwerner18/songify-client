@@ -7,6 +7,7 @@ import InstrumentForm from '../components/instrument_form'
 import MelodyOptions from '../components/melody_options'
 import BeatSelect from '../components/beat_select'
 import VolumeForm from '../components/volume_form'
+import SwingForm from '../components/swing_form'
 
 const GridOptionsContainer = props => {
  return (
@@ -18,6 +19,7 @@ const GridOptionsContainer = props => {
     <MelodyOptions />
     <TempoForm />
     <VolumeForm />
+    <SwingForm />
     <InstrumentForm />
     <SaveButton song_id={ props.song_id } />
    </div>

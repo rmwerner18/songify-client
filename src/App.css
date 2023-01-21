@@ -219,7 +219,7 @@ body {
   margin: 5px;
 }
 
-.bpm-meter, .volume-meter {
+.bpm-meter, .volume-meter, .swing-meter {
   color: var(--controls);
   display: flex;
 }
