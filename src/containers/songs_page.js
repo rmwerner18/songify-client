@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import SongsContainer from './songs_container'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchSongs } from '../actions/set_all_songs'
+import VolumeForm from '../components/volume_form'
 
 const SongsPage = () => {
     let [page, setPage] = useState('ALL_SONGS')
@@ -45,6 +46,9 @@ const SongsPage = () => {
             </div>
             <div className='songs-container-container'>
                 <SongsContainer songs={filterSongs(page)} user={user} page={page}/>
+            </div>
+            <div className='volume-form-container'>
+                <VolumeForm/>
             </div>
         </div>
     )

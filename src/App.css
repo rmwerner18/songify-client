@@ -224,6 +224,21 @@ body {
   display: flex;
 }
 
+.volume-form-container {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  height: auto;
+  background-color: var(--dark-background);
+  border: solid 0.5px var(--checkbox-background);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.volume-form-container > .volume-form > p {
+  margin: 0;
+}
+
 .songs-page {
   margin-top: 80px;
   display: flex;
@@ -503,8 +518,7 @@ h1, h2 {
 }
 
 .drum-preset-select {
-  margin: 10px;
-  margin-bottom: 0px;
+  margin: 0 10px;
 }
 
 .melody-form {
@@ -735,7 +749,7 @@ button:focus {
   align-items: center;
 }
 
-.mode-select {
+.mode-select, .button-container {
   display: flex;
   flex-direction: column;
 }

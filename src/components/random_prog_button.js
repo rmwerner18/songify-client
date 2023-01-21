@@ -11,8 +11,8 @@ const RandomProgButton = (props) => {
     }
     
     return (
-        <div className='random-chords-button-container'>
-            <button className='random-chords-button button' onClick={randomProgGenerator}>Randomize Chords</button>
+        <div className='button-container'>
+            <button className='button' onClick={randomProgGenerator}>Randomize Chords</button>
         </div>
     )
 }
