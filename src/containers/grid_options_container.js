@@ -15,12 +15,12 @@ const GridOptionsContainer = props => {
    <div className='grid-options'>
     <GridPlayButton />
     <RandomProgButton />
+    <InstrumentForm />
     <BeatSelect />
     <MelodyOptions />
     <TempoForm />
     <VolumeForm />
     <SwingForm />
-    <InstrumentForm />
     <SaveButton song_id={ props.song_id } />
    </div>
   </div> 

@@ -222,6 +222,7 @@ body {
 .bpm-meter, .volume-meter, .swing-meter {
   color: var(--controls);
   display: flex;
+  margin:0px;
 }
 
 .volume-form-container {
@@ -484,11 +485,9 @@ h1, h2 {
 }
 
 .instrument-form {
-  color: var(--controls);
-  height: auto;
-  display: flex; 
-  align-items: center;
-  justify-content: center;
+  margin: 10px;
+  margin-top: 0px;
+  
 }
 
 .beat-container {

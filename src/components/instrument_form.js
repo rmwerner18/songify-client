@@ -7,13 +7,10 @@ const InstrumentForm = () => {
     const dispatch = useDispatch()
 
     return (
-        <div className='instrument-form'>
-            <span>Instrument: </span>
-            <select onChange={e => dispatch(changeSongAttribute({instrument: e.target.value}))}>
-                <option selected={instrument==='piano' ? true : false} value="piano">Piano</option>
-                <option selected={instrument==='synth' ? true : false} value="synth">Synth</option>
-            </select>
-        </div>
+        <select className='instrument-form' onChange={e => dispatch(changeSongAttribute({instrument: e.target.value}))}>
+            <option selected={instrument==='piano' ? true : false} value="piano">Piano</option>
+            <option selected={instrument==='synth' ? true : false} value="synth">Synth</option>
+        </select>
     )
 }
 
