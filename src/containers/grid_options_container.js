@@ -1,6 +1,6 @@
 import React from 'react'
 import SaveButton from '../components/save_button'
-import GridPlayButton from '../components/grid_play_button'
+import GridPlayButton from '../components/play_buttons/grid_play_button'
 import RandomProgButton from '../components/random_prog_button'
 import TempoForm from '../components/tempo_form'
 import InstrumentForm from '../components/instrument_form'

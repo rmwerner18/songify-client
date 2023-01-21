@@ -6,7 +6,7 @@ import { changeSongAttribute } from '../actions/change_song_attribute';
 const TempoForm = () => {
     const dispatch = useDispatch()
     const bpm = useSelector(state => state.currentSong.bpm)
-    console.log(bpm)
+    
     return (
         <div className='tempo-form'>
             <p className='bpm-meter'>bpm: {bpm}</p>

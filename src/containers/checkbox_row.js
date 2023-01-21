@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Checkbox from "../components/checkbox";
-import { numberOfBeatsArray } from "../helper_functions.js/make_beat_array";
-import { addOrRemoveBeat } from '../helper_functions.js/add_or_remove_beat';
+import { numberOfBeatsArray } from "../helper_functions/make_beat_array";
+import { addOrRemoveBeat } from '../helper_functions/add_or_remove_beat';
 import { changeSongAttribute } from '../actions/change_song_attribute';
 
 const CheckboxRow = ({ beatType }) => {

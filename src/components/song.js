@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import SongPlayButton from './song_play_button' 
+import SongPlayButton from './play_buttons/song_play_button' 
 import SongOptionsContainer from '../containers/song_options_container'
 
 

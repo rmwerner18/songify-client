@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { stopLoop } from '../helper_functions.js/stop_loop'
+import { stopLoop } from '../helper_functions/stop_loop'
 import SignupForm from '../components/signup_form'
 import LoginForm from '../components/login_form'
 import BASE_API_URL from '../constants/base_api_url'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { stopLoop } from '../helper_functions.js/stop_loop'
+import { stopLoop } from '../helper_functions/stop_loop'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { endNowPlaying } from '../actions/end_now_playing'
 import { useDispatch } from 'react-redux'

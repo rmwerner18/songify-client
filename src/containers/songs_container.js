@@ -5,7 +5,7 @@ import { fetchSongs } from '../actions/set_all_songs'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import SearchBar from '../components/search_bar'
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro' 
-import { stopLoop } from '../helper_functions.js/stop_loop'
+import { stopLoop } from '../helper_functions/stop_loop'
 import BASE_API_URL from '../constants/base_api_url'
 
 

@@ -8,7 +8,7 @@ import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { fetchSounds } from './actions/fetch_sounds'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUserFromToken } from './actions/set_user'
-import PrivateRoute from './components/PrivateRoute';
+import PrivateRoute from './components/private_route';
 import Logout from './components/logout';
 import Logo from './components/logo';
 
