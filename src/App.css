@@ -221,6 +221,7 @@ body {
 
 .bpm-meter {
   color: var(--controls);
+  width: 50px;
 }
 
 .songs-page {
@@ -462,7 +463,7 @@ h1, h2 {
 
 .tempo-form {
   display: flex;
-  width: 80%;
+  width: 90%;
   align-items: center;
   justify-content: center;
 }
