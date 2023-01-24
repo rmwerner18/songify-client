@@ -3,16 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { Provider, useDispatch } from 'react-redux'
-import { applyMiddleware, createStore, combineReducers} from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import thunk from 'redux-thunk'
-import { currentSongReducer } from './reducers/current_song_reducer'
-import { soundsReducer } from './reducers/sounds_reducer'
-import { userReducer } from './reducers/user_reducer'
-import { allSongsReducer } from './reducers/all_songs_reducer'
-import { nowPlayingReducer } from './reducers/now_playing_reducer'
+import { Provider, useDispatch } from 'react-redux';
+import { applyMiddleware, createStore, combineReducers } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
+import { currentSongReducer } from './reducers/current_song_reducer';
+import { soundsReducer } from './reducers/sounds_reducer';
+import { userReducer } from './reducers/user_reducer';
+import { allSongsReducer } from './reducers/all_songs_reducer';
+import { nowPlayingReducer } from './reducers/now_playing_reducer';
 import { currentBeatReducer } from './reducers/current_beat_reducer';
+
+// edit backend to have swing attr on song
 
 let reducer = combineReducers({
   currentSong: currentSongReducer,
@@ -20,13 +22,10 @@ let reducer = combineReducers({
   sounds: soundsReducer,
   user: userReducer,
   nowPlaying: nowPlayingReducer,
-  currentBeat: currentBeatReducer
-})
+  currentBeat: currentBeatReducer,
+});
 
-let store = createStore(
-  reducer,
-  composeWithDevTools(applyMiddleware(thunk))
-)
+let store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(
   <React.StrictMode>

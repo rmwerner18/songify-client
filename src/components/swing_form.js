@@ -1,20 +1,34 @@
-import React, { useState } from 'react'
-import * as Tone from 'tone'
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeSongAttribute } from '../actions/change_song_attribute';
+import * as Tone from 'tone';
 
 const SwingForm = () => {
- const [swing, setSwing] = useState(0)
- Tone.Transport.swing = swing
+  const swing = useSelector((state) => state.currentSong.swing);
+  const [swingState, setSwingState] = useState(swing);
+  const dispatch = useDispatch();
+  Tone.Transport.swing = swingState;
 
- const changeHandler = e => {
-  setSwing(e.target.value * 0.01)
- }
+  const changeHandler = (e) => {
+    if (isNaN(e.target.value)) {
+      return;
+    }
+    setSwingState(e.target.value * 0.01);
+  };
 
- return (
-  <div className='swing-form'>
-   <p className='swing-meter'>swing</p>
-   <input type='range' min='0' max='100' value={swing * 100} onChange={changeHandler}/>
-  </div>
- )
-}
+  return (
+    <div className='swing-form'>
+      <p className='swing-meter'>swing</p>
+      <input
+        type='range'
+        min='0'
+        max='100'
+        value={swingState * 100}
+        onChange={changeHandler}
+        onPointerUp={() => dispatch(changeSongAttribute({ swing: swingState }))}
+      />
+    </div>
+  );
+};
 
-export default SwingForm
+export default SwingForm;
