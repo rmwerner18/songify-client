@@ -34,38 +34,39 @@ const player = (index, time, props) => {
     vBeats,
     viBeats,
     viiBeats,
-    IBeats
+    IBeats,
   };
 
   const drumBeats = {
-    'kick': {
-      'array': kickBeats,
-      'sound': kick
+    kick: {
+      array: kickBeats,
+      sound: kick,
     },
-    'snare': {
-      'array': snareBeats,
-      'sound': snare
+    snare: {
+      array: snareBeats,
+      sound: snare,
     },
-    'hh': {
-      'array': hhBeats,
-      'sound': hh
-    }
+    hh: {
+      array: hhBeats,
+      sound: hh,
+    },
   };
 
   const chordBeats = [
     [0, 4],
     [8, 12],
     [16, 20],
-    [24, 28]
-  ]
+    [24, 28],
+  ];
 
   Tone.Transport.bpm.value = parseInt(bpm);
   const instrumentSound = instrument === 'synth' ? synth : piano;
+
   chordBeats.forEach((array, idx) => {
     if (array.includes(index)) {
-      instrumentSound.triggerAttackRelease(freqs[idx], '2n', time)
+      instrumentSound.triggerAttackRelease(freqs[idx], '2n', time);
     }
-  })
+  });
   Object.keys(melodyBeats).forEach((beatType, beatIndex) => {
     if (melodyBeats[beatType].includes(index)) {
       instrumentSound.triggerAttackRelease(
@@ -73,13 +74,13 @@ const player = (index, time, props) => {
         '8n',
         time
       );
-    };
+    }
   });
   Object.keys(drumBeats).forEach((beatType) => {
     if (drumBeats[beatType]['array'].includes(index)) {
-      drumBeats[beatType]['sound'].start(time)
-    };
-  }); 
+      drumBeats[beatType]['sound'].start(time);
+    }
+  });
   return;
 };
 
