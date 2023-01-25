@@ -8,7 +8,7 @@ import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { fetchSounds } from './actions/fetch_sounds';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from './actions/set_user';
-import PrivateRoute from './components/private_route';
+import RenderPrivateRoute from './components/private_route';
 import Logout from './components/logout';
 import Logo from './components/logo';
 
@@ -30,14 +30,7 @@ const App = () => {
         <Route
           exact
           path='/songs/:id/edit'
-          render={(routerProps) => (user.loaded ?
-            <PrivateRoute>
-              <GridPage song_id={routerProps.match.params.id} />
-            </PrivateRoute>
-            :
-            <div>loading</div>
-          )}
-        />
+          render={(routerProps) => <RenderPrivateRoute routerProps={routerProps} Component={GridPage} />} />
         <Route exact path='/songs' render={() => <SongsPage />} />
         <Route
           exact
