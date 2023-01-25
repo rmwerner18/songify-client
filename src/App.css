@@ -700,10 +700,29 @@ button:focus {
   align-items: center;
 }
 
+.login-fields input {
+  background-color: transparent;
+  border: 0px;
+  border-bottom: var(--controls) solid 1px;
+  display: block;
+  width: 100%;
+  padding: 15px 0;
+  font-size: 30px;
+  color: #fff;
+}
+
+.login-fields input:focus {
+  outline: 0;
+  border-bottom: #fff solid 1px;
+}
+
 .login-fields input[type='submit'] {
-  width: 100px;
-  margin-bottom: 100px;
+  font-family: inherit;
+  width: 100%;
+  border: #fff solid 1px;
+  margin-bottom: 30px;
   margin-top: 5px;
+  font-size: 18px;
 }
 
 .username, .password {
