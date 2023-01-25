@@ -8,21 +8,23 @@ const setUser = (user) => {
   }
 }
 
-export const fetchUserFromToken = (token) => async dispatch => { 
-  const fetchConfig = {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  }
+export const fetchUser = () => async dispatch => { 
 
-  const response = await fetch(BASE_API_URL + 'profile', fetchConfig)
-  const result = await response.json()
-  console.log('user from token', result)
-  console.log(result)
-  if (result.user.id) {
-    dispatch(setUser(result.user))
-  }
+  const token = localStorage.getItem('token')
+
+  if (token) {
+    const fetchConfig = {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+    const response = await fetch(BASE_API_URL + 'profile', fetchConfig)
+    const result = await response.json()
+    if (result.user) {
+      dispatch(setUser({...result.user, ...{loaded: true}}))
+    } else dispatch(setUser({loaded: true}))
+  } else dispatch(setUser({loaded: true}))
 }
 
 export const login = (user) => async dispatch => {

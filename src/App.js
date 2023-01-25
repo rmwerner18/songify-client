@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import GridPage from './containers/grid_page';
 import SongsPage from './containers/songs_page';
@@ -7,7 +7,7 @@ import LoginPage from './containers/login_page';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { fetchSounds } from './actions/fetch_sounds';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserFromToken } from './actions/set_user';
+import { fetchUser } from './actions/set_user';
 import PrivateRoute from './components/private_route';
 import Logout from './components/logout';
 import Logo from './components/logo';
@@ -15,18 +15,14 @@ import Logo from './components/logo';
 const App = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  // const loading,setloadin ==true
+  console.log(user)
 
-  dispatch(fetchSounds());
-  const token = localStorage.getItem('token');
-  if (token && !user.id) {
-    dispatch(fetchUserFromToken(token));
-  }
+  useEffect(() => {
+    dispatch(fetchSounds());
+    dispatch(fetchUser());
+  }, [])
 
   return (
-    // loading ?
-    // loadingpage
-    // :
     <div className='App'>
       <BrowserRouter className='App-Content'>
         <Logo />
@@ -34,10 +30,12 @@ const App = () => {
         <Route
           exact
           path='/songs/:id/edit'
-          render={(routerProps) => (
+          render={(routerProps) => (user.loaded ?
             <PrivateRoute>
               <GridPage song_id={routerProps.match.params.id} />
             </PrivateRoute>
+            :
+            <div>loading</div>
           )}
         />
         <Route exact path='/songs' render={() => <SongsPage />} />

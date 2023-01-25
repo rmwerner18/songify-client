@@ -29,13 +29,9 @@ const SaveButton = props => {
     }
 
     const saveSong = newObj => {
-        return     fetch(BASE_API_URL + '/songs', {
+        return fetch(BASE_API_URL + '/songs', {
             method: "POST",
-            headers: {
-                'content-type': 'application/json',
-                accepts: 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            },
+            headers: fetchHeaders,
             body: JSON.stringify(
                 newObj
             )
