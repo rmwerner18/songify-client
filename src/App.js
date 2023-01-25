@@ -15,12 +15,12 @@ import Logo from './components/logo';
 const App = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  console.log(user)
+  console.log(user);
 
   useEffect(() => {
     dispatch(fetchSounds());
     dispatch(fetchUser());
-  }, [])
+  }, []);
 
   return (
     <div className='App'>
@@ -30,7 +30,13 @@ const App = () => {
         <Route
           exact
           path='/songs/:id/edit'
-          render={(routerProps) => <RenderPrivateRoute routerProps={routerProps} Component={GridPage} />} />
+          render={(routerProps) => (
+            <RenderPrivateRoute
+              routerProps={routerProps}
+              Component={GridPage}
+            />
+          )}
+        />
         <Route exact path='/songs' render={() => <SongsPage />} />
         <Route
           exact

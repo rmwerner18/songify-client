@@ -7,9 +7,11 @@ import SearchBar from '../components/search_bar'
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro' 
 import { stopLoop } from '../helper_functions/stop_loop'
 import BASE_API_URL from '../constants/base_api_url'
+import LoadingPage from '../components/loading_page'
 
 
-const SongsContainer = ({ songs, user, page}) => {
+const SongsContainer = ({ songsObject, user }) => {
+    const { songs, loaded } = songsObject
     let [searchInput, setSearchInput] = useState('')
     const nowPlaying = useSelector(state => state.nowPlaying)
     const dispatch = useDispatch()
@@ -20,7 +22,8 @@ const SongsContainer = ({ songs, user, page}) => {
     }
 
     const renderSongs = () => {
-        return applySearch(songs).map((song, index) => {
+        return loaded ?
+        applySearch(songs).map((song, index) => {
             return (<Song 
                 idx={index}
                 key={song.id}
@@ -29,6 +32,8 @@ const SongsContainer = ({ songs, user, page}) => {
                 likeHandler={likeHandler}
             />)
         })
+        :
+        <LoadingPage/>
     }
 
     const applySearch = (songs) => {
@@ -102,32 +107,6 @@ const SongsContainer = ({ songs, user, page}) => {
             }
         } 
     }
-
-    // const renderNoSongsMessage = () => {
-    //     switch(page) {
-    //         case 'USER_SONGS':
-    //             return (
-    //                 <>
-    //                     <h1>You have not created any songs.</h1>
-    //                     <span>Click the 'Create' tab to create a new song.</span>
-    //                 </>
-    //             )
-    //         case 'LIKED_SONGS':
-    //             return (
-    //                 <>
-    //                     <h1>You have not liked any songs.</h1>
-    //                     <span>Click the like icon on a song to see it appear here</span>
-    //                 </>
-    //             )
-    //         default:
-    //             return (
-    //                 <>
-    //                     <h1>No songs have been created</h1>
-    //                     <span>Click the 'Create' tab to create a new song.</span>
-    //                 </>
-    //             )
-    //     }
-    // }
 
     return (
         <div className="songs-container">
