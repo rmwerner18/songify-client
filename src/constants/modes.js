@@ -121,13 +121,13 @@ const locrian = (melodyKey) => {
 
 
 const modes = {
-    ionian: ionian,
-    dorian: dorian,
-    phrygian: phrygian,
-    lydian: lydian,
-    mixolydian: mixolydian,
-    aeolian: aeolian,
-    locrian: locrian
+    ionian,
+    dorian,
+    phrygian,
+    lydian,
+    mixolydian,
+    aeolian,
+    locrian
 }
 
 export default modes
