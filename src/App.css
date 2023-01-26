@@ -12,7 +12,6 @@
 
 }
 
-
 :root {
   --spotify-green: #1ED760;
   --dark-green: #056952;
@@ -23,13 +22,6 @@
   --spotify-text: #B3B3B3;
   --checkbox-background: #3f3f3f;
 }
-
-/* spotify green 1ED760 */
-/* spotify light charcoal B3B3B3 */
-/* spotify charcoal 121212 */
-/* spotify text 595959 */
-/* spotify selection text bg 333333 */
-/* spotify controls B3B3B3 */
 
 header {
   background-color: darkgray;
@@ -54,10 +46,6 @@ header {
   font-weight: bold;
 }
 
-/* button {
-  font-family: inherit;
-} */
-
 .modal-button {
   background-color: var(--card-background);
   height: 40px;
@@ -79,21 +67,6 @@ select {
 select:focus {
   outline: none;
 }
-
-/* .navbar-with-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-
-} */
-
-/* .search-bar {
-  position: absolute;
-  top: 5%;
-  right: 3%;
-} */
-
-
 
 fieldset {
   border-radius: 25px;
@@ -165,7 +138,6 @@ body {
 }
 
 .grid-page {
-  /* position: absolute; */
   top: 70px;
   right: 150px;
   display: flex;
@@ -182,13 +154,6 @@ body {
   align-items: center;
   border-radius: 15px;
   border: 1px solid #eee;
-  /* box-shadow: inset 0px 0px 10px 3px rgba(0,0,0,0.5), 0 6px 20px 0 rgba(0,0,0,0.4); */
-  /* grid-template-areas:
-  "chords"
-  
-  "beat"
-  "mel"
-  "save" */
 }
 
 .part-label {
@@ -265,7 +230,6 @@ body {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
   height: calc(100vh - 100px);
-  /* width: 45vw; */
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -404,10 +368,6 @@ h1, h2 {
   border-radius: 3px;
 }
 
-/* .checkmark.playing {
-  background-color: var(--spotify-text);
-} */
-
 .checkbox-container:hover input ~ .checkmark {
   background-color: #ccc;
   cursor: pointer;
@@ -471,8 +431,6 @@ h1, h2 {
 .tempo-form {
   display: flex;
   flex-direction: column;
-  /* align-items: center;
-  justify-content: center; */
 }
 
 .instrument-form {
@@ -481,26 +439,24 @@ h1, h2 {
   
 }
 
-.beat-container {
+.drum-container {
   display: flex;
   flex-direction: row;
-  /* margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 10px; */
-  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
 
-.beat-labels p, .melody-labels p {
-  width: 55px;
-  margin: 0;
+.drum-labels p, .melody-labels p {
+  width: 65px;
+  height: 15px;
+  margin: 1px;
   padding: 0;
   font-size: 14.6px; 
   text-align: right;
-  margin-right: 4px;
+  margin-right: 2px;
 }
 
-.beat-form {
+.drum-form {
   margin: 10px;
+  margin-left: 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -512,8 +468,8 @@ h1, h2 {
 }
 
 .melody-form {
-  grid-area: mel;
   margin: 10px;
+  margin-left: 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -524,7 +480,6 @@ h1, h2 {
   display: flex;
   flex-direction: row;
   margin: 10px 3px;
-  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
 
 
@@ -565,7 +520,6 @@ h1, h2 {
   width: 25%;
   text-align: left;
   overflow-x: scroll;
-  /* height: 27px; */
 }
 
 .song-options {
@@ -668,7 +622,6 @@ button:focus {
 }
 
 .login-all button {
-  /* width: 50%; */
   margin: 0 auto;
   color: var(--controls);
   background-color: transparent;
@@ -789,24 +742,16 @@ button:focus {
   height: 50px;
   width: 134px;
   margin: 0 3px;
-  /* border: 0.5px solid #aaa; */
   background-color: var(--spotify-green);
   color: #fff;
   border-radius: 15px;
   align-items: center;
   justify-content: center;
   text-align: center;
-  /* box-shadow: 1px 1px 5px 0.5px rgba(70, 70, 70, 0.2); */
-  /* cursor: pointer; */
 }
 
 .chord-box.playing {
   background-color: var(--dark-green)
-}
-
-.chord-box:hover { 
-  /* margin: 0 2.5px; */
-  /* box-shadow: 1px 1px 2px 0.5px rgba(70, 70, 70, 0.2); */
 }
 
 .chord-name {
