@@ -20,8 +20,7 @@ const DEFAULT_SONG_STATE = {
   viiBeats: [],
   IBeats: [],
   melodyKey: 'C5',
-  melodyMode: 'ionian',
-  isPlaying: false,
+  melodyMode: 'ionian'
 };
 
 export default DEFAULT_SONG_STATE;

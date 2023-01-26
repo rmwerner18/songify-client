@@ -12,12 +12,12 @@ const getIsCurrentBeat = createSelector(
 )
     
 const Checkbox = ({ n, checked, changeHandler })=> {
-  const isCurrentBeat = useSelector(state => getIsCurrentBeat(state, { beatIndex: n } )) 
+  const isCurrentBeat = useSelector(state => getIsCurrentBeat(state, { beatIndex: n } ))
 
   return (
     <div key={n} className={`checkbox-meta-container ${isOnMeasureLine(n)}`}>
     <label className='checkbox-container'>
-      <input type="checkbox" className={isCurrentBeat ? 'checkbox playing' : 'checkbox'} 
+      <input type="checkbox" className={isCurrentBeat ? 'checkbox playing' : 'checkbox'}
       checked={checked} id={n} key={n} onChange={changeHandler}/>
       <div className='checkmark'></div>
     </label>
