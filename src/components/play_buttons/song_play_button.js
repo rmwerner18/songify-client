@@ -16,7 +16,7 @@ import { numberOfBeatsArray } from '../../helper_functions/make_beat_array'
 const SongPlayButton = props => {
  
  let currentSong = useSelector(getCurrentSongWithFrequencies)
- const allSongs = useSelector(state => state.allSongs)
+ const allSongs = useSelector(state => state.allSongs.songs)
  const sounds = useSelector(state => state.sounds)
  const nowPlaying = useSelector(state => state.nowPlaying)
  const user = useSelector(state => state.user)
