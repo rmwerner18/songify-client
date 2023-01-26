@@ -22,7 +22,7 @@ export const fetchUser = () => async dispatch => {
     const response = await fetch(BASE_API_URL + 'profile', fetchConfig)
     const result = await response.json()
     if (result.user) {
-      dispatch(setUser({...result.user, ...{loaded: true}}))
+      dispatch(setUser(result.user))
     } else dispatch(setUser({loaded: true}))
   } else dispatch(setUser({loaded: true}))
 }
