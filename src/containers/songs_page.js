@@ -5,21 +5,23 @@ import { fetchSongs } from '../actions/set_all_songs';
 import VolumeForm from '../components/volume_form';
 
 const SongsPage = () => {
+  console.log('RENDER SONGS PAGE')
   let [page, setPage] = useState('ALL_SONGS');
-  const allSongs = useSelector((state) => state.allSongs);
+  const songs = useSelector((state) => state.allSongs.songs);
+  const songsLoaded = useSelector((state) => state.allSongs.loaded);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const filterSongs = (page) => {
     switch (page) {
       case 'USER_SONGS':
-        return allSongs.songs.filter((song) => song.user.id === user.id);
+        return songs.filter((song) => song.user.id === user.id);
       case 'LIKED_SONGS':
-        return allSongs.songs.filter((song) =>
+        return songs.filter((song) =>
           song.likes.find((like) => like.user_id === user.id)
         );
       default:
-        return allSongs.songs;
+        return songs;
     }
   };
 
@@ -61,7 +63,10 @@ const SongsPage = () => {
         ) : null}
       </div>
       <div className='songs-container-container'>
-        <SongsContainer songsObject={{songs: filterSongs(page), loaded: allSongs.loaded}} user={user} />
+        <SongsContainer
+          songsObject={{ songs: filterSongs(page), loaded: songsLoaded }}
+          user={user}
+        />
       </div>
       <div className='volume-form-container'>
         <VolumeForm />
