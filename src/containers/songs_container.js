@@ -52,20 +52,17 @@ const SongsContainer = ({ songsObject, user }) => {
   };
 
   const deleteSong = (song) => {
-    console.log("DELETE 2")
     return fetch(BASE_API_URL + `songs/${song.id}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     }).then(() => {
-      console.log('DELETE 3');
       dispatch(fetchSongs())
     });
   };
 
   const deleteHandler = (song) => {
-    console.log("DELETE 1")
     if (nowPlaying.song && nowPlaying.song.id === song.id) {
       stopLoop();
     }

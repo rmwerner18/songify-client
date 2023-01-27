@@ -1,5 +1,5 @@
-import React from 'react';
-import CheckboxRow from '../containers/checkbox_row';
+import React, { useState } from 'react';
+import MelodyCheckboxRow from '../containers/melody_checkbox_row';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { useSelector } from 'react-redux';
@@ -9,6 +9,13 @@ const MelodyForm = () => {
   const piano = useSelector((state) => state.sounds.piano);
   const melodyMode = useSelector((state) => state.currentSong.melodyMode);
   const melodyKey = useSelector((state) => state.currentSong.melodyKey);
+  const [beatObject, setBeatObject] = useState({
+    beat: null,
+    duration: 0,
+    beatType: '',
+  });
+
+  console.log(beatObject);
 
   const beatTypes = {
     IBeats: {
@@ -45,6 +52,20 @@ const MelodyForm = () => {
     },
   };
 
+  const dragStartHandler = (n, beatType) => {
+    setBeatObject({ ...beatObject, beat: n, beatType: beatType });
+  };
+
+  const dragEnterHandler = (n, checkboxBeatType) => {
+    if (checkboxBeatType === beatObject.beatType) {
+      setBeatObject({ ...beatObject, duration: n + 1 - beatObject.beat });
+    }
+  };
+
+  const dragEndHandler = () => {
+    console.log('DRAG END', beatObject);
+  };
+
   const triggerSound = (scaleIndex) => {
     piano.triggerAttackRelease(modes[melodyMode](melodyKey)[scaleIndex], '8n');
   };
@@ -70,7 +91,13 @@ const MelodyForm = () => {
         <div className='melody-labels'>{makeMelodyLabels()}</div>
         <div>
           {Object.keys(beatTypes).map((beatType, n) => (
-            <CheckboxRow key={n} beatType={beatType} />
+            <MelodyCheckboxRow
+              key={n}
+              beatType={beatType}
+              dragStartHandler={dragStartHandler}
+              dragEnterHandler={dragEnterHandler}
+              dragEndHandler={dragEndHandler}
+            />
           ))}
         </div>
       </div>

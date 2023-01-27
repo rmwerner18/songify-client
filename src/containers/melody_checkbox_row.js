@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Checkbox from '../components/checkbox';
+import MelodyCheckbox from '../components/melody_checkbox';
 import { numberOfBeatsArray } from '../helper_functions/make_beat_array';
 import { addOrRemoveBeat } from '../helper_functions/add_or_remove_beat';
 import { changeSongAttribute } from '../actions/change_song_attribute';
 
-const CheckboxRow = ({ beatType }) => {
+const MelodyCheckboxRow = ({
+  beatType,
+  dragEnterHandler,
+  dragStartHandler,
+  dragEndHandler,
+}) => {
   const dispatch = useDispatch();
   const rowBeats = useSelector((state) => state.currentSong[beatType]);
+
+  // console.log(beatObject);
 
   const changeHandler = (e) => {
     const { id } = e.target;
@@ -21,12 +28,15 @@ const CheckboxRow = ({ beatType }) => {
     <div className='checkbox-row'>
       {numberOfBeatsArray.map((n) => {
         return (
-          <Checkbox
+          <MelodyCheckbox
             key={n}
             beatType={beatType}
             n={n}
             checked={rowBeats.includes(n)}
             changeHandler={changeHandler}
+            dragStartHandler={dragStartHandler}
+            dragEnterHandler={dragEnterHandler}
+            dragEndHandler={dragEndHandler}
           />
         );
       })}
@@ -34,4 +44,4 @@ const CheckboxRow = ({ beatType }) => {
   );
 };
 
-export default CheckboxRow;
+export default MelodyCheckboxRow;

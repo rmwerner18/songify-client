@@ -5,7 +5,6 @@ import { fetchSongs } from '../actions/set_all_songs';
 import VolumeForm from '../components/volume_form';
 
 const SongsPage = () => {
-  console.log('RENDER SONGS PAGE')
   let [page, setPage] = useState('ALL_SONGS');
   const songs = useSelector((state) => state.allSongs.songs);
   const songsLoaded = useSelector((state) => state.allSongs.loaded);

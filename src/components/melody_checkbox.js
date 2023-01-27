@@ -8,7 +8,15 @@ const getIsCurrentBeat = createSelector(
   (currentBeat, beatIndex) => beatIndex === currentBeat
 );
 
-const Checkbox = ({ n, checked, beatType, changeHandler }) => {
+const MelodyCheckbox = ({
+  n,
+  checked,
+  beatType,
+  changeHandler,
+  dragEnterHandler,
+  dragStartHandler,
+  dragEndHandler,
+}) => {
   const isCurrentBeat = useSelector((state) =>
     getIsCurrentBeat(state, { beatIndex: n })
   );
@@ -24,10 +32,15 @@ const Checkbox = ({ n, checked, beatType, changeHandler }) => {
           key={n}
           onChange={changeHandler}
         />
-        <div className='checkmark'></div>
+        <div
+          className='checkmark'
+          onDragStart={() => dragStartHandler(n, beatType)}
+          onDragEnter={() => dragEnterHandler(n, beatType)}
+          onDragEnd={dragEndHandler}
+        ></div>
       </label>
     </div>
   );
 };
 
-export default Checkbox;
+export default MelodyCheckbox;
