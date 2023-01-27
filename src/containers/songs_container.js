@@ -58,7 +58,7 @@ const SongsContainer = ({ songsObject, user }) => {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     }).then(() => {
-      dispatch(fetchSongs())
+      dispatch(fetchSongs());
     });
   };
 

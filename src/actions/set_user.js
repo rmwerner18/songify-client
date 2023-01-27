@@ -1,60 +1,59 @@
-import { fetchHeaders } from '../constants/fetch_headers'
-import BASE_API_URL from '../constants/base_api_url'
+import { fetchHeaders } from '../constants/fetch_headers';
+import BASE_API_URL from '../constants/base_api_url';
 
 const setUser = (user) => {
   return {
     type: 'SET_USER',
-    user: user
-  }
-}
+    user: user,
+  };
+};
 
-export const fetchUser = () => async dispatch => { 
-
-  const token = localStorage.getItem('token')
+export const fetchUser = () => async (dispatch) => {
+  const token = localStorage.getItem('token');
 
   if (token) {
     const fetchConfig = {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }
-    const response = await fetch(BASE_API_URL + 'profile', fetchConfig)
-    const result = await response.json()
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await fetch(BASE_API_URL + 'profile', fetchConfig);
+    const result = await response.json();
     if (result.user) {
-      dispatch(setUser(result.user))
-    } else dispatch(setUser({loaded: true}))
-  } else dispatch(setUser({loaded: true}))
-}
+      dispatch(setUser(result.user));
+    } else dispatch(setUser({ loaded: true }));
+  } else dispatch(setUser({ loaded: true }));
+};
 
-export const login = (user) => async dispatch => {
+export const login = (user) => async (dispatch) => {
   const fetchConfig = {
-    method: "POST",
+    method: 'POST',
     headers: fetchHeaders,
-    body: JSON.stringify({user: user})
-  }
+    body: JSON.stringify({ user: user }),
+  };
 
-  const response = await fetch(BASE_API_URL + 'login', fetchConfig)
-  const result = await response.json()
+  const response = await fetch(BASE_API_URL + 'login', fetchConfig);
+  const result = await response.json();
   if (result.user) {
-    localStorage.setItem('token', result.jwt)
-    dispatch(setUser(result.user))
-    return true
-  } else alert('invalid username or password')
-}
+    localStorage.setItem('token', result.jwt);
+    dispatch(setUser(result.user));
+    return true;
+  } else alert('invalid username or password');
+};
 
-export const signUp = (user) => async dispatch => {
+export const signUp = (user) => async (dispatch) => {
   const fetchConfig = {
-    method: "POST",
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Accept': "application/json"
+      Accept: 'application/json',
     },
-    body: JSON.stringify({user: user})
-  }
-  
-  const response = await fetch(BASE_API_URL + 'users', fetchConfig)
-  const result = await response.json()
+    body: JSON.stringify({ user: user }),
+  };
+
+  const response = await fetch(BASE_API_URL + 'users', fetchConfig);
+  const result = await response.json();
   localStorage.setItem('token', result.jwt);
-  dispatch(setUser(result.user))
-}
+  dispatch(setUser(result.user));
+};

@@ -30,7 +30,7 @@ const LoginForm = ({ username, password, changeHandler }) => {
           placeholder='password'
           className='password'
         />
-        <input type='submit'/>
+        <input type='submit' />
       </form>
     </>
   );

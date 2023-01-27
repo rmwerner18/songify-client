@@ -94,6 +94,7 @@ const MelodyForm = () => {
             <MelodyCheckboxRow
               key={n}
               beatType={beatType}
+              beatObject={beatObject}
               dragStartHandler={dragStartHandler}
               dragEnterHandler={dragEnterHandler}
               dragEndHandler={dragEndHandler}

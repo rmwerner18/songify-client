@@ -1,6 +1,6 @@
 export const changeSongAttribute = (attr) => {
-    return {
-        type: 'SONG_ATTR',
-        payload: attr
-    }
-}
+  return {
+    type: 'SONG_ATTR',
+    payload: attr,
+  };
+};

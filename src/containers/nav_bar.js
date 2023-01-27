@@ -1,10 +1,10 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { setCurrentSong } from '../actions/set_current_song'
-import { endNowPlaying } from '../actions/end_now_playing'
-import { stopLoop } from '../helper_functions/stop_loop'
-import DEFAULT_SONG_STATE from '../constants/default_song_state'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setCurrentSong } from '../actions/set_current_song';
+import { endNowPlaying } from '../actions/end_now_playing';
+import { stopLoop } from '../helper_functions/stop_loop';
+import DEFAULT_SONG_STATE from '../constants/default_song_state';
 
 const link = {
   display: 'flex',
@@ -13,12 +13,12 @@ const link = {
   height: '40px',
   padding: '0 20px',
   background: 'transparent',
-  'fontFamily': 'Courier New',
+  fontFamily: 'Courier New',
   textDecoration: 'none',
   borderRadius: '10px',
   color: 'var(--spotify-text)',
-  fontWeight: '900'
-}
+  fontWeight: '900',
+};
 
 const createLink = {
   display: 'flex',
@@ -29,66 +29,71 @@ const createLink = {
   height: '30px',
   padding: '0 20px',
   background: 'var(--spotify-green)',
-  'fontFamily': 'Courier New',
+  fontFamily: 'Courier New',
   textDecoration: 'none',
   borderRadius: '10px',
   color: '#121212',
-  fontWeight: '900'
-}
-
+  fontWeight: '900',
+};
 
 const NavBar = (props) => {
-  const dispatch = useDispatch()
-  
-  const resetAudio = () => {
-    stopLoop()
-    dispatch(endNowPlaying())
-    dispatch(setCurrentSong(DEFAULT_SONG_STATE))
-  }
+  const dispatch = useDispatch();
 
-  return ( 
-    <div className='navbar'> 
+  const resetAudio = () => {
+    stopLoop();
+    dispatch(endNowPlaying());
+    dispatch(setCurrentSong(DEFAULT_SONG_STATE));
+  };
+
+  return (
+    <div className='navbar'>
       <NavLink
-        to="/"
+        to='/'
         exact
         style={createLink}
         onClick={resetAudio}
         activeStyle={{
-          color: '#fff'
+          color: '#fff',
         }}
-      >Create</NavLink>
+      >
+        Create
+      </NavLink>
       <NavLink
-        to="/songs"
+        to='/songs'
         exact
         style={link}
         onClick={resetAudio}
         activeStyle={{
-          color: '#fff'
+          color: '#fff',
         }}
-      >Listen</NavLink>
-      {
-        props.user.id 
-        ?
+      >
+        Listen
+      </NavLink>
+      {props.user.id ? (
         <NavLink
           to='/logout'
           exact
           style={link}
           activeStyle={{
-            color: '#fff'
+            color: '#fff',
           }}
-        >Logout</NavLink>
-        :
+        >
+          Logout
+        </NavLink>
+      ) : (
         <NavLink
           to='/login'
           exact
           style={link}
           activeStyle={{
-            color: '#fff'
+            color: '#fff',
           }}
-        >Login</NavLink>
-      }
+        >
+          Login
+        </NavLink>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;

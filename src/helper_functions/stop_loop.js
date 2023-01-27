@@ -1,6 +1,6 @@
-import * as Tone from 'tone'
+import * as Tone from 'tone';
 
 export const stopLoop = () => {
-    Tone.Transport.stop()
-    Tone.Transport.cancel()
-}
+  Tone.Transport.stop();
+  Tone.Transport.cancel();
+};

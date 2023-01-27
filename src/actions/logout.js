@@ -1,10 +1,6 @@
 export const logout = () => {
-    localStorage.removeItem('token')
-    return {
-        type: 'LOGOUT'
-    }
-}
-
-
-
-
+  localStorage.removeItem('token');
+  return {
+    type: 'LOGOUT',
+  };
+};

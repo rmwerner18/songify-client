@@ -4,9 +4,9 @@ import { logout } from '../actions/logout';
 import { Redirect } from 'react-router-dom';
 
 const Logout = () => {
- const dispatch = useDispatch()
- dispatch(logout())
- return <Redirect to={'/login'}/>
-}
+  const dispatch = useDispatch();
+  dispatch(logout());
+  return <Redirect to={'/login'} />;
+};
 
-export default Logout
+export default Logout;

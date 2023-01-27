@@ -9,13 +9,13 @@ const PrivateRoute = ({ children, user }) => {
 
 const RenderPrivateRoute = ({ Component, routerProps }) => {
   const user = useSelector((state) => state.user);
-  return user.loaded 
-    ? 
+  return user.loaded ? (
     <PrivateRoute user={user}>
-      <Component song_id={routerProps.match.params.id}/>
-    </PrivateRoute> 
-    : 
-    <LoadingPage/>
-}
+      <Component song_id={routerProps.match.params.id} />
+    </PrivateRoute>
+  ) : (
+    <LoadingPage />
+  );
+};
 
 export default RenderPrivateRoute;

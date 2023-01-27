@@ -7,14 +7,13 @@ import { changeSongAttribute } from '../actions/change_song_attribute';
 
 const MelodyCheckboxRow = ({
   beatType,
+  beatObject,
   dragEnterHandler,
   dragStartHandler,
   dragEndHandler,
 }) => {
   const dispatch = useDispatch();
   const rowBeats = useSelector((state) => state.currentSong[beatType]);
-
-  // console.log(beatObject);
 
   const changeHandler = (e) => {
     const { id } = e.target;

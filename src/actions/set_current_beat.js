@@ -1,6 +1,6 @@
-export const setCurrentBeat = beat => {
- return {
-  type: 'SET_CURRENT_BEAT',
-  beat: beat
- }
-}
+export const setCurrentBeat = (beat) => {
+  return {
+    type: 'SET_CURRENT_BEAT',
+    beat: beat,
+  };
+};
