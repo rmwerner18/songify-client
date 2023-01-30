@@ -9,15 +9,11 @@ import BeatSelect from '../components/beat_select';
 import VolumeForm from '../components/volume_form';
 import SwingForm from '../components/swing_form';
 
-const GridOptionsContainer = (props) => {
+const LeftGridOptionsContainer = (props) => {
   return (
     <div className='grid-options-container'>
       <div className='grid-options'>
         <GridPlayButton />
-        <RandomProgButton />
-        <InstrumentForm />
-        <BeatSelect />
-        <MelodyOptions />
         <TempoForm />
         <VolumeForm />
         <SwingForm />
@@ -27,4 +23,4 @@ const GridOptionsContainer = (props) => {
   );
 };
 
-export default GridOptionsContainer;
+export default LeftGridOptionsContainer;
