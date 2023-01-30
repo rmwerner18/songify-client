@@ -2,15 +2,15 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeSongAttribute } from '../actions/change_song_attribute';
 
-const InstrumentForm = () => {
-  const instrument = useSelector((state) => state.currentSong.instrument);
+const InstrumentForm = ({ instrumentType }) => {
+  const instrument = useSelector((state) => state.currentSong[instrumentType]);
   const dispatch = useDispatch();
 
   return (
     <select
       className='instrument-form'
       onChange={(e) =>
-        dispatch(changeSongAttribute({ instrument: e.target.value }))
+        dispatch(changeSongAttribute({ [instrumentType]: e.target.value }))
       }
     >
       <option selected={instrument === 'piano' ? true : false} value='piano'>

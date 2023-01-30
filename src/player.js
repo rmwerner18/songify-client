@@ -9,6 +9,7 @@ const player = (index, time, props) => {
     snare,
     kick,
     hh,
+    melodyInstrument,
     melodyMode,
     melodyKey,
     instrument,
@@ -61,6 +62,7 @@ const player = (index, time, props) => {
 
   Tone.Transport.bpm.value = parseInt(bpm);
   const instrumentSound = instrument === 'synth' ? synth : piano;
+  const melodyInstrumentSound = melodyInstrument === 'synth' ? synth : piano
 
   chordBeats.forEach((array, idx) => {
     if (array.includes(index)) {
@@ -69,7 +71,7 @@ const player = (index, time, props) => {
   });
   Object.keys(melodyBeats).forEach((beatType, beatIndex) => {
     if (melodyBeats[beatType].includes(index)) {
-      instrumentSound.triggerAttackRelease(
+      melodyInstrumentSound.triggerAttackRelease(
         modes[melodyMode](melodyKey)[beatIndex],
         '8n',
         time

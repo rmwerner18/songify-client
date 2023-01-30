@@ -1,6 +1,7 @@
 import React from 'react';
 import { changeSongAttribute } from '../actions/change_song_attribute';
 import { useDispatch, useSelector } from 'react-redux';
+import InstrumentForm from './instrument_form';
 
 const MelodyOptions = () => {
   const dispatch = useDispatch();
@@ -90,6 +91,7 @@ const MelodyOptions = () => {
       >
         {modeOptions()}
       </select>
+      <InstrumentForm instrumentType={'melodyInstrument'} />
       <button
         className='button'
         onClick={() => dispatch(changeSongAttribute(clearedBeats))}

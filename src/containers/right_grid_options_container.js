@@ -15,7 +15,7 @@ const RightGridOptionsContainer = (props) => {
       <div className='grid-options'>
         <span>Chords:</span>
         <RandomProgButton />
-        <InstrumentForm />
+        <InstrumentForm instrumentType={ 'instrument' }/>
         <span>Drums:</span>
         <BeatSelect />
         <span>Melody:</span>

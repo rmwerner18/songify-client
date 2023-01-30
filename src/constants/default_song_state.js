@@ -11,6 +11,7 @@ const DEFAULT_SONG_STATE = {
   kickBeats: [],
   hhBeats: [],
   instrument: 'piano',
+  melodyInstrument: 'piano',
   iBeats: [],
   iiBeats: [],
   iiiBeats: [],
