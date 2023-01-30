@@ -13,13 +13,27 @@ const RightGridOptionsContainer = (props) => {
   return (
     <div className='grid-options-container'>
       <div className='grid-options'>
-        <span>Chords:</span>
-        <RandomProgButton />
-        <InstrumentForm instrumentType={ 'instrument' }/>
-        <span>Drums:</span>
-        <BeatSelect />
-        <span>Melody:</span>
-        <MelodyOptions />
+        <div className='grid-options-section'>
+          <span>Chords:</span>
+          <RandomProgButton />
+          <InstrumentForm instrumentType={'instrument'} />
+        </div>
+        <div className='grid-options-section'>
+          <span>Drums:</span>
+          <BeatSelect />
+        </div>
+        <div className='grid-options-section'>
+          <span>Melody:</span>
+          <MelodyOptions />
+        </div>
+        <div className='grid-options-section'>
+          <TempoForm />
+          <VolumeForm />
+          <SwingForm />
+        </div>
+        <div className='grid-options-section'>
+          <SaveButton song_id={props.song_id} />
+        </div>
       </div>
     </div>
   );

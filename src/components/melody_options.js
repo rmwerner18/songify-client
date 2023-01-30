@@ -76,7 +76,7 @@ const MelodyOptions = () => {
   };
 
   return (
-    <div className='mode-select'>
+    <div>
       <select
         onChange={(e) =>
           dispatch(changeSongAttribute({ melodyKey: e.target.value }))

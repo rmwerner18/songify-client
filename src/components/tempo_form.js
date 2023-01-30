@@ -9,7 +9,7 @@ const TempoForm = () => {
 
   return (
     <div className='tempo-form'>
-      <p className='bpm-meter'>bpm: {bpm}</p>
+      <p className='bpm-meter'>bpm: </p>
       <input
         type='range'
         min='30'

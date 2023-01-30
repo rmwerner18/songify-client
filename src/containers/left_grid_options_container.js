@@ -11,13 +11,13 @@ import SwingForm from '../components/swing_form';
 
 const LeftGridOptionsContainer = (props) => {
   return (
-    <div className='grid-options-container'>
+    <div className='grid-options-container left'>
       <div className='grid-options'>
-        <GridPlayButton />
-        <TempoForm />
+        {/* <GridPlayButton /> */}
+        {/* <TempoForm />
         <VolumeForm />
-        <SwingForm />
-        <SaveButton song_id={props.song_id} />
+        <SwingForm /> */}
+        {/* <SaveButton song_id={props.song_id} /> */}
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ const VolumeForm = () => {
 
   return (
     <div className='volume-form'>
-      <p className='volume-meter'>volume</p>
+      <p className='volume-meter'>volume: </p>
       <input
         type='range'
         min='-70'

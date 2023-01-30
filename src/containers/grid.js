@@ -5,6 +5,15 @@ import { setCurrentSong } from '../actions/set_current_song';
 import { useDispatch } from 'react-redux';
 import ChordsContainer from './chords_container';
 import BASE_API_URL from '../constants/base_api_url';
+import GridPlayButton from '../components/play_buttons/grid_play_button';
+import RandomProgButton from '../components/random_prog_button';
+import InstrumentForm from '../components/instrument_form';
+import BeatSelect from '../components/beat_select';
+import MelodyOptions from '../components/melody_options';
+import TempoForm from '../components/tempo_form';
+import SwingForm from '../components/swing_form';
+import VolumeForm from '../components/volume_form';
+import SaveButton from '../components/save_button';
 
 const Grid = (props) => {
   const dispatch = useDispatch();
@@ -31,13 +40,30 @@ const Grid = (props) => {
           <p className='bar-label last'>Bar 4</p>
         </div>
         <div className='grid-container'>
-          <p className='part-label'>Chords</p>
+          <GridPlayButton />
+          <div className='part-label'>
+            <p>CHORDS</p>
+            <InstrumentForm instrumentType={'instrument'} />
+            <RandomProgButton />
+          </div>
           <ChordsContainer />
-          <p className='part-label'>Drums</p>
+          <div className='part-label'>
+            <p>DRUMS</p>
+            <BeatSelect />
+          </div>
           <DrumForm />
-          <p className='part-label'>Melody</p>
+          <div className='part-label'>
+            <p>MELODY</p>
+            <MelodyOptions />
+          </div>
           <MelodyForm />
+          <div className='range-options'>
+            <TempoForm />
+            <VolumeForm />
+            <SwingForm />
+          </div>
         </div>
+        <SaveButton song_id={props.song_id} />
       </div>
     </>
   );

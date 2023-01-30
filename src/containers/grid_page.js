@@ -9,11 +9,11 @@ const GridPage = (props) => {
   const sounds = useSelector((state) => state.sounds);
   return sounds.loaded ? (
     <div className='grid-page'>
-      <LeftGridOptionsContainer />
+      {/* <LeftGridOptionsContainer /> */}
       <Grid song_id={props.song_id ? props.song_id : null} />
-      <RightGridOptionsContainer
+      {/* <RightGridOptionsContainer
         song_id={props.song_id ? props.song_id : null}
-      />
+      /> */}
     </div>
   ) : (
     <LoadingPage />

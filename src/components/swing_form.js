@@ -18,7 +18,7 @@ const SwingForm = () => {
 
   return (
     <div className='swing-form'>
-      <p className='swing-meter'>swing</p>
+      <p className='swing-meter'>swing: </p>
       <input
         type='range'
         min='0'
