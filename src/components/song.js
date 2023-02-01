@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import SongPlayButton from './play_buttons/song_play_button';
 import SongOptionsContainer from '../containers/song_options_container';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 const Song = ({ idx, deleteHandler, likeHandler, song }) => {
   const user = useSelector((state) => state.user);
@@ -41,6 +43,7 @@ const Song = ({ idx, deleteHandler, likeHandler, song }) => {
         user={user}
         userLikesSong={userLikesSong}
       />
+      <FontAwesomeIcon icon={solid('ellipsis')} className='font-awesome' />
     </div>
   );
 };

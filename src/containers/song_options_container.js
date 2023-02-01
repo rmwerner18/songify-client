@@ -31,7 +31,6 @@ const SongOptionsContainer = ({
             onClick={(e) => likeHandler(e, song.id)}
             />
             )}
-        <FontAwesomeIcon icon={solid('ellipsis')} className='font-awesome' />
       </div>
     );
   };

@@ -3,6 +3,8 @@ import SongsContainer from './songs_container';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSongs } from '../actions/set_all_songs';
 import VolumeForm from '../components/volume_form';
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const SongsPage = () => {
   let [page, setPage] = useState('ALL_SONGS');
@@ -41,7 +43,7 @@ const SongsPage = () => {
       <div className='songs-page-menu'>
         <div
           onClick={() => setPage('ALL_SONGS')}
-          className={setActiveClass('ALL_SONGS')}
+          className={`menu-option ${setActiveClass('ALL_SONGS')}`}
         >
           All Songs
         </div>
@@ -49,19 +51,30 @@ const SongsPage = () => {
           <>
             <div
               onClick={() => setPage('USER_SONGS')}
-              className={setActiveClass('USER_SONGS')}
+              className={`menu-option ${setActiveClass('USER_SONGS')}`}
             >
               Songs You've Created
             </div>
             <div
               onClick={() => setPage('LIKED_SONGS')}
-              className={setActiveClass('LIKED_SONGS')}
+              className={`menu-option ${setActiveClass('LIKED_SONGS')}`}
             >
               Songs You've Liked
             </div>
           </>
         ) : null}
-        <p>Playlists:</p>
+        <div className='playlist-section'>
+          <div className='playlist-section-label'>
+            <p>Playlists:</p>
+            <div>
+              <FontAwesomeIcon
+                icon={solid('square-plus')}
+                className='font-awesome'
+                onClick={() => console.log('add playlist')}
+              />
+            </div>
+          </div>
+        </div>
         <div className='volume-form-container'>
           <VolumeForm />
         </div>

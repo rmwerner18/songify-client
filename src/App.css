@@ -30,6 +30,7 @@ header {
 }
 
 .font-awesome {
+  cursor: pointer;
   color: #fff;
 }
 
@@ -74,29 +75,6 @@ fieldset span {
 
 .chord-selection {
   width: 200px;
-}
-
-.menu-icon-background {
-  display: flex;
-  height: 50px;
-  width: 50px;
-  border-radius: 12px;
-  margin: 5px 3px 5px 0;
-  opacity: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.menu-icon-bar {
-  width: 75%;
-  height: 10px;
-  background-color: var(--controls);
-  opacity: 100%;
-  z-index: 1;
-  margin: 2px;
-  border-radius: 5px;
 }
 
 .logo {
@@ -210,7 +188,7 @@ body {
   width: calc(100vw - 100px);
 }
 
-.songs-page-menu div {
+.songs-page-menu .menu-option {
   cursor: pointer;
   margin: 5px 0;
 }
@@ -229,6 +207,15 @@ body {
   font-family: inherit;
   font-weight: 900;
   font-size: 1.3rem;
+}
+
+.playlist-section-label {
+  display: flex;
+  align-items: center;
+}
+
+.playlist-section-label p {
+  margin-right: 40px;
 }
 
 .songs-page .songs-container-container {
@@ -537,7 +524,7 @@ h1, h2 {
 .song-options {
   width: 10%;
   display: flex;
-  align-items: space-around;
+  align-items: center;
   justify-content: space-around;
   height: 100%;
   margin: 5px 10px 0;
