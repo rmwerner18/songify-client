@@ -10,7 +10,7 @@ import BASE_API_URL from '../constants/base_api_url';
 import LoadingPage from '../components/loading_page';
 
 const SongsContainer = ({ songsObject, user }) => {
-  const { songs, loaded } = songsObject;
+  const { songs, loaded, error } = songsObject;
   let [searchInput, setSearchInput] = useState('');
   const nowPlaying = useSelector((state) => state.nowPlaying);
   const dispatch = useDispatch();
@@ -19,8 +19,18 @@ const SongsContainer = ({ songsObject, user }) => {
     setSearchInput(e.target.value);
   };
 
-  const renderSongs = () => {
+  const renderSongsOrLoading = () => {
     return loaded ? (
+      renderSongs()
+    ) : (
+      <LoadingPage />
+    );
+  };
+  
+  const renderSongs = () => {
+    return error ? (
+      <h1>Unable to load songs</h1>
+      ) : (
       applySearch(songs).map((song, index) => {
         return (
           <Song
@@ -30,12 +40,10 @@ const SongsContainer = ({ songsObject, user }) => {
             deleteHandler={deleteHandler}
             likeHandler={likeHandler}
           />
-        );
+        )
       })
-    ) : (
-      <LoadingPage />
-    );
-  };
+    )
+  }
 
   const applySearch = (songs) => {
     if (searchInput) {
@@ -132,7 +140,7 @@ const SongsContainer = ({ songsObject, user }) => {
           handleSearch={handleSearch}
         />
       </div>
-      {renderSongs()}
+      {renderSongsOrLoading()}
     </div>
   );
 };

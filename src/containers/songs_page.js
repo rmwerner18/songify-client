@@ -8,6 +8,7 @@ const SongsPage = () => {
   let [page, setPage] = useState('ALL_SONGS');
   const songs = useSelector((state) => state.allSongs.songs);
   const songsLoaded = useSelector((state) => state.allSongs.loaded);
+  const loadError = useSelector((state) => state.allSongs.error);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -67,7 +68,11 @@ const SongsPage = () => {
       </div>
       <div className='songs-container-container'>
         <SongsContainer
-          songsObject={{ songs: filterSongs(page), loaded: songsLoaded }}
+          songsObject={{
+            songs: filterSongs(page),
+            loaded: songsLoaded,
+            error: loadError,
+          }}
           user={user}
         />
       </div>
