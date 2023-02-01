@@ -20,17 +20,15 @@ const SongsContainer = ({ songsObject, user }) => {
   };
 
   const renderSongsOrLoading = () => {
-    return loaded ? (
-      renderSongs()
-    ) : (
-      <LoadingPage />
-    );
+    return loaded ? renderSongsOrError() : <LoadingPage />;
   };
-  
+
+  const renderSongsOrError = () => {
+    return error ? <h1>Unable to load songs</h1> : renderSongs();
+  };
+
   const renderSongs = () => {
-    return error ? (
-      <h1>Unable to load songs</h1>
-      ) : (
+    return songs.length > 0 ? (
       applySearch(songs).map((song, index) => {
         return (
           <Song
@@ -40,10 +38,12 @@ const SongsContainer = ({ songsObject, user }) => {
             deleteHandler={deleteHandler}
             likeHandler={likeHandler}
           />
-        )
+        );
       })
-    )
-  }
+    ) : (
+      <h1>No Songs Yet</h1>
+    );
+  };
 
   const applySearch = (songs) => {
     if (searchInput) {
