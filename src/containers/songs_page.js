@@ -60,15 +60,15 @@ const SongsPage = () => {
             </div>
           </>
         ) : null}
+        <div className='volume-form-container'>
+          <VolumeForm />
+        </div>
       </div>
       <div className='songs-container-container'>
         <SongsContainer
           songsObject={{ songs: filterSongs(page), loaded: songsLoaded }}
           user={user}
         />
-      </div>
-      <div className='volume-form-container'>
-        <VolumeForm />
       </div>
     </div>
   );
