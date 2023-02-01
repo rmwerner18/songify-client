@@ -22,12 +22,6 @@ const LoginPage = () => {
     }
   };
 
-  // const fetchUsers = () => {
-  //     fetch(BASE_API_URL + '/users')
-  //     .then(resp => resp.json())
-  //     .then(users => setUsers(users))
-  // }
-
   const changeModeHandler = (e) => {
     setHasAccount(!hasAccount);
     setUsername('');

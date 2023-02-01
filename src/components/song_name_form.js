@@ -11,15 +11,20 @@ class SongNameForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={(e) => this.props.submitHandler(e, this.state.value)}>
+      <form
+        className='song-name'
+        onSubmit={(e) => this.props.submitHandler(e, this.state.value)}
+      >
         <p>Please give your masterpiece a name</p>
-        <input
-          type='text'
-          name='songname'
-          onChange={this.changeHandler}
-          value={this.state.value}
-        />
-        <input type='submit' />
+        <div className='song-name-input'>
+          <input
+            type='text'
+            name='songname'
+            onChange={this.changeHandler}
+            value={this.state.value}
+          />
+          <input type='submit' />
+        </div>
       </form>
     );
   }

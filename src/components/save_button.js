@@ -26,8 +26,8 @@ const SaveButton = (props) => {
     const result = await response.json();
     stopLoop();
     props.endNowPlaying();
-    // check response object in back end
     if (result.message !== 'Please log in') {
+      setModalIsOpen(false)
       alert('Your changes have been saved!');
     } else alert(result.message);
     console.log(result.message);
@@ -46,6 +46,7 @@ const SaveButton = (props) => {
       .then((resp) => resp.json())
       .then((song) => {
         if (song.id) {
+          setModalIsOpen(false);
           alert('Your song has been saved!');
         }
       })

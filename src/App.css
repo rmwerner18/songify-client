@@ -658,11 +658,13 @@ button:focus {
   align-items: center;
 }
 
-.login-fields input {
+.login-fields input, .song-name-input input {
   background-color: transparent;
   border: 0px;
   border-bottom: var(--controls) solid 1px;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   padding: 15px 0;
   margin: 15px 0;
@@ -670,7 +672,13 @@ button:focus {
   color: #fff;
 }
 
-.login-fields input:focus {
+.song-name-input {
+  display: flex;
+  align-items: center;
+}
+
+.login-fields input:focus,
+.song-name input:focus {
   outline: 0;
   border-bottom: #fff solid 1px;
 }
@@ -682,6 +690,16 @@ button:focus {
   margin-bottom: 30px;
   margin-top: 40px;
   font-size: 18px;
+}
+
+.song-name input[type='submit'] {
+  border: #fff solid 1px;
+  padding: 0;
+  font-size: 15px;
+  height: 40px;
+  width: 70px;
+  border-radius: 5px;
+  margin: 0 10px;
 }
 
 .login-fields input[type='submit']:hover {
