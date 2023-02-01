@@ -46,13 +46,6 @@ header {
   font-weight: bold;
 }
 
-.modal-button {
-  background-color: var(--card-background);
-  height: 40px;
-  width: 100px;
-  color: #fff;
-}
-
 select {
   border: none;
   cursor: pointer;
@@ -132,19 +125,6 @@ body {
   overflow-x: scroll;
 }
 
-.grid {
-  display: flex;
-  flex-direction: column;
-}
-
-.grid-page {
-  top: 70px;
-  right: 150px;
-  display: flex;
-  place-items: center;
-
-}
-
 .grid-container {
   background-color: var(--dark-background);
   padding: 15px 10px;
@@ -179,7 +159,6 @@ body {
   justify-content: center;
   align-items: center;
   padding-top: 20px;
-  /* align-self: flex-end; */
 }
 
 .grid-options-container.left {
@@ -193,10 +172,6 @@ body {
 .grid-options-section * {
   width: 100%;
 }
-
-/* .grid-options-container * {
-  margin: 5px;
-} */
 
 .range-options {
   width: 100%;
@@ -760,7 +735,6 @@ button:focus {
 }
 
 .save-container {
-  grid-area: save;
   width: auto;
   display: flex;
   align-items: center;
@@ -771,6 +745,7 @@ button:focus {
   height: 50px;
   width: 100%;
   border: 1px solid #aaa;
+  margin-top: 10px;
   border-radius: 10px;
   background-color: var(--header-background);
   cursor: pointer;

@@ -60,6 +60,7 @@ const SongsPage = () => {
             </div>
           </>
         ) : null}
+        <p>Playlists:</p>
         <div className='volume-form-container'>
           <VolumeForm />
         </div>
