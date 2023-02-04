@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchSongs } from '../actions/set_all_songs';
 import VolumeForm from '../components/volume_form';
 import AddPlaylistButton from '../components/add_playlist_icon';
-import { Add } from 'tone';
 
 const SongsPage = () => {
   let [page, setPage] = useState('ALL_SONGS');
