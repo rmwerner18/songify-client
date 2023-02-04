@@ -3,8 +3,8 @@ import SongsContainer from './songs_container';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSongs } from '../actions/set_all_songs';
 import VolumeForm from '../components/volume_form';
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import AddPlaylistButton from '../components/add_playlist_icon';
+import { Add } from 'tone';
 
 const SongsPage = () => {
   let [page, setPage] = useState('ALL_SONGS');
@@ -66,13 +66,7 @@ const SongsPage = () => {
         <div className='playlist-section'>
           <div className='playlist-section-label'>
             <p>Playlists:</p>
-            <div>
-              <FontAwesomeIcon
-                icon={solid('square-plus')}
-                className='font-awesome'
-                onClick={() => console.log('add playlist')}
-              />
-            </div>
+            <AddPlaylistButton />
           </div>
         </div>
         <div className='volume-form-container'>
