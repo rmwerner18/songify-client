@@ -5,7 +5,8 @@ import { fetchSongs } from '../actions/set_all_songs';
 import VolumeForm from '../components/volume_form';
 import AddPlaylistButton from '../components/add_playlist_icon';
 
-const SongsPage = () => {
+const SongsPage = ({ playlistId = false }) => {
+  console.log(playlistId)
   let [page, setPage] = useState('ALL_SONGS');
   const songs = useSelector((state) => state.allSongs.songs);
   const songsLoaded = useSelector((state) => state.allSongs.loaded);
@@ -73,14 +74,26 @@ const SongsPage = () => {
         </div>
       </div>
       <div className='songs-container-container'>
-        <SongsContainer
-          songsObject={{
-            songs: filterSongs(page),
-            loaded: songsLoaded,
-            error: loadError,
-          }}
-          user={user}
-        />
+        {playlistId ? (
+          <SongsContainer
+            songsObject={{
+              songs: filterSongs(page),
+              loaded: songsLoaded,
+              error: loadError,
+            }}
+            playlistId={playlistId}
+            user={user}
+          />
+        ) : (
+          <SongsContainer
+            songsObject={{
+              songs: filterSongs(page),
+              loaded: songsLoaded,
+              error: loadError,
+            }}
+            user={user}
+          />
+        )}
       </div>
     </div>
   );

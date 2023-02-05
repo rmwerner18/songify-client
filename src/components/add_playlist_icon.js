@@ -16,7 +16,6 @@ const AddPlaylistButton = () => {
     };
     const res = await fetch(BASE_API_URL + 'playlists', fetchConfig);
     const playlist = await res.json()
-    
   };
 
   return (

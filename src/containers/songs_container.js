@@ -9,7 +9,8 @@ import { stopLoop } from '../helper_functions/stop_loop';
 import BASE_API_URL from '../constants/base_api_url';
 import LoadingPage from '../components/loading_page';
 
-const SongsContainer = ({ songsObject, user }) => {
+const SongsContainer = ({ songsObject, user, playlistId = false }) => {
+  console.log(playlistId)
   const { songs, loaded, error } = songsObject;
   let [searchInput, setSearchInput] = useState('');
   const nowPlaying = useSelector((state) => state.nowPlaying);
@@ -125,6 +126,18 @@ const SongsContainer = ({ songsObject, user }) => {
 
   return (
     <div className='songs-container'>
+      {playlistId ? 
+        <div>
+          <div className='playlist-image-container'>
+            <img />
+          </div>
+          <div className='playlist-name-container'>
+            <h1>Playlist Name</h1>
+          </div>
+        </div>
+        :
+        null
+      }
       <div className='songs-container-header'>
         <span className='songs-container-header-col icon'>
           <FontAwesomeIcon icon={solid('hashtag')} className='font-awesome' />

@@ -38,6 +38,7 @@ const App = () => {
           )}
         />
         <Route exact path='/songs' render={() => <SongsPage />} />
+        <Route exact path='/playlist/:id' render={(routerProps) => <SongsPage playlistId={ routerProps.match.params.id } />} />
         <Route
           exact
           path='/login'
