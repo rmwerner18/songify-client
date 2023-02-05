@@ -13,6 +13,7 @@ import { userReducer } from './reducers/user_reducer';
 import { allSongsReducer } from './reducers/all_songs_reducer';
 import { nowPlayingReducer } from './reducers/now_playing_reducer';
 import { currentBeatReducer } from './reducers/current_beat_reducer';
+import { playlistsReducer } from './reducers/playlists_reducer';
 
 // edit backend to have swing attr on song
 
@@ -23,6 +24,7 @@ let reducer = combineReducers({
   user: userReducer,
   nowPlaying: nowPlayingReducer,
   currentBeat: currentBeatReducer,
+  playlists: playlistsReducer,
 });
 
 let store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));

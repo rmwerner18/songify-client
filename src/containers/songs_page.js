@@ -4,14 +4,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchSongs } from '../actions/set_all_songs';
 import VolumeForm from '../components/volume_form';
 import AddPlaylistButton from '../components/add_playlist_icon';
+import { fetchPlaylists } from '../actions/fetch_playlists';
 
 const SongsPage = ({ playlistId = false }) => {
-  console.log(playlistId)
   let [page, setPage] = useState('ALL_SONGS');
   const songs = useSelector((state) => state.allSongs.songs);
   const songsLoaded = useSelector((state) => state.allSongs.loaded);
   const loadError = useSelector((state) => state.allSongs.error);
   const user = useSelector((state) => state.user);
+  const playlists = useSelector((state) => state.playlists);
   const dispatch = useDispatch();
 
   const filterSongs = (page) => {
@@ -34,8 +35,15 @@ const SongsPage = ({ playlistId = false }) => {
     return '';
   };
 
+  const showPlaylists = () => {
+    return playlists.map((playlist) => {
+      return <p>{playlist.name}</p>
+    });
+  };
+
   useEffect(() => {
     dispatch(fetchSongs());
+    dispatch(fetchPlaylists());
   }, []);
 
   return (
@@ -68,6 +76,7 @@ const SongsPage = ({ playlistId = false }) => {
             <p>Playlists:</p>
             <AddPlaylistButton />
           </div>
+          {showPlaylists()}
         </div>
         <div className='volume-form-container'>
           <VolumeForm />
