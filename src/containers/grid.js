@@ -8,7 +8,7 @@ import BASE_API_URL from '../constants/base_api_url';
 import GridPlayButton from '../components/play_buttons/grid_play_button';
 import RandomProgButton from '../components/random_prog_button';
 import InstrumentForm from '../components/instrument_form';
-import BeatSelect from '../components/beat_select';
+import DrumsSelect from '../components/drums_select';
 import MelodyOptions from '../components/melody_options';
 import TempoForm from '../components/tempo_form';
 import SwingForm from '../components/swing_form';
@@ -49,7 +49,7 @@ const Grid = (props) => {
           <ChordsContainer />
           <div className='part-label'>
             <p>DRUMS</p>
-            <BeatSelect />
+            <DrumsSelect />
           </div>
           <DrumForm />
           <div className='part-label'>

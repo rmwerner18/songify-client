@@ -5,7 +5,7 @@ import RandomProgButton from '../components/random_prog_button';
 import TempoForm from '../components/tempo_form';
 import InstrumentForm from '../components/instrument_form';
 import MelodyOptions from '../components/melody_options';
-import BeatSelect from '../components/beat_select';
+import DrumsSelect from '../components/drums_select';
 import VolumeForm from '../components/volume_form';
 import SwingForm from '../components/swing_form';
 

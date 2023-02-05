@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { changeSongAttribute } from '../actions/change_song_attribute';
 import DRUM_PRESETS from '../constants/drum_presets';
 
-const BeatSelect = () => {
+const DrumsSelect = () => {
   const dispatch = useDispatch();
 
   const changeHandler = (e) => {
@@ -12,12 +12,12 @@ const BeatSelect = () => {
         changeSongAttribute({ hhBeats: [], kickBeats: [], snareBeats: [] })
       );
     } else {
-      let beat = DRUM_PRESETS[e.target.value];
+      let preset = DRUM_PRESETS[e.target.value];
       dispatch(
         changeSongAttribute({
-          hhBeats: beat.hhBeats,
-          kickBeats: beat.kickBeats,
-          snareBeats: beat.snareBeats,
+          hhBeats: [...preset.hhBeats],
+          kickBeats: [...preset.kickBeats],
+          snareBeats: [...preset.snareBeats],
         })
       );
     }
@@ -42,4 +42,4 @@ const BeatSelect = () => {
   );
 };
 
-export default BeatSelect;
+export default DrumsSelect;

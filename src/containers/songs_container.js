@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Song from '../components/song';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchSongs } from '../actions/set_all_songs';
+import { fetchSongs, setAllSongs } from '../actions/set_all_songs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SearchBar from '../components/search_bar';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
@@ -92,7 +92,7 @@ const SongsContainer = ({ songsObject, user, playlistId = false }) => {
       },
     })
       .then((resp) => resp.json())
-      .then(() => dispatch(fetchSongs()));
+      .then((songs) => dispatch(setAllSongs(songs)));
   };
 
   const createLike = (song) => {
@@ -109,13 +109,12 @@ const SongsContainer = ({ songsObject, user, playlistId = false }) => {
       }),
     })
       .then((resp) => resp.json())
-      .then(() => dispatch(fetchSongs()));
+      .then((songs) => dispatch(setAllSongs(songs)));
   };
 
   const likeHandler = (e, id) => {
     const song = songs.find((song) => song.id === id);
     if (user.id) {
-      userLikesSong(song);
       if (userLikesSong(song)) {
         deleteLike(userLikesSong(song));
       } else {
