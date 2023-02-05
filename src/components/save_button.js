@@ -30,7 +30,6 @@ const SaveButton = (props) => {
       setModalIsOpen(false)
       alert('Your changes have been saved!');
     } else alert(result.message);
-    console.log(result.message);
   };
 
   const saveSong = (newObj) => {

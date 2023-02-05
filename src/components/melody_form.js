@@ -15,8 +15,6 @@ const MelodyForm = () => {
     beatType: '',
   });
 
-  console.log(beatObject);
-
   const beatTypes = {
     IBeats: {
       label: 'i',

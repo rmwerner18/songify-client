@@ -10,7 +10,6 @@ import BASE_API_URL from '../constants/base_api_url';
 import LoadingPage from '../components/loading_page';
 
 const SongsContainer = ({ songsObject, user, playlistId = false }) => {
-  console.log(playlistId)
   const { songs, loaded, error } = songsObject;
   let [searchInput, setSearchInput] = useState('');
   const nowPlaying = useSelector((state) => state.nowPlaying);

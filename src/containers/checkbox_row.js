@@ -11,7 +11,7 @@ const CheckboxRow = ({ beatType }) => {
 
   const changeHandler = (e) => {
     const { id } = e.target;
-    const newBeatArray = addOrRemoveBeat(rowBeats, id);
+    const newBeatArray = addOrRemoveBeat([...rowBeats], id);
     const payload = {};
     payload[beatType] = [...newBeatArray];
     dispatch(changeSongAttribute(payload));

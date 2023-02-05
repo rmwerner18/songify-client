@@ -1,9 +1,9 @@
-export const addOrRemoveBeat = (newArray, id) => {
-  if (newArray.includes(parseInt(id))) {
-    let index = newArray.findIndex((n) => n === parseInt(id));
-    newArray.splice(index, 1);
+export const addOrRemoveBeat = (beatArray, id) => {
+  if (beatArray.includes(parseInt(id))) {
+    let index = beatArray.findIndex((n) => n === parseInt(id));
+    beatArray.splice(index, 1);
   } else {
-    newArray.push(parseInt(id));
+    beatArray.push(parseInt(id));
   }
-  return newArray;
+  return beatArray;
 };

@@ -4,7 +4,7 @@ import CheckboxRow from '../containers/checkbox_row';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-const DrumForm = () => {
+const DrumsForm = () => {
   const { hh, snare, kick } = useSelector((state) => state.sounds);
   const beatTypes = {
     hhBeats: {
@@ -50,4 +50,4 @@ const DrumForm = () => {
   );
 };
 
-export default DrumForm;
+export default DrumsForm;

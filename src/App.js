@@ -15,7 +15,6 @@ import Logo from './components/logo';
 const App = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  console.log({ user });
 
   useEffect(() => {
     dispatch(fetchSounds());

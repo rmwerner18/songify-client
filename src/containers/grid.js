@@ -1,5 +1,5 @@
 import React from 'react';
-import DrumForm from '../components/drum_form';
+import DrumsForm from '../components/drums_form';
 import MelodyForm from '../components/melody_form';
 import { setCurrentSong } from '../actions/set_current_song';
 import { useDispatch } from 'react-redux';
@@ -51,7 +51,7 @@ const Grid = (props) => {
             <p>DRUMS</p>
             <DrumsSelect />
           </div>
-          <DrumForm />
+          <DrumsForm />
           <div className='part-label'>
             <p>MELODY</p>
             <MelodyOptions />
