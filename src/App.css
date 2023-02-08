@@ -353,6 +353,11 @@ h1, h2 {
   margin: 1px;
 }
 
+.resizable-box {
+  position: relative;
+  z-index: 1;
+}
+
 .checkbox-meta-container.box-2 {
   left: 20px;
 }
@@ -372,6 +377,7 @@ h1, h2 {
 .checkmark {
   height: 15px;
   width: 15px;
+  border: 1px solid var(--dark-background);
   background-color: var(--checkbox-background);
   border-radius: 3px;
 }
@@ -478,9 +484,9 @@ h1, h2 {
 .melody-form {
   margin-right: 10px;
   margin-bottom: 10px;
+  width: 600px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   transform: translateX(-29.5px)
 }
 
