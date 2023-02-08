@@ -337,15 +337,24 @@ h1, h2 {
   font-family: inherit;
 }
 
-.checkbox-row {
+.checkbox-rows {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+}
+
+.checkbox-row {
+  position: relative;
   margin: 1px;
   height: 15px;
 }
 
 .checkbox-meta-container {
+  position: absolute;
   margin: 1px;
+}
+
+.checkbox-meta-container.box-2 {
+  left: 20px;
 }
 
 .checkbox-container {

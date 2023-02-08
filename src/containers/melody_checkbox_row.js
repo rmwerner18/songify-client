@@ -5,13 +5,7 @@ import { numberOfBeatsArray } from '../helper_functions/make_beat_array';
 import { addOrRemoveBeat } from '../helper_functions/add_or_remove_beat';
 import { changeSongAttribute } from '../actions/change_song_attribute';
 
-const MelodyCheckboxRow = ({
-  beatType,
-  beatObject,
-  dragEnterHandler,
-  dragStartHandler,
-  dragEndHandler,
-}) => {
+const MelodyCheckboxRow = ({ beatType }) => {
   const dispatch = useDispatch();
   const rowBeats = useSelector((state) => state.currentSong[beatType]);
 
@@ -33,9 +27,6 @@ const MelodyCheckboxRow = ({
             n={n}
             checked={rowBeats.includes(n)}
             changeHandler={changeHandler}
-            dragStartHandler={dragStartHandler}
-            dragEnterHandler={dragEnterHandler}
-            dragEndHandler={dragEndHandler}
           />
         );
       })}

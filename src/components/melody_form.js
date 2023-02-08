@@ -50,20 +50,6 @@ const MelodyForm = () => {
     },
   };
 
-  const dragStartHandler = (n, beatType) => {
-    setBeatObject({ ...beatObject, beat: n, beatType: beatType });
-  };
-
-  const dragEnterHandler = (n, checkboxBeatType) => {
-    if (checkboxBeatType === beatObject.beatType) {
-      setBeatObject({ ...beatObject, duration: n + 1 - beatObject.beat });
-    }
-  };
-
-  const dragEndHandler = () => {
-    console.log('DRAG END', beatObject);
-  };
-
   const triggerSound = (scaleIndex) => {
     piano.triggerAttackRelease(modes[melodyMode](melodyKey)[scaleIndex], '8n');
   };
@@ -87,16 +73,9 @@ const MelodyForm = () => {
     <div className='melody-form'>
       <div className='melody-container'>
         <div className='melody-labels'>{makeMelodyLabels()}</div>
-        <div>
+        <div className='checkbox-rows'>
           {Object.keys(beatTypes).map((beatType, n) => (
-            <MelodyCheckboxRow
-              key={n}
-              beatType={beatType}
-              beatObject={beatObject}
-              dragStartHandler={dragStartHandler}
-              dragEnterHandler={dragEnterHandler}
-              dragEndHandler={dragEndHandler}
-            />
+            <MelodyCheckboxRow key={n} beatType={beatType} />
           ))}
         </div>
       </div>

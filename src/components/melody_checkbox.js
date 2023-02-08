@@ -8,21 +8,17 @@ const getIsCurrentBeat = createSelector(
   (currentBeat, beatIndex) => beatIndex === currentBeat
 );
 
-const MelodyCheckbox = ({
-  n,
-  checked,
-  beatType,
-  changeHandler,
-  dragEnterHandler,
-  dragStartHandler,
-  dragEndHandler,
-}) => {
+const MelodyCheckbox = ({ n, checked, changeHandler }) => {
   const isCurrentBeat = useSelector((state) =>
     getIsCurrentBeat(state, { beatIndex: n })
   );
 
   return (
-    <div key={n} className={`checkbox-meta-container ${isOnMeasureLine(n)}`}>
+    <div
+      key={n}
+      className={`checkbox-meta-container ${isOnMeasureLine(n)}`}
+      style={{ left: n * 15 + 'px' }}
+    >
       <label className='checkbox-container'>
         <input
           type='checkbox'
@@ -32,12 +28,7 @@ const MelodyCheckbox = ({
           key={n}
           onChange={changeHandler}
         />
-        <div
-          className='checkmark'
-          onDragStart={() => dragStartHandler(n, beatType)}
-          onDragEnter={() => dragEnterHandler(n, beatType)}
-          onDragEnd={dragEndHandler}
-        ></div>
+        <div className='checkmark'></div>
       </label>
     </div>
   );
