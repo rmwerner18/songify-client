@@ -40,20 +40,21 @@ const MelodyCheckboxRow = ({ beatType }) => {
   // };
 
   const changeHandler = (e, checked) => {
+    console.log(e)
     const { id } = e.target;
     const newBeatObject = { startBeat: id, duration: 1 };
     const payload = {};
     if (checked) {
-      console.log('checked case');
+      // console.log('checked case');
       delete rowBeats[newBeatObject.startBeat];
     } else
       rowBeats[newBeatObject.startBeat] = { duration: newBeatObject.duration };
     payload[beatType] = { ...rowBeats };
-    console.log(payload);
+    // console.log(payload);
     dispatch(changeSongAttribute(payload));
   };
 
-  console.log(JSON.stringify(rowBeats))
+  // console.log(JSON.stringify(rowBeats))
 
   return (
     <div className='checkbox-row'>
@@ -66,6 +67,7 @@ const MelodyCheckboxRow = ({ beatType }) => {
             checked={Object.keys(rowBeats).includes(n.toString())}
             changeHandler={changeHandler}
             beatObject={beatObject}
+            setBeatObject={setBeatObject}
           />
         );
       })}
