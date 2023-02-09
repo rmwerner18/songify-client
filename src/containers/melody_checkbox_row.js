@@ -11,6 +11,7 @@ const MelodyCheckboxRow = ({ beatType }) => {
 
   const changeHandler = (e) => {
     const { id } = e.target;
+    console.log(e.target)
     const newBeatArray = addOrRemoveBeat(rowBeats, id);
     const payload = {};
     payload[beatType] = [...newBeatArray];
@@ -25,7 +26,7 @@ const MelodyCheckboxRow = ({ beatType }) => {
             key={n}
             beatType={beatType}
             n={n}
-            checked={rowBeats.includes(n)}
+            checked={Object.keys(rowBeats).includes(n)}
             changeHandler={changeHandler}
           />
         );
