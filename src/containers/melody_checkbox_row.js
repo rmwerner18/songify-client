@@ -8,15 +8,52 @@ import { changeSongAttribute } from '../actions/change_song_attribute';
 const MelodyCheckboxRow = ({ beatType }) => {
   const dispatch = useDispatch();
   const rowBeats = useSelector((state) => state.currentSong[beatType]);
+  const [beatObject, setBeatObject] = useState({
+    startBeat: null,
+    duration: 0,
+  });
 
-  const changeHandler = (e) => {
+  // const changeHandler = (e) => {
+  //   const { id } = e.target;
+  //   console.log(e.target)
+  //   const newBeatArray = addOrRemoveBeat(rowBeats, id);
+  //   const payload = {};
+  //   payload[beatType] = [...newBeatArray];
+  //   dispatch(changeSongAttribute(payload));
+  // };
+
+  // const mouseUpHandler = (e, n, checkboxBeatType, checked) => {
+  //   if (checkboxBeatType === beatObject.beatType) {
+  //     console.log('condition passed');
+  //     beatObject = {
+  //       ...beatObject,
+  //       duration: n + 1 - beatObject.startBeat,
+  //     };
+  //   } else beatObject = {};
+  //   setMouseDown(false);
+  //   changeHandler(e, checked);
+  // };
+
+  // const rowMouseDownHandler = (n, beatType) => {
+  //   mouseDownHandler(n, beatType);
+  //   setMouseDown(true);
+  // };
+
+  const changeHandler = (e, checked) => {
     const { id } = e.target;
-    console.log(e.target)
-    const newBeatArray = addOrRemoveBeat(rowBeats, id);
+    const newBeatObject = { startBeat: id, duration: 1 };
     const payload = {};
-    payload[beatType] = [...newBeatArray];
+    if (checked) {
+      console.log('checked case');
+      delete rowBeats[newBeatObject.startBeat];
+    } else
+      rowBeats[newBeatObject.startBeat] = { duration: newBeatObject.duration };
+    payload[beatType] = { ...rowBeats };
+    console.log(payload);
     dispatch(changeSongAttribute(payload));
   };
+
+  console.log(JSON.stringify(rowBeats))
 
   return (
     <div className='checkbox-row'>
@@ -26,8 +63,9 @@ const MelodyCheckboxRow = ({ beatType }) => {
             key={n}
             beatType={beatType}
             n={n}
-            checked={Object.keys(rowBeats).includes(n)}
+            checked={Object.keys(rowBeats).includes(n.toString())}
             changeHandler={changeHandler}
+            beatObject={beatObject}
           />
         );
       })}

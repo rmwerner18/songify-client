@@ -70,7 +70,7 @@ const player = (index, time, props) => {
     }
   });
   Object.keys(melodyBeats).forEach((beatType, beatIndex) => {
-    if (melodyBeats[beatType].includes(index)) {
+    if (Object.keys(melodyBeats[beatType]).includes(index.toString())) {
       melodyInstrumentSound.triggerAttackRelease(
         modes[melodyMode](melodyKey)[beatIndex],
         '8n',

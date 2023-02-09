@@ -9,11 +9,6 @@ const MelodyForm = () => {
   const piano = useSelector((state) => state.sounds.piano);
   const melodyMode = useSelector((state) => state.currentSong.melodyMode);
   const melodyKey = useSelector((state) => state.currentSong.melodyKey);
-  const [beatObject, setBeatObject] = useState({
-    beat: null,
-    duration: 0,
-    beatType: '',
-  });
 
   const beatTypes = {
     IBeats: {
@@ -75,7 +70,10 @@ const MelodyForm = () => {
         <div className='melody-labels'>{makeMelodyLabels()}</div>
         <div className='checkbox-rows'>
           {Object.keys(beatTypes).map((beatType, n) => (
-            <MelodyCheckboxRow key={n} beatType={beatType} />
+            <MelodyCheckboxRow
+              key={n}
+              beatType={beatType}
+            />
           ))}
         </div>
       </div>

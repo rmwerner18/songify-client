@@ -14,47 +14,47 @@ const MelodyCheckbox = ({ n, checked, changeHandler }) => {
     getIsCurrentBeat(state, { beatIndex: n })
   );
 
-    interact('.resizable-box').resizable({
-      edges: { right: true },
+  interact('.resizable-box').resizable({
+    edges: { right: true },
 
-      listeners: {
-        move(event) {
-          var target = event.target;
-          var x = parseFloat(target.getAttribute('data-x')) || 0;
-          var y = parseFloat(target.getAttribute('data-y')) || 0;
+    listeners: {
+      move(event) {
+        var target = event.target;
+        var x = parseFloat(target.getAttribute('data-x')) || 0;
+        var y = parseFloat(target.getAttribute('data-y')) || 0;
 
-          // update the element's style
-          target.style.width = event.rect.width + 'px';
-          target.style.height = event.rect.height + 'px';
+        // update the element's style
+        target.style.width = event.rect.width + 'px';
+        target.style.height = event.rect.height + 'px';
 
-          // translate when resizing from top or left edges
-          x += event.deltaRect.left;
-          y += event.deltaRect.top;
+        // translate when resizing from top or left edges
+        x += event.deltaRect.left;
+        y += event.deltaRect.top;
 
-          target.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+        target.style.transform = 'translate(' + x + 'px,' + y + 'px)';
 
-          target.setAttribute('data-x', x);
-          target.setAttribute('data-y', y);
-        },
+        target.setAttribute('data-x', x);
+        target.setAttribute('data-y', y);
       },
-      modifiers: [
-        // keep the edges inside the parent
-        // interact.modifiers.restrictEdges({
-        //   outer: 'parent',
-        // }),
+    },
+    modifiers: [
+      // keep the edges inside the parent
+      // interact.modifiers.restrictEdges({
+      //   outer: 'parent',
+      // }),
 
-        // minimum size
-        interact.modifiers.restrictSize({
-          min: { width: 15 },
-        }),
+      // minimum size
+      interact.modifiers.restrictSize({
+        min: { width: 15 },
+      }),
 
-        interact.modifiers.snapSize({
-          targets: [interact.snappers.grid({ width: 15, height: 15 })],
-        }),
-      ],
+      interact.modifiers.snapSize({
+        targets: [interact.snappers.grid({ width: 15, height: 15 })],
+      }),
+    ],
 
-      inertia: true,
-    });
+    inertia: true,
+  });
 
   return (
     <div
@@ -69,9 +69,11 @@ const MelodyCheckbox = ({ n, checked, changeHandler }) => {
           checked={checked}
           id={n}
           key={n}
-          onChange={changeHandler}
+          onChange={(e) => changeHandler(e, checked)}
         />
-        <div className={checked ? 'checkmark resizable-box' : 'checkmark'}></div>
+        <div
+          className={checked ? 'checkmark resizable-box' : 'checkmark'}
+        ></div>
       </label>
     </div>
   );
