@@ -340,12 +340,14 @@ h1, h2 {
 .checkbox-rows {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .checkbox-row {
   position: relative;
   margin: 1px;
   height: 15px;
+  width: 100%;
 }
 
 .checkbox-meta-container {
@@ -356,10 +358,6 @@ h1, h2 {
 .resizable-box {
   position: relative;
   z-index: 1;
-}
-
-.checkbox-meta-container.box-2 {
-  left: 20px;
 }
 
 .checkbox-container {
