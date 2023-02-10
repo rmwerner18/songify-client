@@ -13,49 +13,16 @@ const MelodyCheckboxRow = ({ beatType }) => {
     duration: 0,
   });
 
-  // const changeHandler = (e) => {
-  //   const { id } = e.target;
-  //   console.log(e.target)
-  //   const newBeatArray = addOrRemoveBeat(rowBeats, id);
-  //   const payload = {};
-  //   payload[beatType] = [...newBeatArray];
-  //   dispatch(changeSongAttribute(payload));
-  // };
-
-  // const mouseUpHandler = (e, n, checkboxBeatType, checked) => {
-  //   if (checkboxBeatType === beatObject.beatType) {
-  //     console.log('condition passed');
-  //     beatObject = {
-  //       ...beatObject,
-  //       duration: n + 1 - beatObject.startBeat,
-  //     };
-  //   } else beatObject = {};
-  //   setMouseDown(false);
-  //   changeHandler(e, checked);
-  // };
-
-  // const rowMouseDownHandler = (n, beatType) => {
-  //   mouseDownHandler(n, beatType);
-  //   setMouseDown(true);
-  // };
-
   const changeHandler = (id, checked, duration, resize = false) => {
-    // console.log(e)
-    // console
-    // const { id  = e.target;
     const newBeatObject = { startBeat: id, duration };
     const payload = {};
     if (checked && !resize) {
-      // console.log('checked case');
       delete rowBeats[newBeatObject.startBeat];
     } else
       rowBeats[newBeatObject.startBeat] = { duration: newBeatObject.duration };
     payload[beatType] = { ...rowBeats };
-    console.log(payload);
     dispatch(changeSongAttribute(payload));
   };
-
-  // console.log(JSON.stringify(rowBeats))
 
   return (
     <div className='checkbox-row'>

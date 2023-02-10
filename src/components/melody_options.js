@@ -65,14 +65,14 @@ const MelodyOptions = () => {
   };
 
   const clearedBeats = {
-    iBeats: [],
-    iiBeats: [],
-    iiiBeats: [],
-    ivBeats: [],
-    vBeats: [],
-    viBeats: [],
-    viiBeats: [],
-    IBeats: [],
+    iBeats: {},
+    iiBeats: {},
+    iiiBeats: {},
+    ivBeats: {},
+    vBeats: {},
+    viBeats: {},
+    viiBeats: {},
+    IBeats: {},
   };
 
   return (
@@ -94,7 +94,7 @@ const MelodyOptions = () => {
       <InstrumentForm instrumentType={'melodyInstrument'} />
       <button
         className='button'
-        onClick={() => dispatch(changeSongAttribute(clearedBeats))}
+        onClick={() => dispatch(changeSongAttribute({...clearedBeats}))}
       >
         Clear Melody
       </button>

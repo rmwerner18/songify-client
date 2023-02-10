@@ -19,7 +19,6 @@ const MelodyCheckbox = ({
   const isCurrentBeat = useSelector((state) =>
     getIsCurrentBeat(state, { beatIndex: n })
   );
-  // const [duration, setDuration] = useState(1);
 
   const handleResize = (e, ref) => {
     console.log(ref)
@@ -77,6 +76,7 @@ const MelodyCheckbox = ({
               bottomLeft: false,
               topLeft: false,
             }}
+            bounds={'.melody-container'}
           ></Rnd>
         ) : (
           <div
