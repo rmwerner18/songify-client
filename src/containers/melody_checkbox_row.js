@@ -39,18 +39,19 @@ const MelodyCheckboxRow = ({ beatType }) => {
   //   setMouseDown(true);
   // };
 
-  const changeHandler = (e, checked) => {
-    console.log(e)
-    const { id } = e.target;
-    const newBeatObject = { startBeat: id, duration: 1 };
+  const changeHandler = (id, checked, duration, resize = false) => {
+    // console.log(e)
+    // console
+    // const { id  = e.target;
+    const newBeatObject = { startBeat: id, duration };
     const payload = {};
-    if (checked) {
+    if (checked && !resize) {
       // console.log('checked case');
       delete rowBeats[newBeatObject.startBeat];
     } else
       rowBeats[newBeatObject.startBeat] = { duration: newBeatObject.duration };
     payload[beatType] = { ...rowBeats };
-    // console.log(payload);
+    console.log(payload);
     dispatch(changeSongAttribute(payload));
   };
 

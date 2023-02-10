@@ -345,14 +345,14 @@ h1, h2 {
 
 .checkbox-row {
   position: relative;
-  margin: 1px;
-  height: 15px;
+  /* margin: 1px; */
+  height: 17px;
   width: 100%;
 }
 
 .checkbox-meta-container {
   position: absolute;
-  margin: 1px;
+  /* margin: 1px; */
 }
 
 .resizable-box {
@@ -361,8 +361,8 @@ h1, h2 {
 }
 
 .checkbox-container {
-  height: 15px;
-  width: 15px;
+  height: 17px;
+  width: 17px;
 }
 
 .checkbox-container input {
@@ -373,8 +373,8 @@ h1, h2 {
 }
 
 .checkmark {
-  height: 15px;
-  width: 15px;
+  height: 17px;
+  width: 17px;
   border: 1px solid var(--dark-background);
   background-color: var(--checkbox-background);
   border-radius: 3px;
