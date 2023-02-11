@@ -6,7 +6,9 @@ const getCurrentSong = (state) => state.currentSong;
 const getCurrentSongWithFrequencies = createSelector(
   [getCurrentSong],
   (currentSong) => {
-    const freqs = currentSong.chords.map((chord) => {
+    Object.keys(currentSong.chords).map((chordIndex) => {
+      console.log(currentSong.chords)
+      console.log(chordIndex);
       const createChord = (name, qual) => {
         let chord;
         if (qual === 'augmented') {
@@ -28,12 +30,14 @@ const getCurrentSongWithFrequencies = createSelector(
         let freqs = chord.frequencies;
         let b = new Octavian.Note(bass);
         freqs.push(b.frequency);
-        return freqs;
+        currentSong.chords[chordIndex].freqs = freqs
+        return currentSong.chords[chordIndex];
       };
-
+      const chord = currentSong.chords[chordIndex]
       return getFrequencies(chord.bass, chord.name, chord.quality);
     });
-    return { ...currentSong, freqs };
+    console.log(currentSong.chords)
+    return { ...currentSong, chords: currentSong.chords };
   }
 );
 
