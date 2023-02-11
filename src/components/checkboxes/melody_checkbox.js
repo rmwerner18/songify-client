@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { isOnMeasureLine } from '../helper_functions/is_on_measure_line';
+import { isOnMeasureLine } from '../../helper_functions/is_on_measure_line';
 import { createSelector } from '@reduxjs/toolkit';
 import { Rnd } from 'react-rnd';
 

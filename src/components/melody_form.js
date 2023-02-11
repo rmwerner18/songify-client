@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MelodyCheckboxRow from '../containers/melody_checkbox_row';
+import MelodyCheckboxRow from '../containers/checkbox_rows/melody_checkbox_row';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { useSelector } from 'react-redux';
@@ -70,10 +70,7 @@ const MelodyForm = () => {
         <div className='melody-labels'>{makeMelodyLabels()}</div>
         <div className='checkbox-rows'>
           {Object.keys(beatTypes).map((beatType, n) => (
-            <MelodyCheckboxRow
-              key={n}
-              beatType={beatType}
-            />
+            <MelodyCheckboxRow key={n} beatType={beatType} />
           ))}
         </div>
       </div>

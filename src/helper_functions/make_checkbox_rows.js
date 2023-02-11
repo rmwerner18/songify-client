@@ -1,5 +1,5 @@
 import React from 'react';
-import Checkbox from '../components/checkbox';
+import Checkbox from '../components/checkboxes/checkbox';
 import { numberOfBeatsArray } from './make_beat_array';
 
 export const MakeCheckboxRows = (beatTypes) => {

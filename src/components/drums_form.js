@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import CheckboxRow from '../containers/checkbox_row';
+import CheckboxRow from '../containers/checkbox_rows/checkbox_row';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
