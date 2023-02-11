@@ -718,9 +718,8 @@ button:focus {
 }
 
 .chord-container {
-  grid-area: chords;
   display: flex;
-  width: auto;
+  width: 544px;
   height: auto;
   margin: 10px;
   justify-content: center;
