@@ -14,7 +14,11 @@ const Checkbox = ({ n, checked, beatType, changeHandler }) => {
   );
 
   return (
-    <div key={n} className={`checkbox-meta-container ${isOnMeasureLine(n)}`}>
+    <div
+      key={n}
+      style={{ left: n * 17 + 'px' }}
+      className={`checkbox-meta-container ${isOnMeasureLine(n)}`}
+    >
       <label className='checkbox-container'>
         <input
           type='checkbox'

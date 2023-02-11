@@ -340,7 +340,7 @@ h1, h2 {
 .checkbox-rows {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 544px;
 }
 
 .checkbox-row {
@@ -451,11 +451,6 @@ h1, h2 {
   margin-top: 0px;
 }
 
-.drum-container {
-  display: flex;
-  flex-direction: row;
-}
-
 .drum-labels p, .melody-labels p {
   width: 65px;
   height: 15px;
@@ -466,34 +461,19 @@ h1, h2 {
   margin-right: 2px;
 }
 
-.drum-form {
+.drum-form, .melody-form {
   margin: 10px;
-  margin-left: 0px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transform: translateX(-29.5px)
-}
-
-.drum-preset-select {
-  /* margin: 0 10px; */
-}
-
-.melody-form {
-  margin-right: 10px;
-  margin-bottom: 10px;
   width: 617px;
   display: flex;
   flex-direction: column;
-  transform: translateX(-29.5px)
+  transform: translateX(-32px);
 }
 
-.melody-container {
+.drum-container, .melody-container {
   display: flex;
   flex-direction: row;
-  margin: 10px 3px;
+  align-items: center;
 }
-
 
 .song-box {
   height: 50px;

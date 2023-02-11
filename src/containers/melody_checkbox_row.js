@@ -32,6 +32,7 @@ const MelodyCheckboxRow = ({ beatType }) => {
             key={n}
             beatType={beatType}
             n={n}
+            beat={rowBeats[n]}
             checked={Object.keys(rowBeats).includes(n.toString())}
             changeHandler={changeHandler}
             beatObject={beatObject}

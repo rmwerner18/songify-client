@@ -13,6 +13,7 @@ const MelodyCheckbox = ({
   n,
   checked,
   changeHandler,
+  beat,
   beatObject,
   setBeatObject,
 }) => {
@@ -21,11 +22,11 @@ const MelodyCheckbox = ({
   );
 
   const handleResize = (e, ref) => {
-    console.log(ref)
-    const duration = ref.offsetWidth / 17
-    const resize = true
+    console.log(ref);
+    const duration = ref.offsetWidth / 17;
+    const resize = true;
     changeHandler(n, checked, duration, true);
-  }
+  };
 
   const style = {
     display: 'flex',
@@ -58,7 +59,7 @@ const MelodyCheckbox = ({
             default={{
               x: 0,
               y: 0,
-              width: 17,
+              width: beat ? beat.duration * 17 : 17,
               height: 17,
             }}
             onResizeStop={(e, direction, ref, delta, position) => {
