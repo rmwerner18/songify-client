@@ -9,14 +9,12 @@ const ChordCheckboxRow = () => {
   const dispatch = useDispatch();
   const chords = useSelector((state) => state.currentSong.chords);
 
-  const changeHandler = (n, checked) => {
+  const changeHandler = (n, checked, chordNameBassAndQuality) => {
     if (checked) {
       delete chords[n];
     } else {
       chords[n] = {
-        name: 'C4',
-        bass: 'C3',
-        quality: 'majorSeventh',
+        ...chordNameBassAndQuality,
         duration: 1,
       };
     }

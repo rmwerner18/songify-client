@@ -717,13 +717,19 @@ button:focus {
   text-align: left;
 }
 
-.chord-container {
+.chords-container {
   display: flex;
   width: 544px;
   height: auto;
   margin: 10px;
   justify-content: center;
   align-items: center;
+}
+
+.chord-container {
+  display: flex;
+  flex-direction: column
+
 }
 
 .button-container {

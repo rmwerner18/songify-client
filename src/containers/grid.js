@@ -44,7 +44,7 @@ const Grid = (props) => {
           <div className='part-label'>
             <p>CHORDS</p>
             <InstrumentForm instrumentType={'instrument'} />
-            <RandomProgButton />
+            {/* <RandomProgButton /> */}
           </div>
           <ChordsContainer />
           <div className='part-label'>
