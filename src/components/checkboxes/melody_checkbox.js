@@ -22,7 +22,7 @@ const MelodyCheckbox = ({
   );
 
   const handleResize = (e, ref) => {
-    console.log(ref);
+    // console.log(ref);
     const duration = ref.offsetWidth / 17;
     const resize = true;
     changeHandler(n, checked, duration, true);

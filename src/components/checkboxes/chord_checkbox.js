@@ -13,19 +13,19 @@ const ChordCheckbox = ({
   n,
   checked,
   changeHandler,
-  beat,
-  beatObject,
-  setBeatObject,
+  beat
 }) => {
   const isCurrentBeat = useSelector((state) =>
     getIsCurrentBeat(state, { beatIndex: n })
   );
 
+  console.log('rerender chord checkbox')
+
   const handleResize = (e, ref) => {
-    console.log(ref);
+    console.log(ref.offsetWidth);
     const duration = ref.offsetWidth / 17;
     const resize = true;
-    changeHandler(n, checked, duration, true);
+    changeHandler(n, checked, duration, resize);
   };
 
   const style = {
