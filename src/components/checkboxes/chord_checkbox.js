@@ -9,24 +9,10 @@ const getIsCurrentBeat = createSelector(
   (currentBeat, beatIndex) => beatIndex === currentBeat
 );
 
-const ChordCheckbox = ({
-  n,
-  checked,
-  changeHandler,
-  beat
-}) => {
+const ChordCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
   const isCurrentBeat = useSelector((state) =>
     getIsCurrentBeat(state, { beatIndex: n })
   );
-
-  console.log('rerender chord checkbox')
-
-  const handleResize = (e, ref) => {
-    console.log(ref.offsetWidth);
-    const duration = ref.offsetWidth / 17;
-    const resize = true;
-    changeHandler(n, checked, duration, resize);
-  };
 
   const style = {
     display: 'flex',
@@ -51,7 +37,7 @@ const ChordCheckbox = ({
           checked={checked}
           id={n}
           key={n}
-          onChange={(e) => changeHandler(n, checked, 1)}
+          onChange={(e) => changeHandler(n, checked)}
         />
         {checked ? (
           <Rnd
@@ -63,7 +49,7 @@ const ChordCheckbox = ({
               height: 17,
             }}
             onResizeStop={(e, direction, ref, delta, position) => {
-              handleResize(e, ref);
+              resizeHandler(n, ref.offsetWidth / 17);
             }}
             resizeGrid={[17, 17]}
             disableDragging={true}
@@ -77,7 +63,7 @@ const ChordCheckbox = ({
               bottomLeft: false,
               topLeft: false,
             }}
-            // bounds={'.chord-container'}
+            bounds={'.checkbox-row'}
           ></Rnd>
         ) : (
           <div
