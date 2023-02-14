@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-// import ChordF
+import { MID_NOTES, BASS_NOTES } from '../../constants/notes';
+import { CHORD_QUALITIES } from '../../constants/chord_qualities';
 import { useSelector } from 'react-redux';
 import { isOnMeasureLine } from '../../helper_functions/is_on_measure_line';
 import { createSelector } from '@reduxjs/toolkit';
 import { Rnd } from 'react-rnd';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 const getIsCurrentBeat = createSelector(
   [(state) => state.currentBeat, (state, props) => props.beatIndex],
@@ -19,6 +22,9 @@ const ChordCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
     bass: 'C3',
     quality: 'majorSeventh',
   });
+  const [mouseIsOver, setMouseIsOver] = useState(false);
+
+  const { name, bass, quality } = chordNameBassAndQuality;
 
   const style = {
     display: 'flex',
@@ -30,8 +36,16 @@ const ChordCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
     zIndex: 2,
   };
 
+  const checkboxResizeHandler = (ref) => {
+    setMouseIsOver(true);
+    resizeHandler(n, ref.offsetWidth / 17);
+  };
+
   return (
-    <div className='chord-container'>
+    <div
+      className='chord-container'
+      onMouseLeave={(e) => setMouseIsOver(false)}
+    >
       <div
         key={n}
         className={`checkbox-meta-container ${isOnMeasureLine(n)}`}
@@ -55,9 +69,9 @@ const ChordCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
                 width: beat ? beat.duration * 17 : 17,
                 height: 17,
               }}
-              onResizeStop={(e, direction, ref, delta, position) => {
-                resizeHandler(n, ref.offsetWidth / 17);
-              }}
+              onResizeStop={(e, direction, ref, delta, position) =>
+                checkboxResizeHandler(ref)
+              }
               resizeGrid={[17, 17]}
               disableDragging={true}
               enableResizing={{
@@ -71,6 +85,7 @@ const ChordCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
                 topLeft: false,
               }}
               bounds={'.checkbox-row'}
+              onMouseEnter={(e) => setMouseIsOver(true)}
             ></Rnd>
           ) : (
             <div
@@ -80,17 +95,39 @@ const ChordCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
           )}
         </label>
       </div>
-      {checked && (
-        <div
-          style={{
-            height: '17px',
-            width: '30px',
-            border: '1px solid white',
-            position: 'absolute',
-            left: n * 17 + 'px',
-            top: 17 + 'px'
-          }}
-        ></div>
+      {checked && mouseIsOver && (
+        <>
+          <div
+            style={{
+              height: '32px',
+              width: '65px',
+              border: '1px solid white',
+              position: 'absolute',
+              left: n * 17 + 'px',
+              top: '21px',
+              color: 'white',
+              fontSize: '0.75rem',
+              backgroundColor: 'var(--dark-background)',
+              textAlign: 'center',
+              borderRadius: '5px',
+              fontWeight: 'bold',
+            }}
+          >
+            <FontAwesomeIcon
+              icon={solid('caret-up')}
+              className='font-awesome'
+              style={{
+                position: 'absolute',
+                top: '-8px',
+                left: '3.5px',
+                paddingRight: '60px',
+              }}
+            />
+            {MID_NOTES[name]}
+            {CHORD_QUALITIES[quality]}/{BASS_NOTES[bass]} <br />
+            <span>copy</span>
+          </div>
+        </>
       )}
     </div>
   );
