@@ -10,24 +10,20 @@ import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { setChordClipboard } from '../../actions/set_chord_clipboard';
 
 const getIsCurrentBeat = createSelector(
-  [(state) => state.currentBeat, (state, props) => props.beatIndex],
-  (currentBeat, beatIndex) => beatIndex === currentBeat
+  [(state) => state.currentBeat, (state, props) => props.beatRange],
+  (currentBeat, beatRange) =>
+    currentBeat >= beatRange[0] && currentBeat < beatRange[1]
 );
 
 const ChordCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
+  const duration = beat ? beat.duration : 0;
   const isCurrentBeat = useSelector((state) =>
-    getIsCurrentBeat(state, { beatIndex: n })
+    getIsCurrentBeat(state, { beatRange: [n, n + duration] })
   );
   const clipboardName = useSelector((state) => state.chordClipboard.name);
   const clipboardBass = useSelector((state) => state.chordClipboard.bass);
   const clipboardQuality = useSelector((state) => state.chordClipboard.quality);
   const dispatch = useDispatch();
-
-  console.log({
-    clipboardName,
-    clipboardBass,
-    clipboardQuality,
-  });
 
   const [mouseIsOver, setMouseIsOver] = useState(false);
 
@@ -37,7 +33,6 @@ const ChordCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
     alignItems: 'center',
     justifyContent: 'center',
     border: 'solid 1px var(--dark-background)',
-    background: 'var(--spotify-green)',
     zIndex: 2,
   };
 
@@ -73,6 +68,7 @@ const ChordCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
           />
           {checked ? (
             <Rnd
+              className='checkmark'
               style={style}
               default={{
                 x: 0,

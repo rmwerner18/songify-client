@@ -5,19 +5,15 @@ import { createSelector } from '@reduxjs/toolkit';
 import { Rnd } from 'react-rnd';
 
 const getIsCurrentBeat = createSelector(
-  [(state) => state.currentBeat, (state, props) => props.beatIndex],
-  (currentBeat, beatIndex) => beatIndex === currentBeat
+  [(state) => state.currentBeat, (state, props) => props.beatRange],
+  (currentBeat, beatRange) =>
+    currentBeat >= beatRange[0] && currentBeat < beatRange[1]
 );
 
-const MelodyCheckbox = ({
-  n,
-  checked,
-  changeHandler,
-  beat,
-  resizeHandler
-}) => {
+const MelodyCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
+  const duration = beat ? beat.duration : 0;
   const isCurrentBeat = useSelector((state) =>
-    getIsCurrentBeat(state, { beatIndex: n })
+    getIsCurrentBeat(state, { beatRange: [n, n + duration] })
   );
 
   const style = {
@@ -26,7 +22,6 @@ const MelodyCheckbox = ({
     alignItems: 'center',
     justifyContent: 'center',
     border: 'solid 1px var(--dark-background)',
-    background: 'var(--spotify-green)',
     zIndex: 2,
   };
 
@@ -47,6 +42,7 @@ const MelodyCheckbox = ({
         />
         {checked ? (
           <Rnd
+            className='checkmark'
             style={style}
             default={{
               x: 0,

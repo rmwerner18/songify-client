@@ -9,21 +9,19 @@ const MelodyCheckboxRow = ({ beatType }) => {
   const rowBeats = useSelector((state) => state.currentSong[beatType]);
 
   const changeHandler = (n, checked) => {
+    const payload = {};
+    payload[beatType] = { ...rowBeats };
     if (checked) {
-      delete rowBeats[n];
+      delete payload[beatType][n];
     } else
-      rowBeats[n] = { duration: 1 };
-    dispatchBeatChange(rowBeats)
+      payload[beatType][n] = { duration: 1 };
+    dispatch(changeSongAttribute(payload))
   };
 
   const resizeHandler = (n, duration) => {
-    rowBeats[n]['duration'] = duration;
-    dispatchBeatChange(rowBeats);
-  };
-
-  const dispatchBeatChange = (rowBeats) => {
     const payload = {};
     payload[beatType] = { ...rowBeats };
+    payload[beatType][n] = { ...payload.beatType[n], duration };
     dispatch(changeSongAttribute(payload));
   };
 
