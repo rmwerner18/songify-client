@@ -10,8 +10,7 @@ const ChordCheckboxRow = () => {
   const chords = useSelector((state) => state.currentSong.chords);
 
   const changeHandler = (n, checked, chordNameBassAndQuality) => {
-    const payload = {};
-    payload.chords = { ...chords };
+    const payload = { chords: { ...chords } };
     if (checked) {
       delete payload.chords[n];
     } else {
@@ -20,13 +19,14 @@ const ChordCheckboxRow = () => {
         duration: 1,
       };
     }
+    console.log(chords);
     dispatch(changeSongAttribute(payload));
   };
 
   const resizeHandler = (n, duration) => {
-    const payload = {};
-    payload.chords = { ...chords };
-    payload.chords[n]['duration'] = duration;
+    const payload = { chords: { ...chords } };
+    payload.chords[n] = { ...payload.chords[n], duration };
+    console.log(chords);
     dispatch(changeSongAttribute(payload));
   };
 
