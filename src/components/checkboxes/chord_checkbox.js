@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { MID_NOTES, BASS_NOTES } from '../../constants/notes';
 import { CHORD_QUALITIES } from '../../constants/chord_qualities';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { isOnMeasureLine } from '../../helper_functions/is_on_measure_line';
 import { createSelector } from '@reduxjs/toolkit';
 import { Rnd } from 'react-rnd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { setChordClipboard } from '../../actions/set_chord_clipboard';
 
 const getIsCurrentBeat = createSelector(
   [(state) => state.currentBeat, (state, props) => props.beatIndex],
@@ -20,6 +21,7 @@ const ChordCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
   const clipboardName = useSelector((state) => state.chordClipboard.name);
   const clipboardBass = useSelector((state) => state.chordClipboard.bass);
   const clipboardQuality = useSelector((state) => state.chordClipboard.quality);
+  const dispatch = useDispatch();
 
   console.log({
     clipboardName,
@@ -134,7 +136,20 @@ const ChordCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
             />
             {MID_NOTES[beat.name]}
             {CHORD_QUALITIES[beat.quality]}/{BASS_NOTES[beat.bass]} <br />
-            <span>copy</span>
+            <FontAwesomeIcon
+              icon={regular('clipboard')}
+              className='font-awesome'
+              onClick={() =>
+                dispatch(
+                  setChordClipboard({
+                    name: beat.name,
+                    bass: beat.bass,
+                    quality: beat.quality,
+                  })
+                )
+              }
+              style={{ cursor: 'pointer' }}
+            />
           </div>
         </>
       )}
