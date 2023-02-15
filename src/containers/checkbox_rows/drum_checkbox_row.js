@@ -5,7 +5,7 @@ import { numberOfBeatsArray } from '../../helper_functions/make_beat_array';
 import { addOrRemoveBeat } from '../../helper_functions/add_or_remove_beat';
 import { changeSongAttribute } from '../../actions/change_song_attribute';
 
-const CheckboxRow = ({ beatType }) => {
+const DrumCheckboxRow = ({ beatType }) => {
   const dispatch = useDispatch();
   const rowBeats = useSelector((state) => state.currentSong[beatType]);
 
@@ -34,4 +34,4 @@ const CheckboxRow = ({ beatType }) => {
   );
 };
 
-export default CheckboxRow;
+export default DrumCheckboxRow;

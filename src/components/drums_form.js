@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import CheckboxRow from '../containers/checkbox_rows/checkbox_row';
+import DrumCheckboxRow from '../containers/checkbox_rows/drum_checkbox_row';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
@@ -42,7 +42,7 @@ const DrumsForm = () => {
         <div className='drum-labels'>{makeDrumLabels()}</div>
         <div>
           {Object.keys(beatTypes).map((beatType, n) => (
-            <CheckboxRow key={n} beatType={beatType} />
+            <DrumCheckboxRow key={n} beatType={beatType} />
           ))}
         </div>
       </div>
