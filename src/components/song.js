@@ -11,6 +11,9 @@ const Song = ({ idx, deleteHandler, likeHandler, song }) => {
   const [userLikesSong, setUserLikesSong] = useState(null);
   const [likes, setLikes] = useState(song.likes.length);
   const [mouseOver, setMouseOver] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  console.log(dropdownOpen);
 
   useEffect(() => {
     setUserLikesSong(!!like);
@@ -43,7 +46,23 @@ const Song = ({ idx, deleteHandler, likeHandler, song }) => {
         user={user}
         userLikesSong={userLikesSong}
       />
-      <FontAwesomeIcon icon={solid('ellipsis')} className='font-awesome' />
+      {mouseOver && (
+        <FontAwesomeIcon
+          icon={solid('ellipsis')}
+          className='font-awesome'
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+        />
+      )}
+      {dropdownOpen && (
+        <div
+          class='dropdown-content'
+          style={{ height: '50px', width: '50px', backgroundColor: '#fff' }}
+        >
+          <a href='#'>Link 1</a>
+          <a href='#'>Link 2</a>
+          <a href='#'>Link 3</a>
+        </div>
+      )}
     </div>
   );
 };

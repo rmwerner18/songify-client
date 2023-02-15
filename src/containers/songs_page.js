@@ -8,12 +8,16 @@ import { fetchPlaylists } from '../actions/fetch_playlists';
 
 const SongsPage = ({ playlistId = false }) => {
   let [page, setPage] = useState('ALL_SONGS');
-  const songs = useSelector((state) => state.allSongs.songs);
   const songsLoaded = useSelector((state) => state.allSongs.loaded);
+  const allSongs = useSelector((state) => state.allSongs.songs);
   const loadError = useSelector((state) => state.allSongs.error);
   const user = useSelector((state) => state.user);
   const playlists = useSelector((state) => state.playlists);
   const dispatch = useDispatch();
+
+  const songs = playlistId
+    ? playlists[playlistId].songs
+    : allSongs
 
   const filterSongs = (page) => {
     switch (page) {
@@ -37,7 +41,7 @@ const SongsPage = ({ playlistId = false }) => {
 
   const showPlaylists = () => {
     return playlists.map((playlist) => {
-      return <p>{playlist.name}</p>
+      return <p>{playlist.name}</p>;
     });
   };
 
