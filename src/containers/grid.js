@@ -14,6 +14,7 @@ import TempoForm from '../components/tempo_form';
 import SwingForm from '../components/swing_form';
 import VolumeForm from '../components/volume_form';
 import SaveButton from '../components/save_button';
+import ChordForm from '../components/chord_form';
 
 const Grid = (props) => {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const Grid = (props) => {
           <div className='part-label'>
             <p>CHORDS</p>
             <InstrumentForm instrumentType={'instrument'} />
-            {/* <RandomProgButton /> */}
+            <ChordForm />
           </div>
           <ChordsContainer />
           <div className='part-label'>

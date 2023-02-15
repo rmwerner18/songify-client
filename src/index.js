@@ -14,6 +14,7 @@ import { allSongsReducer } from './reducers/all_songs_reducer';
 import { nowPlayingReducer } from './reducers/now_playing_reducer';
 import { currentBeatReducer } from './reducers/current_beat_reducer';
 import { playlistsReducer } from './reducers/playlists_reducer';
+import { chordClipboardReducer } from './reducers/chord_clipboard_reducer';
 
 // edit backend to have swing attr on song
 
@@ -25,6 +26,7 @@ let reducer = combineReducers({
   nowPlaying: nowPlayingReducer,
   currentBeat: currentBeatReducer,
   playlists: playlistsReducer,
+  chordClipboard: chordClipboardReducer
 });
 
 let store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));

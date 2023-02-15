@@ -762,20 +762,21 @@ button:focus {
 
 .chord-box {
   display: flex;
-  height: 50px;
-  width: 134px;
+  height: 30px;
+  width: 200px;
   margin: 0 3px;
-  background-color: var(--spotify-green);
+  background-color: var(--dark-background);
   color: #fff;
-  border-radius: 15px;
+  border: 1px solid var(--controls);
+  border-radius: 5px;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  justify-content: flex-start;
+  text-align: left;
 }
 
-.chord-box.playing {
+/* .chord-box.playing {
   background-color: var(--dark-green)
-}
+} */
 
 .chord-name {
   display: flex;
@@ -785,15 +786,18 @@ button:focus {
 }
 
 .chord-edit-selects {
-  width: 100%
+  width: 100%;
+  margin: 0 3px;
 }
 
 .chord-name-select, .chord-bass-select {
-  width: 30%;
+  width: 20%;
+  margin: 0 0;
 }
 
 .chord-quality-select {
-  width: 50%;
+  width: 30%;
+  margin: 0 0;
 }
 
 

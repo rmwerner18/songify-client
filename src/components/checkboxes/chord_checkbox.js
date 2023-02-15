@@ -17,14 +17,17 @@ const ChordCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
   const isCurrentBeat = useSelector((state) =>
     getIsCurrentBeat(state, { beatIndex: n })
   );
-  const [chordNameBassAndQuality, setChordNameBassAndQuality] = useState({
-    name: 'C4',
-    bass: 'C3',
-    quality: 'majorSeventh',
-  });
-  const [mouseIsOver, setMouseIsOver] = useState(false);
+  const clipboardName = useSelector((state) => state.chordClipboard.name);
+  const clipboardBass = useSelector((state) => state.chordClipboard.bass);
+  const clipboardQuality = useSelector((state) => state.chordClipboard.quality);
 
-  const { name, bass, quality } = chordNameBassAndQuality;
+  console.log({
+    clipboardName,
+    clipboardBass,
+    clipboardQuality,
+  });
+
+  const [mouseIsOver, setMouseIsOver] = useState(false);
 
   const style = {
     display: 'flex',
@@ -58,7 +61,13 @@ const ChordCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
             checked={checked}
             id={n}
             key={n}
-            onChange={(e) => changeHandler(n, checked, chordNameBassAndQuality)}
+            onChange={(e) =>
+              changeHandler(n, checked, {
+                name: clipboardName,
+                bass: clipboardBass,
+                quality: clipboardQuality,
+              })
+            }
           />
           {checked ? (
             <Rnd
@@ -123,8 +132,8 @@ const ChordCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
                 paddingRight: '60px',
               }}
             />
-            {MID_NOTES[name]}
-            {CHORD_QUALITIES[quality]}/{BASS_NOTES[bass]} <br />
+            {MID_NOTES[beat.name]}
+            {CHORD_QUALITIES[beat.quality]}/{BASS_NOTES[beat.bass]} <br />
             <span>copy</span>
           </div>
         </>
