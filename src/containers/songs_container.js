@@ -8,6 +8,7 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { stopLoop } from '../helper_functions/stop_loop';
 import BASE_API_URL from '../constants/base_api_url';
 import LoadingPage from '../components/loading_page';
+import PlaylistHeader from '../components/playlist_header';
 
 const SongsContainer = ({ songsObject, user, playlistId = false }) => {
   const { songs, loaded, error } = songsObject;
@@ -124,16 +125,16 @@ const SongsContainer = ({ songsObject, user, playlistId = false }) => {
 
   return (
     <div className='songs-container'>
-      {playlistId ? (
+      {playlistId && (
         <div>
           <div className='playlist-image-container'>
             <img />
           </div>
           <div className='playlist-name-container'>
-            <h1>Playlist Name {playlistId}</h1>
+            <PlaylistHeader id={playlistId} />
           </div>
         </div>
-      ) : null}
+      )}
       <div className='songs-container-header'>
         <span className='songs-container-header-col icon'>
           <FontAwesomeIcon icon={solid('hashtag')} className='font-awesome' />

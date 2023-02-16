@@ -1,6 +1,6 @@
 import BASE_API_URL from '../constants/base_api_url';
 
-const setPlaylists = (playlists) => {
+export const setPlaylists = (playlists) => {
   return {
     type: 'SET_PLAYLISTS',
     playlists: playlists,

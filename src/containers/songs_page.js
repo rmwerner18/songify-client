@@ -34,7 +34,7 @@ const SongsPage = ({ type, playlistId = false }) => {
         );
       case 'playlist':
         return songs.filter((song) => {
-          song.playlists.find((playlist) => playlist.user_id === playlist.id);//fix this later
+          song.playlists.find((playlist) => playlist.user_id === playlist.id); //fix this later
         });
       default:
         return songs;
@@ -50,7 +50,9 @@ const SongsPage = ({ type, playlistId = false }) => {
           style={linkStyle}
           activeStyle={activeLinkStyle}
         >
-          <div>{playlist.name}</div>
+          <div>
+            {playlist.name} {playlist.id}
+          </div>
         </NavLink>
       );
     });
@@ -101,7 +103,7 @@ const SongsPage = ({ type, playlistId = false }) => {
         <div className='playlist-section'>
           <div className='playlist-section-label'>
             <p>Playlists:</p>
-            <AddPlaylistButton />
+            <AddPlaylistButton playlists={playlists} />
           </div>
           {showPlaylists()}
         </div>
