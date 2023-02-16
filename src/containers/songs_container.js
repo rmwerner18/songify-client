@@ -9,6 +9,7 @@ import { stopLoop } from '../helper_functions/stop_loop';
 import BASE_API_URL from '../constants/base_api_url';
 import LoadingPage from '../components/loading_page';
 import PlaylistHeader from '../components/playlist_header';
+import { fetchHeaders } from '../constants/fetch_headers';
 
 const SongsContainer = ({ songsObject, user, playlist = false }) => {
   const { songs, loaded, error } = songsObject;
@@ -60,15 +61,13 @@ const SongsContainer = ({ songsObject, user, playlist = false }) => {
     return songs;
   };
 
-  const deleteSong = (song) => {
-    return fetch(BASE_API_URL + `songs/${song.id}`, {
+  const deleteSong = async (song) => {
+    const fetchConfig = {
       method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    }).then(() => {
-      dispatch(fetchSongs());
-    });
+      headers: fetchHeaders,
+    };
+    const res = await fetch(BASE_API_URL + 'songs/' + song.id, fetchConfig);
+    dispatch(fetchSongs());
   };
 
   const deleteHandler = (song) => {
@@ -78,47 +77,41 @@ const SongsContainer = ({ songsObject, user, playlist = false }) => {
     deleteSong(song);
   };
 
-  const userLikesSong = (song) => {
+  const userLikesSong = (id) => {
+    const song = songs.find((song) => song.id === id);
     return song.likes.find((like) => like.user_id === user.id);
   };
 
-  const deleteLike = (like) => {
-    return fetch(BASE_API_URL + `likes/${like.id}`, {
+  const deleteLike = async (like) => {
+    const fetchConfig = {
       method: 'DELETE',
-      headers: {
-        'content-type': 'application/json',
-        accepts: 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    })
-      .then((resp) => resp.json())
-      .then((songs) => dispatch(setAllSongs(songs)));
+      headers: fetchHeaders,
+    };
+    const res = await fetch(BASE_API_URL + 'likes/' + like.id, fetchConfig);
+    const songs = await res.json();
+    dispatch(setAllSongs(songs));
   };
 
-  const createLike = (song) => {
-    return fetch(BASE_API_URL + '/likes/', {
+  const createLike = async (id) => {
+    const fetchConfig = {
       method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        accepts: 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
+      headers: fetchHeaders,
       body: JSON.stringify({
-        song_id: song.id,
+        song_id: id,
         user_id: user.id,
       }),
-    })
-      .then((resp) => resp.json())
-      .then((songs) => dispatch(setAllSongs(songs)));
+    };
+    const res = await fetch(BASE_API_URL + 'likes/', fetchConfig)
+    const songs = await res.json()
+    dispatch(setAllSongs(songs));
   };
 
   const likeHandler = (e, id) => {
-    const song = songs.find((song) => song.id === id);
     if (user.id) {
-      if (userLikesSong(song)) {
-        deleteLike(userLikesSong(song));
+      if (userLikesSong(id)) {
+        deleteLike(userLikesSong(id));
       } else {
-        createLike(song);
+        createLike(id);
       }
     }
   };
