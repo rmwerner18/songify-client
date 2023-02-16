@@ -207,7 +207,12 @@ body {
   font-family: inherit;
   font-weight: 900;
   font-size: 1.3rem;
+  overflow-y: scroll;
 }
+
+/* .playlist-section {
+  overflow-y: scroll;
+} */
 
 .playlist-section-label {
   display: flex;

@@ -36,8 +36,16 @@ const App = () => {
             />
           )}
         />
-        <Route exact path='/songs' render={() => <SongsPage />} />
-        <Route exact path='/playlist/:id' render={(routerProps) => <SongsPage playlistId={ routerProps.match.params.id } />} />
+        <Route exact path='/songs' render={() => <SongsPage type='all'/>} />
+        <Route exact path='/users/:id/songs' render={() => <SongsPage type='user'/>} />
+        <Route exact path='/user/:id/likes' render={() => <SongsPage type='liked'/>} />
+        <Route
+          exact
+          path='/playlists/:id'
+          render={(routerProps) => (
+            <SongsPage type='playlist' playlistId={routerProps.match.params.id} />
+          )}
+        />
         <Route
           exact
           path='/login'

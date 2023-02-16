@@ -29,7 +29,10 @@ const Song = ({ idx, deleteHandler, likeHandler, song }) => {
     <div
       className={mouseOver ? 'song-box active' : 'song-box'}
       onMouseEnter={() => setMouseOver(true)}
-      onMouseLeave={() => setMouseOver(false)}
+      onMouseLeave={() => {
+        setMouseOver(false);
+        setDropdownOpen(false);
+      }}
     >
       <div className='song-number'>
         <SongPlayButton id={song.id} mouseOver={mouseOver} idx={idx} />
@@ -56,11 +59,16 @@ const Song = ({ idx, deleteHandler, likeHandler, song }) => {
       {dropdownOpen && (
         <div
           class='dropdown-content'
-          style={{ height: '50px', width: '50px', backgroundColor: '#fff' }}
+          style={{
+            height: '100px',
+            width: '50px',
+            backgroundColor: 'var(--dark-background)',
+            color: '#fff',
+          }}
         >
-          <a href='#'>Link 1</a>
-          <a href='#'>Link 2</a>
-          <a href='#'>Link 3</a>
+          <button>Link 1</button>
+          <button>Link 2</button>
+          <button>Link 3</button>
         </div>
       )}
     </div>
