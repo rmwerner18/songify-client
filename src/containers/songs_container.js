@@ -150,9 +150,7 @@ const SongsContainer = ({ songsObject, user, playlist = false }) => {
           handleSearch={handleSearch}
         />
       </div>
-      <div className={'songs-container-list'}>
-        {renderSongsOrLoading()}
-      </div>
+      <div className={'songs-container-list'}>{renderSongsOrLoading()}</div>
     </div>
   );
 };

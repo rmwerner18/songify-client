@@ -4,6 +4,7 @@ import SongPlayButton from './play_buttons/song_play_button';
 import SongOptionsContainer from '../containers/song_options_container';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import SongDropdownMenu from './song_dropdown_menu';
 
 const Song = ({ idx, deleteHandler, likeHandler, song }) => {
   const user = useSelector((state) => state.user);
@@ -56,21 +57,7 @@ const Song = ({ idx, deleteHandler, likeHandler, song }) => {
           onClick={() => setDropdownOpen(!dropdownOpen)}
         />
       )}
-      {dropdownOpen && (
-        <div
-          className='dropdown-content'
-          style={{
-            height: '100px',
-            width: '50px',
-            backgroundColor: 'var(--dark-background)',
-            color: '#fff',
-          }}
-        >
-          <button>Link 1</button>
-          <button>Link 2</button>
-          <button>Link 3</button>
-        </div>
-      )}
+      {dropdownOpen && <SongDropdownMenu song={song} />}
     </div>
   );
 };

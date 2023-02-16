@@ -23,16 +23,18 @@ const SongsPage = ({ type, playlistId = false }) => {
   const user = useSelector((state) => state.user);
   const playlistsLoaded = useSelector((state) => state.allPlaylists.loaded);
   const playlists = useSelector((state) => state.allPlaylists.playlists);
-  const playlistsLoadError = useSelector(
-    (state) => state.allPlaylists.error
-  );
+  const playlistsLoadError = useSelector((state) => state.allPlaylists.error);
   const dispatch = useDispatch();
 
   const currentPlaylist = playlists.find((playlist) => {
     return playlist.id.toString() === playlistId;
   });
 
-  // console.log(currentPlaylist);
+  const currentPlaylistSongs = songs.filter((song) =>
+    song.playlists.find((playlist) => playlist.id.toString() === playlistId)
+  );
+
+  console.log(currentPlaylist);
 
   const filterSongs = () => {
     switch (type) {
@@ -43,7 +45,7 @@ const SongsPage = ({ type, playlistId = false }) => {
           song.likes.find((like) => like.user_id === user.id)
         );
       case 'playlist':
-        return currentPlaylist ? currentPlaylist.songs : [];
+        return currentPlaylist ? currentPlaylistSongs : [];
       default:
         return songs;
     }

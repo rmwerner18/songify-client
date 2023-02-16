@@ -4,12 +4,11 @@
 
 .App {
   font-family: "Courier New";
-  position: relative;
+  /* position: relative; */
   display: grid;
   place-items: center;
   height: 100vh;
   width: auto;
-
 }
 
 :root {
@@ -100,7 +99,6 @@ fieldset span {
 
 body {
   background-color: var(--dark-background);
-  overflow-x: scroll;
 }
 
 .grid-container {
@@ -203,7 +201,6 @@ body {
 
 .songs-page-menu {
   color: var(--spotify-text);
-  position: relative;
   border-left: 1px solid var(--controls);
   width: 25%;
   padding: 10px;
@@ -236,6 +233,7 @@ body {
 
 .songs-page .songs-container-container {
   width: 75%;
+  overflow-x: visible;
 }
 
 .songs-container {
@@ -249,6 +247,7 @@ body {
   text-align: center;
   align-items: center;
   /* overflow-y: scroll; */
+  overflow-x: visible;
   background-color: var(--card-background);
 }
 
@@ -285,6 +284,7 @@ body {
 
 .songs-container-list {
   overflow-y: scroll;
+  overflow-x: visible;
   width: 100%;
 }
 /* .songs-container-header-col.search input{
@@ -532,7 +532,7 @@ h1, h2 {
 .song-title {
   width: 25%;
   text-align: left;
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
 }
 
 .song-options {
