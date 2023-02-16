@@ -124,18 +124,16 @@ const SongsContainer = ({ songsObject, user, playlistId = false }) => {
 
   return (
     <div className='songs-container'>
-      {playlistId ? 
+      {playlistId ? (
         <div>
           <div className='playlist-image-container'>
             <img />
           </div>
           <div className='playlist-name-container'>
-            <h1>Playlist Name</h1>
+            <h1>Playlist Name {playlistId}</h1>
           </div>
         </div>
-        :
-        null
-      }
+      ) : null}
       <div className='songs-container-header'>
         <span className='songs-container-header-col icon'>
           <FontAwesomeIcon icon={solid('hashtag')} className='font-awesome' />

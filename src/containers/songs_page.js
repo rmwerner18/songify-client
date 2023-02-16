@@ -14,7 +14,7 @@ const linkStyle = {
 
 const activeLinkStyle = {
   color: '#fff',
-}
+};
 
 const SongsPage = ({ type, playlistId = false }) => {
   const songsLoaded = useSelector((state) => state.allSongs.loaded);
@@ -34,7 +34,7 @@ const SongsPage = ({ type, playlistId = false }) => {
         );
       case 'playlist':
         return songs.filter((song) => {
-          song.playlists.find((playlist) => playlist.user_id === playlist.id);
+          song.playlists.find((playlist) => playlist.user_id === playlist.id);//fix this later
         });
       default:
         return songs;
