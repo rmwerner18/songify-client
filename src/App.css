@@ -166,8 +166,8 @@ body {
 
 .volume-form-container {
   position: absolute;
-  bottom: 0px;
-  left: 20px;
+  bottom: 6px;
+  right: 50px;
   height: auto;
   background-color: var(--dark-background);
   border: solid 0.5px var(--checkbox-background);
@@ -197,6 +197,10 @@ body {
   color: #fff;
 }
 
+.songs-page-menu div {
+  margin: 3px 0;
+}
+
 .songs-page-menu {
   color: var(--spotify-text);
   position: relative;
@@ -206,7 +210,7 @@ body {
   margin: 5px 0px;
   font-family: inherit;
   font-weight: 900;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   overflow-y: scroll;
 }
 
@@ -223,6 +227,13 @@ body {
   margin-right: 40px;
 }
 
+.playlist-detail-form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin-left: 20%;
+}
+
 .songs-page .songs-container-container {
   width: 75%;
 }
@@ -231,12 +242,13 @@ body {
   border-radius: 10px;
   /* border-top-left-radius: 0px;
   border-bottom-left-radius: 0px; */
-  height: calc(100vh - 100px);
+  height: calc(100vh - 150px);
+  margin-bottom: 50px;
   display: flex;
   flex-direction: column;
   text-align: center;
   align-items: center;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   background-color: var(--card-background);
 }
 
@@ -271,6 +283,10 @@ body {
   text-align: left;
 }
 
+.songs-container-list {
+  overflow-y: scroll;
+  width: 100%;
+}
 /* .songs-container-header-col.search input{
   width: 30%;
   align-items: right;
@@ -643,7 +659,10 @@ button:focus {
   align-items: center;
 }
 
-.login-fields input, .song-name-input input {
+.login-fields input, 
+.song-name-input input, 
+input[type='text'], 
+textarea[type='text'] {
   background-color: transparent;
   border: 0px;
   border-bottom: var(--controls) solid 1px;

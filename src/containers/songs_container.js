@@ -10,7 +10,7 @@ import BASE_API_URL from '../constants/base_api_url';
 import LoadingPage from '../components/loading_page';
 import PlaylistHeader from '../components/playlist_header';
 
-const SongsContainer = ({ songsObject, user, playlistId = false }) => {
+const SongsContainer = ({ songsObject, user, playlist = false }) => {
   const { songs, loaded, error } = songsObject;
   let [searchInput, setSearchInput] = useState('');
   const nowPlaying = useSelector((state) => state.nowPlaying);
@@ -125,13 +125,13 @@ const SongsContainer = ({ songsObject, user, playlistId = false }) => {
 
   return (
     <div className='songs-container'>
-      {playlistId && (
+      {playlist && (
         <div>
           <div className='playlist-image-container'>
             <img />
           </div>
           <div className='playlist-name-container'>
-            <PlaylistHeader id={playlistId} />
+            <PlaylistHeader playlist={playlist} />
           </div>
         </div>
       )}
@@ -150,7 +150,9 @@ const SongsContainer = ({ songsObject, user, playlistId = false }) => {
           handleSearch={handleSearch}
         />
       </div>
-      {renderSongsOrLoading()}
+      <div className={'songs-container-list'}>
+        {renderSongsOrLoading()}
+      </div>
     </div>
   );
 };

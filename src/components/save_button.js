@@ -56,7 +56,7 @@ const SaveButton = (props) => {
 
   const saveSongHandler = (e, songname) => {
     e.preventDefault();
-    console.log(props.song)
+    // console.log(props.song)
     let newObj;
     newObj = props.song;
     newObj.user_id = props.user.id;

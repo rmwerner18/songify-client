@@ -25,7 +25,7 @@ let reducer = combineReducers({
   user: userReducer,
   nowPlaying: nowPlayingReducer,
   currentBeat: currentBeatReducer,
-  playlists: playlistsReducer,
+  allPlaylists: playlistsReducer,
   chordClipboard: chordClipboardReducer
 });
 

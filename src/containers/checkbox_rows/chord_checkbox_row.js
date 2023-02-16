@@ -19,14 +19,14 @@ const ChordCheckboxRow = () => {
         duration: 1,
       };
     }
-    console.log(chords);
+    // console.log(chords);
     dispatch(changeSongAttribute(payload));
   };
 
   const resizeHandler = (n, duration) => {
     const payload = { chords: { ...chords } };
     payload.chords[n] = { ...payload.chords[n], duration };
-    console.log(chords);
+    // console.log(chords);
     dispatch(changeSongAttribute(payload));
   };
 

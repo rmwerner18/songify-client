@@ -1,7 +1,11 @@
-export const playlistsReducer = (state = [], action) => {
+export const playlistsReducer = (state = { playlists: [] }, action) => {
   switch (action.type) {
     case 'SET_PLAYLISTS':
-      return [...action.playlists];
+      return {
+        playlists: [...action.playlists],
+        loaded: true,
+        error: action.error,
+      };
     default:
       return state;
   }

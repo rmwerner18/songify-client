@@ -19,10 +19,20 @@ const activeLinkStyle = {
 const SongsPage = ({ type, playlistId = false }) => {
   const songsLoaded = useSelector((state) => state.allSongs.loaded);
   const songs = useSelector((state) => state.allSongs.songs);
-  const loadError = useSelector((state) => state.allSongs.error);
+  const songsLoadError = useSelector((state) => state.allSongs.error);
   const user = useSelector((state) => state.user);
-  const playlists = useSelector((state) => state.playlists);
+  const playlistsLoaded = useSelector((state) => state.allPlaylists.loaded);
+  const playlists = useSelector((state) => state.allPlaylists.playlists);
+  const playlistsLoadError = useSelector(
+    (state) => state.allPlaylists.error
+  );
   const dispatch = useDispatch();
+
+  const currentPlaylist = playlists.find((playlist) => {
+    return playlist.id.toString() === playlistId;
+  });
+
+  // console.log(currentPlaylist);
 
   const filterSongs = () => {
     switch (type) {
@@ -33,9 +43,7 @@ const SongsPage = ({ type, playlistId = false }) => {
           song.likes.find((like) => like.user_id === user.id)
         );
       case 'playlist':
-        return songs.filter((song) => {
-          song.playlists.find((playlist) => playlist.user_id === playlist.id); //fix this later
-        });
+        return currentPlaylist ? currentPlaylist.songs : [];
       default:
         return songs;
     }
@@ -85,7 +93,7 @@ const SongsPage = ({ type, playlistId = false }) => {
               activeStyle={activeLinkStyle}
               className={`menu-option ${type === 'user' && 'active'}`}
             >
-              Songs You've Created
+              Your Songs
             </NavLink>
             <br />
             <NavLink
@@ -95,7 +103,7 @@ const SongsPage = ({ type, playlistId = false }) => {
               activeStyle={activeLinkStyle}
               className={`menu-option ${type === 'liked' && 'active'}`}
             >
-              Songs You've Liked
+              Liked Songs
             </NavLink>
             <br />
           </>
@@ -109,14 +117,14 @@ const SongsPage = ({ type, playlistId = false }) => {
         </div>
       </div>
       <div className='songs-container-container'>
-        {playlistId ? (
+        {currentPlaylist ? (
           <SongsContainer
             songsObject={{
               songs: filterSongs(),
-              loaded: songsLoaded,
-              error: loadError,
+              loaded: playlistsLoaded,
+              error: playlistsLoadError,
             }}
-            playlistId={playlistId}
+            playlist={currentPlaylist}
             user={user}
           />
         ) : (
@@ -124,12 +132,13 @@ const SongsPage = ({ type, playlistId = false }) => {
             songsObject={{
               songs: filterSongs(),
               loaded: songsLoaded,
-              error: loadError,
+              error: songsLoadError,
             }}
             user={user}
           />
         )}
       </div>
+      <br />
       <div className='volume-form-container'>
         <VolumeForm />
       </div>

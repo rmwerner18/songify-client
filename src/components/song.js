@@ -13,7 +13,7 @@ const Song = ({ idx, deleteHandler, likeHandler, song }) => {
   const [mouseOver, setMouseOver] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  console.log(dropdownOpen);
+  // console.log(dropdownOpen);
 
   useEffect(() => {
     setUserLikesSong(!!like);
@@ -58,7 +58,7 @@ const Song = ({ idx, deleteHandler, likeHandler, song }) => {
       )}
       {dropdownOpen && (
         <div
-          class='dropdown-content'
+          className='dropdown-content'
           style={{
             height: '100px',
             width: '50px',
