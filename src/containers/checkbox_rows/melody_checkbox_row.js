@@ -21,7 +21,7 @@ const MelodyCheckboxRow = ({ beatType }) => {
   const resizeHandler = (n, duration) => {
     const payload = {};
     payload[beatType] = { ...rowBeats };
-    payload[beatType][n] = { ...payload.beatType[n], duration };
+    payload[beatType][n] = { ...payload[beatType][n], duration };
     dispatch(changeSongAttribute(payload));
   };
 

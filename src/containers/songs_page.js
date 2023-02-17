@@ -123,8 +123,8 @@ const SongsPage = ({ type, playlistId = false }) => {
           <SongsContainer
             songsObject={{
               songs: filterSongs(),
-              loaded: playlistsLoaded,
-              error: playlistsLoadError,
+              loaded: songsLoaded && playlistsLoaded,
+              error: songsLoadError || playlistsLoadError,
             }}
             playlist={currentPlaylist}
             user={user}
