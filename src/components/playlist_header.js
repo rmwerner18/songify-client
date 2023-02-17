@@ -7,25 +7,35 @@ import { fetchPlaylists } from '../actions/fetch_playlists';
 const PlaylistHeader = ({ playlist }) => {
   const [modal, setModal] = useState(false);
   const [formData, setFormData] = useState({ name: '' });
-  const dispatch = useDispatch()
+  const [nameValidationMessage, setNameValidationMessage] = useState(false);
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (formData.name.length === 0) {
+      return setNameValidationMessage(true);
+    }
+
     const fetchConfig = {
       method: 'PATCH',
       headers: fetchHeaders,
-      body: JSON.stringify(formData)
-    }
+      body: JSON.stringify(formData),
+    };
 
-    const res = await fetch(BASE_API_URL + 'playlists/' + playlist.id, fetchConfig);
-    // const resJson = await res.json()
-    dispatch(fetchPlaylists())
+    const res = await fetch(
+      BASE_API_URL + 'playlists/' + playlist.id,
+      fetchConfig
+    );
+    dispatch(fetchPlaylists());
+    setFormData({ name: '' });
     setModal(false);
-    // console.log(formData);
   };
 
   const handleChange = (e) => {
+    if (nameValidationMessage) {
+      setNameValidationMessage(false);
+    }
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
@@ -36,6 +46,11 @@ const PlaylistHeader = ({ playlist }) => {
           <div className='modal-content'>
             <form onSubmit={(e) => handleSubmit(e)}>
               <div className='playlist-detail-form'>
+                {nameValidationMessage && (
+                  <span style={{ color: 'red' }}>
+                    Playlist Must Have A Name
+                  </span>
+                )}
                 <input
                   type='text'
                   id='name'
