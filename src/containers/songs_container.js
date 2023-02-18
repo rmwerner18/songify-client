@@ -101,8 +101,8 @@ const SongsContainer = ({ songsObject, user, playlist = false }) => {
         user_id: user.id,
       }),
     };
-    const res = await fetch(BASE_API_URL + 'likes/', fetchConfig)
-    const songs = await res.json()
+    const res = await fetch(BASE_API_URL + 'likes/', fetchConfig);
+    const songs = await res.json();
     dispatch(setAllSongs(songs));
   };
 
@@ -118,16 +118,7 @@ const SongsContainer = ({ songsObject, user, playlist = false }) => {
 
   return (
     <div className='songs-container'>
-      {playlist && (
-        <div>
-          <div className='playlist-image-container'>
-            <img />
-          </div>
-          <div className='playlist-name-container'>
-            <PlaylistHeader playlist={playlist} />
-          </div>
-        </div>
-      )}
+      {playlist && <PlaylistHeader playlist={playlist} />}
       <div className='songs-container-header'>
         <span className='songs-container-header-col icon'>
           <FontAwesomeIcon icon={solid('hashtag')} className='font-awesome' />

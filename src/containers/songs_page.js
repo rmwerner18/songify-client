@@ -34,8 +34,6 @@ const SongsPage = ({ type, playlistId = false }) => {
     song.playlists.find((playlist) => playlist.id.toString() === playlistId)
   );
 
-  console.log(currentPlaylist);
-
   const filterSongs = () => {
     switch (type) {
       case 'user':
@@ -55,7 +53,7 @@ const SongsPage = ({ type, playlistId = false }) => {
     return playlists.map((playlist) => {
       return (
         <NavLink
-          to={'/playlists/' + playlist.id}
+          to={'/songs/playlists/' + playlist.id}
           exact
           style={linkStyle}
           activeStyle={activeLinkStyle}
@@ -89,7 +87,7 @@ const SongsPage = ({ type, playlistId = false }) => {
         {user.id ? (
           <>
             <NavLink
-              to={`/users/${user.id}/songs`}
+              to={`/songs/users/${user.id}`}
               exact
               style={linkStyle}
               activeStyle={activeLinkStyle}
@@ -99,7 +97,7 @@ const SongsPage = ({ type, playlistId = false }) => {
             </NavLink>
             <br />
             <NavLink
-              to={`/user/${user.id}/likes`}
+              to={`/songs/user/${user.id}/likes`}
               exact
               style={linkStyle}
               activeStyle={activeLinkStyle}

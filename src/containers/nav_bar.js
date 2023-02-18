@@ -60,7 +60,6 @@ const NavBar = (props) => {
       </NavLink>
       <NavLink
         to='/songs'
-        exact
         style={link}
         onClick={resetAudio}
         activeStyle={{

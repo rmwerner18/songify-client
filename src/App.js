@@ -36,14 +36,25 @@ const App = () => {
             />
           )}
         />
-        <Route exact path='/songs' render={() => <SongsPage type='all'/>} />
-        <Route exact path='/users/:id/songs' render={() => <SongsPage type='user'/>} />
-        <Route exact path='/user/:id/likes' render={() => <SongsPage type='liked'/>} />
+        <Route exact path='/songs' render={() => <SongsPage type='all' />} />
         <Route
           exact
-          path='/playlists/:id'
+          path='/songs/users/:id'
+          render={() => <SongsPage type='user' />}
+        />
+        <Route
+          exact
+          path='/songs/user/:id/likes'
+          render={() => <SongsPage type='liked' />}
+        />
+        <Route
+          exact
+          path='/songs/playlists/:id'
           render={(routerProps) => (
-            <SongsPage type='playlist' playlistId={routerProps.match.params.id} />
+            <SongsPage
+              type='playlist'
+              playlistId={routerProps.match.params.id}
+            />
           )}
         />
         <Route

@@ -5,9 +5,10 @@ import { useSelector } from 'react-redux';
 import { fetchHeaders } from '../constants/fetch_headers';
 import BASE_API_URL from '../constants/base_api_url';
 
-const SongDropdownMenu = ({song}) => {
+const SongDropdownMenu = ({ song }) => {
   const [playlistsDropdown, setPlaylistsDropdown] = useState(false);
   const playlists = useSelector((state) => state.allPlaylists.playlists);
+  const user = useSelector((state) => state.user);
   // console.log(son})
 
   const handleAddSong = async (id) => {
@@ -19,7 +20,7 @@ const SongDropdownMenu = ({song}) => {
 
     const res = await fetch(BASE_API_URL + 'playlist_songs', fetchConfig);
     const playlist = await res.json();
-    console.log(playlist);
+    // console.log(playlist);
   };
 
   const showPlaylists = () => {
