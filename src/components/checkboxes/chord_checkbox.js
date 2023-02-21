@@ -15,10 +15,10 @@ const getIsCurrentBeat = createSelector(
     currentBeat >= beatRange[0] && currentBeat < beatRange[1]
 );
 
-const ChordCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
-  const duration = beat ? beat.duration : 0;
+const ChordCheckbox = ({ beat, checked, changeHandler, beatObject, resizeHandler }) => {
+  const duration = beatObject ? beatObject.duration : 0;
   const isCurrentBeat = useSelector((state) =>
-    getIsCurrentBeat(state, { beatRange: [n, n + duration] })
+    getIsCurrentBeat(state, { beatRange: [beat, beat + duration] })
   );
   const clipboardName = useSelector((state) => state.chordClipboard.name);
   const clipboardBass = useSelector((state) => state.chordClipboard.bass);
@@ -38,7 +38,7 @@ const ChordCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
 
   const checkboxResizeHandler = (ref) => {
     setMouseIsOver(true);
-    resizeHandler(n, ref.offsetWidth / 17);
+    resizeHandler(beat, ref.offsetWidth / 17);
   };
 
   return (
@@ -47,19 +47,19 @@ const ChordCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
       onMouseLeave={(e) => setMouseIsOver(false)}
     >
       <div
-        key={n}
-        className={`checkbox-meta-container ${isOnMeasureLine(n)}`}
-        style={{ left: n * 17 + 'px' }}
+        key={beat}
+        className={`checkbox-meta-container ${isOnMeasureLine(beat)}`}
+        style={{ left: beat * 17 + 'px' }}
       >
         <label className='checkbox-container'>
           <input
             type='checkbox'
             className={isCurrentBeat ? 'checkbox playing' : 'checkbox'}
             checked={checked}
-            id={n}
-            key={n}
+            id={beat}
+            key={beat}
             onChange={(e) =>
-              changeHandler(n, checked, {
+              changeHandler(beat, checked, {
                 name: clipboardName,
                 bass: clipboardBass,
                 quality: clipboardQuality,
@@ -73,7 +73,7 @@ const ChordCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
               default={{
                 x: 0,
                 y: 0,
-                width: beat ? beat.duration * 17 : 17,
+                width: beatObject ? beatObject.duration * 17 : 17,
                 height: 17,
               }}
               onResizeStop={(e, direction, ref, delta, position) =>
@@ -110,7 +110,7 @@ const ChordCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
               width: '65px',
               border: '1px solid white',
               position: 'absolute',
-              left: n * 17 + 'px',
+              left: beat * 17 + 'px',
               top: '21px',
               color: 'white',
               fontSize: '0.75rem',
@@ -130,17 +130,18 @@ const ChordCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
                 paddingRight: '60px',
               }}
             />
-            {MID_NOTES[beat.name]}
-            {CHORD_QUALITIES[beat.quality]}/{BASS_NOTES[beat.bass]} <br />
+            {MID_NOTES[beatObject.name]}
+            {CHORD_QUALITIES[beatObject.quality]}/{BASS_NOTES[beatObject.bass]}{' '}
+            <br />
             <FontAwesomeIcon
               icon={regular('clipboard')}
               className='font-awesome'
               onClick={() =>
                 dispatch(
                   setChordClipboard({
-                    name: beat.name,
-                    bass: beat.bass,
-                    quality: beat.quality,
+                    name: beatObject.name,
+                    bass: beatObject.bass,
+                    quality: beatObject.quality,
                   })
                 )
               }

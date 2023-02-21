@@ -27,7 +27,7 @@ const SaveButton = (props) => {
     stopLoop();
     props.endNowPlaying();
     if (result.message !== 'Please log in') {
-      setModalIsOpen(false)
+      setModalIsOpen(false);
       alert('Your changes have been saved!');
     } else alert(result.message);
   };
@@ -54,6 +54,12 @@ const SaveButton = (props) => {
       });
   };
 
+  const makeChordArray = (chords) =>
+    Object.keys(chords).map((startBeat) => ({
+      ...chords[startBeat],
+      start_beat: startBeat,
+    }));
+
   const saveSongHandler = (e, songname) => {
     e.preventDefault();
     // console.log(props.song)
@@ -61,6 +67,7 @@ const SaveButton = (props) => {
     newObj = props.song;
     newObj.user_id = props.user.id;
     newObj.name = songname;
+    newObj.chords = makeChordArray(props.song.chords);
     props.song_id ? saveEdit(newObj) : saveSong(newObj);
   };
 

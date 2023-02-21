@@ -22,9 +22,11 @@ const SongsPage = ({ type, playlistId = false }) => {
   const songsLoadError = useSelector((state) => state.allSongs.error);
   const user = useSelector((state) => state.user);
   const playlistsLoaded = useSelector((state) => state.allPlaylists.loaded);
-  const playlists = useSelector((state) => state.allPlaylists.playlists);
+  const allPlaylists = useSelector((state) => state.allPlaylists.playlists);
   const playlistsLoadError = useSelector((state) => state.allPlaylists.error);
   const dispatch = useDispatch();
+
+  const playlists = allPlaylists.filter(playlist => playlist.user_id === user.id)
 
   const currentPlaylist = playlists.find((playlist) => {
     return playlist.id.toString() === playlistId;

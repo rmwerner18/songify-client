@@ -30,7 +30,7 @@ const AddPlaylistButton = ({ playlists }) => {
     <div>
       {redirectPlaylist.id ? (
         <>
-          <Redirect exact to={`/playlists/${redirectPlaylist.id}`} />
+          <Redirect exact to={`/songs/playlists/${redirectPlaylist.id}`} />
           <FontAwesomeIcon
             icon={solid('square-plus')}
             className='font-awesome'

@@ -32,13 +32,13 @@ const ChordCheckboxRow = () => {
 
   return (
     <div className='checkbox-row'>
-      {numberOfBeatsArray.map((n) => {
+      {numberOfBeatsArray.map((beat) => {
         return (
           <ChordCheckbox
-            key={n}
-            n={n}
-            beat={chords[n]}
-            checked={Object.keys(chords).includes(n.toString())}
+            key={beat}
+            beat={beat}
+            beatObject={chords[beat]}
+            checked={Object.keys(chords).includes(beat.toString())}
             changeHandler={changeHandler}
             resizeHandler={resizeHandler}
           />
