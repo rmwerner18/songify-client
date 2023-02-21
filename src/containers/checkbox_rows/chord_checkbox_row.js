@@ -29,6 +29,8 @@ const ChordCheckboxRow = () => {
     dispatch(changeSongAttribute(payload));
   };
 
+  console.log(chords)
+
   return (
     <div className='checkbox-row'>
       {numberOfBeatsArray.map((beat) => {
@@ -37,7 +39,7 @@ const ChordCheckboxRow = () => {
             key={beat}
             beat={beat}
             beatObject={chords[beat]}
-            checked={Object.keys(chords).includes(beat.toString())}
+            checked={chords[beat]}
             changeHandler={changeHandler}
             resizeHandler={resizeHandler}
           />

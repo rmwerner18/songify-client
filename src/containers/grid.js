@@ -22,10 +22,15 @@ const Grid = (props) => {
 
   const fetchSongToEdit = () => {
     if (props.song_id) {
-      fetch(BASE_API_URL + `songs/${props.song_id}`)
+      fetch(BASE_API_URL + `songs/${props.song_id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
         .then((resp) => resp.json())
         .then((song) => {
-          song.chords = keyBy(song.chords, 'start_beat')
+          song.chords = keyBy(song.chords, 'start_beat');
+          // console.log(song)
           dispatch(setCurrentSong(song));
         });
     }
