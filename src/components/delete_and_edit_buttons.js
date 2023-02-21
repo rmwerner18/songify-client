@@ -5,11 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { endNowPlaying } from '../actions/end_now_playing';
 import { useDispatch } from 'react-redux';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { setCurrentSong } from '../actions/set_current_song';
+import BASE_API_URL from '../constants/base_api_url';
 
 const DeleteAndEditButtons = (props) => {
   const dispatch = useDispatch();
   const editHandler = () => {
     stopLoop();
+    dispatch(setCurrentSong(props.song));
     dispatch(endNowPlaying());
   };
 
