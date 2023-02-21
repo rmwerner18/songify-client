@@ -15,7 +15,13 @@ const getIsCurrentBeat = createSelector(
     currentBeat >= beatRange[0] && currentBeat < beatRange[1]
 );
 
-const ChordCheckbox = ({ beat, checked, changeHandler, beatObject, resizeHandler }) => {
+const ChordCheckbox = ({
+  beat,
+  checked,
+  changeHandler,
+  beatObject,
+  resizeHandler,
+}) => {
   // console.log(beatObject)
   const duration = beatObject ? beatObject.duration : 0;
   const isCurrentBeat = useSelector((state) =>
@@ -75,7 +81,7 @@ const ChordCheckbox = ({ beat, checked, changeHandler, beatObject, resizeHandler
               default={{
                 x: 0,
                 y: 0,
-                width: beatObject ? duration * 17 : 17,
+                width: beatObject ? beatObject.duration * 17 : 17,
                 height: 17,
               }}
               onResizeStop={(e, direction, ref, delta, position) =>

@@ -13,7 +13,8 @@ export const fetchSongs = () => async (dispatch) => {
   try {
     const response = await fetch(BASE_API_URL + 'songs');
     const songs = await response.json();
-    songs.map(song => song.chords = keyBy(song.chords, 'start_beat'))
+    songs.forEach((song) => (song.chords = keyBy(song.chords, 'start_beat')));
+    console.log({ songs });
     dispatch(setAllSongs(songs));
   } catch {
     dispatch(setAllSongs([], true));
