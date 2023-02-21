@@ -1,4 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
+import { keyBy } from 'lodash';
 var Octavian = require('octavian');
 
 const getCurrentSong = (state) => state.currentSong;
@@ -6,40 +7,38 @@ const getCurrentSong = (state) => state.currentSong;
 const getCurrentSongWithFrequencies = createSelector(
   [getCurrentSong],
   (currentSong) => {
-    Object.keys(currentSong.chords).map((chordIndex) => {
-      // console.log(currentSong.chords)
-      // console.log(chordIndex);
+    let newChordsObject = currentSong.chords;
+    if (Array.isArray(currentSong.chords)) {
+      newChordsObject = keyBy(currentSong.chords, 'start_beat');
+    }
+    Object.keys(newChordsObject).map((startBeat) => {
       const createChord = (name, qual) => {
-        let chord;
+        let octavianChord;
         if (qual === 'augmented') {
-          chord = new Octavian.Chord(name);
-          chord.addInterval('majorThird');
-          chord.addInterval('minorSixth');
+          octavianChord = new Octavian.Chord(name);
+          octavianChord.addInterval('majorThird');
+          octavianChord.addInterval('minorSixth');
         } else if (qual === '5') {
-          chord = new Octavian.Chord(name);
-          chord.addInterval('perfectFifth');
-          chord.addInterval('perfectOctave');
+          octavianChord = new Octavian.Chord(name);
+          octavianChord.addInterval('perfectFifth');
+          octavianChord.addInterval('perfectOctave');
         } else {
-          chord = new Octavian.Chord(name, qual);
+          octavianChord = new Octavian.Chord(name, qual);
         }
-        return chord;
+        return octavianChord;
       };
 
-      const getFrequencies = (bass, name, qual) => {
-        // console.log({bass, name, qual})
-        let chord = createChord(name, qual);
-        let freqs = chord.frequencies;
-        let b = new Octavian.Note(bass);
-        freqs.push(b.frequency);
-        currentSong.chords[chordIndex].freqs = freqs
-        return currentSong.chords[chordIndex];
+      const getFrequencies = (bass, name, qual, chord) => {
+        let octavianChord = createChord(name, qual);
+        let bassNote = new Octavian.Note(bass);
+        octavianChord.frequencies.push(bassNote.frequency);
+        chord.freqs = octavianChord.frequencies;
+        return chord
       };
-      const chord = currentSong.chords[chordIndex]
-      // console.log({chord})
-      return getFrequencies(chord['bass'], chord['name'], chord['quality']);
+      const chord = newChordsObject[startBeat];
+      return getFrequencies(chord['bass'], chord['name'], chord['quality'], chord);
     });
-    // console.log(currentSong.chords)
-    return { ...currentSong, chords: currentSong.chords };
+    return { ...currentSong, chords: newChordsObject };
   }
 );
 

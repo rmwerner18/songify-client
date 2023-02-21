@@ -15,6 +15,7 @@ import SwingForm from '../components/swing_form';
 import VolumeForm from '../components/volume_form';
 import SaveButton from '../components/save_button';
 import ChordForm from '../components/chord_form';
+import { keyBy } from 'lodash';
 
 const Grid = (props) => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const Grid = (props) => {
       fetch(BASE_API_URL + `songs/${props.song_id}`)
         .then((resp) => resp.json())
         .then((song) => {
+          song.chords = keyBy(song.chords, 'start_beat')
           dispatch(setCurrentSong(song));
         });
     }

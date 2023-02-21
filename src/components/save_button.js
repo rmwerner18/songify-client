@@ -5,6 +5,7 @@ import SongNameForm from '../components/song_name_form';
 import { fetchHeaders } from '../constants/fetch_headers';
 import { connect } from 'react-redux';
 import BASE_API_URL from '../constants/base_api_url';
+import { omit } from 'lodash';
 
 const SaveButton = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -55,16 +56,11 @@ const SaveButton = (props) => {
   };
 
   const makeChordArray = (chords) =>
-    Object.keys(chords).map((startBeat) => ({
-      ...chords[startBeat],
-      start_beat: startBeat,
-    }));
+    Object.keys(chords).map((startBeat) => omit(chords[startBeat], 'freqs'));
 
   const saveSongHandler = (e, songname) => {
     e.preventDefault();
-    // console.log(props.song)
-    let newObj;
-    newObj = props.song;
+    const newObj = { ...props.song };
     newObj.user_id = props.user.id;
     newObj.name = songname;
     newObj.chords = makeChordArray(props.song.chords);
