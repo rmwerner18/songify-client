@@ -6,7 +6,7 @@ import { endNowPlaying } from '../actions/end_now_playing';
 import { useDispatch } from 'react-redux';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-const DeleteAndEditButtons = (props) => {
+const DeleteAndEditButtons = ({ id, deleteHandler }) => {
   const dispatch = useDispatch();
   const editHandler = () => {
     stopLoop();
@@ -18,9 +18,9 @@ const DeleteAndEditButtons = (props) => {
       <FontAwesomeIcon
         icon={solid('trash-can')}
         className='font-awesome'
-        onClick={() => props.deleteHandler(props)}
+        onClick={() => deleteHandler(id)}
       />
-      <NavLink to={`/songs/${props.id}/edit`}>
+      <NavLink to={`/songs/${id}/edit`}>
         <FontAwesomeIcon
           icon={solid('pen-to-square')}
           className='font-awesome'
