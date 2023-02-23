@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ChordCheckbox from '../../components/checkboxes/chord_checkbox';
 import { numberOfBeatsArray } from '../../helper_functions/make_beat_array';
@@ -19,14 +19,12 @@ const ChordCheckboxRow = () => {
         duration: 1,
       };
     }
-    // console.log(chords);
     dispatch(changeSongAttribute(payload));
   };
 
   const resizeHandler = (n, duration) => {
     const payload = { chords: { ...chords } };
     payload.chords[n] = { ...payload.chords[n], duration };
-    // console.log(chords);
     dispatch(changeSongAttribute(payload));
   };
 

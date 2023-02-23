@@ -16,7 +16,7 @@ const SongOptionsContainer = ({
     return (
       <div className='song-options'>
         {songBelongsToUser() ? (
-          <DeleteAndEditButtons id={song.id} song={song} deleteHandler={deleteHandler} />
+          <DeleteAndEditButtons id={song.id} deleteHandler={deleteHandler} />
         ) : null}
         {userLikesSong ? (
           <FontAwesomeIcon
