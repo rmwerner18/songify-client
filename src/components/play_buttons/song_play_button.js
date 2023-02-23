@@ -21,10 +21,9 @@ const SongPlayButton = (props) => {
   const user = useSelector((state) => state.user);
   const songRef = useRef(currentSong);
 
-  console.log(currentSong)
-  console.log(allSongs);
-
   const dispatch = useDispatch();
+
+  console.log('render SONG PLAY BUTTON');
 
   useEffect(() => {
     songRef.current = currentSong;

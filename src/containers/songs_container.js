@@ -61,12 +61,12 @@ const SongsContainer = ({ songsObject, user, playlist = false }) => {
     return songs;
   };
 
-  const deleteSong = async (song) => {
+  const deleteSong = async (id) => {
     const fetchConfig = {
       method: 'DELETE',
       headers: fetchHeaders,
     };
-    const res = await fetch(BASE_API_URL + 'songs/' + song.id, fetchConfig);
+    const res = await fetch(BASE_API_URL + 'songs/' + id, fetchConfig);
     dispatch(fetchSongs());
   };
 

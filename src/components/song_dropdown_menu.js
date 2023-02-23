@@ -9,7 +9,6 @@ const SongDropdownMenu = ({ song }) => {
   const [playlistsDropdown, setPlaylistsDropdown] = useState(false);
   const playlists = useSelector((state) => state.allPlaylists.playlists);
   const user = useSelector((state) => state.user);
-  // console.log(son})
 
   const handleAddSong = async (id) => {
     const fetchConfig = {
@@ -20,7 +19,6 @@ const SongDropdownMenu = ({ song }) => {
 
     const res = await fetch(BASE_API_URL + 'playlist_songs', fetchConfig);
     const playlist = await res.json();
-    // console.log(playlist);
   };
 
   const showPlaylists = () => {

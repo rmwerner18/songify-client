@@ -22,7 +22,6 @@ const ChordCheckbox = ({
   beatObject,
   resizeHandler,
 }) => {
-  // console.log(beatObject)
   const duration = beatObject ? beatObject.duration : 0;
   const isCurrentBeat = useSelector((state) =>
     getIsCurrentBeat(state, { beatRange: [beat, beat + duration] })
@@ -48,7 +47,6 @@ const ChordCheckbox = ({
     resizeHandler(beat, ref.offsetWidth / 17);
   };
 
-  // console.log({duration})
   return (
     <div
       className='chord-container'

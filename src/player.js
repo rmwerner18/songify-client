@@ -71,7 +71,6 @@ const player = (index, time, props) => {
   //   }
   // });
   Object.keys(chords).forEach(chordIndex => {
-    // console.log(chordIndex)
     if (chordIndex === index.toString()) {
       const t = Tone.Time('8n');
       instrumentSound.triggerAttackRelease(

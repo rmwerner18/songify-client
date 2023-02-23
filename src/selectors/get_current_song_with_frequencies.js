@@ -7,12 +7,8 @@ const getCurrentSong = (state) => state.currentSong;
 const getCurrentSongWithFrequencies = createSelector(
   [getCurrentSong],
   (currentSong) => {
-    let newChordsObject = { ...currentSong.chords };
-    console.log('RUN GET CURRENT SONG WITH FREQ');
-    // if (Array.isArray(currentSong.chords)) {
-    //   newChordsObject = keyBy(currentSong.chords, 'start_beat');
-    // }
-    const newNewChordsObject = Object.keys(newChordsObject).map((startBeat) => {
+    console.log('render GET CURRENT SONG WITH FREQS')
+    Object.keys(currentSong.chords).map((startBeat) => {
       const createChord = (name, qual) => {
         let octavianChord;
         if (qual === 'augmented') {
@@ -36,7 +32,7 @@ const getCurrentSongWithFrequencies = createSelector(
         chord.freqs = octavianChord.frequencies;
         return chord;
       };
-      const chord = newChordsObject[startBeat];
+      const chord = currentSong.chords[startBeat];
       return getFrequencies(
         chord['bass'],
         chord['name'],
@@ -44,7 +40,7 @@ const getCurrentSongWithFrequencies = createSelector(
         chord
       );
     });
-    return { ...currentSong, chords: newNewChordsObject };
+    return currentSong;
   }
 );
 

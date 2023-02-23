@@ -15,11 +15,13 @@ import VolumeForm from '../components/volume_form';
 import SaveButton from '../components/save_button';
 import ChordForm from '../components/chord_form';
 import LoadingPage from '../components/loading_page';
+import { keyBy } from 'lodash';
 
 const Grid = (props) => {
   const dispatch = useDispatch();
-  const [songToEditIsLoaded, setSongToEditIsLoaded] = useState(false)
+  const [songToEditIsLoaded, setSongToEditIsLoaded] = useState(false);
 
+  console.log('render GRID')
 
   const fetchSongToEdit = () => {
     if (props.song_id) {
@@ -30,9 +32,9 @@ const Grid = (props) => {
       })
         .then((resp) => resp.json())
         .then((song) => {
-          console.log(song)
+          song.chords = keyBy(song.chords, 'start_beat');
           dispatch(setCurrentSong(song));
-          setSongToEditIsLoaded(true)
+          setSongToEditIsLoaded(true);
         });
     }
   };
@@ -41,9 +43,9 @@ const Grid = (props) => {
 
   return (
     <>
-      {(props.song_id && !songToEditIsLoaded) ?
-        <LoadingPage/>
-        :
+      {props.song_id && !songToEditIsLoaded ? (
+        <LoadingPage />
+      ) : (
         <div className='grid'>
           <div className='bar-labels'>
             <p className='bar-label'>Bar 1</p>
@@ -77,7 +79,7 @@ const Grid = (props) => {
           </div>
           <SaveButton song_id={props.song_id} />
         </div>
-      }
+      )}
     </>
   );
 };

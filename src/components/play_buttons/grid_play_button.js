@@ -21,6 +21,9 @@ const GridPlayButton = () => {
   const nowPlaying = useSelector((state) => state.nowPlaying);
   const songRef = useRef(currentSong);
 
+  console.log('render GRID PLAY BUTTON')
+  // console.log({ currentSong, sounds, nowPlaying, songRef })
+
   const dispatch = useDispatch();
 
   useEffect(() => {
