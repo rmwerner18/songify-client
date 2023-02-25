@@ -77,7 +77,7 @@ const Grid = (props) => {
               <SwingForm />
             </div>
           </div>
-          <SaveButton song_id={props.song_id} />
+          {/* <SaveButton song_id={props.song_id} /> */}
         </div>
       )}
     </>

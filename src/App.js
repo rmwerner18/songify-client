@@ -18,6 +18,7 @@ const App = () => {
   const user = useSelector((state) => state.user);
 
   console.log(console.log(process.env.NODE_ENV))
+  console.log('hello world');
 
   useEffect(() => {
     dispatch(fetchSounds());
