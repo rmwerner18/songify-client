@@ -26,6 +26,9 @@ const SongsPage = ({ type, playlistId = false }) => {
   const playlistsLoadError = useSelector((state) => state.allPlaylists.error);
   const dispatch = useDispatch();
 
+  console.log('render songs page')
+  
+
   const playlists = allPlaylists.filter(playlist => playlist.user_id === user.id)
 
   const currentPlaylist = playlists.find((playlist) => {

@@ -11,10 +11,13 @@ import { fetchUser } from './actions/set_user';
 import RenderPrivateRoute from './components/private_route';
 import Logout from './components/logout';
 import Logo from './components/logo';
+import BASE_API_URL from './constants/base_api_url';
 
 const App = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+
+  console.log(console.log(process.env.NODE_ENV))
 
   useEffect(() => {
     dispatch(fetchSounds());

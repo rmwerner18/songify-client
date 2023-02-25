@@ -23,7 +23,7 @@ const SongPlayButton = (props) => {
 
   const dispatch = useDispatch();
 
-  console.log('render SONG PLAY BUTTON');
+  // console.log('render SONG PLAY BUTTON');
 
   useEffect(() => {
     songRef.current = currentSong;

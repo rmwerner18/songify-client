@@ -21,7 +21,7 @@ const Grid = (props) => {
   const dispatch = useDispatch();
   const [songToEditIsLoaded, setSongToEditIsLoaded] = useState(false);
 
-  console.log('render GRID')
+  // console.log('render GRID')
 
   const fetchSongToEdit = () => {
     if (props.song_id) {

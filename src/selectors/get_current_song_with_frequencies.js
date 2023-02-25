@@ -7,8 +7,7 @@ const getCurrentSong = (state) => state.currentSong;
 const getCurrentSongWithFrequencies = createSelector(
   [getCurrentSong],
   (currentSong) => {
-    console.log('render GET CURRENT SONG WITH FREQS')
-    Object.keys(currentSong.chords).map((startBeat) => {
+    Object.keys(currentSong.chords).forEach((startBeat) => {
       const createChord = (name, qual) => {
         let octavianChord;
         if (qual === 'augmented') {
