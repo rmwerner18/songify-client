@@ -1,21 +1,41 @@
 import React, { useState } from 'react';
 import Song from '../components/song';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchSongs, setAllSongs } from '../actions/set_all_songs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SearchBar from '../components/search_bar';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
-import { stopLoop } from '../helper_functions/stop_loop';
-import BASE_API_URL from '../constants/base_api_url';
 import LoadingPage from '../components/loading_page';
 import PlaylistHeader from '../components/playlist_header';
-import { fetchHeaders } from '../constants/fetch_headers';
+import { useSelector } from 'react-redux';
 
-const SongsContainer = ({ songsObject, user, playlist = false }) => {
+const SongsContainer = ({ type, playlistId = false }) => {
+  const songsObject = useSelector((state) => state.allSongs);
+  const user = useSelector((state) => state.user);
   const { songs, loaded, error } = songsObject;
-  let [searchInput, setSearchInput] = useState('');
-  const nowPlaying = useSelector((state) => state.nowPlaying);
-  const dispatch = useDispatch();
+  const [searchInput, setSearchInput] = useState('');
+
+  const currentPlaylist = user.playlists
+    ? user.playlists.find((playlist) => playlist.id.toString() === playlistId)
+    : {};
+
+
+  const currentPlaylistSongs = songs.filter((song) =>
+    song.playlists.find((playlist) => playlist.id.toString() === playlistId)
+  );
+
+  const filterSongs = () => {
+    switch (type) {
+      case 'user':
+        return songs.filter((song) => song.user.id === user.id);
+      case 'liked':
+        return songs.filter((song) =>
+          song.likes.find((like) => like.user_id === user.id)
+        );
+      case 'playlist':
+        return playlistId ? currentPlaylistSongs : [];
+      default:
+        return songs;
+    }
+  };
 
   const handleSearch = (e) => {
     setSearchInput(e.target.value);
@@ -31,16 +51,8 @@ const SongsContainer = ({ songsObject, user, playlist = false }) => {
 
   const renderSongs = () => {
     return songs.length > 0 ? (
-      applySearch(songs).map((song, index) => {
-        return (
-          <Song
-            idx={index}
-            key={song.id}
-            song={song}
-            deleteHandler={deleteHandler}
-            likeHandler={likeHandler}
-          />
-        );
+      applySearch(filterSongs()).map((song, index) => {
+        return <Song idx={index} key={song.id} song={song} />;
       })
     ) : (
       <h1>No Songs Yet</h1>
@@ -50,8 +62,8 @@ const SongsContainer = ({ songsObject, user, playlist = false }) => {
   const applySearch = (songs) => {
     if (searchInput) {
       return songs.filter((song) => {
-        let formattedName = song.name.toLowerCase();
-        let formattedUsername = song.user.username.toLowerCase();
+        const formattedName = song.name.toLowerCase();
+        const formattedUsername = song.user.username.toLowerCase();
         return (
           formattedName.includes(searchInput.toLowerCase()) ||
           formattedUsername.includes(searchInput.toLowerCase())
@@ -61,64 +73,9 @@ const SongsContainer = ({ songsObject, user, playlist = false }) => {
     return songs;
   };
 
-  const deleteSong = async (id) => {
-    const fetchConfig = {
-      method: 'DELETE',
-      headers: fetchHeaders,
-    };
-    const res = await fetch(BASE_API_URL + 'songs/' + id, fetchConfig);
-    dispatch(fetchSongs());
-  };
-
-  const deleteHandler = (song) => {
-    if (nowPlaying.song && nowPlaying.song.id === song.id) {
-      stopLoop();
-    }
-    deleteSong(song);
-  };
-
-  const userLikesSong = (id) => {
-    const song = songs.find((song) => song.id === id);
-    return song.likes.find((like) => like.user_id === user.id);
-  };
-
-  const deleteLike = async (like) => {
-    const fetchConfig = {
-      method: 'DELETE',
-      headers: fetchHeaders,
-    };
-    const res = await fetch(BASE_API_URL + 'likes/' + like.id, fetchConfig);
-    const songs = await res.json();
-    dispatch(setAllSongs(songs));
-  };
-
-  const createLike = async (id) => {
-    const fetchConfig = {
-      method: 'POST',
-      headers: fetchHeaders,
-      body: JSON.stringify({
-        song_id: id,
-        user_id: user.id,
-      }),
-    };
-    const res = await fetch(BASE_API_URL + 'likes/', fetchConfig);
-    const songs = await res.json();
-    dispatch(setAllSongs(songs));
-  };
-
-  const likeHandler = (e, id) => {
-    if (user.id) {
-      if (userLikesSong(id)) {
-        deleteLike(userLikesSong(id));
-      } else {
-        createLike(id);
-      }
-    }
-  };
-
   return (
     <div className='songs-container'>
-      {playlist && <PlaylistHeader playlist={playlist} />}
+      {currentPlaylist && <PlaylistHeader playlist={currentPlaylist} />}
       <div className='songs-container-header'>
         <span className='songs-container-header-col icon'>
           <FontAwesomeIcon icon={solid('hashtag')} className='font-awesome' />

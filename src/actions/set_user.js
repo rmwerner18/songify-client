@@ -10,7 +10,7 @@ const setUser = (user) => {
 
 export const fetchUser = () => async (dispatch) => {
   const token = localStorage.getItem('token');
-  let user = {}
+  let user = {};
 
   if (token) {
     const fetchConfig = {
@@ -21,12 +21,10 @@ export const fetchUser = () => async (dispatch) => {
     };
     const response = await fetch(BASE_API_URL + 'profile', fetchConfig);
     const result = await response.json();
-    if (result.user) {
-      user = result.user;
-    };
-  };
+    if (result) user = result;
+  }
 
-  dispatch(setUser(user))
+  dispatch(setUser(user));
 };
 
 export const login = (user) => async (dispatch) => {

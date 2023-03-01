@@ -3,14 +3,35 @@ import { NavLink } from 'react-router-dom';
 import { stopLoop } from '../helper_functions/stop_loop';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { endNowPlaying } from '../actions/end_now_playing';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { fetchSongs } from '../actions/set_all_songs';
+import { fetchHeaders } from '../constants/fetch_headers';
+import BASE_API_URL from '../constants/base_api_url';
 
-const DeleteAndEditButtons = ({ id, deleteHandler }) => {
+const DeleteAndEditButtons = ({ id }) => {
   const dispatch = useDispatch();
+  const nowPlaying = useSelector(state => state.nowPlaying)
+  
   const editHandler = () => {
     stopLoop();
     dispatch(endNowPlaying());
+  };
+
+  const deleteSong = async (id) => {
+    const fetchConfig = {
+      method: 'DELETE',
+      headers: fetchHeaders,
+    };
+    const res = await fetch(BASE_API_URL + 'songs/' + id, fetchConfig);
+    dispatch(fetchSongs());
+  };
+
+  const deleteHandler = (song) => {
+    if (nowPlaying.song && nowPlaying.song.id === song.id) {
+      stopLoop();
+    }
+    deleteSong(song);
   };
 
   return (

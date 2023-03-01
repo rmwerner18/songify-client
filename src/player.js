@@ -14,7 +14,6 @@ const player = (index, time, props) => {
     melodyKey,
     instrument,
     chords,
-    // freqs,
     kickBeats,
     snareBeats,
     hhBeats,
@@ -26,6 +25,7 @@ const player = (index, time, props) => {
     viBeats,
     viiBeats,
     IBeats,
+    swing,
   } = props;
 
   const melodyBeats = {
@@ -54,22 +54,11 @@ const player = (index, time, props) => {
     },
   };
 
-  // const chordBeats = [
-  //   [0, 4],
-  //   [8, 12],
-  //   [16, 20],
-  //   [24, 28],
-  // ];
-
+  Tone.Transport.swing = swing;
   Tone.Transport.bpm.value = parseInt(bpm);
   const instrumentSound = instrument === 'synth' ? synth : piano;
   const melodyInstrumentSound = melodyInstrument === 'synth' ? synth : piano;
 
-  // chordBeats.forEach((array, idx) => {
-  //   if (array.includes(index)) {
-  //     instrumentSound.triggerAttackRelease(freqs[idx], '2n', time);
-  //   }
-  // });
   Object.keys(chords).forEach(chordIndex => {
     if (chordIndex === index.toString()) {
       const t = Tone.Time('8n');

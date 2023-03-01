@@ -30,28 +30,20 @@ const SongDropdownMenu = ({ song }) => {
   };
 
   return (
-    <div
-      className='dropdown-content'
-      style={{
-        height: '100px',
-        width: '50px',
-        backgroundColor: 'var(--dark-background)',
-        color: '#fff',
-        display: 'flex',
-        position: 'relative',
-        zIndex: 100,
-      }}
-    >
-      <div className={'dropdown-content-first'}>
-        <button onMouseOver={() => setPlaylistsDropdown(true)}>
+    <div className='dropdown-content'>
+      <div className='dropdown-content-first'>
+        <button
+          className='dropdown-option'
+          onMouseOver={() => setPlaylistsDropdown(true)}
+        >
           Add to Playlist
           <FontAwesomeIcon
             icon={solid('caret-right')}
             className='font-awesome'
           />
         </button>
-        <button>Link 2</button>
-        <button>Link 3</button>
+        <button className='dropdown-option'>Link 2</button>
+        <button className='dropdown-option'>Link 3</button>
       </div>
       <div className={'dropdown-content-second'}>
         {playlistsDropdown && showPlaylists()}

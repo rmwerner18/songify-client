@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import SongPlayButton from './play_buttons/song_play_button';
 import SongOptionsContainer from '../containers/song_options_container';
@@ -6,23 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import SongDropdownMenu from './song_dropdown_menu';
 
-const Song = ({ idx, deleteHandler, likeHandler, song }) => {
+const Song = ({ idx, song }) => {
   const user = useSelector((state) => state.user);
-  const like = song.likes.find((like) => like.user_id === user.id);
-  const [userLikesSong, setUserLikesSong] = useState(null);
-  const [likes, setLikes] = useState(song.likes.length);
   const [mouseOver, setMouseOver] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  useEffect(() => {
-    setUserLikesSong(!!like);
-  }, [like]);
-
-  const songLikeHandler = (e, id) => {
-    userLikesSong ? setLikes(likes - 1) : setLikes(likes + 1);
-    setUserLikesSong(!userLikesSong);
-    likeHandler(e, song.id);
-  };
+  // console.log('render SONG');
 
   return (
     <div
@@ -39,15 +28,9 @@ const Song = ({ idx, deleteHandler, likeHandler, song }) => {
       <h2 className='song-title'>{song.name}</h2>
       <p className='song-maker'>{song.user.username}</p>
       <span className='song-likes' id={`like-count-${song.id}`}>
-        {likes}
+        {song.likes.length}
       </span>
-      <SongOptionsContainer
-        deleteHandler={deleteHandler}
-        song={song}
-        likeHandler={songLikeHandler}
-        user={user}
-        userLikesSong={userLikesSong}
-      />
+      <SongOptionsContainer song={song} />
       {mouseOver && (
         <FontAwesomeIcon
           icon={solid('ellipsis')}

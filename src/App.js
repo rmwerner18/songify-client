@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import GridPage from './containers/grid_page';
 import SongsPage from './containers/songs_page';
@@ -16,9 +16,6 @@ import BASE_API_URL from './constants/base_api_url';
 const App = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-
-  console.log(console.log(process.env.NODE_ENV))
-  console.log('hello world');
 
   useEffect(() => {
     dispatch(fetchSounds());

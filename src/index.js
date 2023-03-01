@@ -16,8 +16,6 @@ import { currentBeatReducer } from './reducers/current_beat_reducer';
 import { playlistsReducer } from './reducers/playlists_reducer';
 import { chordClipboardReducer } from './reducers/chord_clipboard_reducer';
 
-// edit backend to have swing attr on song
-
 let reducer = combineReducers({
   currentSong: currentSongReducer,
   allSongs: allSongsReducer,

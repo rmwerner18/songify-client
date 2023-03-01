@@ -21,8 +21,6 @@ const Grid = (props) => {
   const dispatch = useDispatch();
   const [songToEditIsLoaded, setSongToEditIsLoaded] = useState(false);
 
-  // console.log('render GRID')
-
   const fetchSongToEdit = () => {
     if (props.song_id) {
       fetch(BASE_API_URL + `songs/${props.song_id}`, {
@@ -77,7 +75,7 @@ const Grid = (props) => {
               <SwingForm />
             </div>
           </div>
-          {/* <SaveButton song_id={props.song_id} /> */}
+          <SaveButton song_id={props.song_id} />
         </div>
       )}
     </>

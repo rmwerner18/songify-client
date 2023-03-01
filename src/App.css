@@ -4,7 +4,6 @@
 
 .App {
   font-family: "Courier New";
-  /* position: relative; */
   display: grid;
   place-items: center;
   height: 100vh;
@@ -13,6 +12,7 @@
 
 :root {
   --spotify-green: #1ED760;
+  --dropdown-background: #282828;
   --dark-green: #056952;
   --dark-background: #121212;
   --header-background: #1A1A1A;
@@ -211,10 +211,6 @@ body {
   overflow-y: scroll;
 }
 
-/* .playlist-section {
-  overflow-y: scroll;
-} */
-
 .playlist-section-label {
   display: flex;
   align-items: center;
@@ -287,10 +283,6 @@ body {
   overflow-x: visible;
   width: 100%;
 }
-/* .songs-container-header-col.search input{
-  width: 30%;
-  align-items: right;
-} */
 
 /* _______________________________________________ */
 
@@ -366,14 +358,12 @@ h1, h2 {
 
 .checkbox-row {
   position: relative;
-  /* margin: 1px; */
   height: 17px;
   width: 100%;
 }
 
 .checkbox-meta-container {
   position: absolute;
-  /* margin: 1px; */
 }
 
 .resizable-box {
@@ -468,7 +458,6 @@ h1, h2 {
 }
 
 .instrument-form {
-  /* margin: 10px; */
   margin-top: 0px;
 }
 
@@ -511,20 +500,6 @@ h1, h2 {
   background-color: var(--checkbox-background);
 }
 
-/* .song-list-start-button {
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  border: none;
-  font-size: x-large;
-  background: transparent;
-  cursor: pointer;
-}
-
-.song-list-start-button:focus {
-  outline: 0;
-} */
-
 .song-number {
   width: 10%;
 }
@@ -532,7 +507,6 @@ h1, h2 {
 .song-title {
   width: 25%;
   text-align: left;
-  /* overflow-x: scroll; */
 }
 
 .song-options {
@@ -542,6 +516,25 @@ h1, h2 {
   justify-content: space-around;
   height: 100%;
   margin: 5px 10px 0;
+}
+
+.dropdown-content {
+  height: 80px;
+  width: 150px;
+  background-color: var(--dropdown-background);
+  color: #fff;
+  display: flex;
+}
+
+.dropdown-option {
+  background-color: transparent;
+  border: none;
+  color: var(--spotify-text);
+  width: 100%;
+}
+
+.dropdown-option:hover {
+  background-color: var(--checkbox-background);
 }
 
 .song-options button {
@@ -797,10 +790,6 @@ textarea[type='text'] {
   justify-content: flex-start;
   text-align: left;
 }
-
-/* .chord-box.playing {
-  background-color: var(--dark-green)
-} */
 
 .chord-name {
   display: flex;

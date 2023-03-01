@@ -24,7 +24,7 @@ const PlaylistHeader = ({ playlist }) => {
     };
 
     const res = await fetch(
-      BASE_API_URL + 'playlists/' + playlist.id,
+      BASE_API_URL + 'playlists/' + playlist,
       fetchConfig
     );
     dispatch(fetchPlaylists());
