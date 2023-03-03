@@ -30,7 +30,7 @@ const Song = ({ idx, song }) => {
         {song.likes.length}
       </span>
       <SongOptionsContainer song={song} />
-      {mouseOver && (
+      {mouseOver && user.id && (
         <FontAwesomeIcon
           icon={solid('ellipsis')}
           className='font-awesome'

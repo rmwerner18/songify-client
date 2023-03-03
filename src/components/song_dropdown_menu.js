@@ -9,7 +9,6 @@ import { setSongDropdown } from '../actions/set_song_dropdown';
 const SongDropdownMenu = ({ style }) => {
   const [playlistsDropdown, setPlaylistsDropdown] = useState(false);
   const songDropdown = useSelector((state) => state.songDropdown);
-  const playlists = useSelector((state) => state.allPlaylists.playlists);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -25,7 +24,7 @@ const SongDropdownMenu = ({ style }) => {
   };
 
   const showPlaylists = () => {
-    return playlists.map((playlist) => {
+    return user.playlists.map((playlist) => {
       return (
         <div
           className='dropdown-option'
