@@ -50,8 +50,9 @@ const SongsContainer = ({ type, playlistId = false }) => {
   };
 
   const renderSongs = () => {
-    return songs.length > 0 ? (
-      applySearch(filterSongs()).map((song, index) => {
+    const filteredSongs = filterSongs();
+    return filteredSongs.length > 0 ? (
+      applySearch(filteredSongs).map((song, index) => {
         return <Song idx={index} key={song.id} song={song} />;
       })
     ) : (

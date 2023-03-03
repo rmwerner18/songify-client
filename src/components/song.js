@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import SongPlayButton from './play_buttons/song_play_button';
 import SongOptionsContainer from '../containers/song_options_container';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
-import SongDropdownMenu from './song_dropdown_menu';
+import { setSongDropdown } from '../actions/set_song_dropdown';
 
 const Song = ({ idx, song }) => {
   const user = useSelector((state) => state.user);
   const [mouseOver, setMouseOver] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  // console.log('render SONG');
+  const dispatch = useDispatch();
 
   return (
     <div
@@ -35,10 +34,13 @@ const Song = ({ idx, song }) => {
         <FontAwesomeIcon
           icon={solid('ellipsis')}
           className='font-awesome'
-          onClick={() => setDropdownOpen(!dropdownOpen)}
+          onClick={(e) =>
+            dispatch(
+              setSongDropdown({ songId: song.id, x: e.clientX, y: e.clientY })
+            )
+          }
         />
       )}
-      {dropdownOpen && <SongDropdownMenu song={song} />}
     </div>
   );
 };

@@ -26,7 +26,7 @@ const SongsPageMenu = ({ type }) => {
           activeStyle={activeLinkStyle}
         >
           <div>
-            {playlist.name} {playlist.id}
+            {playlist.name}
           </div>
         </NavLink>
       );

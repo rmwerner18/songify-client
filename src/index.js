@@ -15,8 +15,9 @@ import { nowPlayingReducer } from './reducers/now_playing_reducer';
 import { currentBeatReducer } from './reducers/current_beat_reducer';
 import { playlistsReducer } from './reducers/playlists_reducer';
 import { chordClipboardReducer } from './reducers/chord_clipboard_reducer';
+import { SongDropdownReducer } from './reducers/song_dropdown_reducer';
 
-let reducer = combineReducers({
+const reducer = combineReducers({
   currentSong: currentSongReducer,
   allSongs: allSongsReducer,
   sounds: soundsReducer,
@@ -24,10 +25,11 @@ let reducer = combineReducers({
   nowPlaying: nowPlayingReducer,
   currentBeat: currentBeatReducer,
   allPlaylists: playlistsReducer,
-  chordClipboard: chordClipboardReducer
+  chordClipboard: chordClipboardReducer,
+  songDropdown: SongDropdownReducer,
 });
 
-let store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(
   <React.StrictMode>
