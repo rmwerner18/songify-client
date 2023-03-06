@@ -8,7 +8,7 @@ import omit from 'lodash/omit';
 const ChordCheckboxRow = () => {
   const dispatch = useDispatch();
   const chords = useSelector((state) => state.currentSong.chords);
-
+  
   const changeHandler = (start_beat, checked, chordNameBassAndQuality) => {
     const payload = { chords: { ...chords } };
     if (checked) {
@@ -37,7 +37,7 @@ const ChordCheckboxRow = () => {
             key={beat}
             beat={beat}
             beatObject={chords[beat]}
-            checked={chords[beat]}
+            checked={!!chords[beat]}
             changeHandler={changeHandler}
             resizeHandler={resizeHandler}
           />
