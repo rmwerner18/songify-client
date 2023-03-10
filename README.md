@@ -4,7 +4,7 @@ A music composition app that allows users to customize chords/melody/drum beat a
 Demo: https://www.loom.com/share/70df34504ddf4d7f9e5e57e71e1edfec
 
 ## Backend
-https://github.com/rmwerner18/songify_api
+https://github.com/rmwerner18/songify-api
 
 ## Stack
 Javascript | React.js | React Router | Redux | Octavian | Tone.js
