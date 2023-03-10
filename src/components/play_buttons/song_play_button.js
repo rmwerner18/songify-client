@@ -43,9 +43,9 @@ const SongPlayButton = (props) => {
   const playHandler = (e) => {
     dispatch(setCurrentSong(allSongs.find((song) => song.id === props.id)));
     if (!nowPlaying.song) {
-      // Tone.Destination.context.resume().then(() => {
-      startLoop();
-      // })
+      Tone.Destination.context.resume().then(() => {
+        startLoop();
+      })
       dispatch(
         setNowPlaying({ song: allSongs.find((song) => song.id === props.id) })
       );
