@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import BASE_API_URL from '../constants/base_api_url';
 import { fetchHeaders } from '../constants/fetch_headers';
-import { fetchPlaylists } from '../actions/fetch_playlists';
+import { fetchUser } from '../actions/set_user';
 
 const PlaylistHeader = ({ playlist }) => {
   const [modal, setModal] = useState(false);
@@ -24,10 +24,10 @@ const PlaylistHeader = ({ playlist }) => {
     };
 
     const res = await fetch(
-      BASE_API_URL + 'playlists/' + playlist,
+      BASE_API_URL + 'playlists/' + playlist.id,
       fetchConfig
     );
-    dispatch(fetchPlaylists());
+    dispatch(fetchUser());
     setFormData({ name: '' });
     setModal(false);
   };
