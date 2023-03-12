@@ -49,6 +49,7 @@ const GridPlayButton = () => {
       stopLoop();
       dispatch(clearCurrentBeat());
       dispatch(endNowPlaying());
+      player('index', 'time', { ...sounds, ...songRef.current }, true)
     }
   };
 
