@@ -5,6 +5,8 @@ import SongOptionsContainer from '../containers/song_options_container';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { setSongDropdown } from '../actions/set_song_dropdown';
+import SongDropdownMenu from './song_dropdown_menu';
+import { Menu } from '@mantine/core';
 
 const Song = ({ idx, song }) => {
   const user = useSelector((state) => state.user);
@@ -31,15 +33,15 @@ const Song = ({ idx, song }) => {
       </span>
       <SongOptionsContainer song={song} />
       {mouseOver && user.id && (
-        <FontAwesomeIcon
-          icon={solid('ellipsis')}
-          className='font-awesome'
-          onClick={(e) =>
-            dispatch(
-              setSongDropdown({ songId: song.id, x: e.clientX, y: e.clientY })
-            )
-          }
-        />
+        <Menu trigger='hover' keepMounted>
+          <Menu.Target>
+            <FontAwesomeIcon
+              icon={solid('ellipsis')}
+              className='font-awesome'
+            />
+          </Menu.Target>
+          <SongDropdownMenu id={song.id} />
+        </Menu>
       )}
     </div>
   );

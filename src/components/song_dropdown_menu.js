@@ -1,72 +1,50 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { fetchHeaders } from '../constants/fetch_headers';
 import BASE_API_URL from '../constants/base_api_url';
-import { setSongDropdown } from '../actions/set_song_dropdown';
+import { Menu, Notification } from '@mantine/core';
 
-const SongDropdownMenu = ({ style }) => {
-  const [playlistsDropdown, setPlaylistsDropdown] = useState(false);
-  const songDropdown = useSelector((state) => state.songDropdown);
+const SongDropdownMenu = ({ id }) => {
   const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
 
-  const handleAddSong = async (id) => {
+  const handleAddSong = async (playlistId) => {
     const fetchConfig = {
       method: 'POST',
       headers: fetchHeaders,
-      body: JSON.stringify({ playlist_id: id, song_id: songDropdown.songId }),
+      body: JSON.stringify({ playlist_id: playlistId, song_id: id }),
     };
 
     const res = await fetch(BASE_API_URL + 'playlist_songs', fetchConfig);
     const playlist = await res.json();
+    if (playlist) {
+      console.log('abcdefghijklmnop');
+    }
   };
 
-  const showPlaylists = () => {
-    return user.playlists.map((playlist) => {
-      return (
-        <div
-          className='dropdown-option'
-          onClick={() => handleAddSong(playlist.id)}
-          style={{ height: '20px' }}
-        >
-          {playlist.name}
-        </div>
-      );
-    });
-  };
+  const showPlaylists = () =>
+    user.playlists.map((playlist) => (
+      <Menu.Item onClick={() => handleAddSong(playlist.id)}>
+        {playlist.name}
+      </Menu.Item>
+    ));
 
   return (
-    <div
-      className='dropdown-content'
-      onMouseLeave={() => dispatch(setSongDropdown({}))}
-      style={style}
-    >
-      <div className='dropdown-content-first'>
-        <button className='dropdown-option'>Link 1</button>
-        <button
-          className='dropdown-option'
-          onMouseOver={() => setPlaylistsDropdown(true)}
-          // onMouseLeave={() => setPlaylistsDropdown(false)}
-        >
-          {playlistsDropdown && (
-            <div
-              className={'dropdown-content-second'}
-              style={{ top: -(songDropdown.y / 1.5) }}
-            >
-              {showPlaylists()}
-            </div>
-          )}
-          Add to Playlist
-          <FontAwesomeIcon
-            icon={solid('caret-right')}
-            className='font-awesome'
-          />
-        </button>
-        <button className='dropdown-option'>Link 3</button>
-      </div>
-    </div>
+    <>
+      <Menu.Dropdown>
+        <Menu.Item>Link 1</Menu.Item>
+        <Menu.Item>
+          <Menu trigger='hover' position='left' keepMounted>
+            <Menu.Target>
+              <div>Add to Playlist</div>
+            </Menu.Target>
+            <Menu.Dropdown>{showPlaylists()}</Menu.Dropdown>
+          </Menu>
+        </Menu.Item>
+        <Menu.Item>Link 3</Menu.Item>
+      </Menu.Dropdown>
+    </>
   );
 };
 
