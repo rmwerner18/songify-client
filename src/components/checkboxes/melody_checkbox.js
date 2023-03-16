@@ -38,7 +38,7 @@ const MelodyCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
           checked={checked}
           id={n}
           key={n}
-          onChange={(e) => changeHandler(n, checked, 1)}
+          onChange={(e) => changeHandler(n, checked, isCurrentBeat)}
         />
         {checked ? (
           <Rnd

@@ -1,7 +1,7 @@
 import * as Tone from 'tone';
 import modes from './constants/modes';
 
-const player = (index, time, props, stop = false) => {
+const player = (index, time, props) => {
   const {
     bpm,
     synth,
@@ -66,7 +66,9 @@ const player = (index, time, props, stop = false) => {
     }
     if (
       chords[startBeat]['start_beat'] + chords[startBeat]['duration'] ===
-      index
+        index ||
+      (chords[startBeat]['start_beat'] + chords[startBeat].duration === 32 &&
+        index === 0)
     ) {
       instrumentSound.triggerRelease(chords[startBeat]['freqs'], time);
     }
@@ -79,7 +81,10 @@ const player = (index, time, props, stop = false) => {
           time
         );
       }
-      if (parseInt(startBeat) + beatType[startBeat].duration === index) {
+      if (
+        parseInt(startBeat) + beatType[startBeat].duration === index ||
+        (parseInt(startBeat) + beatType[startBeat].duration === 32 && index === 0)
+      ) {
         melodyInstrumentSound.triggerRelease(
           modes[melodyMode](melodyKey)[beatIndex],
           time
