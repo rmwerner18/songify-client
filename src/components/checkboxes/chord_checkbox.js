@@ -8,7 +8,6 @@ import { Rnd } from 'react-rnd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { setChordClipboard } from '../../actions/set_chord_clipboard';
-import { faCommentsDollar } from '@fortawesome/free-solid-svg-icons';
 
 const getIsCurrentBeat = createSelector(
   [(state) => state.currentBeat, (state, props) => props.beatRange],

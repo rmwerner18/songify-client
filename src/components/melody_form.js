@@ -70,7 +70,11 @@ const MelodyForm = () => {
         <div className='melody-labels'>{makeMelodyLabels()}</div>
         <div className='checkbox-rows'>
           {Object.keys(beatTypes).map((beatType, n) => (
-            <MelodyCheckboxRow key={n} beatType={beatType} />
+            <MelodyCheckboxRow
+              key={n}
+              beatType={beatType}
+              scaleIndex={beatTypes[beatType]['scaleIndex']}
+            />
           ))}
         </div>
       </div>
