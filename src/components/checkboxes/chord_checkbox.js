@@ -69,7 +69,7 @@ const ChordCheckbox = ({
                 name: clipboardName,
                 bass: clipboardBass,
                 quality: clipboardQuality,
-              })
+              }, isCurrentBeat)
             }
           />
           {checked ? (
