@@ -20,10 +20,9 @@ const SongPlayButton = (props) => {
   const nowPlaying = useSelector((state) => state.nowPlaying);
   const user = useSelector((state) => state.user);
   const songRef = useRef(currentSong);
+  console.log(sounds)
 
   const dispatch = useDispatch();
-
-  console.log('render SONG PLAY BUTTON');
 
   useEffect(() => {
     songRef.current = currentSong;
@@ -56,7 +55,7 @@ const SongPlayButton = (props) => {
       );
       startLoop();
     } else {
-      stopLoop();
+      stopLoop(sounds);
       dispatch(endNowPlaying());
     }
   };

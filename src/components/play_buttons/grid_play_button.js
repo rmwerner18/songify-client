@@ -46,10 +46,10 @@ const GridPlayButton = () => {
       });
       dispatch(setNowPlaying({ song: 'current song' }));
     } else {
-      stopLoop();
+      stopLoop({ ...sounds, ...songRef.current });
       dispatch(clearCurrentBeat());
       dispatch(endNowPlaying());
-      player('index', 'time', { ...sounds, ...songRef.current }, true)
+      // player('index', 'time', { ...sounds, ...songRef.current }, true)
     }
   };
 
