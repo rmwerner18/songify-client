@@ -9,16 +9,13 @@ const InstrumentForm = ({ instrumentType }) => {
   return (
     <select
       className='instrument-form'
+      defaultValue={instrument}
       onChange={(e) =>
         dispatch(changeSongAttribute({ [instrumentType]: e.target.value }))
       }
     >
-      <option selected={instrument === 'piano' ? true : false} value='piano'>
-        Piano
-      </option>
-      <option selected={instrument === 'synth' ? true : false} value='synth'>
-        Synth
-      </option>
+      <option value='piano'>Piano</option>
+      <option value='synth'>Synth</option>
     </select>
   );
 };

@@ -41,24 +41,14 @@ const MelodyOptions = () => {
   };
   const rootOptions = () => {
     return keyRoots.map((root) => (
-      <option
-        key={root}
-        value={root}
-        selected={
-          removeNumber(melodyKey) === removeNumber(root) ? 'selected' : null
-        }
-      >
+      <option key={root} value={root}>
         {removeNumber(root)}
       </option>
     ));
   };
   const modeOptions = () => {
     return modes.map((mode) => (
-      <option
-        key={mode}
-        selected={melodyMode === mode ? 'selected' : null}
-        value={mode}
-      >
+      <option key={mode} value={mode}>
         {mode}
       </option>
     ));
@@ -81,6 +71,7 @@ const MelodyOptions = () => {
         onChange={(e) =>
           dispatch(changeSongAttribute({ melodyKey: e.target.value }))
         }
+        value={melodyKey}
       >
         {rootOptions()}
       </select>
@@ -88,13 +79,14 @@ const MelodyOptions = () => {
         onChange={(e) =>
           dispatch(changeSongAttribute({ melodyMode: e.target.value }))
         }
+        value={melodyMode}
       >
         {modeOptions()}
       </select>
       <InstrumentForm instrumentType={'melodyInstrument'} />
       <button
         className='button'
-        onClick={() => dispatch(changeSongAttribute({...clearedBeats}))}
+        onClick={() => dispatch(changeSongAttribute({ ...clearedBeats }))}
       >
         Clear Melody
       </button>

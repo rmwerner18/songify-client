@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MID_NOTES, BASS_NOTES } from '../constants/notes';
 import { CHORD_QUALITIES } from '../constants/chord_qualities';
-import { useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { setChordClipboard } from '../actions/set_chord_clipboard';
@@ -11,15 +11,12 @@ const ChordForm = () => {
   const [bass, setBass] = useState(chord.bass);
   const [name, setName] = useState(chord.name);
   const [quality, setQuality] = useState(chord.quality);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const chordNameOptions = () => {
     return Object.keys(MID_NOTES).map((noteValue) => {
       return (
-        <option
-          value={noteValue}
-          selected={chord.name === noteValue ? true : false}
-        >
+        <option key={noteValue} value={noteValue}>
           {MID_NOTES[noteValue]}
         </option>
       );
@@ -29,7 +26,7 @@ const ChordForm = () => {
   const chordQualityOptions = () => {
     return Object.keys(CHORD_QUALITIES).map((qual) => {
       return (
-        <option value={qual} selected={chord.quality === qual ? true : false}>
+        <option key={qual} value={qual}>
           {CHORD_QUALITIES[qual]}
         </option>
       );
@@ -39,10 +36,7 @@ const ChordForm = () => {
   const chordBassOptions = () => {
     return Object.keys(BASS_NOTES).map((noteValue) => {
       return (
-        <option
-          value={noteValue}
-          selected={chord.bass === noteValue ? true : false}
-        >
+        <option key={noteValue} value={noteValue}>
           {BASS_NOTES[noteValue]}
         </option>
       );
@@ -55,12 +49,14 @@ const ChordForm = () => {
         <select
           className='chord-name-select'
           onChange={(e) => setName(e.target.value)}
+          value={chord.name}
         >
           {chordNameOptions()}
         </select>
         <select
           className='chord-quality-select'
           onChange={(e) => setQuality(e.target.value)}
+          value={chord.quality}
         >
           {chordQualityOptions()}
         </select>
@@ -68,13 +64,16 @@ const ChordForm = () => {
         <select
           className='chord-bass-select'
           onChange={(e) => setBass(e.target.value)}
+          value={chord.bass}
         >
           {chordBassOptions()}
         </select>
         <FontAwesomeIcon
           icon={regular('clipboard')}
           className='font-awesome'
-          onClick={e => {dispatch(setChordClipboard({bass, name, quality}))}}
+          onClick={(e) => {
+            dispatch(setChordClipboard({ bass, name, quality }));
+          }}
         />
       </div>
     </div>

@@ -24,7 +24,7 @@ const DrumsForm = () => {
   const makeDrumLabels = () => {
     return Object.keys(beatTypes).map((beatType) => {
       return (
-        <p>
+        <p key={beatType}>
           {beatTypes[beatType]['label']}
           <FontAwesomeIcon
             icon={solid('volume-low')}

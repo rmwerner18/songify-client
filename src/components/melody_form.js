@@ -52,7 +52,7 @@ const MelodyForm = () => {
   const makeMelodyLabels = () => {
     return Object.keys(beatTypes).map((beatType) => {
       return (
-        <p>
+        <p key={beatType}>
           {beatTypes[beatType]['label']}
           <FontAwesomeIcon
             icon={solid('volume-low')}
