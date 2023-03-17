@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import MelodyCheckboxRow from '../containers/checkbox_rows/melody_checkbox_row';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';

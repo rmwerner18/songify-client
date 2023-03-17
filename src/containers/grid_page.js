@@ -1,3 +1,4 @@
+import { Slider } from '@mantine/core';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import LoadingPage from '../components/loading_page';

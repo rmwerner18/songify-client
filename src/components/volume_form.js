@@ -1,23 +1,21 @@
 import React, { useState } from 'react';
+import { Slider } from '@mantine/core';
 import * as Tone from 'tone';
 
 const VolumeForm = () => {
-  const [volume, setVolume] = useState(null);
-  Tone.Destination.volume.value = volume || -30;
-
-  const changeHandler = (e) => {
-    setVolume(e.target.value);
-  };
+  const [volume, setVolume] = useState(-30);
+  Tone.Destination.volume.value = volume;
 
   return (
     <div className='volume-form'>
       <p className='volume-meter'>volume: </p>
-      <input
-        type='range'
-        min='-70'
-        max='1'
-        value={volume || -30}
-        onChange={changeHandler}
+      <Slider
+        color='spotify-green'
+        min={-70}
+        max={0}
+        scale={(v) => v + 70}
+        value={volume}
+        onChange={setVolume}
       />
     </div>
   );

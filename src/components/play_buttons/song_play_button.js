@@ -18,9 +18,7 @@ const SongPlayButton = (props) => {
   const allSongs = useSelector((state) => state.allSongs.songs);
   const sounds = useSelector((state) => state.sounds);
   const nowPlaying = useSelector((state) => state.nowPlaying);
-  const user = useSelector((state) => state.user);
   const songRef = useRef(currentSong);
-  console.log(sounds)
 
   const dispatch = useDispatch();
 

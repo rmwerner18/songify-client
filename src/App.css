@@ -452,9 +452,10 @@ h1, h2 {
 }
 
 .tempo-form, .volume-form, .swing-form {
-  display: flex;
+  width: 30%;
+  /* display: flex; */
   align-items: center;
-
+  /* flex-direction: column; */
 }
 
 .instrument-form {

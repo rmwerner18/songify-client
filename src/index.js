@@ -16,6 +16,8 @@ import { currentBeatReducer } from './reducers/current_beat_reducer';
 import { playlistsReducer } from './reducers/playlists_reducer';
 import { chordClipboardReducer } from './reducers/chord_clipboard_reducer';
 import { SongDropdownReducer } from './reducers/song_dropdown_reducer';
+import { MantineProvider } from '@mantine/core';
+import theme from './styles/mantine-theme';
 
 const reducer = combineReducers({
   currentSong: currentSongReducer,
@@ -34,7 +36,9 @@ const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <MantineProvider theme={theme}>
+        <App />
+      </MantineProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

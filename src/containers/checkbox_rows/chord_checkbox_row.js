@@ -1,10 +1,8 @@
 import React from 'react';
-import * as Tone from 'tone';
 import { useSelector, useDispatch } from 'react-redux';
 import ChordCheckbox from '../../components/checkboxes/chord_checkbox';
 import { numberOfBeatsArray } from '../../helper_functions/make_beat_array';
 import { changeSongAttribute } from '../../actions/change_song_attribute';
-import omit from 'lodash/omit';
 
 const ChordCheckboxRow = () => {
   const dispatch = useDispatch();
