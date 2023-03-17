@@ -13,7 +13,7 @@ const VolumeForm = () => {
         color='spotify-green'
         min={-70}
         max={0}
-        scale={(v) => v + 70}
+        scale={(value) => value + 70}
         value={volume}
         onChange={setVolume}
       />

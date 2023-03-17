@@ -6,11 +6,7 @@ import { Slider } from '@mantine/core';
 
 const SwingForm = () => {
   const swing = useSelector((state) => state.currentSong.swing);
-  const [swingState, setSwingState] = useState(swing);
   const dispatch = useDispatch();
-  Tone.Transport.swing = swingState;
-
-  const valueLabelFormat = (value) => Math.round(value);
 
   return (
     <div className='swing-form'>
@@ -19,12 +15,11 @@ const SwingForm = () => {
         color='spotify-green'
         min={0}
         max={1}
-        scale={(v) => v * 100}
+        scale={(value) => value * 100}
         step={0.01}
-        value={swingState}
-        onChange={setSwingState}
-        label={valueLabelFormat}
-        onChangeEnd={dispatch(changeSongAttribute({ swing: swingState }))}
+        value={swing}
+        onChange={(value) => dispatch(changeSongAttribute({ swing: value }))}
+        label={(value) => Math.round(value)}
       />
     </div>
   );
