@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { isOnMeasureLine } from '../../helper_functions/is_on_measure_line';
 import { createSelector } from '@reduxjs/toolkit';
@@ -15,6 +15,7 @@ const MelodyCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
   const isCurrentBeat = useSelector((state) =>
     getIsCurrentBeat(state, { beatRange: [n, n + duration] })
   );
+  const [mouseDownDuration, setMouseDownDuration] = useState(duration);
 
   const style = {
     display: 'flex',
@@ -38,7 +39,12 @@ const MelodyCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
           checked={checked}
           id={n}
           key={n}
-          onChange={(e) => changeHandler(n, checked, isCurrentBeat)}
+          onMouseDown={() => setMouseDownDuration(duration)}
+          onChange={(e) => {
+            if (mouseDownDuration === duration) {
+              changeHandler(n, checked, isCurrentBeat);
+            }
+          }}
         />
         {checked ? (
           <Rnd
@@ -51,6 +57,7 @@ const MelodyCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
               height: 17,
             }}
             onResizeStop={(e, direction, ref, delta, position) => {
+              console.log('stop resize');
               resizeHandler(n, ref.offsetWidth / 17);
             }}
             resizeGrid={[17, 17]}

@@ -32,6 +32,7 @@ const ChordCheckbox = ({
   const dispatch = useDispatch();
 
   const [mouseIsOver, setMouseIsOver] = useState(false);
+  const [mouseDownDuration, setMouseDownDuration] = useState(duration);
 
   const style = {
     display: 'flex',
@@ -64,13 +65,21 @@ const ChordCheckbox = ({
             checked={checked}
             id={beat}
             key={beat}
-            onChange={(e) =>
-              changeHandler(beat, checked, {
-                name: clipboardName,
-                bass: clipboardBass,
-                quality: clipboardQuality,
-              }, isCurrentBeat)
-            }
+            onMouseDown={() => setMouseDownDuration(duration)}
+            onChange={(e) => {
+              if (mouseDownDuration === duration) {
+                changeHandler(
+                  beat,
+                  checked,
+                  {
+                    name: clipboardName,
+                    bass: clipboardBass,
+                    quality: clipboardQuality,
+                  },
+                  isCurrentBeat
+                );
+              }
+            }}
           />
           {checked ? (
             <Rnd
@@ -101,10 +110,7 @@ const ChordCheckbox = ({
               onMouseEnter={(e) => setMouseIsOver(true)}
             ></Rnd>
           ) : (
-            <div
-              className='checkmark'
-              style={{ width: 17 + 'px' }}
-            ></div>
+            <div className='checkmark' style={{ width: 17 + 'px' }}></div>
           )}
         </label>
       </div>
