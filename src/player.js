@@ -70,7 +70,8 @@ const player = (index, time, props) => {
       (chords[startBeat]['start_beat'] + chords[startBeat].duration === 32 &&
         index === 0)
     ) {
-      instrumentSound.triggerRelease(chords[startBeat]['freqs'], time);
+      piano.triggerRelease(chords[startBeat]['freqs'], time);
+      synth.triggerRelease(chords[startBeat]['freqs'], time);
     }
   });
   melodyBeats.forEach((beatType, beatIndex) => {
@@ -83,12 +84,11 @@ const player = (index, time, props) => {
       }
       if (
         parseInt(startBeat) + beatType[startBeat].duration === index ||
-        (parseInt(startBeat) + beatType[startBeat].duration === 32 && index === 0)
+        (parseInt(startBeat) + beatType[startBeat].duration === 32 &&
+          index === 0)
       ) {
-        melodyInstrumentSound.triggerRelease(
-          modes[melodyMode](melodyKey)[beatIndex],
-          time
-        );
+        piano.triggerRelease(modes[melodyMode](melodyKey)[beatIndex], time);
+        synth.triggerRelease(modes[melodyMode](melodyKey)[beatIndex], time);
       }
     });
   });
