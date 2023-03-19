@@ -65,8 +65,9 @@ const ChordCheckbox = ({
             checked={checked}
             id={beat}
             key={beat}
-            onMouseDown={() => setMouseDownDuration(duration)}
             onChange={(e) => {
+              console.log(mouseDownDuration);
+              console.log(duration);
               if (mouseDownDuration === duration) {
                 changeHandler(
                   beat,
@@ -94,6 +95,7 @@ const ChordCheckbox = ({
               onResizeStop={(e, direction, ref, delta, position) =>
                 checkboxResizeHandler(ref)
               }
+              onMouseDown={() => setMouseDownDuration(duration)}
               resizeGrid={[17, 17]}
               disableDragging={true}
               enableResizing={{
@@ -110,7 +112,11 @@ const ChordCheckbox = ({
               onMouseEnter={(e) => setMouseIsOver(true)}
             ></Rnd>
           ) : (
-            <div className='checkmark' style={{ width: 17 + 'px' }}></div>
+            <div
+              onMouseDown={() => setMouseDownDuration(duration)}
+              className='checkmark'
+              style={{ width: 17 + 'px' }}
+            ></div>
           )}
         </label>
       </div>

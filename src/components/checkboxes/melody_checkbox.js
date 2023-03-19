@@ -60,6 +60,7 @@ const MelodyCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
               console.log('stop resize');
               resizeHandler(n, ref.offsetWidth / 17);
             }}
+            onMouseDown={() => setMouseDownDuration(duration)}
             resizeGrid={[17, 17]}
             disableDragging={true}
             enableResizing={{
@@ -76,6 +77,7 @@ const MelodyCheckbox = ({ n, checked, changeHandler, beat, resizeHandler }) => {
           ></Rnd>
         ) : (
           <div
+            onMouseDown={() => setMouseDownDuration(duration)}
             className='checkmark'
             style={checked ? null : { width: 17 + 'px' }}
           ></div>
