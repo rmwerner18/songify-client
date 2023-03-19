@@ -173,6 +173,10 @@ body {
   padding: 10px;
 }
 
+.volume-form-container > .volume-form {
+  width: 100%;
+}
+
 .volume-form-container > .volume-form > p {
   margin: 0;
 }

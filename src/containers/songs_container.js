@@ -10,16 +10,15 @@ import { useSelector } from 'react-redux';
 const SongsContainer = ({ type, playlistId = false }) => {
   const songsObject = useSelector((state) => state.allSongs);
   const user = useSelector((state) => state.user);
+  const playlists = useSelector((state) => state.allPlaylists.playlists);
   const { songs, loaded, error } = songsObject;
   const [searchInput, setSearchInput] = useState('');
 
-  const currentPlaylist = user.playlists
-    ? user.playlists.find((playlist) => playlist.id.toString() === playlistId)
-    : {};
+  const currentPlaylist =
+    playlists?.find((playlist) => playlist.id === playlistId) ?? {};
 
-
-  const currentPlaylistSongs = songs.filter((song) =>
-    song.playlists.find((playlist) => playlist.id.toString() === playlistId)
+  const currentPlaylistSongs = currentPlaylist && songs.filter((song) =>
+    currentPlaylist.songs?.find((playlistSong) => playlistSong.id === song.id)
   );
 
   const filterSongs = () => {
@@ -31,7 +30,7 @@ const SongsContainer = ({ type, playlistId = false }) => {
           song.likes.find((like) => like.user_id === user.id)
         );
       case 'playlist':
-        return playlistId ? currentPlaylistSongs : [];
+        return currentPlaylistSongs;
       default:
         return songs;
     }
@@ -53,7 +52,9 @@ const SongsContainer = ({ type, playlistId = false }) => {
     const filteredSongs = filterSongs();
     return filteredSongs.length > 0 ? (
       applySearch(filteredSongs).map((song, index) => {
-        return <Song idx={index} key={song.id} song={song} />;
+        return (
+          <Song idx={index} key={song.id} song={song} playlistId={playlistId} />
+        );
       })
     ) : (
       <h1>No Songs Yet</h1>

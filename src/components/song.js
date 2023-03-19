@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import SongPlayButton from './play_buttons/song_play_button';
 import SongOptionsContainer from '../containers/song_options_container';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
-import { setSongDropdown } from '../actions/set_song_dropdown';
 import SongDropdownMenu from './song_dropdown_menu';
 import { Menu } from '@mantine/core';
 
-const Song = ({ idx, song }) => {
+const Song = ({ idx, song, playlistId }) => {
   const user = useSelector((state) => state.user);
   const [mouseOver, setMouseOver] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dispatch = useDispatch();
 
   return (
     <div
@@ -20,7 +17,6 @@ const Song = ({ idx, song }) => {
       onMouseEnter={() => setMouseOver(true)}
       onMouseLeave={() => {
         setMouseOver(false);
-        setDropdownOpen(false);
       }}
     >
       <div className='song-number'>
@@ -40,7 +36,7 @@ const Song = ({ idx, song }) => {
               className='font-awesome'
             />
           </Menu.Target>
-          <SongDropdownMenu id={song.id} />
+          <SongDropdownMenu songId={song.id} playlistId={playlistId} />
         </Menu>
       )}
     </div>

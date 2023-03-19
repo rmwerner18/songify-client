@@ -5,7 +5,9 @@ import AddPlaylistButton from '../components/add_playlist_button';
 
 const SongsPageMenu = ({ type }) => {
   const user = useSelector((state) => state.user);
-  const playlists = user.playlists || []
+  const playlists = useSelector(state => state.allPlaylists.playlists);
+
+
 
   const linkStyle = {
     color: 'var(--spotify-text)',

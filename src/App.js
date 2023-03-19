@@ -54,7 +54,7 @@ const App = () => {
           render={(routerProps) => (
             <SongsPage
               type='playlist'
-              playlistId={routerProps.match.params.id}
+              playlistIdParam={routerProps.match.params.id}
             />
           )}
         />

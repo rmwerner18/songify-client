@@ -7,19 +7,25 @@ import { fetchPlaylists } from '../actions/fetch_playlists';
 import SongsPageMenu from './songs_page_menu';
 import SongDropdownMenu from '../components/song_dropdown_menu';
 
-const SongsPage = ({ type, playlistId = false }) => {
-  const songDropdown = useSelector(state => state.songDropdown)
+const SongsPage = ({ type, playlistIdParam }) => {
+  const playlistId = playlistIdParam && parseInt(playlistIdParam);
+  const user = useSelector((state) => state.user);
+  const userId = user.id;
+  const songDropdown = useSelector((state) => state.songDropdown);
   const dispatch = useDispatch();
 
   const dropdownStyle = {
     left: songDropdown.x,
-    top: songDropdown.y
-  }
+    top: songDropdown.y,
+  };
 
   useEffect(() => {
     dispatch(fetchSongs());
-    dispatch(fetchPlaylists());
   }, []);
+
+  useEffect(() => {
+    userId && dispatch(fetchPlaylists(userId));
+  }, [userId]);
 
   return (
     <div className='songs-page'>
