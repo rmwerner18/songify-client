@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import DeleteAndEditButtons from '../components/delete_and_edit_buttons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { setAllSongs } from '../actions/all_songs';
@@ -9,7 +8,6 @@ import BASE_API_URL from '../constants/base_api_url';
 
 const SongOptionsContainer = ({ song }) => {
   const user = useSelector((state) => state.user);
-  const songBelongsToUser = () => song.user.id === user.id && user.id;
   const dispatch = useDispatch();
 
   const like = () => {
@@ -53,7 +51,6 @@ const SongOptionsContainer = ({ song }) => {
   const songOptions = () => {
     return (
       <div className='song-options'>
-        {songBelongsToUser() ? <DeleteAndEditButtons id={song.id} /> : null}
         {like() ? (
           <FontAwesomeIcon
             icon={solid('thumbs-up')}

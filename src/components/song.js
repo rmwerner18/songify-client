@@ -36,7 +36,11 @@ const Song = ({ idx, song, playlistId }) => {
               className='font-awesome'
             />
           </Menu.Target>
-          <SongDropdownMenu songId={song.id} playlistId={playlistId} />
+          <SongDropdownMenu
+            songId={song.id}
+            songUserId={song.user.id}
+            playlistId={playlistId}
+          />
         </Menu>
       )}
     </div>

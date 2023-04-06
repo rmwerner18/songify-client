@@ -4,15 +4,19 @@ import { fetchHeaders } from '../constants/fetch_headers';
 import BASE_API_URL from '../constants/base_api_url';
 import { Menu } from '@mantine/core';
 import { removePlaylistSong } from '../actions/playlists';
+import DeleteSongOption from './delete_song_option';
+import EditSongOption from './edit_song_option';
 import { Notification } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
 
-const SongDropdownMenu = ({ songId, playlistId }) => {
+const SongDropdownMenu = ({ songId, songUserId, playlistId }) => {
   const user = useSelector((state) => state.user);
   const [notification, setNotification] = useState(false);
   const playlists = useSelector((state) => state.allPlaylists.playlists);
   const dispatch = useDispatch();
-  
+
+  const songBelongsToUser = () => user.id && songUserId === user.id;
+
   const handleAddSong = async (playlist) => {
     if (playlist.songs.find((song) => song.id === songId)) {
       console.log('song already in playlist');
@@ -49,16 +53,26 @@ const SongDropdownMenu = ({ songId, playlistId }) => {
     }
   };
 
-  const showPlaylists = () =>
+  const showPlaylists = () => [
+    <Menu.Item onClick={() => console.log('check')}>
+      Add To New Playlist
+    </Menu.Item>,
     playlists.map((playlist) => (
       <Menu.Item onClick={() => handleAddSong(playlist)}>
         {playlist.name}
       </Menu.Item>
-    ));
+    )),
+  ];
 
   return (
     <Menu.Dropdown>
       <Menu.Item>Link 1</Menu.Item>
+      {songBelongsToUser() && (
+        <>
+          <DeleteSongOption songId={songId} />
+          <EditSongOption songId={songId} />
+        </>
+      )}
       {playlistId && (
         <Menu.Item onClick={handleRemoveSong}>
           Remove From This Playlist
