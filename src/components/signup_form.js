@@ -1,5 +1,5 @@
 import React from 'react';
-import { signUp } from '../actions/set_user';
+import { signUp } from '../actions/user';
 import { useDispatch } from 'react-redux';
 
 const SignupForm = ({ username, password, findUser, changeHandler }) => {

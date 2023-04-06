@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { changeSongAttribute } from '../actions/change_song_attribute';
+import { changeSongAttribute } from '../actions/current_song';
 import DRUM_PRESETS from '../constants/drum_presets';
 
 const DrumsSelect = () => {

@@ -5,13 +5,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import BASE_API_URL from '../constants/base_api_url';
 import { fetchHeaders } from '../constants/fetch_headers';
 import { Redirect, withRouter } from 'react-router-dom';
-import { setPlaylists } from '../actions/fetch_playlists';
-import { fetchUser } from '../actions/set_user';
+import { setPlaylists } from '../actions/playlists';
+import { fetchUser } from '../actions/user';
 
 const AddPlaylistButton = ({ playlists }) => {
   const user = useSelector((state) => state.user);
   const [redirectPlaylist, setRedirectPlaylist] = useState({});
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const addPlaylist = async () => {
     const fetchConfig = {
@@ -24,7 +24,7 @@ const AddPlaylistButton = ({ playlists }) => {
     const res = await fetch(BASE_API_URL + 'playlists', fetchConfig);
     const playlist = await res.json();
     setRedirectPlaylist(playlist);
-    dispatch(fetchUser())
+    dispatch(fetchUser());
   };
 
   return (

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeSongAttribute } from '../actions/change_song_attribute';
+import { changeSongAttribute } from '../actions/current_song';
 import * as Tone from 'tone';
 import { Slider } from '@mantine/core';
 

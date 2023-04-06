@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { stopLoop } from '../helper_functions/stop_loop';
-import { endNowPlaying } from '../actions/end_now_playing';
+import { endNowPlaying } from '../actions/now_playing';
 import SongNameForm from '../components/song_name_form';
 import { fetchHeaders } from '../constants/fetch_headers';
 import { connect } from 'react-redux';

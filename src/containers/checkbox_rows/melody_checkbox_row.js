@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MelodyCheckbox from '../../components/checkboxes/melody_checkbox';
 import { numberOfBeatsArray } from '../../helper_functions/make_beat_array';
-import { changeSongAttribute } from '../../actions/change_song_attribute';
+import { changeSongAttribute } from '../../actions/current_song';
 import modes from '../../constants/modes';
 
 const MelodyCheckboxRow = ({ beatType, scaleIndex }) => {

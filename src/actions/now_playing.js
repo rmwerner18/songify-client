@@ -4,3 +4,9 @@ export const setNowPlaying = (song) => {
     song: song,
   };
 };
+
+export const endNowPlaying = () => {
+  return {
+    type: 'END_NOW_PLAYING',
+  };
+};

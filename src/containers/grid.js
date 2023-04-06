@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DrumsForm from '../components/drums_form';
 import MelodyForm from '../components/melody_form';
-import { setCurrentSong } from '../actions/set_current_song';
+import { setCurrentSong } from '../actions/current_song';
 import { useDispatch } from 'react-redux';
 import ChordsContainer from './chords_container';
 import BASE_API_URL from '../constants/base_api_url';

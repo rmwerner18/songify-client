@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { logout } from '../actions/logout';
+import { logout } from '../actions/user';
 import { Redirect } from 'react-router-dom';
 
 const Logout = () => {

@@ -2,9 +2,9 @@ import React from 'react';
 import * as Tone from 'tone';
 import player from '../../player';
 import { stopLoop } from '../../helper_functions/stop_loop';
-import { setNowPlaying } from '../../actions/set_now_playing';
-import { endNowPlaying } from '../../actions/end_now_playing';
-import { setCurrentSong } from '../../actions/set_current_song';
+import { setNowPlaying } from '../../actions/now_playing';
+import { endNowPlaying } from '../../actions/now_playing';
+import { setCurrentSong } from '../../actions/current_song';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
@@ -42,7 +42,7 @@ const SongPlayButton = (props) => {
     if (!nowPlaying.song) {
       Tone.Destination.context.resume().then(() => {
         startLoop();
-      })
+      });
       dispatch(
         setNowPlaying({ song: allSongs.find((song) => song.id === props.id) })
       );

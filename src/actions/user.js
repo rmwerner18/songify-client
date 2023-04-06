@@ -58,3 +58,10 @@ export const signUp = (user) => async (dispatch) => {
   localStorage.setItem('token', result.jwt);
   dispatch(setUser(result.user));
 };
+
+export const logout = () => {
+  localStorage.removeItem('token');
+  return {
+    type: 'LOGOUT',
+  };
+};

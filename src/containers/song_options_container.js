@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import DeleteAndEditButtons from '../components/delete_and_edit_buttons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
-import { setAllSongs } from '../actions/set_all_songs';
+import { setAllSongs } from '../actions/all_songs';
 import { fetchHeaders } from '../constants/fetch_headers';
 import BASE_API_URL from '../constants/base_api_url';
 

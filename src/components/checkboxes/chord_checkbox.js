@@ -7,7 +7,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import { Rnd } from 'react-rnd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
-import { setChordClipboard } from '../../actions/set_chord_clipboard';
+import { setChordClipboard } from '../../actions/chords';
 
 const getIsCurrentBeat = createSelector(
   [(state) => state.currentBeat, (state, props) => props.beatRange],

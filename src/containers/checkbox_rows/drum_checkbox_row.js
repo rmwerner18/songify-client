@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Checkbox from '../../components/checkboxes/checkbox';
 import { numberOfBeatsArray } from '../../helper_functions/make_beat_array';
 import { addOrRemoveBeat } from '../../helper_functions/add_or_remove_beat';
-import { changeSongAttribute } from '../../actions/change_song_attribute';
+import { changeSongAttribute } from '../../actions/current_song';
 
 const DrumCheckboxRow = ({ beatType }) => {
   const dispatch = useDispatch();

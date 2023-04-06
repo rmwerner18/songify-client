@@ -1,25 +1,34 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch, useSelector, useStore } from 'react-redux';
 import { fetchHeaders } from '../constants/fetch_headers';
 import BASE_API_URL from '../constants/base_api_url';
 import { Menu } from '@mantine/core';
-import { removePlaylistSong } from '../actions/fetch_playlists';
+import { removePlaylistSong } from '../actions/playlists';
+import { Notification } from '@mantine/core';
 
 const SongDropdownMenu = ({ songId, playlistId }) => {
   const user = useSelector((state) => state.user);
-  const dispatch = useDispatch()
+  const [notification, setNotification] = useState(false);
+  const playlists = useSelector((state) => state.allPlaylists.playlists);
+  const dispatch = useDispatch();
 
-  const handleAddSong = async (id) => {
+  const handleAddSong = async (playlist) => {
+    if (playlist.songs.find((song) => song.id === songId)) {
+      console.log('song already in playlist');
+    }
     const fetchConfig = {
       method: 'POST',
       headers: fetchHeaders,
-      body: JSON.stringify({ playlist_id: id, song_id: songId }),
+      body: JSON.stringify({ playlist_id: playlist.id, song_id: songId }),
     };
 
     const res = await fetch(BASE_API_URL + 'playlist_songs', fetchConfig);
-    const playlist = await res.json();
-    if (playlist) {
-      console.log(playlist);
+    const json = await res.json();
+    if (json) {
+      setNotification(true);
+      setTimeout(() => {
+        setNotification(false);
+      }, 3000);
     }
   };
 
@@ -29,16 +38,19 @@ const SongDropdownMenu = ({ songId, playlistId }) => {
       headers: fetchHeaders,
       body: JSON.stringify({ playlist_id: playlistId, song_id: songId }),
     };
-    const res = await fetch(BASE_API_URL + 'playlist_songs/remove_song', fetchConfig);
-    console.log(res)
+    const res = await fetch(
+      BASE_API_URL + 'playlist_songs/remove_song',
+      fetchConfig
+    );
+    console.log(res);
     if (res.status === 200) {
-      dispatch(removePlaylistSong(playlistId, songId))
+      dispatch(removePlaylistSong(playlistId, songId));
     }
   };
 
   const showPlaylists = () =>
-    user.playlists.map((playlist) => (
-      <Menu.Item onClick={() => handleAddSong(playlist.id)}>
+    playlists.map((playlist) => (
+      <Menu.Item onClick={() => handleAddSong(playlist)}>
         {playlist.name}
       </Menu.Item>
     ));

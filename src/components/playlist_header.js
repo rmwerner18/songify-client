@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import BASE_API_URL from '../constants/base_api_url';
 import { fetchHeaders } from '../constants/fetch_headers';
-import { fetchUser } from '../actions/set_user';
+import { fetchUser } from '../actions/user';
 
 const PlaylistHeader = ({ playlist }) => {
   const [modal, setModal] = useState(false);

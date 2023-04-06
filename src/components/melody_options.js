@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSongAttribute } from '../actions/change_song_attribute';
+import { changeSongAttribute } from '../actions/current_song';
 import { useDispatch, useSelector } from 'react-redux';
 import InstrumentForm from './instrument_form';
 

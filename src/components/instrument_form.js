@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeSongAttribute } from '../actions/change_song_attribute';
+import { changeSongAttribute } from '../actions/current_song';
 
 const InstrumentForm = ({ instrumentType }) => {
   const instrument = useSelector((state) => state.currentSong[instrumentType]);

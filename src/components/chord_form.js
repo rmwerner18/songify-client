@@ -4,7 +4,7 @@ import { CHORD_QUALITIES } from '../constants/chord_qualities';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { regular } from '@fortawesome/fontawesome-svg-core/import.macro';
-import { setChordClipboard } from '../actions/set_chord_clipboard';
+import { setChordClipboard } from '../actions/chords';
 
 const ChordForm = () => {
   const chord = useSelector((state) => state.chordClipboard);

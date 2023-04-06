@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setCurrentSong } from '../actions/set_current_song';
-import { endNowPlaying } from '../actions/end_now_playing';
+import { setCurrentSong } from '../actions/current_song';
+import { endNowPlaying } from '../actions/now_playing';
 import { stopLoop } from '../helper_functions/stop_loop';
 import DEFAULT_SONG_STATE from '../constants/default_song_state';
 

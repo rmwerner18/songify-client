@@ -1,7 +1,7 @@
 import React from 'react';
 import { Slider } from '@mantine/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeSongAttribute } from '../actions/change_song_attribute';
+import { changeSongAttribute } from '../actions/current_song';
 
 const TempoForm = () => {
   const bpm = useSelector((state) => state.currentSong.bpm);

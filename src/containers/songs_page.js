@@ -1,23 +1,16 @@
 import React, { useEffect } from 'react';
 import SongsContainer from './songs_container';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSongs } from '../actions/set_all_songs';
+import { fetchSongs } from '../actions/all_songs';
 import VolumeForm from '../components/volume_form';
-import { fetchPlaylists } from '../actions/fetch_playlists';
+import { fetchPlaylists } from '../actions/playlists';
 import SongsPageMenu from './songs_page_menu';
-import SongDropdownMenu from '../components/song_dropdown_menu';
 
 const SongsPage = ({ type, playlistIdParam }) => {
   const playlistId = playlistIdParam && parseInt(playlistIdParam);
   const user = useSelector((state) => state.user);
   const userId = user.id;
-  const songDropdown = useSelector((state) => state.songDropdown);
   const dispatch = useDispatch();
-
-  const dropdownStyle = {
-    left: songDropdown.x,
-    top: songDropdown.y,
-  };
 
   useEffect(() => {
     dispatch(fetchSongs());
@@ -41,7 +34,6 @@ const SongsPage = ({ type, playlistIdParam }) => {
       <div className='volume-form-container'>
         <VolumeForm />
       </div>
-      {songDropdown.songId && <SongDropdownMenu style={dropdownStyle} />}
     </div>
   );
 };
