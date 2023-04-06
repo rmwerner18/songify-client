@@ -28,8 +28,8 @@ const Song = ({ idx, song, playlistId }) => {
         {song.likes.length}
       </span>
       <SongOptionsContainer song={song} />
-      {mouseOver && user.id && (
-        <Menu trigger='hover' keepMounted>
+      {user.id && (
+        <Menu keepMounted>
           <Menu.Target>
             <FontAwesomeIcon
               icon={solid('ellipsis')}

@@ -5,13 +5,14 @@ import BASE_API_URL from '../constants/base_api_url';
 import { Menu } from '@mantine/core';
 import { removePlaylistSong } from '../actions/playlists';
 import { Notification } from '@mantine/core';
+import { useHover } from '@mantine/hooks';
 
 const SongDropdownMenu = ({ songId, playlistId }) => {
   const user = useSelector((state) => state.user);
   const [notification, setNotification] = useState(false);
   const playlists = useSelector((state) => state.allPlaylists.playlists);
   const dispatch = useDispatch();
-
+  
   const handleAddSong = async (playlist) => {
     if (playlist.songs.find((song) => song.id === songId)) {
       console.log('song already in playlist');
