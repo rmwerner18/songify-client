@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector, useStore } from 'react-redux';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchHeaders } from '../constants/fetch_headers';
 import BASE_API_URL from '../constants/base_api_url';
-import { Menu } from '@mantine/core';
+import { Divider, Menu } from '@mantine/core';
 import { removePlaylistSong } from '../actions/playlists';
 import DeleteSongOption from './delete_song_option';
 import EditSongOption from './edit_song_option';
-import { Notification } from '@mantine/core';
-import { useHover } from '@mantine/hooks';
 
 const SongDropdownMenu = ({ songId, songUserId, playlistId }) => {
   const user = useSelector((state) => state.user);
-  const [notification, setNotification] = useState(false);
   const playlists = useSelector((state) => state.allPlaylists.playlists);
   const dispatch = useDispatch();
 
@@ -28,13 +25,6 @@ const SongDropdownMenu = ({ songId, songUserId, playlistId }) => {
     };
 
     const res = await fetch(BASE_API_URL + 'playlist_songs', fetchConfig);
-    const json = await res.json();
-    if (json) {
-      setNotification(true);
-      setTimeout(() => {
-        setNotification(false);
-      }, 3000);
-    }
   };
 
   const handleRemoveSong = async () => {
@@ -57,6 +47,7 @@ const SongDropdownMenu = ({ songId, songUserId, playlistId }) => {
     <Menu.Item onClick={() => console.log('check')}>
       Add To New Playlist
     </Menu.Item>,
+    <Divider/>,
     playlists.map((playlist) => (
       <Menu.Item onClick={() => handleAddSong(playlist)}>
         {playlist.name}

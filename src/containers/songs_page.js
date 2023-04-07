@@ -5,6 +5,7 @@ import { fetchSongs } from '../actions/all_songs';
 import VolumeForm from '../components/volume_form';
 import { fetchPlaylists } from '../actions/playlists';
 import SongsPageMenu from './songs_page_menu';
+import { Notification } from '@mantine/core';
 
 const SongsPage = ({ type, playlistIdParam }) => {
   const playlistId = playlistIdParam && parseInt(playlistIdParam);
@@ -21,20 +22,27 @@ const SongsPage = ({ type, playlistIdParam }) => {
   }, [userId]);
 
   return (
-    <div className='songs-page'>
-      <SongsPageMenu type={type} />
-      <div className='songs-container-container'>
-        {playlistId ? (
-          <SongsContainer type={type} playlistId={playlistId} />
-        ) : (
-          <SongsContainer type={type} />
-        )}
+    <>
+      <div className='songs-page'>
+        <SongsPageMenu type={type} />
+        <div className='songs-container-container'>
+          {playlistId ? (
+            <SongsContainer type={type} playlistId={playlistId} />
+          ) : (
+            <SongsContainer type={type} />
+          )}
+        </div>
+        <br />
+        <div className='volume-form-container'>
+          <VolumeForm />
+        </div>
       </div>
-      <br />
-      <div className='volume-form-container'>
-        <VolumeForm />
+      <div className='toast-notification-container'>
+        <Notification>Song has been added</Notification>
+        <Notification>Song has been added</Notification>
+        <Notification>Song has been added</Notification>
       </div>
-    </div>
+    </>
   );
 };
 
