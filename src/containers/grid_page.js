@@ -3,8 +3,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import LoadingPage from '../components/loading_page';
 import Grid from './grid';
-import LeftGridOptionsContainer from './left_grid_options_container';
-import RightGridOptionsContainer from './right_grid_options_container';
+// import LeftGridOptionsContainer from './left_grid_options_container';
+// import RightGridOptionsContainer from './right_grid_options_container';
 
 const GridPage = (props) => {
   const sounds = useSelector((state) => state.sounds);

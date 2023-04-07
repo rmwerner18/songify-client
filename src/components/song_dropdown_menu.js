@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchHeaders } from '../constants/fetch_headers';
 import BASE_API_URL from '../constants/base_api_url';
 import { Divider, Menu } from '@mantine/core';
+import {
+  addNotification,
+  removeFirstNotification,
+} from '../actions/notifications';
 import { removePlaylistSong } from '../actions/playlists';
 import DeleteSongOption from './delete_song_option';
 import EditSongOption from './edit_song_option';
@@ -25,6 +29,11 @@ const SongDropdownMenu = ({ songId, songUserId, playlistId }) => {
     };
 
     const res = await fetch(BASE_API_URL + 'playlist_songs', fetchConfig);
+    const json = res.json();
+    if (json) {
+      dispatch(addNotification('song has been added to ' + playlist.name));
+      setTimeout(() => dispatch(removeFirstNotification()), 2000);
+    }
   };
 
   const handleRemoveSong = async () => {
@@ -47,7 +56,7 @@ const SongDropdownMenu = ({ songId, songUserId, playlistId }) => {
     <Menu.Item onClick={() => console.log('check')}>
       Add To New Playlist
     </Menu.Item>,
-    <Divider/>,
+    <Divider />,
     playlists.map((playlist) => (
       <Menu.Item onClick={() => handleAddSong(playlist)}>
         {playlist.name}

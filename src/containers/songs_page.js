@@ -10,12 +10,20 @@ import { Notification } from '@mantine/core';
 const SongsPage = ({ type, playlistIdParam }) => {
   const playlistId = playlistIdParam && parseInt(playlistIdParam);
   const user = useSelector((state) => state.user);
+  const notifications = useSelector((state) => state.notifications);
   const userId = user.id;
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchSongs());
   }, []);
+
+  const showNotifications = () => {
+    console.log(notifications);
+    return notifications.map((notification) => (
+      <Notification withCloseButton={false}>{notification}</Notification>
+    ));
+  };
 
   useEffect(() => {
     userId && dispatch(fetchPlaylists(userId));
@@ -37,11 +45,7 @@ const SongsPage = ({ type, playlistIdParam }) => {
           <VolumeForm />
         </div>
       </div>
-      <div className='toast-notification-container'>
-        <Notification>Song has been added</Notification>
-        <Notification>Song has been added</Notification>
-        <Notification>Song has been added</Notification>
-      </div>
+      <div className='toast-notification-container'>{showNotifications()}</div>
     </>
   );
 };

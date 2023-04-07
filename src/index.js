@@ -16,6 +16,7 @@ import { currentBeatReducer } from './reducers/current_beat_reducer';
 import { playlistsReducer } from './reducers/playlists_reducer';
 import { chordClipboardReducer } from './reducers/chord_clipboard_reducer';
 import { SongDropdownReducer } from './reducers/song_dropdown_reducer';
+import { notificationsReducer } from './reducers/notifications_reducer';
 import { MantineProvider } from '@mantine/core';
 import theme from './styles/mantine-theme';
 
@@ -29,6 +30,7 @@ const reducer = combineReducers({
   allPlaylists: playlistsReducer,
   chordClipboard: chordClipboardReducer,
   songDropdown: SongDropdownReducer,
+  notifications: notificationsReducer,
 });
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));

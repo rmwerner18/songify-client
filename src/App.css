@@ -193,8 +193,8 @@ body {
 .toast-notification-container {
   position: absolute;
   bottom: 40px;
-  left: 15%;
-  transform: translateX(-50%);
+  left: 50px;
+  /* transform: translateX(-50%); */
 }
 
 .toast-notification-container > * {
