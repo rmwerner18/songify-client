@@ -6,6 +6,7 @@ import VolumeForm from '../components/volume_form';
 import { fetchPlaylists } from '../actions/playlists';
 import SongsPageMenu from './songs_page_menu';
 import { Notification } from '@mantine/core';
+import NotificationContainer from '../components/notification_container';
 
 const SongsPage = ({ type, playlistIdParam }) => {
   const playlistId = playlistIdParam && parseInt(playlistIdParam);
@@ -45,7 +46,7 @@ const SongsPage = ({ type, playlistIdParam }) => {
           <VolumeForm />
         </div>
       </div>
-      <div className='toast-notification-container'>{showNotifications()}</div>
+      <NotificationContainer/>
     </>
   );
 };

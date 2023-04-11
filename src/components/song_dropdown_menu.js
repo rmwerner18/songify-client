@@ -9,10 +9,12 @@ import {
 import { removePlaylistSong } from '../actions/playlists';
 import DeleteSongOption from './delete_song_option';
 import EditSongOption from './edit_song_option';
+import { useNotifications } from '../hooks/use_notifications';
 
 const SongDropdownMenu = ({ songId, songUserId, playlistId }) => {
   const user = useSelector((state) => state.user);
   const playlists = useSelector((state) => state.allPlaylists.playlists);
+  const notifications = useNotifications()
   const dispatch = useDispatch();
 
   const songBelongsToUser = () => user.id && songUserId === user.id;
@@ -30,7 +32,12 @@ const SongDropdownMenu = ({ songId, songUserId, playlistId }) => {
     const res = await fetch(BASE_API_URL + 'playlist_songs', fetchConfig);
     const json = res.json();
     if (json) {
-      dispatch(handleNewNotification('song has been added to ' + playlist.name));
+      notifications.show({
+        message: 'song has been added to ' + playlist.name,
+        title: 'title',
+        type: 'success'
+      });
+      // dispatch(handleNewNotification('song has been added to ' + playlist.name));
     }
   };
 

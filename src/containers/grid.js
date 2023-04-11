@@ -16,6 +16,7 @@ import SaveButton from '../components/save_button';
 import ChordForm from '../components/chord_form';
 import LoadingPage from '../components/loading_page';
 import { keyBy } from 'lodash';
+import NotificationContainer from '../components/notification_container';
 
 const Grid = (props) => {
   const dispatch = useDispatch();
@@ -76,6 +77,7 @@ const Grid = (props) => {
             </div>
           </div>
           <SaveButton song_id={props.song_id} />
+          <NotificationContainer />
         </div>
       )}
     </>

@@ -17,6 +17,7 @@ import { playlistsReducer } from './reducers/playlists_reducer';
 import { chordClipboardReducer } from './reducers/chord_clipboard_reducer';
 import { SongDropdownReducer } from './reducers/song_dropdown_reducer';
 import { notificationsReducer } from './reducers/notifications_reducer';
+import { Notifications } from '@mantine/notifications';
 import { MantineProvider } from '@mantine/core';
 import theme from './styles/mantine-theme';
 
@@ -39,6 +40,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <MantineProvider theme={theme}>
+        <Notifications />
         <App />
       </MantineProvider>
     </Provider>

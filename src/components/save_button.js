@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { stopLoop } from '../helper_functions/stop_loop';
 import { endNowPlaying } from '../actions/now_playing';
 import SongNameForm from '../components/song_name_form';
+import { handleNewNotification } from '../actions/notifications';
 import { fetchHeaders } from '../constants/fetch_headers';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import BASE_API_URL from '../constants/base_api_url';
 import { omit } from 'lodash';
 
 const SaveButton = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const saveEdit = async (newObj) => {
     const fetchConfig = {
@@ -29,7 +31,7 @@ const SaveButton = (props) => {
     props.endNowPlaying();
     if (result.message !== 'Please log in') {
       setModalIsOpen(false);
-      alert('Your changes have been saved!');
+      dispatch(handleNewNotification('Song has been saved!'));
     } else alert(result.message);
   };
 
@@ -47,7 +49,7 @@ const SaveButton = (props) => {
       .then((song) => {
         if (song.id) {
           setModalIsOpen(false);
-          alert('Your song has been saved!');
+          dispatch(handleNewNotification('Song has been saved!'));
         }
       })
       .catch(() => {
