@@ -3,7 +3,12 @@ import { notifications } from '@mantine/notifications';
 const NOTIFICATION_STYLES = {
   success: (theme) => ({
     root: {
-      backgroundColor: theme.colors['spotify-green'][5],
+      backgroundColor: '#DAF7A6',
+    },
+  }),
+  failure: (theme) => ({
+    root: {
+      backgroundColor: '#FF5733 ',
     },
   }),
 };

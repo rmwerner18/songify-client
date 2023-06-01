@@ -3,9 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchHeaders } from '../constants/fetch_headers';
 import BASE_API_URL from '../constants/base_api_url';
 import { Divider, Menu } from '@mantine/core';
-import {
-  handleNewNotification
-} from '../actions/notifications';
+import { handleNewNotification } from '../actions/notifications';
 import { removePlaylistSong } from '../actions/playlists';
 import DeleteSongOption from './delete_song_option';
 import EditSongOption from './edit_song_option';
@@ -14,7 +12,7 @@ import { useNotifications } from '../hooks/use_notifications';
 const SongDropdownMenu = ({ songId, songUserId, playlistId }) => {
   const user = useSelector((state) => state.user);
   const playlists = useSelector((state) => state.allPlaylists.playlists);
-  const notifications = useNotifications()
+  const notifications = useNotifications();
   const dispatch = useDispatch();
 
   const songBelongsToUser = () => user.id && songUserId === user.id;
@@ -35,9 +33,14 @@ const SongDropdownMenu = ({ songId, songUserId, playlistId }) => {
       notifications.show({
         message: 'song has been added to ' + playlist.name,
         title: 'title',
-        type: 'success'
+        type: 'success',
       });
-      // dispatch(handleNewNotification('song has been added to ' + playlist.name));
+    } else {
+      notifications.show({
+        message: 'could not add song',
+        title: 'title',
+        type: 'failure',
+      });
     }
   };
 
