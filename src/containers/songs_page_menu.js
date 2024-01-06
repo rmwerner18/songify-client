@@ -2,12 +2,13 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import AddPlaylistButton from '../components/add_playlist_button';
+import { Menu } from '@mantine/core';
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const SongsPageMenu = ({ type }) => {
   const user = useSelector((state) => state.user);
-  const playlists = useSelector(state => state.allPlaylists.playlists);
-
-
+  const playlists = useSelector((state) => state.allPlaylists.playlists);
 
   const linkStyle = {
     color: 'var(--spotify-text)',
@@ -18,19 +19,45 @@ const SongsPageMenu = ({ type }) => {
     color: '#fff',
   };
 
+  // const showDropdown = (e) => {
+  //   e.persist();
+  //   if (e.altKey) {
+  //     return (
+  //       <Menu.Dropdown>
+  //         <Menu.Item>Item 1</Menu.Item>
+  //         <Menu.Item>Item 2</Menu.Item>
+  //         <Menu.Item>Item 3</Menu.Item>
+  //       </Menu.Dropdown>
+  //     );
+  //   }
+  // };
+
   const showPlaylists = () => {
     return playlists.map((playlist) => {
       return (
-        <NavLink
-          to={'/songs/playlists/' + playlist.id}
-          exact
-          style={linkStyle}
-          activeStyle={activeLinkStyle}
-        >
-          <div>
-            {playlist.name}
-          </div>
-        </NavLink>
+        <>
+          <NavLink
+            to={'/songs/playlists/' + playlist.id}
+            exact
+            style={linkStyle}
+            activeStyle={activeLinkStyle}
+          >
+            <div>{playlist.name}</div>
+          </NavLink>
+          <Menu trigger='click'>
+            <Menu.Target>
+              <FontAwesomeIcon
+                icon={solid('ellipsis')}
+                className='font-awesome'
+              />
+            </Menu.Target>
+            <Menu.Dropdown>
+              <Menu.Item>Item 1</Menu.Item>
+              <Menu.Item>Item 2</Menu.Item>
+              <Menu.Item>Item 3</Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
+        </>
       );
     });
   };
@@ -82,4 +109,4 @@ const SongsPageMenu = ({ type }) => {
   );
 };
 
-export default SongsPageMenu
+export default SongsPageMenu;
