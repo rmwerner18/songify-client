@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import AddPlaylistButton from '../components/add_playlist_button';
-import { Menu } from '@mantine/core';
+import { Menu, Divider } from '@mantine/core';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -22,7 +22,7 @@ const SongsPageMenu = ({ type }) => {
   const showPlaylists = () => {
     return playlists.map((playlist) => {
       return (
-        <div className='playlist-list-name'>
+        <div className='playlist-list-name menu-option'>
           <NavLink
             to={'/songs/playlists/' + playlist.id}
             exact
@@ -33,9 +33,7 @@ const SongsPageMenu = ({ type }) => {
           </NavLink>
           <Menu trigger='click'>
             <Menu.Target>
-              <FontAwesomeIcon
-                icon={solid('ellipsis')}
-              />
+              <FontAwesomeIcon icon={solid('ellipsis')} />
             </Menu.Target>
             <Menu.Dropdown>
               <Menu.Item>Rename</Menu.Item>
@@ -86,10 +84,8 @@ const SongsPageMenu = ({ type }) => {
         </>
       ) : null}
       <div className='playlist-section'>
-        <div className='playlist-section-label'>
-          <p>Playlists:</p>
-          <AddPlaylistButton playlists={playlists} />
-        </div>
+        <Divider size='xs' />
+        <AddPlaylistButton playlists={playlists} />
         {showPlaylists()}
       </div>
     </div>

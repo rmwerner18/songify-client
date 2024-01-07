@@ -203,24 +203,20 @@ body {
 
 .songs-page-menu .menu-option {
   cursor: pointer;
-  margin: 5px 0;
+  margin: 3px 0;
+}
+
+.songs-page-menu .menu-option:hover {
+  text-decoration: underline;
 }
 
 .songs-page-menu div.active {
   color: #fff;
 }
 
-.songs-page-menu div {
-  margin: 3px 0;
-}
-
 .playlist-list-name {
   display: flex;
   justify-content: space-between;
-}
-
-.playlist-list-name:hover {
-  text-decoration: underline;
 }
 
 .songs-page-menu {
@@ -233,15 +229,6 @@ body {
   font-weight: 900;
   font-size: 1.2rem;
   overflow-y: scroll;
-}
-
-.playlist-section-label {
-  display: flex;
-  align-items: center;
-}
-
-.playlist-section-label p {
-  margin-right: 40px;
 }
 
 .playlist-detail-form {
