@@ -214,6 +214,15 @@ body {
   margin: 3px 0;
 }
 
+.playlist-list-name {
+  display: flex;
+  justify-content: space-between;
+}
+
+.playlist-list-name:hover {
+  text-decoration: underline;
+}
+
 .songs-page-menu {
   color: var(--spotify-text);
   border-left: 1px solid var(--controls);

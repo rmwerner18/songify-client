@@ -19,23 +19,10 @@ const SongsPageMenu = ({ type }) => {
     color: '#fff',
   };
 
-  // const showDropdown = (e) => {
-  //   e.persist();
-  //   if (e.altKey) {
-  //     return (
-  //       <Menu.Dropdown>
-  //         <Menu.Item>Item 1</Menu.Item>
-  //         <Menu.Item>Item 2</Menu.Item>
-  //         <Menu.Item>Item 3</Menu.Item>
-  //       </Menu.Dropdown>
-  //     );
-  //   }
-  // };
-
   const showPlaylists = () => {
     return playlists.map((playlist) => {
       return (
-        <>
+        <div className='playlist-list-name'>
           <NavLink
             to={'/songs/playlists/' + playlist.id}
             exact
@@ -48,16 +35,16 @@ const SongsPageMenu = ({ type }) => {
             <Menu.Target>
               <FontAwesomeIcon
                 icon={solid('ellipsis')}
-                className='font-awesome'
               />
             </Menu.Target>
             <Menu.Dropdown>
-              <Menu.Item>Item 1</Menu.Item>
-              <Menu.Item>Item 2</Menu.Item>
-              <Menu.Item>Item 3</Menu.Item>
+              <Menu.Item>Rename</Menu.Item>
+              <Menu.Item>Delete</Menu.Item>
+              <Menu.Item>Play</Menu.Item>
+              <Menu.Item>Duplicate</Menu.Item>
             </Menu.Dropdown>
           </Menu>
-        </>
+        </div>
       );
     });
   };
