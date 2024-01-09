@@ -164,9 +164,10 @@ body {
 
 .volume-form-container {
   position: absolute;
-  bottom: 6px;
-  right: 50px;
-  height: auto;
+  bottom: 0px;
+  right: 0px;
+  height: 10%;
+  width: 100%;
   background-color: var(--dark-background);
   border: solid 0.5px var(--checkbox-background);
   border-radius: 5px;
@@ -183,11 +184,12 @@ body {
 
 .songs-page {
   margin-top: 80px;
+  margin-bottom: 10vh;
   display: flex;
   flex-direction: row;
   width: 100vw;
   height: calc(100vh - 100px);
-  width: calc(100vw - 100px);
+  width: calc(100vw - 30px);
 }
 
 .toast-notification-container {
@@ -221,10 +223,10 @@ body {
 
 .songs-page-menu {
   color: var(--spotify-text);
-  border-left: 1px solid var(--controls);
   width: 25%;
   padding: 10px;
   margin: 5px 0px;
+  margin-bottom: 10vh;
   font-family: inherit;
   font-weight: 900;
   font-size: 1.2rem;
