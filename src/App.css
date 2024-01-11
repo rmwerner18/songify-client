@@ -187,6 +187,7 @@ body {
   margin-bottom: 10vh;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   width: 100vw;
   height: calc(100vh - 100px);
   width: calc(100vw - 30px);
@@ -222,8 +223,10 @@ body {
 }
 
 .songs-page-menu {
+  border: 1px solid #ffffff;
+  border-radius: 20px;
   color: var(--spotify-text);
-  width: 25%;
+  width: 18%;
   padding: 10px;
   margin: 5px 0px;
   margin-bottom: 10vh;
@@ -246,27 +249,25 @@ body {
 }
 
 .songs-container {
-  border-radius: 10px;
-  /* border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px; */
+  border-radius: 20px;
+  border: 1px solid #FFFFFF;
   height: calc(100vh - 150px);
   margin-bottom: 50px;
   display: flex;
   flex-direction: column;
   text-align: center;
-  align-items: center;
-  /* overflow-y: scroll; */
   overflow-x: visible;
   background-color: var(--card-background);
 }
 
 .songs-container-header {
-  padding: 10px;
+  padding: 2px;
+  border: 0px;
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: var(--card-background);
+  background-color: transparent;
   border-bottom: 0.5px solid var(--spotify-text);
   border-bottom-width: 90%;
 }
@@ -503,7 +504,7 @@ h1, h2 {
   height: 50px;
   width: 100%;
   display: flex;
-  background-color: var(--card-background);
+  background-color: transparent;
   border-radius: 4px;
   align-items: center;
   text-align: center;

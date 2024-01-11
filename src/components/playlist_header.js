@@ -71,13 +71,11 @@ const PlaylistHeader = ({ playlist }) => {
           </div>
         </div>
       )}
-      <div>
-        <div className='playlist-image-container'>
-          <img />
-        </div>
-        <div className='playlist-name-container'>
-          <h1 onClick={() => setModal(true)}>{playlist.name}</h1>
-        </div>
+      <div className='playlist-image-container'>
+        <img />
+      </div>
+      <div className='playlist-name-container'>
+        <h1 onClick={() => setModal(true)}>{playlist.name}</h1>
       </div>
     </>
   );

@@ -77,7 +77,7 @@ const SongsContainer = ({ type, playlistId = false }) => {
 
   return (
     <div className='songs-container'>
-      {currentPlaylist && <PlaylistHeader playlist={currentPlaylist} />}
+      {(currentPlaylist.length > 0) && <PlaylistHeader playlist={currentPlaylist} />}
       <div className='songs-container-header'>
         <span className='songs-container-header-col icon'>
           <FontAwesomeIcon icon={solid('hashtag')} className='font-awesome' />
