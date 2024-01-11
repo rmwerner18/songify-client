@@ -236,6 +236,24 @@ body {
   overflow-y: scroll;
 }
 
+.search-bar-main {
+  width: 100%;
+  background-color: var(--checkbox-background);
+  height: 40px;
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+  margin: 5px 0;
+  padding: 20px;
+  font-size: larger;
+}
+
+.search-bar::placeholder {
+  color: #999999;
+  font-size: large;
+  font-weight: bold;
+}
+
 .playlist-detail-form {
   display: flex;
   flex-direction: column;
@@ -243,15 +261,19 @@ body {
   margin-left: 20%;
 }
 
-.songs-page .songs-container-container {
+.songs-page-content {
+  height: calc(100vh - 150px);
   width: 75%;
+}
+
+.songs-container-container {
   overflow-x: visible;
 }
 
 .songs-container {
   border-radius: 20px;
   border: 1px solid #FFFFFF;
-  height: calc(100vh - 150px);
+  height: 70vh;
   margin-bottom: 50px;
   display: flex;
   flex-direction: column;

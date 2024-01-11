@@ -34,12 +34,15 @@ const SongsPage = ({ type, playlistIdParam }) => {
     <>
       <div className='songs-page'>
         <SongsPageMenu type={type} />
-        <div className='songs-container-container'>
-          {playlistId ? (
-            <SongsContainer type={type} playlistId={playlistId} />
-          ) : (
-            <SongsContainer type={type} />
-          )}
+        <div className='songs-page-content'>
+          <input className='search-bar-main' placeholder='Search'></input>
+          <div className='songs-container-container'>
+            {playlistId ? (
+              <SongsContainer type={type} playlistId={playlistId} />
+            ) : (
+              <SongsContainer type={type} />
+            )}
+          </div>
         </div>
         <br />
         <div className='volume-form-container'>
