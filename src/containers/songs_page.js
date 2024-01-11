@@ -7,6 +7,9 @@ import { fetchPlaylists } from '../actions/playlists';
 import SongsPageMenu from './songs_page_menu';
 import { Notification } from '@mantine/core';
 import NotificationContainer from '../components/notification_container';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+
 
 const SongsPage = ({ type, playlistIdParam }) => {
   const playlistId = playlistIdParam && parseInt(playlistIdParam);
@@ -45,11 +48,14 @@ const SongsPage = ({ type, playlistIdParam }) => {
           </div>
         </div>
         <br />
-        <div className='volume-form-container'>
+        <div className='now-playing-options'>
+          <FontAwesomeIcon icon={solid('backward')} className='font-awesome' />
+          <FontAwesomeIcon icon={solid('play')} className='font-awesome' />
+          <FontAwesomeIcon icon={solid('forward')} className='font-awesome' />
           <VolumeForm />
         </div>
       </div>
-      <NotificationContainer/>
+      <NotificationContainer />
     </>
   );
 };

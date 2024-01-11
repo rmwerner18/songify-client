@@ -162,7 +162,7 @@ body {
   margin: 0px;
 }
 
-.volume-form-container {
+.now-playing-options {
   position: absolute;
   bottom: 0px;
   right: 0px;
@@ -174,11 +174,11 @@ body {
   padding: 10px;
 }
 
-.volume-form-container > .volume-form {
-  width: 100%;
+.now-playing-options > .volume-form {
+  width: 20%;
 }
 
-.volume-form-container > .volume-form > p {
+.now-playing-options > .volume-form > p {
   margin: 0;
 }
 
