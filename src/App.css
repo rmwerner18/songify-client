@@ -187,7 +187,7 @@ body {
   margin-bottom: 10vh;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 100vw;
   height: calc(100vh - 100px);
   width: calc(100vw - 30px);
@@ -226,10 +226,10 @@ body {
   border: 1px solid #ffffff;
   border-radius: 20px;
   color: var(--spotify-text);
+  height: 70vh;
   width: 18%;
   padding: 10px;
-  margin: 5px 0px;
-  margin-bottom: 10vh;
+  height: calc(100vh - 150px);
   font-family: inherit;
   font-weight: 900;
   font-size: 1.2rem;
